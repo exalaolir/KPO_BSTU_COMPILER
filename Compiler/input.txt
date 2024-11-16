@@ -10,6 +10,9 @@ fn int b( bool z, int e){
 
 fn int main(){
 	int a = -0xF111;
+
+	fn int jzz( bool z, int e){}
+
 	while(a != 1){
 		int q = 88
 	

@@ -433,6 +433,13 @@ namespace LEXER
 
 				param.line = line;
 				param.pos = counter;
+
+				if (scopes.top() != "go")
+				{
+					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+							  "Недопустимая вложенная функция");
+					throw "Exception";
+				}
 				param.scope = scopes.top();
 
 				do
