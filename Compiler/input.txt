@@ -1,0 +1,22 @@
+fn int b( bool z, int e){
+	string a = "bsbacbsac";
+	while(a == ""){
+		int q = 88;
+	}
+	if(z){
+		double zse = 0.0345;
+	}
+}
+
+fn int main(){
+	int a = -0xF111;
+	while(a != 1){
+		int q = 88;
+	}
+	@KIJIOJIOJ
+	PKPOOOPPO SSSXSXXXZXZXZX/@/@
+	if(a){
+		double zse= 0.0345;
+	}
+	let auto = 45 + a + -b(b(b()));
+}

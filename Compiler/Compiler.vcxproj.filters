@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Lolger">
+      <UniqueIdentifier>{13cc1808-9356-4580-bc17-635d2329a885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Loger">
+      <UniqueIdentifier>{f20fb84c-bea5-496a-bcb0-e3276c91e534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Regex">
+      <UniqueIdentifier>{08eed56e-9393-42c3-b067-23b571b60bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Regex">
+      <UniqueIdentifier>{c288ab43-d1f6-4b7f-a28b-29cd2235c21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Input_Vallidator">
+      <UniqueIdentifier>{6ada750b-bbc0-44e2-85b8-a04c24700307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Input_Validator">
+      <UniqueIdentifier>{3a3a7c37-480c-40db-b04d-024ddc8f73c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Lexer">
+      <UniqueIdentifier>{d0558624-8779-4289-963f-1822c1e17fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Lexer">
+      <UniqueIdentifier>{daa9b199-1045-41c7-a696-3f0a760a94d7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Compiler.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Исходные файлы\Lolger</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Исходные файлы\Regex</Filter>
+    </ClCompile>
+    <ClCompile Include="Automat.cpp">
+      <Filter>Исходные файлы\Regex</Filter>
+    </ClCompile>
+    <ClCompile Include="InputValidator.cpp">
+      <Filter>Исходные файлы\Input_Validator</Filter>
+    </ClCompile>
+    <ClCompile Include="Lexer_On_Start.cpp">
+      <Filter>Исходные файлы\Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="Lex_Table.cpp">
+      <Filter>Исходные файлы\Lexer</Filter>
+    </ClCompile>
+    <ClCompile Include="Identify_Table.cpp">
+      <Filter>Исходные файлы\Lexer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Файлы заголовков\Loger</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Automat.h">
+      <Filter>Файлы заголовков\Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Файлы заголовков\Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="InputValidator.h">
+      <Filter>Файлы заголовков\Input_Vallidator</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexer.h">
+      <Filter>Файлы заголовков\Lexer</Filter>
+    </ClInclude>
+    <ClInclude Include="Symbols_And_Resourses.h">
+      <Filter>Файлы заголовков\Lexer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="output.txt.out">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="log.txt.log">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="input.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
