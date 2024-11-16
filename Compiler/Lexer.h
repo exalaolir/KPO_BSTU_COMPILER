@@ -59,7 +59,7 @@ namespace LEXER
 
 		~Lexer();
 
-		std::list<Lexem> generateLexTable();
+		std::vector<Lexem> generateLexTable();
 
 		IdTable generateIdTable();
 	private:
@@ -78,6 +78,6 @@ namespace LEXER
 
 		std::stack<string> scopes;
 		int currentScopeNumber;
+		bool hasErrors = false;
 	};
 }
-

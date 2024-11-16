@@ -5,9 +5,10 @@
 
 namespace LEXER
 {
-	std::list<Lexem> Lexer::generateLexTable()
+	std::vector<Lexem> Lexer::generateLexTable()
 	{
-		std::list<Lexem> result;
+		std::vector<Lexem> result;
+		//result.reserve(());
 		int line = 1;
 		int counter = 0;
 
@@ -51,7 +52,7 @@ namespace LEXER
 		{
 			Regex::Regex regex;
 
-			if (regex.Match(token, "(\"[\n-ÿ]*\")"))
+			if (regex.Match(token, "(\"[\t-ÿ]*\")"))
 			{
 				result = "l";
 			}

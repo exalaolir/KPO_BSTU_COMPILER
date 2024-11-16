@@ -11,12 +11,15 @@ fn int b( bool z, int e){
 fn int main(){
 	int a = -0xF111;
 	while(a != 1){
-		int q = 88;
+		int q = 88
+	
 	}
+	string Kate = "/"/Kate/"/\/\t//\t/";
 	@KIJIOJIOJ
 	PKPOOOPPO SSSXSXXXZXZXZX/@/@
-	if(a){
-		double zse= 0.0345;
+	if(true){
+		double zrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrse= 0.0345;
 	}
-	let auto = 45 + a + -b(b(b()));
+
+	let auto = "h";
 }

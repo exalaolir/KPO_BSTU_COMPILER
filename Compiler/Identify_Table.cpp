@@ -243,7 +243,7 @@ namespace LEXER
 		{
 			Regex::Regex regex;
 
-			if (regex.Match(token, "(\"[ -я]*\")"))
+			if (regex.Match(token, "(\"[\t-я]*\")"))
 			{
 				type = StringLiteral;
 			}
@@ -816,7 +816,9 @@ namespace LEXER
 			case End:
 				break;
 			default:
-				throw;
+				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						  std::format("Невозможно вывести авто-тип, неопознанная лексема: {}", *currentToken));
+				throw "Esception";
 				break;
 			}
 
