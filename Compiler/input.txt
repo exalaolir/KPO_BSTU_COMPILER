@@ -9,17 +9,17 @@ fn int b( bool z, int e){
 }
 
 fn int main(){
-	int a = -0xF111;
+	int a = 0hF111;
 
 	while(a != 1){
-		int q = 88
+		int h jkj = 0hFFFFFF;
 	
 	}
 	string Kate = "/"/Kate/"/\/\t//\t/";
 	@KIJIOJIOJ
 	PKPOOOPPO SSSXSXXXZXZXZX/@/@
 	if(true){
-		double zrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrse= 0.0345;
+		double zrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrse= 0.0345 % 4;
 	}
 
 	let auto = "h";

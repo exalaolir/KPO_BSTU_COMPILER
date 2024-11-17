@@ -145,7 +145,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 			{
 				if (IS_DEPRICATED_SYMBOL(i)) continue;
 
-				if (code[i] == ' ')
+				if (code[i] == ' ' || code[i] == '\t')
 				{
 					buffer.push_back('$');
 					continue;
@@ -181,7 +181,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 						continue;
 					}
 				}
-
+				
 				if (Spaces.contains(code[i]))
 				{
 					buffer.push_back('$');

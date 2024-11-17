@@ -210,18 +210,19 @@ namespace LEXER
 		Keywords type;
 		counter += 1;
 
-		auto isValidLiteral = [=](Keywords type, std::string& literal) {
+		auto isValidLiteral = [=](Keywords type, std::string& literal, int code = 10) {
 			try
 			{
 				double val;
+				int intVal;
 				switch (type)
 				{
 
 				case LEXER::IntLiteral:
-					std::stoi(literal);
+					intVal = std::stoi(literal, nullptr, code);
 					break;
 				case LEXER::DoubleLiteral:
-					std::stod(literal);
+					val = std::stod(literal);
 					break;
 				default:
 					break;
@@ -260,17 +261,36 @@ namespace LEXER
 			}
 			else if (regex.Match(token, "(0b(1|0)+)"))
 			{
-				isValidLiteral(IntLiteral, token);
+				auto newTocken = token.erase(0, 2);
+				isValidLiteral(IntLiteral, newTocken, 2);
 				type = IntLiteral;
 			}
 			else if (regex.Match(token, "((0[1-7]+[0-9]*|-0[1-7]+[0-9]*))"))
 			{
-				isValidLiteral(IntLiteral, token);
+				std::string newTocken;
+				if (token[0] == '-')
+				{
+					newTocken = token.erase(1, 2);
+				}
+				else
+				{
+					newTocken = token.erase(0, 2);
+				}
+				isValidLiteral(IntLiteral, newTocken, 8);
 				type = IntLiteral;
 			}
-			else if (regex.Match(token, "((0x([A-F]+|[1-9])+[0-9]*[A-F]*|-0x([A-F]+|[1-9])+[0-9]*[A-F]*))"))
+			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*))"))
 			{
-				isValidLiteral(IntLiteral, token);
+				std::string newTocken;
+				if (token[0] == '-')
+				{
+					newTocken = token.erase(1, 2);
+				}
+				else
+				{
+					newTocken = token.erase(0, 2);
+				}
+				isValidLiteral(IntLiteral, newTocken, 16);
 				type = IntLiteral;
 			}
 			else if (regex.Match(token, "(([0-9]+.[0-9]+|-[0-9]+.[0-9]+))"))
@@ -282,7 +302,7 @@ namespace LEXER
 			{
 				type = BoolLiteral;
 			}
-			else if (regex.Match(token, "([A-z]([A-z]|[0-9])*)")
+			else if (regex.Match(token, "(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)")
 					 && !TokenTypes.contains(token))
 			{
 				type = Id;

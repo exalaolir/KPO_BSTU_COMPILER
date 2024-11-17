@@ -79,11 +79,11 @@ namespace LEXER
 			{
 				result = "l";
 			}
-			else if (regex.Match(token, "((0x([A-F]+|[1-9])+[0-9]*[A-F]*|-0x([A-F]+|[1-9])+[0-9]*[A-F]*))"))
+			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*))"))
 			{
 				result = "l";
 			}
-			else if (regex.Match(token, "([A-z]([A-z]|[0-9])*)")
+			else if (regex.Match(token, "(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)")
 					 && !TokenTypes.contains(token))
 			{
 				result = "i";

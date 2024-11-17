@@ -48,7 +48,8 @@ namespace LEXER
 		Delim,
 		More,
 		Less,
-		Eqal
+		Eqal,
+		opDelim
 	};
 
 	inline static const std::unordered_map<string, string> Lexems
@@ -80,6 +81,7 @@ namespace LEXER
 		{">=", ">="},
 		{"<=", "<="},
 		{"<", "<"},
+		{"%", "%"},
 		{"!", "!"},
 	};
 
@@ -110,6 +112,7 @@ namespace LEXER
 		{"=", Eqal},
 		{"!", ServisSymbol},
 		{">", More},
+		{"%", opDelim},
 		{"<", Less},
 	};
 
@@ -118,6 +121,7 @@ namespace LEXER
 		{'/', true},
 		{'*', true},
 		{'+', true},
+		{'%', true},
 		{'=', true},
 		{'(', true},
 		{')', true},
