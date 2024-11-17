@@ -164,8 +164,8 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 					if (i + 2 < code.length() && isSymbol && code[i + 1] == 0 && code[i + 2] == 'x' && counter > 1)
 					{
 						buffer.push_back('$');
-						buffer.push_back(code[i]);
 						code.erase(i + 2, 1);
+						buffer.push_back(code[i]);
 						continue;
 					}
 					else if (i + 2 < code.length() && isSymbol && code[i + 1] == 0 && code[i + 2] == 'o' && counter > 1)
@@ -180,6 +180,10 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 						buffer.push_back(code[i]);
 						continue;
 					}
+				}
+				else if (code[i] == 'x')
+				{
+					code.erase(i, 1);
 				}
 				
 				if (Spaces.contains(code[i]))

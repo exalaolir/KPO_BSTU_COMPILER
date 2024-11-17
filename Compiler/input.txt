@@ -1,21 +1,10 @@
-fn int b( bool z, int e){
-	string a = "bsbacbsac";
-	while(a == ""){
-		int q = 88;
-	}
-	if(z){
-		double zse = 0.0345;
-	}
-}
-
-fn int main(){
-	int a = 0hF111;
+	int a = 0x45;
 
 	while(a != 1){
 		int h jkj = 0hFFFFFF;
 	
 	}
-	string Kate = "/"/Kate/"/\/\t//\t/";
+	string Kate = "/"/Kate/"/\/\t//\t/ ///";
 	@KIJIOJIOJ
 	PKPOOOPPO SSSXSXXXZXZXZX/@/@
 	if(true){
