@@ -412,6 +412,12 @@ namespace LEXER
 		function.line = line;
 		function.pos = counter;
 
+		if (scopes.top() != "g0")
+		{
+			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+					  "Недопустимая вложенная функция");
+			throw "Exception";
+		}
 		function.scope = scopes.top();
 		function.ownScope = scopeGenerator(function.scope, function.name);
 		function.value = None;
@@ -434,12 +440,6 @@ namespace LEXER
 				param.line = line;
 				param.pos = counter;
 
-				if (scopes.top() != "go")
-				{
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
-							  "Недопустимая вложенная функция");
-					throw "Exception";
-				}
 				param.scope = scopes.top();
 
 				do
