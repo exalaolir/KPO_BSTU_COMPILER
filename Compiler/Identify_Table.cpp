@@ -270,11 +270,11 @@ namespace LEXER
 				std::string newTocken;
 				if (token[0] == '-')
 				{
-					newTocken = token.erase(1, 2);
+					newTocken = token.erase(1, 1);
 				}
 				else
 				{
-					newTocken = token.erase(0, 2);
+					newTocken = token.erase(0, 1);
 				}
 				isValidLiteral(IntLiteral, newTocken, 8);
 				type = IntLiteral;

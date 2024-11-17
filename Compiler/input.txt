@@ -1,7 +1,5 @@
-	int a = 0x45;
 
-	while(a != 1){
-		int h jkj = 0hFFFFFF;
+		0x20000000000000000;
 	
 	}
 	string Kate = "/"/Kate/"/\/\t//\t/ ///";
