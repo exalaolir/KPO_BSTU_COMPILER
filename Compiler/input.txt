@@ -1,3 +1,4 @@
+	
 	int a = 0x45;
 
 	while(a != 1){
@@ -9,6 +10,37 @@
 	PKPOOOPPO SSSXSXXXZXZXZX/@/@
 	if(true){
 		double zrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrse= 0.0345 % 4;
+	}
+
+	let auto = "h";
+	fn int b( bool z, int e){
+	string a = "bsbacbsac";
+	while(a == ""){
+		int q = 88;
+	}
+	if(z){
+		double zse = 0.0345;
+	}
+}
+
+fn int main(){
+	int a1sdfsdsW = 0x20000000000;
+	int h = 0h80000000;
+	int y8 = 0b1000
+	while(h != 1){
+		int q = 88
+	
+	}
+	string Kate = "/"/Kate/"/\/\t//\t/";
+	string Kate1 ="‘’“”•–—™š›œŸ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ";
+	string l ="";
+	bool q = true;
+	double r = 2.2-;
+	let r1 = "/"/Kate/"/ \ /\t//\t/tyty/ /\n/";
+	@KIJIOJIOJ
+	PKPOOOPPO SSSXSXXXZXZXZX/@/@
+	if(true){
+		double zrrrrrrrrrse= 0.0345;
 	}
 
 	let auto = "h";
