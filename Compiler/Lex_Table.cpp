@@ -8,7 +8,8 @@ namespace LEXER
 	std::vector<Lexem> Lexer::generateLexTable()
 	{
 		std::vector<Lexem> result;
-		//result.reserve(());
+
+		result.reserve(preprocesseredStr.size());
 		int line = 1;
 		int counter = 0;
 
