@@ -6,6 +6,7 @@ LEXER::Lexer::Lexer(std::string& fileName)
 {
 	currentScopeNumber = 0;
 	scopes.push("g0");
+	literalNumber = 0;
 
 	if (!inFile.is_open())
 	{

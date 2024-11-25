@@ -98,7 +98,6 @@ namespace LEXER
 
 	IdTable LEXER::Lexer::generateIdTable()
 	{
-		IdTable idTable;
 		std::stack<Keywords> brackets;
 		int line = 1;
 		int counter = 0;
@@ -205,7 +204,7 @@ namespace LEXER
 		return idTable;
 	}
 
-	Keywords LEXER::Lexer::GetKeyword(string& token, int& line, int& counter)
+	Keywords LEXER::Lexer::GetKeyword(string& token, int& line, int& counter, bool isLexTable)
 	{
 		Keywords type;
 		counter += 1;
@@ -247,6 +246,22 @@ namespace LEXER
 			if (regex.Match(token, "(\"[\t-я]*\")"))
 			{
 				type = StringLiteral;
+				
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = StringLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = token;
+
+					idTable.Add(literal);
+				}
 			}
 			else if (token == "|")
 			{
@@ -254,16 +269,48 @@ namespace LEXER
 				counter = 0;
 				return None;
 			}
-			else if (regex.Match(token, "(([1-9]+[0-9]*|-[1-9]+[0-9]*))"))
+			else if (regex.Match(token, "(([1-9]+[0-9]*|-[1-9]+[0-9]*|0))"))
 			{
 				isValidLiteral(IntLiteral, token);
 				type = IntLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = IntLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = std::stoi(token, nullptr, 10);
+
+					idTable.Add(literal);
+				}
 			}
 			else if (regex.Match(token, "(0b(1|0)+)"))
 			{
 				auto newTocken = token.erase(0, 2);
 				isValidLiteral(IntLiteral, newTocken, 2);
 				type = IntLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = IntLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = std::stoi(token, nullptr, 8);
+
+					idTable.Add(literal);
+				}
 			}
 			else if (regex.Match(token, "((0[1-7]+[0-9]*|-0[1-7]+[0-9]*))"))
 			{
@@ -278,6 +325,22 @@ namespace LEXER
 				}
 				isValidLiteral(IntLiteral, newTocken, 8);
 				type = IntLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = IntLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = std::stoi(token, nullptr, 8);
+
+					idTable.Add(literal);
+				}
 			}
 			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*))"))
 			{
@@ -292,15 +355,70 @@ namespace LEXER
 				}
 				isValidLiteral(IntLiteral, newTocken, 16);
 				type = IntLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = IntLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = std::stoi(token, nullptr, 16);
+
+					idTable.Add(literal);
+				}
 			}
 			else if (regex.Match(token, "(([0-9]+.[0-9]+|-[0-9]+.[0-9]+))"))
 			{
 				isValidLiteral(DoubleLiteral, token);
 				type = DoubleLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = DoubleLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = std::stod(token);
+
+					idTable.Add(literal);
+				}
 			}
 			else if (regex.Match(token, "((true|false))"))
 			{
 				type = BoolLiteral;
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal-" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = IntLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					
+					if (token == "true")
+					{
+						literal.value = true;
+					}
+					else
+					{
+						literal.value = false;
+					}
+
+					idTable.Add(literal);
+				}
 			}
 			else if (regex.Match(token, "(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)")
 					 && !TokenTypes.contains(token))
@@ -341,7 +459,7 @@ namespace LEXER
 		const std::array<string, 2> expressions
 		{
 			"(int|string|bool|double)",
-			"([A-z]([A-z]|[0-9])*)"
+			"(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"
 		};
 
 		const std::array<std::string, 2> errorMessages
@@ -511,7 +629,7 @@ namespace LEXER
 		const std::array<string, 2> expressions
 		{
 			"(int|string|bool|double)",
-			"([A-z]([A-z]|[0-9])*)"
+			"(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"
 		};
 
 		const std::array<std::string, 2> errorMessages
@@ -672,7 +790,7 @@ namespace LEXER
 			}
 		} while (*currentToken == "|");
 
-		if (regex.Match(*currentToken, "([A-z]([A-z]|[0-9])*)"))
+		if (regex.Match(*currentToken, "(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"))
 		{
 			if (GetKeyword(*currentToken, line, counter) != Id)
 			{
@@ -680,6 +798,7 @@ namespace LEXER
 						  std::format("Неверно задан идентификатор {}", *currentToken));
 				throw "Exception";
 			}
+
 			autoType.name = *currentToken;
 			autoType.line = line;
 			autoType.pos = counter;
@@ -781,6 +900,8 @@ namespace LEXER
 			case More:
 				break;
 			case Less:
+				break;
+			case Comma:
 				break;
 			case IntLiteral:
 				if (autoType.valueType == None)

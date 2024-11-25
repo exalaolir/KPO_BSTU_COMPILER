@@ -37,6 +37,9 @@
     <Filter Include="Исходные файлы\Lexer">
       <UniqueIdentifier>{daa9b199-1045-41c7-a696-3f0a760a94d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Sintax_Analiser">
+      <UniqueIdentifier>{87180324-f203-4a81-bfe5-fc8e4201f32f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Compiler.cpp">
@@ -66,6 +69,12 @@
     <ClCompile Include="Identify_Table.cpp">
       <Filter>Исходные файлы\Lexer</Filter>
     </ClCompile>
+    <ClCompile Include="Magazine_Automate.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GRB.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -92,6 +101,12 @@
     <ClInclude Include="Symbols_And_Resourses.h">
       <Filter>Файлы заголовков\Lexer</Filter>
     </ClInclude>
+    <ClInclude Include="Magazine_Automate.h">
+      <Filter>Файлы заголовков\Sintax_Analiser</Filter>
+    </ClInclude>
+    <ClInclude Include="GRB.h">
+      <Filter>Файлы заголовков\Sintax_Analiser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="output.txt.out">
@@ -101,6 +116,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="input.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="translationInfo.txt.log">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

@@ -49,7 +49,8 @@ namespace LEXER
 		More,
 		Less,
 		Eqal,
-		opDelim
+		opDelim,
+		Literal
 	};
 
 	inline static const std::unordered_map<string, string> Lexems
