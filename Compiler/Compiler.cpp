@@ -9,7 +9,7 @@ using namespace LEXER;
 int main(int argc, char* argv[])
 {
 	setlocale(LC_ALL, "ru");
-	setlocale(LC_NUMERIC, "C");
+ 	setlocale(LC_NUMERIC, "C");
 	try
 	{
 		std::unordered_map<Keywords, string> kl
