@@ -1,13 +1,21 @@
+@int uuo = 66 +88 -88 - -999;@
 
-		0x20000000000000000;
-	
-	}
-	string Kate = "/"/Kate/"/\/\t//\t/ ///";
-	@KIJIOJIOJ
-	PKPOOOPPO SSSXSXXXZXZXZX/@/@
-	if(true){
-		double zrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrse= 0.0345 % 4;
-	}
-
-	let auto = "h";
+fn int q(int z, bool v)
+{
+	@z = v;@
+	z;
+	return z;
 }
+fn int io(string z)
+{
+z;
+	return z;
+} 
+
+fn int main()
+{
+let lll = true;
+	let y = (lll);
+	q;
+	return 0;
+} 

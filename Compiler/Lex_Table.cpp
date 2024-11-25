@@ -8,17 +8,20 @@ namespace LEXER
 	std::vector<Lexem> Lexer::generateLexTable()
 	{
 		std::vector<Lexem> result;
+		std::stack<Keywords> brackets;
 
 		result.reserve(preprocesseredStr.size());
 		int line = 1;
 		int counter = 0;
+		int timeToScopeGen = 1;
 
 		for (auto& token : this->preprocesseredStr)
 		{
-			auto newLex = GetType(token, line, counter);
+			double hash = -1.0;
+			auto newLex = GetType(token, line, counter, hash, timeToScopeGen, brackets);
 			if (newLex != DEPRICATED_SYMBOL)
 			{
-				Lexem lex(newLex, line, counter);
+				Lexem lex(newLex, line, counter, hash);
 				result.push_back(lex);
 			}
 		}
@@ -34,17 +37,140 @@ namespace LEXER
 		std::cout << std::endl;
 		for (auto jj : result)
 		{
-			std::cout << jj.line << "  " << jj.index << "  "  << jj.lexema << std::endl;
+			std::cout << jj.line << "  " << jj.index << "  "  << jj.lexema <<
+				"  " << jj.positionInIdTable << std::endl;
 		}
 
+		scopes = {};
+		scopes.push("g0");
+		currentScopeNumber = 0;
+		literalNumber = 0;
 		return result;
 	}
 
-	inline std::string LEXER::Lexer::GetType(string& token, int& line, int& counter)
+	inline std::string LEXER::Lexer::GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGen, std::stack<Keywords>& brackets)
 	{
+		auto hasher = [](string& name, string& scope)->double {
+			return std::hash<string>()(name) +
+				std::hash<string>()(scope);
+		};
+
 		std::string result;
 		counter += 1;
 
+		int notLine = line; 
+		int notcounter = line;
+		
+		if(timeToScopeGen > 1) timeToScopeGen++;
+
+		Keywords tokenType = GetKeyword(token, notLine, notcounter, true);
+
+		switch (tokenType)
+		{
+		case Fun:
+		{
+			timeToScopeGen++;
+			break;
+		}
+		case OpenBracket:
+		{
+			brackets.push(OpenBracket);
+			break;
+		}
+		case If:
+		{
+			string id = "i";
+			scopeGenerator(scopes.top(), id);
+			break;
+		}
+		case Else:
+		{
+			string id = "e";
+			scopeGenerator(scopes.top(), id);
+			break;
+		}
+		case For:
+		{
+			string id = "f";
+			scopeGenerator(scopes.top(), id);
+			break;
+		}
+		case While:
+		{
+			string id = "w";
+			scopeGenerator(scopes.top(), id);
+			break;
+		}
+		case BoolLiteral:
+		{
+			std::string id = "none";
+			std:: string name = "Literal-" + std::to_string(literalNumber);
+			hash = hasher(name, id);
+			literalNumber++;
+			break;
+		}
+		case DoubleLiteral:
+		{
+			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string id = "none";
+			hash = hasher(name, id);
+			literalNumber++;
+			break;
+		}
+		case StringLiteral:
+		{
+			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string id = "none";
+			hash = hasher(name, id);
+			literalNumber++;
+			break;
+		}
+		case IntLiteral:
+		{
+			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string id = "none";
+			hash = hasher(name, id);
+			literalNumber++;
+			break;
+		}
+		case Main:
+		{
+			hash = hasher(token, scopes.top());
+			if (timeToScopeGen == 4)
+			{
+				string id = string() + token[0];
+				scopeGenerator(scopes.top(), id);
+				timeToScopeGen = 1;
+			}
+			break;
+		}
+		case Id:
+		{
+			hash = hasher(token, scopes.top());
+			if (timeToScopeGen == 4)
+			{
+				string id = string() + token[0];
+				scopeGenerator(scopes.top(), id);
+				timeToScopeGen = 1;
+			}
+			break;
+		}
+		case CloseBracket:
+		{
+			if (brackets.empty())
+			{
+				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						  "Нарушен уровень вложенности");
+				throw "Esception";
+			}
+			brackets.pop();
+			if (scopes.size() != 1) scopes.pop();
+			break;
+		}
+		default:
+			break;
+		}
+		
 		if (Lexems.contains(token))
 		{
 			result = Lexems.at(token);
@@ -63,7 +189,7 @@ namespace LEXER
 				counter = 0;
 				return DEPRICATED_SYMBOL;
 			}
-			else if (regex.Match(token, "(([1-9]+[0-9]*|[0-9]+.[0-9]+|true|false))"))
+			else if (regex.Match(token, "(([1-9]+[0-9]*|[0-9]+.[0-9]+|true|false|0))"))
 			{
 				result = "l";
 			}

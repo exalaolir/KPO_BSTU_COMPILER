@@ -36,7 +36,7 @@ void LOGGER::Logger::Log(Level level, const std::string sourse, const std::strin
 
 	std::cout << std::format(" Источник: {}, Сообщение: {}\n", sourse, message);
 	
-	fileLogger.Write(logMessage);
+	this->fileLogger.Write(logMessage);
 }
 
 LOGGER::FileLog::~FileLog()

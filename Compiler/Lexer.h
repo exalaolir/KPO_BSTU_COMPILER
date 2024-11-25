@@ -7,16 +7,18 @@ namespace LEXER
 	{
 		Lexem(std::string lexema,
 			  unsigned int line,
-			  unsigned int index)
+			  unsigned int index,
+			  double positionInIdTable = -1.0)
 		{
 			this->index = index;
 			this->line = line;
 			this->lexema = lexema;
+			this->positionInIdTable = positionInIdTable;
 		}
 		std::string lexema;
 		unsigned int line;
 		unsigned int index;
-		unsigned int positionInIdTable;
+		double positionInIdTable;
 	};
 
 	struct Entry
@@ -65,12 +67,12 @@ namespace LEXER
 	private:
 		std::list<string> preprocessCode(std::string& code);
 		std::string readFile(std::string& fileName);
-		Keywords GetKeyword(string& token, int& line, int& counter);
+		Keywords GetKeyword(string& token, int& line, int& counter, bool isLexTable = false);
 		std::string scopeGenerator(string& priviosScope, string& id);
 		void createFun(std::list<string>::iterator& currentTocken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, bool& hasMain);
 		void createVar(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, Keywords type);
 		void createAuto(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter);
-		inline std::string GetType(string& token, int& line, int& counter);
+		inline std::string GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGe, std::stack<Keywords>& brackets);
 
 		std::ifstream inFile;
 		std::list<string> preprocesseredStr;
@@ -79,5 +81,7 @@ namespace LEXER
 		std::stack<string> scopes;
 		int currentScopeNumber;
 		bool hasErrors = false;
+		int literalNumber;
+		IdTable idTable;
 	};
 }

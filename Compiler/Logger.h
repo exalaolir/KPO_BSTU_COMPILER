@@ -11,14 +11,15 @@ namespace LOGGER
     static struct FileLog
 	{
 	public:
-		FileLog() {}
+		FileLog() 
+		{
+			
+		}
 
 		~FileLog();
 
 		void Write(const std::string& data);
-
 		std::string path;
-	private:
 		std::ofstream logFile;
 	};
 
@@ -47,6 +48,7 @@ namespace LOGGER
 		void Log(Level level, const std::string sourse, const std::string message);
 
 		static inline std::string path = "log.txt.log";
+		static inline FileLog fileLogger;
 	private:
 		static inline std::array<int, FATAL_ERROR + 1u> colors =
 		{
@@ -56,7 +58,7 @@ namespace LOGGER
 			FOREGROUND_RED | FOREGROUND_INTENSITY,
 			FOREGROUND_RED | FOREGROUND_INTENSITY
 		};
-		static inline FileLog fileLogger;
+	
 	};
 
 	static inline Logger GetLogger()

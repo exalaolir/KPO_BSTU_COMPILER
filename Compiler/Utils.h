@@ -27,6 +27,14 @@ namespace Utils
 	}
 
 	template<typename T>
+	T Pop(std::list<T>& list)
+	{
+		T result = list.back();
+		list.pop_back();
+		return result;
+	}
+
+	template<typename T>
 	T Pop(std::queue<T>& stack)
 	{
 		T result = stack.front();

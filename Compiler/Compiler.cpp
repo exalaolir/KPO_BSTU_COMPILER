@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "InputValidator.h"
 #include "Lexer.h"
+#include "Magazine_Automate.h"
 
 using namespace INPUTVAL;
 using namespace LEXER;
@@ -40,7 +41,7 @@ int main(int argc, char* argv[])
 		};
 		auto params = validateParams(argc, argv);
 		Lexer lexer(params[IN_FILE]);
-		lexer.generateLexTable();
+		auto hjk = lexer.generateLexTable();
 		auto h = lexer.generateIdTable();
 
 		for (auto i : h.keys)
@@ -48,8 +49,17 @@ int main(int argc, char* argv[])
 			auto q = h.table[i];
 			std::cout << kl[q.type] << " " << q.name << " " << kl[q.valueType] << " " 
 				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params 
-				<< " " << q.GetValue() << std::endl;
+				<< " " << q.GetValue()  << "  " << q.GetHashCode() << std::endl;
 		}
+
+		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
+
+		MFST_TRACE_START(log);
+		MFST::Mfst mfst(hjk, h, GRB::getGreibach());
+		if (!mfst.start(log))
+			throw "Error";
+		mfst.savededucation();
+		mfst.printrules(log);
 	}
 	catch (...)
 	{
