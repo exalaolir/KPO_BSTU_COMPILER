@@ -54,14 +54,14 @@ int main(int argc, char* argv[])
 				<< " " << q.GetValue()  << "  " << q.GetHashCode() << std::endl;
 		}
 
-		/*auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
+		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
 
 		MFST_TRACE_START(log);
 		MFST::Mfst mfst(hjk, h, GRB::getGreibach());
 		if (!mfst.start(log))
 			throw "Error";
 		mfst.savededucation();
-		mfst.printrules(log);*/
+		mfst.printrules(log);
 
 		ANALISER::Analiser analiser;
 		analiser.analise(hjk, h);

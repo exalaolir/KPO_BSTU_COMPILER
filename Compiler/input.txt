@@ -3,9 +3,9 @@ fn int w(int t){
 	int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));
 	return (55 + t * 4) / w(8);
 }
-fn int q(int z, bool v)
-{
-	return z;
+fn int nh1(int y,int k,string w, bool k1, int i ) {
+	w = nh(5,"jihuih");
+	return w;
 }
 fn string w1(int z, bool v)
 {
