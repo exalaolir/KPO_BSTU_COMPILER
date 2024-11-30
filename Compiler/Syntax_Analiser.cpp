@@ -14,6 +14,10 @@ void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 		case 'r':
 			checkReturnType(lexTable, idTable, i);
 			break;
+		case 'i':
+		case 'l':
+			checkExp(lexTable, idTable, i, idTable[lexTable[i].positionInIdTable]);
+			break;
 		default:
 			break;
 		}
@@ -75,9 +79,13 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 
 	size_t currentParamType = 0;
 
-	while (!brackets.empty() && currentParamType != countOfParams - 1)
+	while (!brackets.empty() && currentParamType != countOfParams )
 	{
-		if(lexTable[index].lexema == ")") brackets.pop();
+		if (lexTable[index].lexema == ")")
+		{
+			brackets.pop();
+			continue;
+		}
 		if(lexTable[index].lexema == ",") index++;
 
 		size_t oldIndex = index;
@@ -85,27 +93,27 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 		{
 		case Fun:
 			if(params[currentParamType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-			checkFun(lexTable, idTable, index);
+			//checkFun(lexTable, idTable, index);
 			break;
 		case ServisSymbol:
-			if (lexTable[index].lexema != ",")
+			if (lexTable[index].lexema != "," && lexTable[index + 1].lexema != ")" )
 			{
-				checkExp(lexTable, idTable, index);
+				checkExp(lexTable, idTable, index, currentType);
 			}
 			break;
 		case Literal:
 			if (params[currentParamType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-			if (lexTable[index + 1].lexema != ",")
+			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index);
+				checkExp(lexTable, idTable, index, currentType);
 			}
 			break;
 		case Param:
 		case Variable:
 			if (currentFunction.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
-			if (lexTable[index + 1].lexema != ",")
+			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index);
+				checkExp(lexTable, idTable, index, currentType);
 			}
 			break;
 		default:
@@ -116,8 +124,41 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 	}
 }
 
-void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index)
+void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index, Entry& currentType)
 {
+
+	auto generateThrow = [&]()
+	{
+			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+					  std::format("Ожидался тип {}", types[currentType.valueType]));
+			throw "Exception";
+	}; 
+	index++;
+
+	while (lexTable[index].lexema != ";")
+	{
+		size_t oldIndex = index;
+		
+		switch (returnType(lexTable, idTable, index))
+		{
+		case Fun:
+			if (currentType.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
+			break;
+		case ServisSymbol:
+			break;
+		case Literal:
+			if (currentType.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
+			break;
+		case Param:
+		case Variable:
+			if (currentType.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
+			break;
+		default:
+			break;
+		}
+		if (lexTable[index].lexema == ";") break;
+		index++;
+	}
 
 }
 
@@ -131,41 +172,52 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 	};
 
 	index++;
-
-	while (lexTable[index].lexema != ";")
+	if (currentFunction.name == "main" && 
+		(idTable[lexTable[index].positionInIdTable].valueType != IntLiteral ||
+		std::get<int>(idTable[lexTable[index].positionInIdTable].value) != 0))
 	{
-		size_t oldIndex = index;
-		auto j = idTable[lexTable[oldIndex].positionInIdTable].valueType;
-		switch (returnType(lexTable, idTable, index))
+		ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+				  std::format("Функция main должна возвращать 0"));
+		throw "Exception";
+	}
+	else
+	{
+		while (lexTable[index].lexema != ";")
 		{
-		case Fun:
-			if (currentFunction.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-			checkFun(lexTable, idTable, index);
-			break;
-		case ServisSymbol:
-			if (lexTable[index].lexema != ",")
+			size_t oldIndex = index;
+			
+			switch (returnType(lexTable, idTable, index))
 			{
-				checkExp(lexTable, idTable, index);
+			case Fun:
+				if (currentFunction.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
+				checkFun(lexTable, idTable, index);
+				break;
+			case ServisSymbol:
+				if (lexTable[index].lexema != ";")
+				{
+					checkExp(lexTable, idTable, index, currentFunction);
+				}
+				break;
+			case Literal:
+				if (currentFunction.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
+				if (lexTable[index + 1].lexema != ";")
+				{
+					checkExp(lexTable, idTable, index, currentFunction);
+				}
+				break;
+			case Param:
+			case Variable:
+				if (currentFunction.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
+				if (lexTable[index + 1].lexema != ";")
+				{
+					checkExp(lexTable, idTable, index, currentFunction);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case Literal:
-			if (currentFunction.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-			if (lexTable[index + 1].lexema != ",")
-			{
-				checkExp(lexTable, idTable, index);
-			}
-			break;
-		case Param:
-		case Variable:
-			if (currentFunction.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
-			if (lexTable[index + 1].lexema != ",")
-			{
-				checkExp(lexTable, idTable, index);
-			}
-			break;
-		default:
-			break;
+			if(lexTable[index].lexema == ";") break;
+			index++;
 		}
-		index++;
 	}
 }

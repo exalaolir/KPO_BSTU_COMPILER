@@ -1,13 +1,18 @@
 
 fn int w(int t){
-	return 77;
+	int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));
+	return (55 + t * 4) / w(8);
 }
 fn int q(int z, bool v)
 {
 	return z;
 }
-
+fn string w1(int z, bool v)
+{
+	return "hjk";
+}
 fn int main()
 {
+    string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
 	return 0;
 } 

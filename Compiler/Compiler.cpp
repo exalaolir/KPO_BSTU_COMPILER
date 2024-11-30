@@ -63,10 +63,10 @@ int main(int argc, char* argv[])
 		mfst.savededucation();
 		mfst.printrules(log);*/
 
-		POLISH::changeLexTable(hjk, h);
-
 		ANALISER::Analiser analiser;
 		analiser.analise(hjk, h);
+
+		POLISH::changeLexTable(hjk, h);
 	}
 	catch (...)
 	{
