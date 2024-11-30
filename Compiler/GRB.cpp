@@ -55,6 +55,25 @@ namespace GRB
 			Rule::Chain(2, TS('t'), TS('i'))
 
 		),
+		Rule(NS('A'), GRB_ERROR_SERIES + 3, 8,//Аргументы (ДОБАВИТЬ ВЫРАЖЕНИЕ)
+
+			Rule::Chain(3, TS('i'), TS(','), NS('A')),
+
+			Rule::Chain(1, TS('i')),
+
+			Rule::Chain(3, TS('l'), TS(','), NS('A')),
+
+			Rule::Chain(1, TS('l')),
+
+			Rule::Chain(5, TS('i'), TS('o'), NS('V'), TS(','), NS('A')),
+
+			Rule::Chain(3, TS('i'), TS('o'), NS('V')),
+
+			Rule::Chain(5, TS('l'), TS('o'), NS('V'), TS(','), NS('A')),
+
+			Rule::Chain(1, TS('l'), TS('o'), NS('V'))
+
+		),
 
 		Rule(NS('R'), GRB_ERROR_SERIES + 4, 2,//RETURN
 
