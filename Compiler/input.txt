@@ -1,13 +1,19 @@
 
-fn int w(int t){
-	return 77;
-}
-fn int q(int z, bool v)
-{
-	return z;
-}
+fn int nh(int y,int k,string w, bool k1, int i ) {
+	int result = ( y + k ) - 10 / 34;
 
+	return ( y + k ) - 10 / 34+(7+9)/8-8-9+(5-3)+(34-78)+((result+9)-67+(7-9));
+}
+fn int nh1(int y,int k,string w, bool k1, int i ) {
+	w = nh(5,"jihuih");
+	return 5;
+}
 fn int main()
 {
+    int h = 8;
+	int l = 0;
+	h = l;
+	string k = nh1(3,7,")");
+	int e = 2567*3-(h+4546+(4-8)/70.456+(468 % 2));
 	return 0;
 } 

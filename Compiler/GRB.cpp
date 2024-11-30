@@ -6,66 +6,84 @@
 
 namespace GRB
 {
-	Greibach greibach(NS('S'), TS('$'), 8,
+	Greibach greibach(NS('S'), TS('$'), 6,
 
-					  Rule(NS('S'), GRB_ERROR_SERIES, 5,//—“–” “”–¿  Œƒ¿
-					  Rule::Chain(13, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('B'), TS('r'), NS('E'), TS(';'), TS('}'), NS('F')),
-					  Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('S')),
-					  Rule::Chain(3, TS('t'), TS('i'), NS('L')),
-					  Rule::Chain(2, TS('i'), NS('L')),
-					  Rule::Chain(9, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), TS('{'), NS('B'), TS(';'), TS('}'))
-	),
-					  Rule(NS('F'), GRB_ERROR_SERIES + 2, 2,//‘”Õ ÷»» » ‘”Õ ÷»ﬂ MAIN
+		Rule(NS('S'), GRB_ERROR_SERIES, 6,//—“–” “”–¿  Œƒ¿
 
-					  Rule::Chain(9, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), TS('{'), NS('B'), TS(';'), TS('}')),
-			          Rule::Chain(13, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('B'), TS('r'), NS('E'), TS(';'), TS('}'), NS('F'))
-	),
-					  Rule(NS('L'), GRB_ERROR_SERIES + 3, 2,//À»“≈–¿À€ »À» «Õ¿◊≈Õ»ﬂ  Œ“Œ–€≈ œ–»—¬¿»¬¿ﬁ“—ﬂ œ≈–≈Ã≈ÕÕ€Ã(»À» Õ≈ œ–»—¬¿»¬¿ﬁ“—ﬂ)
-					  Rule::Chain(1, TS(';')),
-					  Rule::Chain(3, TS('='), NS('V'), TS(';'))
-	),
-					  Rule(NS('V'), GRB_ERROR_SERIES + 4, 5,//¬—≈ ¬Œ«ÃŒ∆Õ€≈ ¬€–¿∆≈Õ»ﬂ( –ŒÃ≈ ‘”Õ ÷»…)
-					  Rule::Chain(1, TS('l')),
-					  Rule::Chain(3, TS('('), NS('V'), TS(')')),
-					  Rule::Chain(3, TS('l'), TS('o'), NS('V')),
-					  Rule::Chain(1, TS('i')),
-					  Rule::Chain(3, TS('i'), TS('o'), NS('V'))
-	),
-					  Rule(NS('A'), GRB_ERROR_SERIES + 5, 4,//¿–√”Ã≈Õ“€(◊“Œ œ≈–≈ƒ¿®Ã ¬ ‘”Õ ÷»ﬁ œ–» ≈® ¬€«Œ¬≈)
-					  Rule::Chain(1, TS('i')),
-					  Rule::Chain(3, TS('i'), TS(','), NS('A')),
-					  Rule::Chain(1, TS('l')),
-					  Rule::Chain(3, TS('l'), TS(','), NS('A'))
-	),
-					  Rule(NS('P'), GRB_ERROR_SERIES + 6, 2,//œ¿–¿Ã≈“–€ ‘”Õ ÷»»
-					  Rule::Chain(2, TS('t'), TS('i')),
-					  Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('P'))
-	), 
-					  Rule(NS('E'), GRB_ERROR_SERIES + 7, 3,//¬Œ«¬–¿Ÿ¿≈ÃŒ≈ «Õ¿◊≈Õ»≈
-					  Rule::Chain(1, TS('i')),
-					  Rule::Chain(1, TS('l')),
-					  Rule::Chain(3, TS('('), NS('E'), TS(')'))/*,
-					  Rule::Chain(3, TS('('), NS('W'), TS(')'))*/
-	),
-					  Rule(NS('B'), GRB_ERROR_SERIES + 8, 12,//“≈ÀŒ ‘”Õ ÷»»(»À» ¡ÀŒ   Œƒ¿ ¬ Àﬁ¡ŒÃ ÷» À≈)
-					  Rule::Chain(4, TS('t'), TS('i'), NS('L'),NS('B')),
-					  Rule::Chain(9, TS('t'), TS('i'), TS('='), TS('i'), TS('('),NS('A'),TS(')'), TS(';'), NS('B')),
-					  Rule::Chain(5, TS('i'), TS('='), NS('V'), TS(';'), NS('B')),
-					  Rule::Chain(8, TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), TS(';'), NS('B')),
+			Rule::Chain(11, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), TS('{'), NS('B'), TS('r'),TS('l'), TS(';'), TS('}')),
 
-					  Rule::Chain(3, TS('t'), TS('i'), NS('L')),
-					  Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), TS(';')),
-					  Rule::Chain(4, TS('i'), TS('='), NS('V'), TS(';')),
-					  Rule::Chain(7, TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), TS(';')),
+			Rule::Chain(13, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('B'), TS('r'), NS('R'), TS(';'), TS('}'), NS('S')),
 
-					  Rule::Chain(8, TS('q'), TS('('), NS('Q'), TS(')'), TS('{'), NS('B'), TS('}'), NS('B')),//”—ÀŒ¬Õ€… Œœ≈–¿“Œ–
-					  Rule::Chain(7, TS('q'), TS('('), NS('Q'), TS(')'), TS('{'), NS('B'), TS('}')),
+			Rule::Chain(13, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('B'), TS('r'), NS('V'), TS(';'), TS('}'), NS('S')),
 
-					  Rule::Chain(12, TS('q'), TS('('), NS('Q'), TS(')'), TS('{'), NS('B'), TS('}'), //if(){}else{}
-						  TS('s'), TS('{'), NS('B'), TS('}'), NS('B')),
-					  Rule::Chain(11, TS('q'), TS('('), NS('Q'), TS(')'), TS('{'), NS('B'), TS('}'),
-							  TS('s'), TS('{'), NS('B'), TS('}'))
-	)
+			Rule::Chain(12, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), TS('r'), NS('R'), TS(';'), TS('}'), NS('S')),
+
+			Rule::Chain(12, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), TS('r'), NS('V'), TS(';'), TS('}'), NS('S')),
+
+			Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('S'))
+
+		),
+
+		Rule(NS('B'), GRB_ERROR_SERIES + 1, 6,//“≈ÀŒ
+
+			Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('B')),
+
+			Rule::Chain(3, TS('t'), TS('i'), NS('L')),
+
+			Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), NS('B')),
+
+			Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), TS(';')),
+
+			Rule::Chain(2, TS('i'), NS('L')),
+
+			Rule::Chain(3, TS('i'), NS('L'),NS('B'))
+		),
+
+		Rule(NS('L'), GRB_ERROR_SERIES + 2, 3,//À»“≈–¿À
+
+			Rule::Chain(3, TS('='), TS('l'), TS(';')),
+
+			Rule::Chain(3, TS('='), TS('i'), TS(';')),
+
+			Rule::Chain(3, TS('='), NS('V'), TS(';'))
+		),
+
+		Rule(NS('P'), GRB_ERROR_SERIES + 3, 2,//œ¿–¿Ã≈“–
+
+			Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('P')),
+
+			Rule::Chain(2, TS('t'), TS('i'))
+
+		),
+
+		Rule(NS('R'), GRB_ERROR_SERIES + 4, 2,//RETURN
+
+			Rule::Chain(1, TS('i')),
+
+			Rule::Chain(1, TS('l'))
+
+		),
+
+		Rule(NS('V'), GRB_ERROR_SERIES + 5, 9,//¬€–¿∆≈Õ»≈
+
+			Rule::Chain(2, TS('i'), NS('V')),
+
+			Rule::Chain(2, TS('l'), NS('V')),
+
+			Rule::Chain(4, TS('('), NS('V'), TS(')'), NS('V')),
+
+			Rule::Chain(3, TS('o'), TS('i'), NS('V')),
+
+			Rule::Chain(3, TS('o'), TS('l'), NS('V')),
+
+			Rule::Chain(5, TS('o'), TS('('), NS('V'), TS(')'), NS('V')),
+
+			Rule::Chain(2, TS('o'), TS('i')),
+
+			Rule::Chain(2, TS('o'), TS('l')),
+
+			Rule::Chain(4, TS('o'), TS('('), NS('V'), TS(')'))
+		)
 					 
 	//),
 	//				  Rule(NS('B'), GRB_ERROR_SERIES + 2, 16,  // ‚ÓÁÏÓÊÌ˚Â ÍÓÌÒÚÛÍˆËË ‚ Ù-Ëˇı
