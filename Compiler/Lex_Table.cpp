@@ -15,13 +15,47 @@ namespace LEXER
 		int counter = 0;
 		int timeToScopeGen = 1;
 
-		for (auto& token : this->preprocesseredStr)
+		for (auto iter = this->preprocesseredStr.begin(); iter != this->preprocesseredStr.end(); iter++)
 		{
 			double hash = -1.0;
-			auto newLex = GetType(token, line, counter, hash, timeToScopeGen, brackets);
+			short prioryty = -1;
+			auto token = *iter;
+			auto newLex = GetType(token, line, counter, hash, timeToScopeGen, brackets, iter);
 			if (newLex != DEPRICATED_SYMBOL)
 			{
-				Lexem lex(newLex, line, counter, hash);
+				if (newLex == "o")
+				{
+					switch (newLex[0])
+					{
+					case '(':
+						prioryty = 0;
+						break;
+					case ')':
+						prioryty = 0;
+						break;
+					case ',':
+						prioryty = 1;
+						break;
+					case '+':
+						prioryty = 2;
+						break;
+					case '-':
+						prioryty = 2;
+						break;
+					case '*':
+						prioryty = 3;
+						break;
+					case '/':
+						prioryty = 3;
+						break;
+					case '%':
+						prioryty = 3;
+						break;
+					default:
+						break;
+					}
+				}
+				Lexem lex(newLex, line, counter, hash, prioryty);
 				result.push_back(lex);
 			}
 		}
@@ -48,7 +82,7 @@ namespace LEXER
 		return result;
 	}
 
-	inline std::string LEXER::Lexer::GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGen, std::stack<Keywords>& brackets)
+	inline std::string LEXER::Lexer::GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGen, std::stack<Keywords>& brackets, auto& iter)
 	{
 		auto hasher = [](string& name, string& scope)->double {
 			return std::hash<string>()(name) +
@@ -146,13 +180,23 @@ namespace LEXER
 		}
 		case Id:
 		{
-			hash = hasher(token, scopes.top());
-			if (timeToScopeGen == 4)
+			iter++;
+			if (*iter == "(" && scopes.top() != "g0")
 			{
-				string id = string() + token[0];
-				scopeGenerator(scopes.top(), id);
-				timeToScopeGen = 1;
+				string id = "g0";
+				hash = hasher(token, id);
 			}
+			else
+			{
+				hash = hasher(token, scopes.top());
+				if (timeToScopeGen == 4)
+				{
+					string id = string() + token[0];
+					scopeGenerator(scopes.top(), id);
+					timeToScopeGen = 1;
+				}
+			}
+			iter--;
 			break;
 		}
 		case CloseBracket:

@@ -167,6 +167,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Polish.cpp" />
+    <ClCompile Include="Syntax_Analiser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Automat.h" />
@@ -177,7 +179,9 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Polish.h" />
     <ClInclude Include="Symbols_And_Resourses.h" />
+    <ClInclude Include="Syntax_Analiser.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

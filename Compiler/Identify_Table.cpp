@@ -403,7 +403,7 @@ namespace LEXER
 					literal.type = Literal;
 					literal.name = "Literal-" + std::to_string(literalNumber);
 					literalNumber++;
-					literal.valueType = IntLiteral;
+					literal.valueType = BoolLiteral;
 					literal.scope = "none";
 					literal.line = line;
 					literal.pos = counter;
@@ -574,6 +574,7 @@ namespace LEXER
 				param.type = Param;
 
 				getTyoeAndId(param, 1);
+				idTable[function.GetHashCode()].paramTypes.push_back(param.valueType);
 
 				param.line = line;
 				param.pos = counter;
@@ -604,7 +605,11 @@ namespace LEXER
 				isExist(param);
 
 				idTable.Add(param);
-				if (*currentToken == ")") break;
+				if (*currentToken == ")")
+				{
+					countOfParams++;
+					break;
+				}
 
 				currentToken++;
 				countOfParams++;

@@ -1,18 +1,13 @@
-int uuo = 66 +88 -88 - -999;
 
+fn int w(int t){
+	return 77;
+}
 fn int q(int z, bool v)
 {
-	z = v;
 	return z;
 }
-fn int io(string z)
-{
-	return z;
-} 
 
 fn int main()
 {
-let lll = true;
-	let y = (lll);
 	return 0;
 } 

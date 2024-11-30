@@ -25,9 +25,6 @@
     <Filter Include="Исходные файлы\Regex">
       <UniqueIdentifier>{c288ab43-d1f6-4b7f-a28b-29cd2235c21b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Input_Vallidator">
-      <UniqueIdentifier>{6ada750b-bbc0-44e2-85b8-a04c24700307}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\Input_Validator">
       <UniqueIdentifier>{3a3a7c37-480c-40db-b04d-024ddc8f73c3}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,18 @@
     </Filter>
     <Filter Include="Файлы заголовков\Sintax_Analiser">
       <UniqueIdentifier>{87180324-f203-4a81-bfe5-fc8e4201f32f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Syntax_Analiser">
+      <UniqueIdentifier>{2bb770c8-1074-4fb2-862b-6e7898afc1f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Polish_Natation">
+      <UniqueIdentifier>{9c40b676-649c-4a0d-ab36-6817ade41200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Syntaxer">
+      <UniqueIdentifier>{5bbc87c4-3ae6-422c-9aba-47d48b1e9059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Lolger\Input_Vallidator">
+      <UniqueIdentifier>{6ada750b-bbc0-44e2-85b8-a04c24700307}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +78,16 @@
     <ClCompile Include="Identify_Table.cpp">
       <Filter>Исходные файлы\Lexer</Filter>
     </ClCompile>
+    <ClCompile Include="GRB.cpp">
+      <Filter>Исходные файлы\Syntax_Analiser</Filter>
+    </ClCompile>
     <ClCompile Include="Magazine_Automate.cpp">
+      <Filter>Исходные файлы\Syntax_Analiser</Filter>
+    </ClCompile>
+    <ClCompile Include="Polish.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="GRB.cpp">
+    <ClCompile Include="Syntax_Analiser.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,7 +108,7 @@
       <Filter>Файлы заголовков\Regex</Filter>
     </ClInclude>
     <ClInclude Include="InputValidator.h">
-      <Filter>Файлы заголовков\Input_Vallidator</Filter>
+      <Filter>Исходные файлы\Lolger\Input_Vallidator</Filter>
     </ClInclude>
     <ClInclude Include="Lexer.h">
       <Filter>Файлы заголовков\Lexer</Filter>
@@ -106,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="GRB.h">
       <Filter>Файлы заголовков\Sintax_Analiser</Filter>
+    </ClInclude>
+    <ClInclude Include="Polish.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax_Analiser.h">
+      <Filter>Файлы заголовков\Syntaxer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

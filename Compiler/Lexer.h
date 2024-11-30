@@ -8,17 +8,19 @@ namespace LEXER
 		Lexem(std::string lexema,
 			  unsigned int line,
 			  unsigned int index,
-			  double positionInIdTable = -1.0)
+			  double positionInIdTable = -1.0, short prioryty = -1)
 		{
 			this->index = index;
 			this->line = line;
 			this->lexema = lexema;
 			this->positionInIdTable = positionInIdTable;
+			this->prioryty = prioryty;
 		}
 		std::string lexema;
 		unsigned int line;
 		unsigned int index;
 		double positionInIdTable;
+		short prioryty;
 	};
 
 	struct Entry
@@ -32,6 +34,7 @@ namespace LEXER
 		int pos = -1;
 		int params = 0;
 		std::variant <int, double, bool, std::string, Keywords> value;
+		std::vector<Keywords> paramTypes;
 		
 		std::variant <Keywords, 
 			std::string, 
@@ -72,7 +75,7 @@ namespace LEXER
 		void createFun(std::list<string>::iterator& currentTocken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, bool& hasMain);
 		void createVar(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, Keywords type);
 		void createAuto(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter);
-		inline std::string GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGe, std::stack<Keywords>& brackets);
+		inline std::string GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGe, std::stack<Keywords>& brackets, auto& iter);
 
 		std::ifstream inFile;
 		std::list<string> preprocesseredStr;
