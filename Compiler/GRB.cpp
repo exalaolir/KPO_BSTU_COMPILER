@@ -6,7 +6,7 @@
 
 namespace GRB
 {
-	Greibach greibach(NS('S'), TS('$'), 6,
+	Greibach greibach(NS('S'), TS('$'), 7,
 
 		Rule(NS('S'), GRB_ERROR_SERIES, 6,//—“–” “”–¿  Œƒ¿
 
