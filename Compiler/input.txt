@@ -1,9 +1,13 @@
-fn int w(int t){
-    if ( t < ! 56) {
-    int j = 7;
+fn int w(int t,bool jk, bool t8){
+    if ( t8 : true) {
+        if(t > 0) {
+            int j = 89;
+        }
    }
    else {
-    int k = t + 56; 
+         if(t8 < 0) {
+             int y = 129;
+         } 
    }
   @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
   return (55 + t * 4) / w(8);

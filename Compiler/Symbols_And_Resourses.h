@@ -48,8 +48,14 @@ namespace LEXER
 		Delim,
 		More,
 		Less,
-		Eqal,
 		opDelim,
+		Eqal,
+
+		IfEqal,
+		IfNoEqal,
+		MoreorEqal,
+		LessorEqal,
+
 		Literal
 	};
 
@@ -116,10 +122,16 @@ namespace LEXER
 		{"-", Minus},
 		{"*", Star},
 		{"/", Delim},
+		{"%", opDelim},
 		{"=", Eqal},
+
+		{":", IfEqal},
+		{"~", IfNoEqal},
+		{"^", MoreorEqal},
+		{"_", LessorEqal},
+
 		{"!", ServisSymbol},
 		{">", More},
-		{"%", opDelim},
 		{"<", Less},
 	};
 
