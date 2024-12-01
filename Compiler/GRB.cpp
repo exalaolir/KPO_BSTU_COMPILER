@@ -25,7 +25,7 @@ namespace GRB
 
 		),
 
-		Rule(NS('B'), GRB_ERROR_SERIES + 1, 10,//ТЕЛО
+		Rule(NS('B'), GRB_ERROR_SERIES + 1, 12,//ТЕЛО
 
 			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('B')),
 
@@ -48,9 +48,14 @@ namespace GRB
 
 			Rule::Chain(11, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'),TS('s'), TS('{'), NS('B'), TS('}')),
 
-			Rule::Chain(12, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'), TS('s'), TS('{'), NS('B'), TS('}'), NS('B'))
+			Rule::Chain(12, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'), TS('s'), TS('{'), NS('B'), TS('}'), NS('B')),
 
-
+			/// <summary>
+			/// while
+			/// </summary>
+			 
+			Rule::Chain(7, TS('w'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}')),
+			Rule::Chain(8, TS('w'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'), NS('B'))
 		),
 
 		Rule(NS('L'), GRB_ERROR_SERIES + 2, 2,//ЛИТЕРАЛ
