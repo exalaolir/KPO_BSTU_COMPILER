@@ -1,5 +1,6 @@
+
 fn int w(int t,bool jk, bool t8){
-    if ( jk : (! jk ~ true )) {
+    if ( (w((55 + 89 * 4) / w((55 + 9 * 4)))/ w(9)) > 8 ) {
         if(t > 0) {
            @ int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
            int k = true;
@@ -19,6 +20,7 @@ fn int w(int t,bool jk, bool t8){
          }
    }
   @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
+
   return (55 + t * 4) / w(8);
 }
 fn int nh1(int y,int k,string w, bool k1, int i ) {

@@ -95,6 +95,7 @@ namespace LEXER
 		{">", "u"},
 		{"<", "u"},
 
+		{"!", "!"},
 	};
 
 	inline static const unordered_map<string, Keywords> TokenTypes
