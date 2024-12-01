@@ -1,4 +1,5 @@
 #pragma once
+#define END_BRACKET ')'
 #include "Lexer.h"
 
 using namespace LEXER;
@@ -14,7 +15,7 @@ namespace ANALISER
 		void setCurrentFunction(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index);
 		Keywords returnType(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index);
 		void checkFun(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index);
-		void checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index, Entry& currentType);
+		void checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index, Entry& currentType, char endSymbol = ';');
 		void checkReturnType(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index);
 
 		static inline std::unordered_map<Keywords, string> types 

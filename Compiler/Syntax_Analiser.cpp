@@ -79,14 +79,24 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 
 	size_t currentParamType = 0;
 
-	while (!brackets.empty() && currentParamType != countOfParams )
+	while (!brackets.empty())
 	{
 		if (lexTable[index].lexema == ")")
 		{
 			brackets.pop();
 			continue;
 		}
-		if(lexTable[index].lexema == ",") index++;
+		if (lexTable[index].lexema == ",")
+		{
+			index++;
+			currentParamType++;
+			if (currentParamType >= countOfParams)
+			{
+				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
+				throw "Exception";
+			}
+		}
 
 		size_t oldIndex = index;
 		switch (returnType(lexTable, idTable, index))
@@ -96,16 +106,16 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			//checkFun(lexTable, idTable, index);
 			break;
 		case ServisSymbol:
-			if (lexTable[index].lexema != "," && lexTable[index + 1].lexema != ")" )
+			if (lexTable[index].lexema == "," || lexTable[index].lexema == ")" )
 			{
-				checkExp(lexTable, idTable, index, currentType);
+				currentParamType++;
 			}
 			break;
 		case Literal:
 			if (params[currentParamType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index, currentType);
+				checkExp(lexTable, idTable, index, currentType, END_BRACKET);
 			}
 			break;
 		case Param:
@@ -113,18 +123,17 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			if (currentFunction.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index, currentType);
+				checkExp(lexTable, idTable, index, currentType, END_BRACKET);
 			}
 			break;
 		default:
 			break;
 		}
 		index++;
-		currentParamType++;
 	}
 }
 
-void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index, Entry& currentType)
+void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index, Entry& currentType, char endSymbol)
 {
 
 	auto generateThrow = [&]()
@@ -135,7 +144,7 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 	}; 
 	index++;
 
-	while (lexTable[index].lexema != ";")
+	while (lexTable[index].lexema[0] != endSymbol)
 	{
 		size_t oldIndex = index;
 		
@@ -156,7 +165,7 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 		default:
 			break;
 		}
-		if (lexTable[index].lexema == ";") break;
+		if (lexTable[index].lexema[0] == endSymbol) break;
 		index++;
 	}
 
