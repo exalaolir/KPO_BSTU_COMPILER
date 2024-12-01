@@ -3,6 +3,7 @@
 
 void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 {
+	size_t leftStart = 0;
 	size_t leftEnd = 0;
 	size_t rightStart = 0;
 	size_t rightEnd = 0;
@@ -25,12 +26,14 @@ void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 		case 'q':
 		{
 			i++;
-			checkBlockRange(lexTable, idTable, i, leftEnd, rightStart, rightEnd);
-			size_t currentType = i + 1;
+			checkBlockRange(lexTable, idTable, i, leftStart, leftEnd, rightStart, rightEnd);
+			size_t currentType = leftStart;
 			rightStart--;
 			checkExp(lexTable, idTable, i, idTable[lexTable[currentType].positionInIdTable], lexTable[leftEnd + 1].lexema[0]);
 			checkExp(lexTable, idTable, rightStart, idTable[lexTable[currentType].positionInIdTable], lexTable[rightEnd].lexema[0]);
 			i = rightStart;
+
+			leftStart = 0;
 			leftEnd = 0;
 			rightStart = 0;
 			rightEnd = 0;
@@ -249,12 +252,21 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 	}
 }
 
-void ANALISER::Analiser::checkBlockRange(std::vector<Lexem>& lexTable, IdTable& idTable, size_t index, size_t& leftEnd, size_t& rightStart, size_t& rightEnd)
+void ANALISER::Analiser::checkBlockRange(std::vector<Lexem>& lexTable, IdTable& idTable, size_t index, size_t& leftStart,  size_t& leftEnd, size_t& rightStart, size_t& rightEnd)
 {
 	bool rightLeftFlag = false;
+	bool leftFlag = false;
 
 	while (lexTable[index].lexema != "{")
 	{
+		if (!leftFlag)
+		{
+			if (lexTable[index].lexema == "l" || lexTable[index].lexema == "i")
+			{
+				leftStart = index;
+				leftFlag = true;
+			}
+		}
 		if (lexTable[index].lexema == "u")
 		{
 			rightLeftFlag = true;
