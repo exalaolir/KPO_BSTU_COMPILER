@@ -8,6 +8,10 @@ fn int nh1(int y,int k,string w, bool k1, int i ) {
 fn string w1(int z, bool v)
 {
     int jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
+    if(45 + w(33) > 7)
+    {
+
+    }
   return "hjk";
 }
 fn int main()
