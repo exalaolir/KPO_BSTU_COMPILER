@@ -1,23 +1,38 @@
 fn int w(int t,bool jk, bool t8){
-    if ( t8 : true) {
+    if ( jk : (! jk ~ true )) {
         if(t > 0) {
-            int j = 89;
+           @ int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
+           int k = true;
         }
    }
    else {
          if(t8 < 0) {
              int y = 129;
          } 
+         else {
+            if(6 _ true) {
+                int h = 123; 
+            }
+            if((true : ! false) > ((6 + 3 * 4) ^ 0)) {
+                int lqw = 500;
+            }
+         }
    }
   @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
   return (55 + t * 4) / w(8);
 }
 fn int nh1(int y,int k,string w, bool k1, int i ) {
+    if(y > w(7, true, false)) {
+        int y = w(7, true, false);
+        if(y > 90) {
+            int l = 0;
+        }
+    }
   return 0;
 }
 fn string w1(int z, bool v)
 {
-    @int jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
+    @int jk = (79) - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
     return "hjk";
 }
 fn int main()

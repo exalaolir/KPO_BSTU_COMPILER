@@ -95,7 +95,6 @@ namespace LEXER
 		{">", "u"},
 		{"<", "u"},
 
-		{"!", "!"},
 	};
 
 	inline static const unordered_map<string, Keywords> TokenTypes
@@ -130,7 +129,6 @@ namespace LEXER
 		{"^", MoreorEqal},
 		{"_", LessorEqal},
 
-		{"!", ServisSymbol},
 		{">", More},
 		{"<", Less},
 	};
@@ -149,7 +147,8 @@ namespace LEXER
 		{',', true},
 		{';', true},
 		{'-', true},
-		{'|', true}
+		{'|', true},
+		{'!', true}
 	};
 
 	inline static const std::unordered_map<std::string, char> SpecialSymbols
