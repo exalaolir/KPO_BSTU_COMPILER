@@ -155,7 +155,7 @@ namespace GRB
 
 		),
 
-		Rule(NS('I'), GRB_ERROR_SERIES + 6, 36,//ПРОДОЛЖЕНИЕ  УСЛОВИЯ
+		Rule(NS('I'), GRB_ERROR_SERIES + 6, 12,//ПРОДОЛЖЕНИЕ  УСЛОВИЯ
 
 		    Rule::Chain(3, TS('u'), NS('R'), NS('I')),
 			Rule::Chain(4, TS('u'), TS('!'), NS('R'), NS('I')),
@@ -174,48 +174,7 @@ namespace GRB
 			Rule::Chain(5, TS('u'), TS('!'), TS('('), NS('V'), TS(')')),
 
 		    Rule::Chain(4, TS('u'), TS('('), NS('U'), TS(')')),
-			Rule::Chain(5, TS('u'), TS('!'), TS('('), NS('U'), TS(')')),
-
-
-			Rule::Chain(3, TS('<'), NS('R'), NS('I')),
-			Rule::Chain(4, TS('<'), TS('!'), NS('R'), NS('I')),
-
-			Rule::Chain(5, TS('<'), TS('('), NS('V'), TS(')'), NS('I')),
-			Rule::Chain(6, TS('<'), TS('!'), TS('('), NS('V'), TS(')'), NS('I')),
-
-			Rule::Chain(5, TS('<'), TS('('), NS('U'), TS(')'), NS('I')),
-			Rule::Chain(5, TS('<'), TS('!'), TS('('), NS('U'), TS(')'), NS('I')),
-
-
-			Rule::Chain(2, TS('<'), NS('R')),
-			Rule::Chain(3, TS('<'), TS('!'), NS('R')),
-
-			Rule::Chain(4, TS('<'), TS('('), NS('V'), TS(')')),
-			Rule::Chain(5, TS('<'), TS('!'), TS('('), NS('V'), TS(')')),
-
-			Rule::Chain(4, TS('<'), TS('('), NS('U'), TS(')')),
-			Rule::Chain(5, TS('<'), TS('!'), TS('('), NS('U'), TS(')')),
-
-
-			Rule::Chain(3, TS('>'), NS('R'), NS('I')),
-			Rule::Chain(4, TS('>'), TS('!'), NS('R'), NS('I')),
-
-			Rule::Chain(5, TS('>'), TS('('), NS('V'), TS(')'), NS('I')),
-			Rule::Chain(6, TS('>'), TS('!'), TS('('), NS('V'), TS(')'), NS('I')),
-
-			Rule::Chain(5, TS('>'), TS('('), NS('U'), TS(')'), NS('I')),
-			Rule::Chain(6, TS('>'), TS('!'), TS('('), NS('U'), TS(')'), NS('I')),
-
-
-			Rule::Chain(2, TS('>'), NS('R')),
-			Rule::Chain(3, TS('>'), TS('!'), NS('R')),
-
-			Rule::Chain(4, TS('>'), TS('('), NS('V'), TS(')')),
-			Rule::Chain(5, TS('>'), TS('!'), TS('('), NS('V'), TS(')')),
-
-			Rule::Chain(4, TS('>'), TS('('), NS('U'), TS(')')),
-			Rule::Chain(5, TS('>'), TS('!'), TS('('), NS('U'), TS(')'))
-
+			Rule::Chain(5, TS('u'), TS('!'), TS('('), NS('U'), TS(')'))
 
 		),
 
