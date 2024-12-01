@@ -1,5 +1,11 @@
 fn int w(int t){
-  int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));
+    if ( t < ! 56) {
+    int j = 7;
+   }
+   else {
+    int k = t + 56; 
+   }
+  @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
   return (55 + t * 4) / w(8);
 }
 fn int nh1(int y,int k,string w, bool k1, int i ) {
@@ -7,11 +13,11 @@ fn int nh1(int y,int k,string w, bool k1, int i ) {
 }
 fn string w1(int z, bool v)
 {
-    int jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
-  return "hjk";
+    @int jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
+    return "hjk";
 }
 fn int main()
 {
-    string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
-  return 0;
+   @string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);@
+   return 0;
 }
