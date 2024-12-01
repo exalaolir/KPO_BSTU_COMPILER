@@ -1,4 +1,4 @@
-#include "pch.h"
+п»ї#include "pch.h"
 #include "GRB.h"
 #include <string.h>
 
@@ -6,11 +6,12 @@
 
 namespace GRB
 {
-	Greibach greibach(NS('S'), TS('$'), 7,
+	Greibach greibach(NS('S'), TS('$'), 10,
 
-		Rule(NS('S'), GRB_ERROR_SERIES, 6,//СТРУКТУРА КОДА
+		Rule(NS('S'), GRB_ERROR_SERIES, 7,//РЎРўР РЈРљРўРЈР Рђ РљРћР”Рђ
 
-			Rule::Chain(11, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), TS('{'), NS('B'), TS('r'),TS('l'), TS(';'), TS('}')),
+			Rule::Chain(11, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), TS('{'), NS('B'), TS('r'), TS('l'), TS(';'), TS('}')),
+			Rule::Chain(10, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), TS('{'), TS('r'), TS('l'), TS(';'), TS('}')),
 
 			Rule::Chain(13, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('B'), TS('r'), NS('R'), TS(';'), TS('}'), NS('S')),
 
@@ -20,92 +21,215 @@ namespace GRB
 
 			Rule::Chain(12, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), TS('r'), NS('V'), TS(';'), TS('}'), NS('S')),
 
-			Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('S'))
+			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('S'))
 
 		),
 
-		Rule(NS('B'), GRB_ERROR_SERIES + 1, 6,//ТЕЛО
+		Rule(NS('B'), GRB_ERROR_SERIES + 1, 10,//РўР•Р›Рћ
 
-			Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('B')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('B')),
 
-			Rule::Chain(3, TS('t'), TS('i'), NS('L')),
+			Rule::Chain(4, TS('t'), TS('i'), NS('L'), TS(';')),//3, TS('t'), TS('i'), NS('L')
 
-			Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), NS('B')),
+			Rule::Chain(9, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), TS(';'), NS('B')),
 
 			Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), TS(';')),
 
-			Rule::Chain(2, TS('i'), NS('L')),
+			Rule::Chain(3, TS('i'), NS('L'), TS(';')),//2, TS('i'), NS('L')
 
-			Rule::Chain(3, TS('i'), NS('L'),NS('B'))
+			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('B')),
+			/// <summary>
+			/// СѓСЃР»РѕРІРЅС‹Рµ РѕРїРµСЂР°С‚РѕСЂС‹
+			/// </summary>
+
+			Rule::Chain(7, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}')),
+
+			Rule::Chain(8, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'), NS('B')),
+
+			Rule::Chain(11, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'),TS('s'), TS('{'), NS('B'), TS('}')),
+
+			Rule::Chain(12, TS('q'), TS('('), NS('U'), TS(')'), TS('{'), NS('B'), TS('}'), TS('s'), TS('{'), NS('B'), TS('}'), NS('B'))
+
+
 		),
 
-		Rule(NS('L'), GRB_ERROR_SERIES + 2, 3,//ЛИТЕРАЛ
+		Rule(NS('L'), GRB_ERROR_SERIES + 2, 3,//Р›РРўР•Р РђР›
 
-			Rule::Chain(3, TS('='), TS('l'), TS(';')),
+			Rule::Chain(2, TS('='), TS('l')),//3, TS('='), TS('l'), TS(';')
 
-			Rule::Chain(3, TS('='), TS('i'), TS(';')),
+			Rule::Chain(2, TS('='), TS('i')),//3, TS('='), TS('i'), TS(';')
 
-			Rule::Chain(3, TS('='), NS('V'), TS(';'))
+			Rule::Chain(2, TS('='), NS('V'))//3, TS('='), NS('V'), TS(';')
 		),
 
-		Rule(NS('P'), GRB_ERROR_SERIES + 3, 2,//ПАРАМЕТР
+		Rule(NS('P'), GRB_ERROR_SERIES + 3, 2,//РџРђР РђРњР•РўР 
 
 			Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('P')),
 
 			Rule::Chain(2, TS('t'), TS('i'))
 
 		),
-		Rule(NS('A'), GRB_ERROR_SERIES + 3, 8,//Аргументы (ДОБАВИТЬ ВЫРАЖЕНИЕ)
-
-			Rule::Chain(3, TS('i'), TS(','), NS('A')),
+		Rule(NS('A'), GRB_ERROR_SERIES + 4, 16,//РђСЂРіСѓРјРµРЅС‚С‹
 
 			Rule::Chain(1, TS('i')),
-
-			Rule::Chain(3, TS('l'), TS(','), NS('A')),
 
 			Rule::Chain(1, TS('l')),
 
-			Rule::Chain(5, TS('i'), TS('o'), NS('V'), TS(','), NS('A')),
+			Rule::Chain(2, TS('i'), NS('T')),
 
-			Rule::Chain(3, TS('i'), TS('o'), NS('V')),
+			Rule::Chain(2, TS('l'), NS('T')),
 
-			Rule::Chain(5, TS('l'), TS('o'), NS('V'), TS(','), NS('A')),
 
-			Rule::Chain(1, TS('l'), TS('o'), NS('V'))
+			Rule::Chain(4, TS('i'), TS('('), NS('A'), TS(')')),
+			Rule::Chain(5, TS('i'), TS('('), NS('A'), TS(')'), NS('T')),
+
+
+			Rule::Chain(4, TS('('), NS('V'), TS(')'), NS('T')),
+			Rule::Chain(3, TS('('), NS('V'), TS(')')),
+
+
+			Rule::Chain(3, TS('i'), TS(','), NS('A')),
+			Rule::Chain(3, TS('l'), TS(','), NS('A')),
+
+			Rule::Chain(4, TS('i'), NS('T'), TS(','), NS('A')),
+			Rule::Chain(4, TS('l'), NS('T'), TS(','), NS('A')),
+
+			Rule::Chain(6, TS('i'), TS('('), NS('A'), TS(')'), TS(','), NS('A')),
+			Rule::Chain(7, TS('i'), TS('('), NS('A'), TS(')'), NS('T'), TS(','), NS('A')),
+
+			Rule::Chain(6, TS('('), NS('V'), TS(')'), NS('T'), TS(','), NS('A')),
+			Rule::Chain(5, TS('('), NS('V'), TS(')'), TS(','), NS('A'))
+			
+		),
+
+		Rule(NS('V'), GRB_ERROR_SERIES + 6, 5,//РЅР°С‡Р°Р»Рѕ Р’Р«Р РђР–Р•РќРР•
+
+			Rule::Chain(2, TS('i'), NS('T')),
+			Rule::Chain(2, TS('l'), NS('T')),
+			Rule::Chain(5, TS('i'), TS('('), NS('A'), TS(')'), NS('T')),
+
+			Rule::Chain(3, TS('('), NS('V'), TS(')')),
+
+			Rule::Chain(4, TS('('), NS('V'), TS(')'),NS('T'))
+			
+		),
+		Rule(NS('T'), GRB_ERROR_SERIES + 6, 4,//РџР РћР”РћР›Р–Р•РќРР• Р’Р«Р РђР–Р•РќРР•
+
+		Rule::Chain(3, TS('o'), NS('R'), NS('T')),
+
+		Rule::Chain(5, TS('o'), TS('('), NS('V'), TS(')'), NS('T')),
+
+
+		Rule::Chain(2, TS('o'), NS('R')),
+
+		Rule::Chain(4, TS('o'), TS('('), NS('V'), TS(')'))
 
 		),
 
-		Rule(NS('R'), GRB_ERROR_SERIES + 4, 2,//RETURN
+		Rule(NS('R'), GRB_ERROR_SERIES + 5, 3,//RETURN
 
-			Rule::Chain(1, TS('i')),
+		Rule::Chain(1, TS('i')),
 
-			Rule::Chain(1, TS('l'))
+		Rule::Chain(1, TS('l')),
+
+		Rule::Chain(4, TS('i'), TS('('), NS('A'), TS(')'))
+		),
+
+		Rule(NS('U'), GRB_ERROR_SERIES + 6, 12,//РЅР°С‡Р°Р»Рѕ РЈРЎР›РћР’РРЇ
+
+		Rule::Chain(2, TS('i'), NS('I')),
+		Rule::Chain(2, TS('l'), NS('I')),
+		Rule::Chain(4, TS('('), NS('V'), TS(')'), NS('I')),
+		Rule::Chain(5, TS('i'), TS('('), NS('A'), TS(')'), NS('I')),
+
+		Rule::Chain(3, TS('('), NS('U'), TS(')')),
+		Rule::Chain(4, TS('('), NS('U'), TS(')'), NS('I')),
+
+		Rule::Chain(3, TS('!'), TS('i'), NS('I')),
+		Rule::Chain(3, TS('!'), TS('l'), NS('I')),
+		Rule::Chain(5, TS('!'), TS('('), NS('V'), TS(')'), NS('I')),
+		Rule::Chain(6, TS('!'), TS('i'), TS('('), NS('A'), TS(')'), NS('I')),
+
+		Rule::Chain(4, TS('!'), TS('('), NS('U'), TS(')')),
+		Rule::Chain(5, TS('!'), TS('('), NS('U'), TS(')'), NS('I'))
 
 		),
 
-		Rule(NS('V'), GRB_ERROR_SERIES + 5, 9,//ВЫРАЖЕНИЕ
+		Rule(NS('I'), GRB_ERROR_SERIES + 6, 36,//РџР РћР”РћР›Р–Р•РќРР•  РЈРЎР›РћР’РРЇ
 
-			Rule::Chain(2, TS('i'), NS('V')),
+		    Rule::Chain(3, TS('u'), NS('R'), NS('I')),
+			Rule::Chain(4, TS('u'), TS('!'), NS('R'), NS('I')),
 
-			Rule::Chain(2, TS('l'), NS('V')),
+		    Rule::Chain(5, TS('u'), TS('('), NS('V'), TS(')'), NS('I')),
+			Rule::Chain(6, TS('u'), TS('!'), TS('('), NS('V'), TS(')'), NS('I')),
 
-			Rule::Chain(4, TS('('), NS('V'), TS(')'), NS('V')),
+		    Rule::Chain(5, TS('u'), TS('('), NS('U'), TS(')'), NS('I')),
+			Rule::Chain(6, TS('u'), TS('!'), TS('('), NS('U'), TS(')'), NS('I')),
 
-			Rule::Chain(3, TS('o'), TS('i'), NS('V')),
 
-			Rule::Chain(3, TS('o'), TS('l'), NS('V')),
+	    	Rule::Chain(2, TS('u'), NS('R')),
+			Rule::Chain(3, TS('u'), TS('!'), NS('R')),
 
-			Rule::Chain(5, TS('o'), TS('('), NS('V'), TS(')'), NS('V')),
+		    Rule::Chain(4, TS('u'), TS('('), NS('V'), TS(')')),
+			Rule::Chain(5, TS('u'), TS('!'), TS('('), NS('V'), TS(')')),
 
-			Rule::Chain(2, TS('o'), TS('i')),
+		    Rule::Chain(4, TS('u'), TS('('), NS('U'), TS(')')),
+			Rule::Chain(5, TS('u'), TS('!'), TS('('), NS('U'), TS(')')),
 
-			Rule::Chain(2, TS('o'), TS('l')),
 
-			Rule::Chain(4, TS('o'), TS('('), NS('V'), TS(')'))
+			Rule::Chain(3, TS('<'), NS('R'), NS('I')),
+			Rule::Chain(4, TS('<'), TS('!'), NS('R'), NS('I')),
+
+			Rule::Chain(5, TS('<'), TS('('), NS('V'), TS(')'), NS('I')),
+			Rule::Chain(6, TS('<'), TS('!'), TS('('), NS('V'), TS(')'), NS('I')),
+
+			Rule::Chain(5, TS('<'), TS('('), NS('U'), TS(')'), NS('I')),
+			Rule::Chain(5, TS('<'), TS('!'), TS('('), NS('U'), TS(')'), NS('I')),
+
+
+			Rule::Chain(2, TS('<'), NS('R')),
+			Rule::Chain(3, TS('<'), TS('!'), NS('R')),
+
+			Rule::Chain(4, TS('<'), TS('('), NS('V'), TS(')')),
+			Rule::Chain(5, TS('<'), TS('!'), TS('('), NS('V'), TS(')')),
+
+			Rule::Chain(4, TS('<'), TS('('), NS('U'), TS(')')),
+			Rule::Chain(5, TS('<'), TS('!'), TS('('), NS('U'), TS(')')),
+
+
+			Rule::Chain(3, TS('>'), NS('R'), NS('I')),
+			Rule::Chain(4, TS('>'), TS('!'), NS('R'), NS('I')),
+
+			Rule::Chain(5, TS('>'), TS('('), NS('V'), TS(')'), NS('I')),
+			Rule::Chain(6, TS('>'), TS('!'), TS('('), NS('V'), TS(')'), NS('I')),
+
+			Rule::Chain(5, TS('>'), TS('('), NS('U'), TS(')'), NS('I')),
+			Rule::Chain(6, TS('>'), TS('!'), TS('('), NS('U'), TS(')'), NS('I')),
+
+
+			Rule::Chain(2, TS('>'), NS('R')),
+			Rule::Chain(3, TS('>'), TS('!'), NS('R')),
+
+			Rule::Chain(4, TS('>'), TS('('), NS('V'), TS(')')),
+			Rule::Chain(5, TS('>'), TS('!'), TS('('), NS('V'), TS(')')),
+
+			Rule::Chain(4, TS('>'), TS('('), NS('U'), TS(')')),
+			Rule::Chain(5, TS('>'), TS('!'), TS('('), NS('U'), TS(')'))
+
+
+		),
+
+		Rule(NS('R'), GRB_ERROR_SERIES + 5, 3,//RETURN
+
+		Rule::Chain(1, TS('i')),
+
+		Rule::Chain(1, TS('l')),
+
+		Rule::Chain(4, TS('i'), TS('('), NS('A'), TS(')'))
 		)
 					 
 	//),
-	//				  Rule(NS('B'), GRB_ERROR_SERIES + 2, 16,  // возможные конструкции в ф-иях
+	//				  Rule(NS('B'), GRB_ERROR_SERIES + 2, 16,  // РІРѕР·РјРѕР¶РЅС‹Рµ РєРѕРЅСЃС‚СЂСѓРєС†РёРё РІ С„-РёСЏС…
 
 	//				  Rule::Chain(5, TS('a'), TS('n'), TS('i'), TS(';'), NS('N')),
 	//				  Rule::Chain(5, TS('a'), TS('c'), TS('i'), TS(';'), NS('N')),
@@ -124,7 +248,7 @@ namespace GRB
 	//				  Rule::Chain(6, TS('x'), TS('('), NS('E'), TS(')'), TS(';'), NS('N')),
 	//				  Rule::Chain(5, TS('x'), TS('('), NS('E'), TS(')'), TS(';'))
 	//),
-	//				  Rule(NS('E'), GRB_ERROR_SERIES + 3, 20, // выражения
+	//				  Rule(NS('E'), GRB_ERROR_SERIES + 3, 20, // РІС‹СЂР°Р¶РµРЅРёСЏ
 
 	//				  Rule::Chain(1, TS('i')),
 	//				  Rule::Chain(1, TS('q')),
@@ -149,7 +273,7 @@ namespace GRB
 
 	//),
 
-	//				  Rule(NS('W'), GRB_ERROR_SERIES + 4, 6, // принимаемые параметры ф-ии
+	//				  Rule(NS('W'), GRB_ERROR_SERIES + 4, 6, // РїСЂРёРЅРёРјР°РµРјС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ С„-РёРё
 
 	//				  Rule::Chain(3, TS('i'), TS(','), NS('W')),
 	//				  Rule::Chain(3, TS('l'), TS(','), NS('W')),
@@ -159,7 +283,7 @@ namespace GRB
 	//				  Rule::Chain(1, TS('k'))
 	//),
 
-	//				  Rule(NS('M'), GRB_ERROR_SERIES + 5, 16, // знаки
+	//				  Rule(NS('M'), GRB_ERROR_SERIES + 5, 16, // Р·РЅР°РєРё
 
 	//				  Rule::Chain(2, TS('+'), NS('E')),
 	//				  Rule::Chain(4, TS('+'), TS('('), NS('E'), TS(')')),
@@ -180,64 +304,64 @@ namespace GRB
 	//)
 	);
 
-	Rule::Chain::Chain(short psize, GRBALPHABET s, ...)  //конструктор цепочки - праыой части правила(кол-во символов в цепочке, терминал или нетерминал...)
+	Rule::Chain::Chain(short psize, GRBALPHABET s, ...)  //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ С†РµРїРѕС‡РєРё - РїСЂР°С‹РѕР№ С‡Р°СЃС‚Рё РїСЂР°РІРёР»Р°(РєРѕР»-РІРѕ СЃРёРјРІРѕР»РѕРІ РІ С†РµРїРѕС‡РєРµ, С‚РµСЂРјРёРЅР°Р» РёР»Рё РЅРµС‚РµСЂРјРёРЅР°Р»...)
 	{
-		nt = new GRBALPHABET[size = psize];    //цепочка терминалов
-		int* p = (int*)&s;                      //присваиваем символ указателю п
+		nt = new GRBALPHABET[size = psize];    //С†РµРїРѕС‡РєР° С‚РµСЂРјРёРЅР°Р»РѕРІ
+		int* p = (int*)&s;                      //РїСЂРёСЃРІР°РёРІР°РµРј СЃРёРјРІРѕР» СѓРєР°Р·Р°С‚РµР»СЋ Рї
 		for (short i = 0; i < psize; ++i)
-			nt[i] = (GRBALPHABET)p[i]; //заполняем цепочку терминалов
+			nt[i] = (GRBALPHABET)p[i]; //Р·Р°РїРѕР»РЅСЏРµРј С†РµРїРѕС‡РєСѓ С‚РµСЂРјРёРЅР°Р»РѕРІ
 	};
-	Rule::Rule(GRBALPHABET pnn, int piderror, short psize, Chain c, ...) //конструктор правила
-	{															//(нетерминал, идентификатор диагностического сообщения, количество цепочек(правых частей правила), множество цепочек (правых частей правила)
-		nn = pnn;    //нетерминал
-		iderror = piderror; //идентификатор
-		chains = new Chain[size = psize]; //место для цепочки
+	Rule::Rule(GRBALPHABET pnn, int piderror, short psize, Chain c, ...) //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїСЂР°РІРёР»Р°
+	{															//(РЅРµС‚РµСЂРјРёРЅР°Р», РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґРёР°РіРЅРѕСЃС‚РёС‡РµСЃРєРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ, РєРѕР»РёС‡РµСЃС‚РІРѕ С†РµРїРѕС‡РµРє(РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ РїСЂР°РІРёР»Р°), РјРЅРѕР¶РµСЃС‚РІРѕ С†РµРїРѕС‡РµРє (РїСЂР°РІС‹С… С‡Р°СЃС‚РµР№ РїСЂР°РІРёР»Р°)
+		nn = pnn;    //РЅРµС‚РµСЂРјРёРЅР°Р»
+		iderror = piderror; //РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ
+		chains = new Chain[size = psize]; //РјРµСЃС‚Рѕ РґР»СЏ С†РµРїРѕС‡РєРё
 		Chain* p = &c;
 		for (int i = 0; i < size; i++)
-			chains[i] = p[i]; //заполняем множество цепочек
+			chains[i] = p[i]; //Р·Р°РїРѕР»РЅСЏРµРј РјРЅРѕР¶РµСЃС‚РІРѕ С†РµРїРѕС‡РµРє
 	};
-	Greibach::Greibach(GRBALPHABET pstartN, GRBALPHABET pstbottom, short psize, Rule r, ...)//конструктор гграматики Грейбаха(стартовый символ, дно стека, количество правил, правила...)
+	Greibach::Greibach(GRBALPHABET pstartN, GRBALPHABET pstbottom, short psize, Rule r, ...)//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РіРіСЂР°РјР°С‚РёРєРё Р“СЂРµР№Р±Р°С…Р°(СЃС‚Р°СЂС‚РѕРІС‹Р№ СЃРёРјРІРѕР», РґРЅРѕ СЃС‚РµРєР°, РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂР°РІРёР», РїСЂР°РІРёР»Р°...)
 	{
-		startN = pstartN; //стартовый символ
-		stbottomT = pstbottom;//дно стека
-		rules = new Rule[size = psize];//выделяем память
+		startN = pstartN; //СЃС‚Р°СЂС‚РѕРІС‹Р№ СЃРёРјРІРѕР»
+		stbottomT = pstbottom;//РґРЅРѕ СЃС‚РµРєР°
+		rules = new Rule[size = psize];//РІС‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ
 		Rule* p = &r;
-		for (int i = 0; i < size; i++) rules[i] = p[i];//заполняем правила
+		for (int i = 0; i < size; i++) rules[i] = p[i];//Р·Р°РїРѕР»РЅСЏРµРј РїСЂР°РІРёР»Р°
 	};
-	Greibach getGreibach() { return greibach; }; //получить грамматику
-	short Greibach::getRule(GRBALPHABET pnn, Rule& prule) //получить правило (левый символ правила, возвращаемое правило грамматики)
+	Greibach getGreibach() { return greibach; }; //РїРѕР»СѓС‡РёС‚СЊ РіСЂР°РјРјР°С‚РёРєСѓ
+	short Greibach::getRule(GRBALPHABET pnn, Rule& prule) //РїРѕР»СѓС‡РёС‚СЊ РїСЂР°РІРёР»Рѕ (Р»РµРІС‹Р№ СЃРёРјРІРѕР» РїСЂР°РІРёР»Р°, РІРѕР·РІСЂР°С‰Р°РµРјРѕРµ РїСЂР°РІРёР»Рѕ РіСЂР°РјРјР°С‚РёРєРё)
 	{
 		short rc = -1;
 		short k = 0;
 		while (k < size && rules[k].nn != pnn)
-			k++;   //пока К меньше количества правил и пока левый символ правила не равен парметру ф-ции
+			k++;   //РїРѕРєР° Рљ РјРµРЅСЊС€Рµ РєРѕР»РёС‡РµСЃС‚РІР° РїСЂР°РІРёР» Рё РїРѕРєР° Р»РµРІС‹Р№ СЃРёРјРІРѕР» РїСЂР°РІРёР»Р° РЅРµ СЂР°РІРµРЅ РїР°СЂРјРµС‚СЂСѓ С„-С†РёРё
 		if (k < size)
-			prule = rules[rc = k];    //возвращаемое правило граматики равно правилу с индексом К
-		return rc; //возвращается номер правила или -1
+			prule = rules[rc = k];    //РІРѕР·РІСЂР°С‰Р°РµРјРѕРµ РїСЂР°РІРёР»Рѕ РіСЂР°РјР°С‚РёРєРё СЂР°РІРЅРѕ РїСЂР°РІРёР»Сѓ СЃ РёРЅРґРµРєСЃРѕРј Рљ
+		return rc; //РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ РЅРѕРјРµСЂ РїСЂР°РІРёР»Р° РёР»Рё -1
 	};
-	Rule Greibach::getRule(short n) //получить правило по номеру
+	Rule Greibach::getRule(short n) //РїРѕР»СѓС‡РёС‚СЊ РїСЂР°РІРёР»Рѕ РїРѕ РЅРѕРјРµСЂСѓ
 	{
-		Rule rc;      //создаём правило рц
-		if (n < size)rc = rules[n];  //присваиваем правилу рц правило н
-		return rc; //возвращаем созданное правило
+		Rule rc;      //СЃРѕР·РґР°С‘Рј РїСЂР°РІРёР»Рѕ СЂС†
+		if (n < size)rc = rules[n];  //РїСЂРёСЃРІР°РёРІР°РµРј РїСЂР°РІРёР»Сѓ СЂС† РїСЂР°РІРёР»Рѕ РЅ
+		return rc; //РІРѕР·РІСЂР°С‰Р°РµРј СЃРѕР·РґР°РЅРЅРѕРµ РїСЂР°РІРёР»Рѕ
 	};
-	char* Rule::getCRule(char* b, short nchain) //получить правило в виде N->цепочка (буфер, номер цепочки(правой части) в правиле)
+	char* Rule::getCRule(char* b, short nchain) //РїРѕР»СѓС‡РёС‚СЊ РїСЂР°РІРёР»Рѕ РІ РІРёРґРµ N->С†РµРїРѕС‡РєР° (Р±СѓС„РµСЂ, РЅРѕРјРµСЂ С†РµРїРѕС‡РєРё(РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё) РІ РїСЂР°РІРёР»Рµ)
 	{
-		char bchain[200]; //строка
-		b[0] = Chain::alphabet_to_char(nn); b[1] = '-'; b[2] = '>'; b[3] = 0x00; //терминал -> 
-		chains[nchain].getCChain(bchain); //получает правую сторонц правила
-		strcat_s(b, sizeof(bchain) + 5, bchain);//добавляем строку (куда, с какого элемента, строку)
+		char bchain[200]; //СЃС‚СЂРѕРєР°
+		b[0] = Chain::alphabet_to_char(nn); b[1] = '-'; b[2] = '>'; b[3] = 0x00; //С‚РµСЂРјРёРЅР°Р» -> 
+		chains[nchain].getCChain(bchain); //РїРѕР»СѓС‡Р°РµС‚ РїСЂР°РІСѓСЋ СЃС‚РѕСЂРѕРЅС† РїСЂР°РІРёР»Р°
+		strcat_s(b, sizeof(bchain) + 5, bchain);//РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ (РєСѓРґР°, СЃ РєР°РєРѕРіРѕ СЌР»РµРјРµРЅС‚Р°, СЃС‚СЂРѕРєСѓ)
 		return b;
 	};
-	short Rule::getNextChain(GRBALPHABET t, Rule::Chain& pchain, short j) //получить следующую за j подходящую цепочку, вернуть её номер или -1 
-	{                                                                //(первый символ цепочки, возвращаемая цепочка, номер цепочки)
+	short Rule::getNextChain(GRBALPHABET t, Rule::Chain& pchain, short j) //РїРѕР»СѓС‡РёС‚СЊ СЃР»РµРґСѓСЋС‰СѓСЋ Р·Р° j РїРѕРґС…РѕРґСЏС‰СѓСЋ С†РµРїРѕС‡РєСѓ, РІРµСЂРЅСѓС‚СЊ РµС‘ РЅРѕРјРµСЂ РёР»Рё -1 
+	{                                                                //(РїРµСЂРІС‹Р№ СЃРёРјРІРѕР» С†РµРїРѕС‡РєРё, РІРѕР·РІСЂР°С‰Р°РµРјР°СЏ С†РµРїРѕС‡РєР°, РЅРѕРјРµСЂ С†РµРїРѕС‡РєРё)
 		short rc = -1;
 		while (j < size && chains[j].nt[0] != t)++j;
 		rc = (j < size ? j : -1);
 		if (rc >= 0)pchain = chains[rc];
 		return rc;
 	};
-	char* Rule::Chain::getCChain(char* b) //получить правую сторону правила
+	char* Rule::Chain::getCChain(char* b) //РїРѕР»СѓС‡РёС‚СЊ РїСЂР°РІСѓСЋ СЃС‚РѕСЂРѕРЅСѓ РїСЂР°РІРёР»Р°
 	{
 		for (int i = 0; i < size; i++)b[i] = Chain::alphabet_to_char(nt[i]);
 		b[size] = 0x00;
