@@ -25,6 +25,10 @@ namespace ANALISER
 			{String, "string"},
 			{Bool, "bool"},
 			{Double, "double"},
+			{IntLiteral, "int"},
+			{StringLiteral, "string"},
+			{BoolLiteral, "bool"},
+			{DoubleLiteral, "double"},
 		};
 
 		static inline std::unordered_map<Keywords, Keywords> literalTypes
@@ -33,6 +37,10 @@ namespace ANALISER
 			{StringLiteral, String},
 			{BoolLiteral, Bool},
 			{DoubleLiteral, Double},
+			{Int, Int},
+			{String, String},
+			{Bool, Bool},
+			{Double, Double},
 		};
 	};
 }
