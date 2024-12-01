@@ -1,18 +1,17 @@
-
 fn int w(int t){
-	int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));
-	return (55 + t * 4) / w(8);
+  int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));
+  return (55 + t * 4) / w(8);
 }
 fn int nh1(int y,int k,string w, bool k1, int i ) {
-	w = nh(5,"jihuih");
-	return w;
+  return 0;
 }
 fn string w1(int z, bool v)
 {
-	return "hjk";
+    int jk = 79;
+  return "hjk";
 }
 fn int main()
 {
-    string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
-	return 0;
-} 
+    string kl = w1( w( (  55 + 89 * 4 ) / w( ( 55 + 9 * 4  ) / w(9) ) ), true);
+  return 0;
+}
