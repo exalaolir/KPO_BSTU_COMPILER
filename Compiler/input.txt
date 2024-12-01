@@ -1,11 +1,11 @@
 fn int w(int t){
-    if ( t < ! 56) {
+    if (55 + t * 4 / w(55 + 9 * 4) / w(9) < 56) {
     int j = 7;
    }
-   else {
-    int k = t + 56; 
-   }
-  @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
+
+
+  @ bool llllll = 7 > 9;
+  int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
   return (55 + t * 4) / w(8);
 }
 fn int nh1(int y,int k,string w, bool k1, int i ) {

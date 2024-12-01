@@ -23,9 +23,19 @@ void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 			checkExp(lexTable, idTable, i, idTable[lexTable[i].positionInIdTable]);
 			break;
 		case 'q':
+		{
 			i++;
 			checkBlockRange(lexTable, idTable, i, leftEnd, rightStart, rightEnd);
+			size_t currentType = i + 1;
+			rightStart--;
+			checkExp(lexTable, idTable, i, idTable[lexTable[currentType].positionInIdTable], lexTable[leftEnd + 1].lexema[0]);
+			checkExp(lexTable, idTable, rightStart, idTable[lexTable[currentType].positionInIdTable], lexTable[rightEnd].lexema[0]);
+			i = rightStart;
+			leftEnd = 0;
+			rightStart = 0;
+			rightEnd = 0;
 			break;
+		}
 		default:
 			break;
 		}
@@ -159,16 +169,16 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 		switch (returnType(lexTable, idTable, index))
 		{
 		case Fun:
-			if (currentType.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
+			if (literalTypes[currentType.valueType] != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			break;
 		case ServisSymbol:
 			break;
 		case Literal:
-			if (currentType.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
+			if (literalTypes[currentType.valueType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
 			break;
 		case Param:
 		case Variable:
-			if (currentType.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
+			if (literalTypes[currentType.valueType] != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			break;
 		default:
 			break;
@@ -245,13 +255,20 @@ void ANALISER::Analiser::checkBlockRange(std::vector<Lexem>& lexTable, IdTable& 
 
 	while (lexTable[index].lexema != "{")
 	{
-		switch (lexTable[index].lexema[0])
+		if (lexTable[index].lexema == "u")
 		{
-		case '>':
-		case '<':
-
-		default:
-			break;
+			rightLeftFlag = true;
+			rightStart = index + 1;
+			index++;
+			continue;
+		}
+		if (!rightLeftFlag)
+		{
+			leftEnd = index;
+		}
+		else
+		{
+			rightEnd = index;
 		}
 		index++;
 	}

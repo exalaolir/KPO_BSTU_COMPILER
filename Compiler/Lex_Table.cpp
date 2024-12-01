@@ -5,6 +5,9 @@
 
 namespace LEXER
 {
+	bool ifFlag = false;
+	std::string name;
+
 	std::vector<Lexem> Lexer::generateLexTable()
 	{
 		std::vector<Lexem> result;
@@ -108,13 +111,18 @@ namespace LEXER
 		}
 		case OpenBracket:
 		{
+			if (ifFlag)
+			{
+				scopeGenerator(scopes.top(), name);
+				ifFlag = false;
+			}
 			brackets.push(OpenBracket);
 			break;
 		}
 		case If:
 		{
-			string id = "i";
-			scopeGenerator(scopes.top(), id);
+			ifFlag = true;
+			name = "i";
 			break;
 		}
 		case Else:
