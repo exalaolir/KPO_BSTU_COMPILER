@@ -23,6 +23,7 @@ void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 		case 'l':
 			checkExp(lexTable, idTable, i, idTable[lexTable[i].positionInIdTable]);
 			break;
+		case 'w':
 		case 'q':
 		{
 			i++;

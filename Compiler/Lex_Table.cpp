@@ -139,8 +139,8 @@ namespace LEXER
 		}
 		case While:
 		{
-			string id = "w";
-			scopeGenerator(scopes.top(), id);
+			ifFlag = true;
+			name = "w";
 			break;
 		}
 		case BoolLiteral:

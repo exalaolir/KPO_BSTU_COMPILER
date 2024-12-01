@@ -3,7 +3,7 @@ fn int w(int t,bool jk, bool t8){
     if ( (w((55 + 89 * 4) / w((55 + 9 * 4)))/ w(9)) > 8 ) {
         if(t > 0) {
            @ int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
-           int k = true;
+           int k = 77;
         }
    }
    else {
@@ -11,14 +11,15 @@ fn int w(int t,bool jk, bool t8){
              int y = 129;
          } 
          else {
-            if(6 _ true) {
+            if(6 _ 77) {
                 int h = 123; 
             }
-            if((true : ! false) > ((6 + 3 * 4) ^ 0)) {
-                int lqw = 500;
-            }
-         }
+               }
    }
+
+   while(t8 < 0) {
+             int y = 129;
+         } 
   @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
 
   return (55 + t * 4) / w(8);
