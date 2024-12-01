@@ -3,6 +3,10 @@
 
 void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 {
+	size_t leftEnd = 0;
+	size_t rightStart = 0;
+	size_t rightEnd = 0;
+
 	for (size_t i = 0; i < lexTable.size(); i++)
 	{
 		auto currentLexem = lexTable[i];
@@ -17,6 +21,10 @@ void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 		case 'i':
 		case 'l':
 			checkExp(lexTable, idTable, i, idTable[lexTable[i].positionInIdTable]);
+			break;
+		case 'q':
+			i++;
+			checkBlockRange(lexTable, idTable, i, leftEnd, rightStart, rightEnd);
 			break;
 		default:
 			break;
@@ -228,5 +236,23 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 			if(lexTable[index].lexema == ";") break;
 			index++;
 		}
+	}
+}
+
+void ANALISER::Analiser::checkBlockRange(std::vector<Lexem>& lexTable, IdTable& idTable, size_t index, size_t& leftEnd, size_t& rightStart, size_t& rightEnd)
+{
+	bool rightLeftFlag = false;
+
+	while (lexTable[index].lexema != "{")
+	{
+		switch (lexTable[index].lexema[0])
+		{
+		case '>':
+		case '<':
+
+		default:
+			break;
+		}
+		index++;
 	}
 }
