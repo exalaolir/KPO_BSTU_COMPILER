@@ -43,8 +43,9 @@ int main(int argc, char* argv[])
 		};
 		auto params = validateParams(argc, argv);
 		Lexer lexer(params[IN_FILE]);
+
 		auto hjk = lexer.generateLexTable();
-		auto h = lexer.generateIdTable();
+		auto h = lexer.generateIdTable(hjk);
 
 		for (auto i : h.keys)
 		{

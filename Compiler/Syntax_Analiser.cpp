@@ -92,20 +92,27 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 	brackets.push(lexTable[index].lexema[0]);
 	index++;
 
+	size_t currentParamType = 0;
+
 	auto generateThrow = [&]()
 	{
 			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
-					  std::format("Ожидался тип {}", types[currentType.valueType]));
+					  std::format("Ожидался тип {}", types[params[currentParamType]]));
 			throw "Exception";
 	};
 
-	size_t currentParamType = 0;
 
 	while (!brackets.empty())
 	{
 		if (lexTable[index].lexema == ")")
 		{
 			brackets.pop();
+			if (brackets.empty() && currentParamType != countOfParams - 1)
+			{
+				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
+				throw "Exception";
+			}
 			continue;
 		}
 		if (lexTable[index].lexema == ";")

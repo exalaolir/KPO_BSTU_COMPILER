@@ -12,6 +12,7 @@ namespace LEXER
 	{
 		std::vector<Lexem> result;
 		std::stack<Keywords> brackets;
+		auto res = preprocesseredStr;
 
 		result.reserve(preprocesseredStr.size());
 		int line = 1;
@@ -58,7 +59,8 @@ namespace LEXER
 						break;
 					}
 				}
-				Lexem lex(newLex, line, counter, hash, prioryty);
+				Lexem lex(newLex, token,  line, counter, hash, prioryty);
+
 				result.push_back(lex);
 			}
 		}
@@ -82,6 +84,7 @@ namespace LEXER
 		scopes.push("g0");
 		currentScopeNumber = 0;
 		literalNumber = 0;
+		preprocesseredStr = res;
 		return result;
 	}
 

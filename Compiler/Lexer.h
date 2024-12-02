@@ -6,6 +6,7 @@ namespace LEXER
 	struct Lexem
 	{
 		Lexem(std::string lexema,
+			  std::string originalText,
 			  unsigned int line,
 			  unsigned int index,
 			  double positionInIdTable = -1.0, short prioryty = -1)
@@ -13,10 +14,12 @@ namespace LEXER
 			this->index = index;
 			this->line = line;
 			this->lexema = lexema;
+			this->originalText = originalText;
 			this->positionInIdTable = positionInIdTable;
 			this->prioryty = prioryty;
 		}
 		std::string lexema;
+		std::string originalText;
 		unsigned int line;
 		unsigned int index;
 		double positionInIdTable;
@@ -66,15 +69,15 @@ namespace LEXER
 
 		std::vector<Lexem> generateLexTable();
 
-		IdTable generateIdTable();
+		IdTable generateIdTable(std::vector<Lexem>& lexTable);
 	private:
 		std::list<string> preprocessCode(std::string& code);
 		std::string readFile(std::string& fileName);
 		Keywords GetKeyword(string& token, int& line, int& counter, bool isLexTable = false);
 		std::string scopeGenerator(string& priviosScope, string& id);
-		void createFun(std::list<string>::iterator& currentTocken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, bool& hasMain);
-		void createVar(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, Keywords type);
-		void createAuto(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter);
+		void createFun(std::list<string>::iterator& currentTocken, std::vector<Lexem>& lexTable, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, bool& hasMain);
+		void createVar(std::list<string>::iterator& currentToken, std::vector<Lexem>& lexTable, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, Keywords type);
+		void createAuto(std::list<string>::iterator& currentToken, std::vector<Lexem>& lexTable,  IdTable& idTable, std::list<string>& tokens, int& line, int& counter);
 		inline std::string GetType(string& token, int& line, int& counter, double& hash, int& timeToScopeGe, std::stack<Keywords>& brackets, auto& iter);
 
 		std::ifstream inFile;

@@ -5,6 +5,8 @@
 
 namespace LEXER
 {
+
+	int counterVec = 0;
 	std::variant <Keywords,
 		std::string,
 		int,
@@ -96,34 +98,35 @@ namespace LEXER
 		return table.contains(key);
 	}
 
-	IdTable LEXER::Lexer::generateIdTable()
+	IdTable LEXER::Lexer::generateIdTable(std::vector<Lexem>& lexTable)
 	{
 		std::stack<Keywords> brackets;
 		int line = 1;
 		int counter = 0;
 		bool hasMain = false;
+		auto reservedStr = preprocesseredStr; 
 
-		for (auto token = preprocesseredStr.begin(); token != preprocesseredStr.end(); token++)
+		for (auto token = preprocesseredStr.begin(); token != preprocesseredStr.end(); token++, counterVec++)
 		{
 			switch (GetKeyword(*token, line, counter))
 			{
 			case Fun:
-				createFun(token, idTable, preprocesseredStr, line, counter, hasMain);
+				createFun(token, lexTable, idTable,  preprocesseredStr, line, counter, hasMain);
 				break;
 			case Int:
-				createVar(token, idTable, preprocesseredStr, line, counter, Int);
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Int);
 				break;
 			case String:
-				createVar(token, idTable, preprocesseredStr, line, counter, String);
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, String);
 				break;
 			case Double:
-				createVar(token, idTable, preprocesseredStr, line, counter, Double);
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Double);
 				break;
 			case Bool:
-				createVar(token, idTable, preprocesseredStr, line, counter, Bool);
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Bool);
 				break;
 			case Let:
-				createAuto(token, idTable, preprocesseredStr, line, counter);
+				createAuto(token, lexTable, idTable, preprocesseredStr, line, counter);
 				break;
 			case OpenBracket:
 			{
@@ -147,6 +150,9 @@ namespace LEXER
 						std::hash<string>()(scope);
 					if (idTable.Contains(key))
 					{
+						int hhh = std::distance(preprocesseredStr.begin(), token) - line + 1;
+						std::cout << hhh << std::endl;
+						lexTable[hhh].positionInIdTable = key;
 						check = true;
 						break;
 					}
@@ -201,6 +207,8 @@ namespace LEXER
 					  "Отсутствует функция main");
 			throw "Esception";
 		}
+
+		preprocesseredStr = reservedStr;
 		return idTable;
 	}
 
@@ -450,11 +458,12 @@ namespace LEXER
 		return newScope;
 	}
 
-	void LEXER::Lexer::createFun(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, bool& hasMain)
+	void LEXER::Lexer::createFun(std::list<string>::iterator& currentToken, std::vector<Lexem>& lexTable, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, bool& hasMain)
 	{
 		Entry function;
 		Regex::Regex regex;
 		currentToken++;
+		counterVec++;
 
 		const std::array<string, 2> expressions
 		{
@@ -472,6 +481,13 @@ namespace LEXER
 			{
 				if (idTable.Contains(entry))
 				{
+					if (entry.type == Variable)
+					{
+
+						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
+						std::cout << hhh << std::endl;
+						lexTable[hhh].positionInIdTable = entry.GetHashCode();
+					}
 					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter), "Множественная инициализация");
 					throw "Exception";
 				}
@@ -488,6 +504,7 @@ namespace LEXER
 							line++;
 							counter = 0;
 							currentToken++;
+							counterVec++;
 						}
 					} while (*currentToken == "|");
 
@@ -532,6 +549,7 @@ namespace LEXER
 							}
 						}
 						currentToken++;
+						counterVec++;
 					}
 					else
 					{
@@ -568,6 +586,7 @@ namespace LEXER
 		{
 			Entry param;
 			currentToken++;
+			counterVec++;
 
 			while (*currentToken != ")")
 			{
@@ -588,6 +607,7 @@ namespace LEXER
 						line++;
 						counter = 0;
 						currentToken++;
+						counterVec++;
 					}
 				} while (*currentToken == "|");
 
@@ -612,6 +632,7 @@ namespace LEXER
 				}
 
 				currentToken++;
+				counterVec++;
 				countOfParams++;
 			}
 		}
@@ -625,7 +646,7 @@ namespace LEXER
 		idTable[function.GetHashCode()].params = countOfParams;
 	}
 
-	inline void LEXER::Lexer::createVar(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, Keywords type)
+	inline void LEXER::Lexer::createVar(std::list<string>::iterator& currentToken, std::vector<Lexem>& lexTable, IdTable& idTable, std::list<string>& tokens, int& line, int& counter, Keywords type)
 	{
 		Entry var;
 		Regex::Regex regex;
@@ -647,6 +668,12 @@ namespace LEXER
 			{
 				if (idTable.Contains(entry))
 				{
+					if (entry.type == Variable)
+					{
+						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
+						std::cout << hhh << std::endl;
+						lexTable[hhh].positionInIdTable = entry.GetHashCode();
+					}
 					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter), "Множественная инициализация");
 					throw "Exception";
 				}
@@ -663,6 +690,7 @@ namespace LEXER
 							line++;
 							counter = 0;
 							currentToken++;
+							counterVec++;
 						}
 					} while (*currentToken == "|");
 
@@ -700,6 +728,7 @@ namespace LEXER
 							}
 						}
 						currentToken++;
+						counterVec++;
 					}
 					else
 					{
@@ -722,7 +751,7 @@ namespace LEXER
 		idTable.Add(var);
 	}
 
-	void LEXER::Lexer::createAuto(std::list<string>::iterator& currentToken, IdTable& idTable, std::list<string>& tokens, int& line, int& counter)
+	void LEXER::Lexer::createAuto(std::list<string>::iterator& currentToken, std::vector<Lexem>& lexTable, IdTable& idTable, std::list<string>& tokens, int& line, int& counter)
 	{
 		currentToken++;
 		Entry autoType;
@@ -731,6 +760,12 @@ namespace LEXER
 			{
 				if (idTable.Contains(entry))
 				{
+					if (entry.type == Variable)
+					{
+						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
+						std::cout << hhh << std::endl;
+						lexTable[hhh].positionInIdTable = entry.GetHashCode();
+					}
 					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter), "Множественная инициализация");
 					throw "Exception";
 				}
@@ -749,6 +784,12 @@ namespace LEXER
 
 				if (idTable.Contains(resultKey))
 				{
+					if (idTable[resultKey].type == Variable)
+					{
+						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
+						std::cout << hhh << std::endl;
+						lexTable[hhh].positionInIdTable = resultKey;
+					}
 					check = true;
 					break;
 				}
@@ -792,6 +833,7 @@ namespace LEXER
 				line++;
 				counter = 0;
 				currentToken++;
+				counterVec++;
 			}
 		} while (*currentToken == "|");
 
@@ -809,6 +851,7 @@ namespace LEXER
 			autoType.pos = counter;
 
 			currentToken++;
+			counterVec++;
 
 			do
 			{
@@ -817,6 +860,7 @@ namespace LEXER
 					line++;
 					counter = 0;
 					currentToken++;
+					counterVec++;
 				}
 			} while (*currentToken == "|");
 
@@ -841,6 +885,7 @@ namespace LEXER
 		do
 		{
 			currentToken++;
+			counterVec++;
 			do
 			{
 				if (*currentToken == "|")
@@ -848,6 +893,7 @@ namespace LEXER
 					line++;
 					counter = 0;
 					currentToken++;
+					counterVec++;
 				}
 			} while (*currentToken == "|");
 
