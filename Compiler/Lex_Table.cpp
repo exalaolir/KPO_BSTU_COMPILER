@@ -65,21 +65,6 @@ namespace LEXER
 			}
 		}
 
-		int kk = 1;
-		for (auto jj : result)
-		{
-			if (jj.line != kk) std::cout << std::endl;
-			std::cout << jj.lexema;
-			kk = jj.line;
-		}
-		std::cout << std::endl;
-		std::cout << std::endl;
-		for (auto jj : result)
-		{
-			std::cout << jj.line << "  " << jj.index << "  "  << jj.lexema <<
-				"  " << jj.positionInIdTable << std::endl;
-		}
-
 		scopes = {};
 		scopes.push("g0");
 		currentScopeNumber = 0;

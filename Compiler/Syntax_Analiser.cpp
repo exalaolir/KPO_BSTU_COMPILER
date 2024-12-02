@@ -174,7 +174,6 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 
 void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index, Entry& currentType, char endSymbol)
 {
-
 	auto generateThrow = [&]()
 	{
 			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),

@@ -55,6 +55,21 @@ int main(int argc, char* argv[])
 				<< " " << q.GetValue()  << "  " << q.GetHashCode() << std::endl;
 		}
 
+		int kk = 1;
+		for (auto jj : hjk)
+		{
+			if (jj.line != kk) std::cout << std::endl;
+			std::cout << jj.lexema;
+			kk = jj.line;
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+		for (auto jj : hjk)
+		{
+			std::cout << jj.line << "  " << jj.index << "  " << jj.lexema <<
+				"  " << jj.positionInIdTable << std::endl;
+		}
+
 		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
 
 		MFST_TRACE_START(log);
