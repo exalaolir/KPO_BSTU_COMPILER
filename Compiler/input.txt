@@ -1,27 +1,28 @@
 fn int w(int t){
 
-  int y = y+y*3 + w(y*5+256%y);
+ @ int y = y+y*3 + w(y*5+256%y);@
 
   return (55 + t * 4) / w(8);
 }
 
 fn int nh1(int y,int k,int hlkkkk, bool k1, int i ) {
-    if(y > w(7)) {
+   @ if(y > w(7)) {
         int y = w(7);
         if(y > 90) {
             int l = 0;
         }
-    }
+    }@
   return 0;
 }
 fn string w1(int z, bool v)
 {
-    let jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
+    @let jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
     return "hjk";
 }
 fn int main()
 {
    string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
-   let ghh = w1(w(6), true);
+   let hgk = true;
+   let ghh = w1(w(6),hgk);
    return 0;
 }

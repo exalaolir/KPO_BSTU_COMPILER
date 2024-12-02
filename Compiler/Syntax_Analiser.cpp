@@ -158,7 +158,8 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			break;
 		case Param:
 		case Variable:
-			if (currentFunction.valueType != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
+			//std::cout << types[currentFunction.valueType] << " " << types[idTable[lexTable[oldIndex].positionInIdTable].valueType] << std::endl;
+			if (params[currentParamType] != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
 				checkExp(lexTable, idTable, index, currentType, END_BRACKET);
