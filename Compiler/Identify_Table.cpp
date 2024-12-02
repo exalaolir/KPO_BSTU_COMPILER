@@ -864,17 +864,9 @@ namespace LEXER
 					if (idExists(key))
 					{
 						auto lexem = idTable[key];
-						if (autoType.valueType == None)
-						{
-							autoType.valueType = lexem.valueType;
-							setType();
-						}
-						else if (autoType.valueType != lexem.valueType)
-						{
-							ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-									  std::format("Невозможно вывести авто-тип, разные типы: {}", *currentToken));
-							throw "Esception";
-						}
+						autoType.valueType = lexem.valueType;
+						setType();
+						break;
 					}
 					else
 					{
@@ -914,12 +906,6 @@ namespace LEXER
 					autoType.valueType = Int;
 					setType();
 				}
-				else if (autoType.valueType != Int)
-				{
-					ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-							  std::format("Невозможно вывести авто-тип, разные типы: {}", *currentToken));
-					throw "Esception";
-				}
 				break;
 			case BoolLiteral:
 				if (autoType.valueType == None)
@@ -927,12 +913,7 @@ namespace LEXER
 					autoType.valueType = Bool;
 					setType();
 				}
-				else if (autoType.valueType != Bool)
-				{
-					ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-							  std::format("Невозможно вывести авто-тип, разные типы: {}", *currentToken));
-					throw "Esception";
-				}
+
 				break;
 			case DoubleLiteral:
 				if (autoType.valueType == None)
@@ -940,24 +921,12 @@ namespace LEXER
 					autoType.valueType = Double;
 					setType();
 				}
-				else if (autoType.valueType != Double)
-				{
-					ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-							  std::format("Невозможно вывести авто-тип, разные типы: {}", *currentToken));
-					throw "Esception";
-				}
 				break;
 			case StringLiteral:
 				if (autoType.valueType == None)
 				{
 					autoType.valueType = String;
 					setType();
-				}
-				else if (autoType.valueType != String)
-				{
-					ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-							  std::format("Невозможно вывести авто-тип, разные типы: {}", *currentToken));
-					throw "Esception";
 				}
 				break;
 			case OpenParmBracket:
@@ -969,9 +938,6 @@ namespace LEXER
 			case End:
 				break;
 			default:
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-						  std::format("Невозможно вывести авто-тип, неопознанная лексема: {}", *currentToken));
-				throw "Esception";
 				break;
 			}
 

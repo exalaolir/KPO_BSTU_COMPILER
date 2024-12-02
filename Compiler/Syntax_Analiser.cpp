@@ -38,8 +38,8 @@ void ANALISER::Analiser::analise(std::vector<Lexem>& lexTable, IdTable& idTable)
 			leftEnd = 0;
 			rightStart = 0;
 			rightEnd = 0;
-			break;
 		}
+		break;
 		default:
 			break;
 		}
@@ -108,6 +108,16 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			brackets.pop();
 			continue;
 		}
+		if (lexTable[index].lexema == ";")
+		{
+			if (currentParamType != countOfParams - 1)
+			{
+				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
+				throw "Exception";
+			}
+			break;
+		}
 		if (lexTable[index].lexema == ",")
 		{
 			index++;
@@ -125,7 +135,6 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 		{
 		case Fun:
 			if(params[currentParamType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-			//checkFun(lexTable, idTable, index);
 			break;
 		case ServisSymbol:
 			if (lexTable[index].lexema == "," || lexTable[index].lexema == ")" )
@@ -190,7 +199,6 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 		if (lexTable[index].lexema[0] == endSymbol) break;
 		index++;
 	}
-
 }
 
 void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index)
@@ -221,7 +229,7 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 			{
 			case Fun:
 				if (currentFunction.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-				checkFun(lexTable, idTable, index);
+				//checkFun(lexTable, idTable, index);
 				break;
 			case ServisSymbol:
 				if (lexTable[index].lexema != ";")

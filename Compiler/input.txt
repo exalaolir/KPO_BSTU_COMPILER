@@ -1,32 +1,13 @@
+fn int w(int t){
 
-fn int w(int t,bool jk, bool t8){
-    if ( (w((55 + 89 * 4) / w((55 + 9 * 4)))/ w(9)) > 8 ) {
-        if(t > 0) {
-           @ int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
-           int k = 77;
-        }
-   }
-   else {
-         if(t8 < 0) {
-             int y = 129;
-         } 
-         else {
-            if(6 _ 77) {
-                int h = 123; 
-            }
-               }
-   }
-
-   while(t8 < 0) {
-             int y = 129;
-         } 
-  @int gh = (55 + t * 4) / w((55 + 9 * 4) / w(9));@
+  int y = y+y*3 + w(y*5+256%y);
 
   return (55 + t * 4) / w(8);
 }
-fn int nh1(int y,int k,string w, bool k1, int i ) {
-    if(y > w(7, true, false)) {
-        int y = w(7, true, false);
+
+fn int nh1(int y,int k,int hlkkkk, bool k1, int i ) {
+    if(y > w(7)) {
+        int y = w(7);
         if(y > 90) {
             int l = 0;
         }
@@ -35,11 +16,12 @@ fn int nh1(int y,int k,string w, bool k1, int i ) {
 }
 fn string w1(int z, bool v)
 {
-    @int jk = (79) - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
+    let jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
     return "hjk";
 }
 fn int main()
 {
-   @string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);@
+   string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
+   let ghh = w1(w(6), true);
    return 0;
 }
