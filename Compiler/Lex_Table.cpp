@@ -46,17 +46,21 @@ namespace LEXER
 					case '-':
 						prioryty = 2;
 						break;
+					case '#':
+					case '$':
+						prioryty = 3;
+						break;
 					case '>':
 					case '<':
 					case '^':
 					case '_':
-						prioryty = 3;
+						prioryty =4;
 						break;
 					case ':':
-						prioryty = 4;
+						prioryty = 5;
 						break;
 					case ',':
-						prioryty = 5;
+						prioryty = 6;
 						break;
 					default:
 						break;

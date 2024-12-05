@@ -79,6 +79,32 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			case '/':
 				return a / b;
 				break;
+			case '#':
+			{
+				if (std::is_same_v<T, int>)
+				{
+					return (INT64)a << (int)b;
+				}
+				else
+				{
+					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", el.line, el.index), "Оператор # недопустим для типа double");
+					throw "Exception";
+				}
+				break;
+			}
+			case '$':
+			{
+				if (std::is_same_v<T, int>)
+				{
+					return (int)a >> (int)b;
+				}
+				else
+				{
+					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", el.line, el.index), "Оператор $ недопустим для типа double");
+					throw "Exception";
+				}
+				break;
+			}
 			case '%':
 			{
 				if (std::is_same_v<T, int>)
@@ -168,6 +194,16 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор % недопустим для типа double");
 						throw "Exception";
 					}
+					if (lexem.originalText == "#" && (type.valueType == Double || type.valueType == DoubleLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор # недопустим для типа double");
+						throw "Exception";
+					}
+					if (lexem.originalText == "$" && (type.valueType == Double || type.valueType == DoubleLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор $ недопустим для типа double");
+						throw "Exception";
+					}
 					if (lexTable[index - 1].lexema == "i" || lexTable[index - 1].lexema == "l")
 					{
 						/*auto right = ANALISER::Analiser::types[idTable[lexTable[index + 1].positionInIdTable].valueType];*/
@@ -195,6 +231,16 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 					if (lexem.originalText == "%" && (type.valueType == Double || type.valueType == DoubleLiteral))
 					{
 						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор % недопустим для типа double");
+						throw "Exception";
+					}
+					if (lexem.originalText == "#" && (type.valueType == Double || type.valueType == DoubleLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор # недопустим для типа double");
+						throw "Exception";
+					}
+					if (lexem.originalText == "$" && (type.valueType == Double || type.valueType == DoubleLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор $ недопустим для типа double");
 						throw "Exception";
 					}
 					return ServisSymbol;
