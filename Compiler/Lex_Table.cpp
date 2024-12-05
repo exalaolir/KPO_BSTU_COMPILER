@@ -29,44 +29,45 @@ namespace LEXER
 			{
 				if (newLex == "o" || newLex == "u")
 				{
-					switch (token[0])
+					switch (TokenTypes.at(token))
 					{
-					case '(':
+					case OpenParmBracket:
 						prioryty = 0;
 						break;
-					case ')':
+					case CloseParmBracket:
 						prioryty = 0;
 						break;
-					case '*':
-					case '/':
-					case '%':
+					case Star:
+					case Delim:
+					case opDelim:
 						prioryty = 1;
 						break;
-					case '+':
-					case '-':
+					case Plus:
+					case Minus:
 						prioryty = 2;
 						break;
-					case '#':
-					case '$':
+					case ShiftLeft:
+					case ShiftRight:
 						prioryty = 3;
 						break;
-					case '>':
-					case '<':
-					case '^':
-					case '_':
-						prioryty =4;
+					case More:
+					case Less:
+					case MoreorEqal:
+					case LessorEqal:
+						prioryty = 4;
 						break;
-					case ':':
+					case IfEqal:
+					case IfNoEqal:
 						prioryty = 5;
 						break;
-					case ',':
+					case Comma:
 						prioryty = 6;
 						break;
 					default:
 						break;
 					}
 				}
-				Lexem lex(newLex, token,  line, counter, hash, prioryty);
+				Lexem lex(newLex, token, line, counter, hash, prioryty);
 
 				result.push_back(lex);
 			}
@@ -85,15 +86,15 @@ namespace LEXER
 		auto hasher = [](string& name, string& scope)->double {
 			return std::hash<string>()(name) +
 				std::hash<string>()(scope);
-		};
+			};
 
 		std::string result;
 		counter += 1;
 
-		int notLine = line; 
+		int notLine = line;
 		int notcounter = line;
-		
-		if(timeToScopeGen > 1) timeToScopeGen++;
+
+		if (timeToScopeGen > 1) timeToScopeGen++;
 
 		Keywords tokenType = GetKeyword(token, notLine, notcounter, true);
 
@@ -141,7 +142,7 @@ namespace LEXER
 		case BoolLiteral:
 		{
 			std::string id = "none";
-			std:: string name = "Literal-" + std::to_string(literalNumber);
+			std::string name = "Literal-" + std::to_string(literalNumber);
 			hash = hasher(name, id);
 			literalNumber++;
 			break;
@@ -217,7 +218,7 @@ namespace LEXER
 		default:
 			break;
 		}
-		
+
 		if (Lexems.contains(token))
 		{
 			result = Lexems.at(token);

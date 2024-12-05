@@ -83,6 +83,20 @@ int main(int argc, char* argv[])
 		analiser.analise(hjk, h);
 
 		POLISH::changeLexTable(hjk, h);
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		for (auto i : h)
+		{
+			auto q = i.second;
+			std::cout << kl[q.type] << " " << q.name << " " << kl[q.valueType] << " "
+				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params
+				<< " " << q.GetValue() << "  " << q.GetHashCode() << std::endl;
+		}
+	}
+	catch (const std::out_of_range& ex)
+	{
+		std::cout << ex.what();
 	}
 	catch (...)
 	{

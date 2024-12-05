@@ -67,16 +67,16 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 			}
 			if (!literalBrackets.empty())
 			{
-				if ((int)i - 1 >= 0 && 
-					(int)i + 1 < code.length() && 
-					code[i - 1] == '/' && 
+				if ((int)i - 1 >= 0 &&
+					(int)i + 1 < code.length() &&
+					code[i - 1] == '/' &&
 					code[i + 2] == '/' &&
-					code[i] == '\\' && 
+					code[i] == '\\' &&
 					(code[i + 1] == 'v' || code[i + 1] == 'n' || code[i + 1] == 't'))
 				{
 					buffer.pop_back();
-					std::string simbol = string() + code[i] + code[i+1];
-					
+					std::string simbol = string() + code[i] + code[i + 1];
+
 					buffer.push_back(SpecialSymbols.at(simbol));
 					i += 2;
 					shouldChange = false;
@@ -129,7 +129,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 	{
 		shouldChange = true;
 
-		if(code[i] != '\t' && code[i] != '\v' && code[i] != ' ') simbolCounter += 1;
+		if (code[i] != '\t' && code[i] != '\v' && code[i] != ' ') simbolCounter += 1;
 
 		if (code[i] == '|')
 		{
@@ -156,12 +156,10 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 				{
 					int counter = 1;
 
-					while (code[i - counter] == ' ')
-					{
-						counter++;
-					}
-					
+					while (code[i - counter] == ' ') counter++;
+
 					bool isSymbol = (MATH_SIMBOL(i, counter));
+
 					if (i + 2 < code.length() && isSymbol && code[i + 1] == 0 && code[i + 2] == 'x' && counter > 1)
 					{
 						buffer.push_back('$');
@@ -181,17 +179,39 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 						buffer.push_back(code[i]);
 						continue;
 					}
+					else if (code[i - 1] == '(' && isSymbol && isdigit(code[i + 1]))
+					{
+						buffer.push_back('$');
+						buffer.push_back(code[i]);
+						continue;
+					}
 				}
 				else if (code[i] == 'x')
 				{
 					code.erase(i, 1);
 				}
-				
+
 				if (Spaces.contains(code[i]))
 				{
-					buffer.push_back('$');
-					buffer.push_back(code[i]);
-					buffer.push_back('$');
+					if (i + 1 < code.length() &&
+						((code[i] == '<' && code[i + 1] == '=') ||
+						(code[i] == '>' && code[i + 1] == '=') ||
+						(code[i] == ':' && code[i + 1] == '!') ||
+						(code[i] == '>' && code[i + 1] == '>') ||
+						(code[i] == '<' && code[i + 1] == '<')))
+					{
+						buffer.push_back('$');
+						buffer.push_back(code[i]);
+						i++;
+						buffer.push_back(code[i]);
+						buffer.push_back('$');
+					}
+					else
+					{
+						buffer.push_back('$');
+						buffer.push_back(code[i]);
+						buffer.push_back('$');
+					}
 					continue;
 				}
 			}

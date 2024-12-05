@@ -40,6 +40,8 @@ namespace LEXER
 
 	Entry& LEXER::IdTable::operator[](double key) const
 	{
+		if(key == -1) 
+			throw std::out_of_range(__FILE__ + std::to_string(__LINE__));
 		return table[key];
 	}
 
@@ -96,6 +98,11 @@ namespace LEXER
 	bool LEXER::IdTable::Contains(double& key) const
 	{
 		return table.contains(key);
+	}
+
+	void IdTable::Delete(Entry& entry) const
+	{
+		table.erase(entry.GetHashCode());
 	}
 
 	IdTable LEXER::Lexer::generateIdTable(std::vector<Lexem>& lexTable)
