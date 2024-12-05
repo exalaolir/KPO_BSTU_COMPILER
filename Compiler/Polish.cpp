@@ -194,7 +194,9 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTable, size_t& index, bool (*stopped)(vector<LEXER::Lexem>&, size_t))
 {
 	bool optymiseFlag = true;
-	auto currentType = idTable[lexTable[index].positionInIdTable];
+	size_t typeIndex = index;
+	while(lexTable[typeIndex].positionInIdTable == -1) typeIndex++;
+	auto currentType = idTable[lexTable[typeIndex].positionInIdTable];
 
 	auto GetType = [&idTable, &optymiseFlag, &lexTable, &index, &currentType](LEXER::Lexem& lexem)->LEXER::Keywords
 		{
@@ -277,18 +279,6 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 			auto type = idTable[lexem.positionInIdTable];
 
 			if (type.type == Fun || type.type == Variable || type.type == Param) optymiseFlag = false;
-			/*if (type.valueType != Int &&
-				type.valueType != IntLiteral &&
-				type.valueType != Double &&
-				type.valueType != DoubleLiteral &&
-				type.type != Param &&
-				lexTable[index + 1].lexema != ";" &&
-				lexTable[index + 1].lexema != "u" &&
-				lexTable[index + 1].lexema != ")")
-			{
-				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), std::format("Арифметические выражения неподдерживаются для типа {}", ANALISER::Analiser::types[type.valueType]));
-				throw "Exception";
-			}*/
 			return type.type;
 		};
 
@@ -351,7 +341,6 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 		{
 			if (operators.empty())
 			{
-
 				auto lexem = lexTable[index];
 				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Неверный синтаксис выражения");
 				throw "Exception";
