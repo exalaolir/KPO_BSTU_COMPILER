@@ -27,9 +27,9 @@ namespace LEXER
 			auto newLex = GetType(token, line, counter, hash, timeToScopeGen, brackets, iter);
 			if (newLex != DEPRICATED_SYMBOL)
 			{
-				if (newLex == "o")
+				if (newLex == "o" || newLex == "u")
 				{
-					switch (newLex[0])
+					switch (token[0])
 					{
 					case '(':
 						prioryty = 0;
@@ -37,23 +37,26 @@ namespace LEXER
 					case ')':
 						prioryty = 0;
 						break;
-					case ',':
+					case '*':
+					case '/':
+					case '%':
 						prioryty = 1;
 						break;
 					case '+':
-						prioryty = 2;
-						break;
 					case '-':
 						prioryty = 2;
 						break;
-					case '*':
+					case '>':
+					case '<':
+					case '^':
+					case '_':
 						prioryty = 3;
 						break;
-					case '/':
-						prioryty = 3;
+					case ':':
+						prioryty = 4;
 						break;
-					case '%':
-						prioryty = 3;
+					case ',':
+						prioryty = 5;
 						break;
 					default:
 						break;
