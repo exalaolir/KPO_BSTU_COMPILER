@@ -1,5 +1,6 @@
 fn int w(int t){
 
+    @string jjjjjj = "noino" * "jj";@
     int y = 3 + 5 - 10;
 
   return (55 + t * 4) / w(8);
@@ -21,7 +22,7 @@ fn string w1(int z, bool v)
 }
 fn bool w11(int z, bool v)
 {
-    if(v : false) {
+    if(v : false + true) {
        z = 0;
     }
     if((7.00 * 8.67): 66.764) {
