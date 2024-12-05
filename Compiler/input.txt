@@ -31,14 +31,14 @@ fn bool w11(int z, bool v)
      if((0h6 * 0hF) : 66) {
        z = 0;
     }
-    let rtyry = nh1(89,5,9,w11(8,false),98) - w11(nh1(89,5,9,w11(8,false),98), true);
+    let rtyry = 324 + 7979354;
     return true;
 }
 fn int main()
 {
    string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
    let hgk = true;
-   int hjk = 67/78 + 89;
+   int hjk = nh1(0,-324,1,true, 345) + w(343) / nh1(0,w(34),1,true, 345);
    let ghh = w1(w(6),hgk);
    return 0;
 }

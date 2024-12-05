@@ -158,6 +158,7 @@ namespace LEXER
 		{'!', true},
 		{'>', true},
 		{'<', true},
+
 		{'_', true},
 		{'^', true},
 		{'~', true},
