@@ -56,6 +56,9 @@ namespace LEXER
 		MoreorEqal,
 		LessorEqal,
 
+		ShiftRight,
+		ShiftLeft,
+
 		Literal
 	};
 
@@ -87,6 +90,8 @@ namespace LEXER
 		{"/", "o"},
 		{"=", "="},
 		{"%", "o"},
+		{"#", "o"},
+		{"$", "o"},
 
 		{":", "u"},//==
 		{"~", "u"},//!=
@@ -123,13 +128,15 @@ namespace LEXER
 		{"%", opDelim},
 		{"=", Eqal},
 
-		{":", IfEqal},
-		{"~", IfNoEqal},
-		{"^", MoreorEqal},
-		{"_", LessorEqal},
+		{":", IfEqal},//==
+		{"~", IfNoEqal},//!=
+		{"^", MoreorEqal},//>=
+		{"_", LessorEqal},//<=
 
 		{">", More},
 		{"<", Less},
+		{"#", ShiftLeft},//<<
+		{"$", ShiftRight},//>>
 	};
 
 	inline static const std::unordered_map<char, bool> Spaces
@@ -147,7 +154,15 @@ namespace LEXER
 		{';', true},
 		{'-', true},
 		{'|', true},
-		{'!', true}
+		{'!', true},
+		{'>', true},
+		{'<', true},
+		{'_', true},
+		{'^', true},
+		{'~', true},
+		{':', true},
+		{'#', true},
+		{'$', true},
 	};
 
 	inline static const std::unordered_map<std::string, char> SpecialSymbols
