@@ -185,6 +185,12 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 						buffer.push_back(code[i]);
 						continue;
 					}
+					else if (code[i - 1] == ',' && isSymbol && isdigit(code[i + 1]))
+					{
+						buffer.push_back('$');
+						buffer.push_back(code[i]);
+						continue;
+					}
 				}
 				else if (code[i] == 'x')
 				{
