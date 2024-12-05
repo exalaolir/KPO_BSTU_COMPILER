@@ -115,6 +115,7 @@ namespace LEXER
 		{"for", For},
 		{"while", While},
 		{"let", Let},
+
 		{";", End},
 		{",", Comma},
 		{"{", OpenBracket},
