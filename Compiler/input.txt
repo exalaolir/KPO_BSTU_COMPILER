@@ -1,3 +1,4 @@
+int yui = 8;
 fn int w(int t){
 
     int y = y+y*3 + w(y*5+256%y);
@@ -14,11 +15,12 @@ fn int nh1(int y,int k,int hlkkkk, bool k1, int i ) {
     }
   return 0;
 }
-fn string w1(int z, bool v)
+fn int w1(int z, bool v)
 {
-    @let jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
-    return "hjk";
+    let jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
+    return jk;
 }
+
 fn bool w11(int z, bool v)
 {
     if(v : false) {
@@ -28,8 +30,8 @@ fn bool w11(int z, bool v)
 }
 fn int main()
 {
-   @string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
+   let kl = w((55 + 89 * 4) / w((55 + 9 * 4) / w(9)));
    let hgk = true;
-   let ghh = w1(w(6),hgk);@
+   let ghh = w1(w(6),hgk);
    return 0;
 }
