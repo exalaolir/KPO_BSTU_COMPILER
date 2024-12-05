@@ -1,6 +1,6 @@
 fn int w(int t){
 
-    int y = y+y*3 + w(y*5+256%y);
+    int y = 3 + 5 - 10;
 
   return (55 + t * 4) / w(8);
 }
@@ -12,7 +12,6 @@ fn int nh1(int y,int k,int hlkkkk, bool k1, int i ) {
             int l = 0;
         }
     }
-    string jjjjjjj = "oijoi" + "ioj";
   return 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
 }
 fn string w1(int z, bool v)
@@ -23,6 +22,12 @@ fn string w1(int z, bool v)
 fn bool w11(int z, bool v)
 {
     if(v : false) {
+       z = 0;
+    }
+    if(7.00 * 8.67 : 66.764) {
+       z = 0;
+    }
+     if(0h6 * 0hF : 66) {
        z = 0;
     }
     return true;

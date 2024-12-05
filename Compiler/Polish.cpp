@@ -5,6 +5,8 @@
 using namespace LEXER;
 using namespace Utils;
 
+int literalCounter = 0;
+
 void POLISH::changeLexTable(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTable)
 {
 	std::vector<LEXER::Lexem> newTable;
@@ -30,6 +32,7 @@ void POLISH::changeLexTable(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTa
 			i++;
 			auto polishExpression = makePolish(lexTable, idTable, i, ifStop);
 			newTable.insert(newTable.end(), polishExpression.begin(), polishExpression.end());
+
 		}
 		if (lexTable[i].lexema != "=" && lexTable[i].lexema != "r") newTable.push_back(lexTable[i]);
 		else
@@ -37,6 +40,7 @@ void POLISH::changeLexTable(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTa
 			newTable.push_back(lexTable[i]);
 			i++;
 			auto polishExpression = makePolish(lexTable, idTable, i, exeptionStop);
+			i--;
 			newTable.insert(newTable.end(), polishExpression.begin(), polishExpression.end());
 		}
 	}
@@ -47,7 +51,7 @@ void POLISH::changeLexTable(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTa
 	for (auto jj : lexTable)
 	{
 		if (jj.line != kk) std::cout << std::endl;
-		std::cout << jj.lexema;
+		std::cout << jj.originalText;
 		kk = jj.line;
 	}
 }
@@ -59,7 +63,7 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 
 	auto count = [](T a, T b, char op) -> T
 		{
-			std::swap(a, b);
+			/*std::swap(a, b);*/
 			switch (op)
 			{
 			case '+':
@@ -89,11 +93,35 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			}
 		};
 
+	auto getType = []() -> Keywords {
+		return std::is_same_v<T, int> ? IntLiteral : DoubleLiteral;
+		};
+
+	auto createEntry = [&](auto& newEntry, auto& val) {
+		newEntry.type = Literal;
+		newEntry.name = "Literal_New_" + std::to_string(literalCounter);
+		literalCounter++;
+		newEntry.valueType = getType();
+		newEntry.scope = "none";
+		newEntry.value = val;
+		};
 	for (auto element : expression)
 	{
 		if (element.lexema == "u")
 		{
+			auto val = Pop(results);
+			Entry newEntry;
+			createEntry(newEntry, val);
+			idTable.Add(newEntry);
+			result.push_back(Lexem("l", std::to_string(val), -1, -1, newEntry.GetHashCode()));
 
+			val = Pop(results);
+			Entry newEntry1;
+			createEntry(newEntry1, val);
+			idTable.Add(newEntry1);
+			result.push_back(Lexem("l", std::to_string(val), -1, -1, newEntry1.GetHashCode()));
+
+			result.push_back(element);
 		}
 		else if (element.lexema == "o")
 		{
@@ -104,14 +132,25 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			results.push(std::get<T>(idTable[element.positionInIdTable].value));
 		}
 	}
+
+	if (result.empty())
+	{
+		auto val = Pop(results);
+		Entry newEntry;
+		createEntry(newEntry, val);
+		idTable.Add(newEntry);
+		result.push_back(Lexem("l", std::to_string(val), -1, -1, newEntry.GetHashCode()));
+	}
+
+	expression = result;
 }
 
 std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTable, size_t& index, bool (*stopped)(vector<LEXER::Lexem>&, size_t))
 {
 	bool optymiseFlag = true;
-	auto currentType = idTable[lexTable[index].positionInIdTable].type;
+	auto currentType = idTable[lexTable[index].positionInIdTable].valueType;
 
-	auto GetType = [&idTable, &optymiseFlag](LEXER::Lexem& lexem)->LEXER::Keywords
+	auto GetType = [&idTable, &optymiseFlag, &lexTable, index](LEXER::Lexem& lexem)->LEXER::Keywords
 		{
 			auto type = idTable[lexem.positionInIdTable];
 
@@ -147,7 +186,10 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 				type.valueType != IntLiteral &&
 				type.valueType != Double &&
 				type.valueType != DoubleLiteral &&
-				type.type != Param)
+				type.type != Param &&
+				lexTable[index + 1].lexema != ";" &&
+				lexTable[index + 1].lexema != "u" &&
+				lexTable[index + 1].lexema != ")")
 			{
 				throw "Exception";
 			}
@@ -215,8 +257,6 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 		index++;
 	}
 
-	index--;
-
 	while (!operators.empty())
 	{
 		if (GetType(operators.top()) == OpenParmBracket)
@@ -234,7 +274,7 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 	{
 		if (currentType == Int || currentType == IntLiteral)
 			POLISH::countPolish<int>(newPolishExpression, idTable);
-		else
+		else if (currentType == Double || currentType == DoubleLiteral)
 			POLISH::countPolish<double>(newPolishExpression, idTable);
 	}
 
