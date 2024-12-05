@@ -22,7 +22,7 @@ fn string w1(int z, bool v)
 }
 fn bool w11(int z, bool v)
 {
-    if(v : false + true) {
+    if(nh1(89,9,nh1(89,5,9,w11(8,false),98),w11(67,true),123) : nh1(nh1(9,8,6,false,976),89,0,w11(8,false),123)) {
        z = 0;
     }
     if((7.00 * 8.67): 66.764) {
@@ -31,7 +31,7 @@ fn bool w11(int z, bool v)
      if((0h6 * 0hF) : 66) {
        z = 0;
     }
-    let rtyry = true + false;
+    let rtyry = nh1(89,5,9,w11(8,false),98) - w11(nh1(89,5,9,w11(8,false),98), true);
     return true;
 }
 fn int main()
