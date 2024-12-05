@@ -38,6 +38,7 @@ namespace LEXER
 		int params = 0;
 		std::variant <int, double, bool, std::string, Keywords> value;
 		std::vector<Keywords> paramTypes;
+		bool isUse = false;
 		
 		std::variant <Keywords, 
 			std::string, 
@@ -54,10 +55,30 @@ namespace LEXER
 		void Add(Entry& entry);
 		bool Contains(Entry& entry) const;
 		bool Contains(double& key) const;
+		void Delete(Entry& entry) const;
 		mutable std::unordered_map<double, Entry> table;
 		std::list<double> keys;
 
 		Entry& operator[](double key) const;
+
+		using iterator = typename std::unordered_map<double, Entry>::iterator;
+		using const_iterator = typename std::unordered_map<double, Entry>::const_iterator;
+
+		iterator begin() {
+			return table.begin();
+		}
+
+		const_iterator begin() const {
+			return table.begin();
+		}
+
+		iterator end() {
+			return table.end();
+		}
+
+		const_iterator end() const {
+			return table.end();
+		}
 	};
 
 	struct Lexer

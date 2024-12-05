@@ -90,18 +90,18 @@ namespace LEXER
 		{"/", "o"},
 		{"=", "="},
 		{"%", "o"},
-		{"#", "o"},
-		{"$", "o"},
+		{">>", "o"},
+		{"<<", "o"},
 
 		{":", "u"},//==
-		{"~", "u"},//!=
-		{"^", "u"},//>=
-		{"_", "u"},//<=
+		{":!", "u"},//!=
+		{">=", "u"},//>=
+		{"<=", "u"},//<=
 		{">", "u"},
 		{"<", "u"},
 	};
 
-	inline static const unordered_map<string, Keywords> TokenTypes
+	inline static const unordered_map<std::string, Keywords> TokenTypes
 	{
 		{"int", Int},
 		{"string", String},
@@ -130,14 +130,14 @@ namespace LEXER
 		{"=", Eqal},
 
 		{":", IfEqal},//==
-		{"~", IfNoEqal},//!=
-		{"^", MoreorEqal},//>=
-		{"_", LessorEqal},//<=
+		{":!", IfNoEqal},//!=
+		{">=", MoreorEqal},//>=
+		{"=<", LessorEqal},//<=
 
 		{">", More},
 		{"<", Less},
-		{"#", ShiftLeft},//<<
-		{"$", ShiftRight},//>>
+		{"<<", ShiftLeft},//<<
+		{">>", ShiftRight},//>>
 	};
 
 	inline static const std::unordered_map<char, bool> Spaces
@@ -157,14 +157,7 @@ namespace LEXER
 		{'|', true},
 		{'!', true},
 		{'>', true},
-		{'<', true},
-
-		{'_', true},
-		{'^', true},
-		{'~', true},
-		{':', true},
-		{'#', true},
-		{'$', true},
+		{'<', true}
 	};
 
 	inline static const std::unordered_map<std::string, char> SpecialSymbols

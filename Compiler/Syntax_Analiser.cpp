@@ -61,6 +61,7 @@ void ANALISER::Analiser::setCurrentFunction(std::vector<Lexem>& lexTable, IdTabl
 
 Keywords ANALISER::Analiser::returnType(std::vector<Lexem>& lexTable, IdTable& idTable, size_t& index)
 {
+	if(lexTable[index].positionInIdTable == -1) return ServisSymbol;
 	auto currentLex = idTable[lexTable[index].positionInIdTable];
 
 	switch (currentLex.type)
