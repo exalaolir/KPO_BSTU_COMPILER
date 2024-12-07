@@ -1,6 +1,7 @@
 let ty = "ujuju";
 string uihiuh = "uuu";
 
+fn int w(int t) {
     @string jjjjjj = "noino" * "jj";@
     int y = 3 + 5 - 10;
 
