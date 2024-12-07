@@ -15,10 +15,14 @@ namespace GRB
 			Rule::Chain(7, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), NS('W'))
 
 		),
-		Rule(NS('G'), GRB_ERROR_SERIES, 3,//ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+		Rule(NS('G'), GRB_ERROR_SERIES, 6,//ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
 			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('G')),
 			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('F')),
-			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('M'))
+			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('M')),
+
+			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('G')),
+			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('F')),
+			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('M'))
 		),
 		Rule(NS('M'), GRB_ERROR_SERIES, 1,//СТРУКТУРА КОДА MAIN
 			Rule::Chain(6, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), NS('Y'))
