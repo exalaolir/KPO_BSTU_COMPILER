@@ -459,7 +459,7 @@ namespace LEXER
 		int levelNumber = stoi(string() + priviosScope[priviosScope.length() - 1]);
 
 		std::string level = std::to_string(levelNumber + 1);
-		newScope += '-' + string() + id[0] + uHash + level;
+		newScope += '_' + string() + id[0] + uHash + level;
 
 		scopes.push(newScope);
 		return newScope;

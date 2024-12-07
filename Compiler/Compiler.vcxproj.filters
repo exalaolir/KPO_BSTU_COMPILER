@@ -49,6 +49,15 @@
     <Filter Include="Исходные файлы\Lolger\Input_Vallidator">
       <UniqueIdentifier>{6ada750b-bbc0-44e2-85b8-a04c24700307}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\polish">
+      <UniqueIdentifier>{905f2aef-0124-47ce-8785-8b34a1893f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\semantic">
+      <UniqueIdentifier>{a424010a-c118-4994-a89c-03bb708c02da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Generator">
+      <UniqueIdentifier>{a831815f-2748-43c0-a514-124f5967423a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Compiler.cpp">
@@ -85,9 +94,12 @@
       <Filter>Исходные файлы\Syntax_Analiser</Filter>
     </ClCompile>
     <ClCompile Include="Polish.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\polish</Filter>
     </ClCompile>
     <ClCompile Include="Syntax_Analiser.cpp">
+      <Filter>Исходные файлы\semantic</Filter>
+    </ClCompile>
+    <ClCompile Include="Generator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,11 +134,17 @@
     <ClInclude Include="GRB.h">
       <Filter>Файлы заголовков\Sintax_Analiser</Filter>
     </ClInclude>
-    <ClInclude Include="Polish.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Syntax_Analiser.h">
       <Filter>Файлы заголовков\Syntaxer</Filter>
+    </ClInclude>
+    <ClInclude Include="Polish.h">
+      <Filter>Файлы заголовков\Polish_Natation</Filter>
+    </ClInclude>
+    <ClInclude Include="Generator.h">
+      <Filter>Файлы заголовков\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="Constructions.h">
+      <Filter>Файлы заголовков\Generator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
