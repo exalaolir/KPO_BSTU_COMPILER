@@ -12,6 +12,8 @@ namespace LEXER
 		String,
 		Bool,
 		Double,
+		Char,
+		Byte,
 
 		Fun,
 		Return,
@@ -21,6 +23,9 @@ namespace LEXER
 		StringLiteral,
 		BoolLiteral,
 		DoubleLiteral,
+		UIntLiteral,
+		ByteLiteral,
+		CharLiteral,
 
 		If,
 		Else,

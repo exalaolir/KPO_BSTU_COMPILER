@@ -1,4 +1,5 @@
-fn int w(int t){
+let ty = "ujuju";
+string uihiuh = "uuu";
 
     @string jjjjjj = "noino" * "jj";@
     int y = 3 + 5 - 10;

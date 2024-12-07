@@ -108,7 +108,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 		};
 
 	auto generateError = [](auto& stack)
-		{
+	{
 
 			if (!stack.empty())
 			{
@@ -123,7 +123,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 				}
 				throw "Exception";
 			}
-		};
+	};
 
 	for (i; i < code.length(); i++)
 	{
