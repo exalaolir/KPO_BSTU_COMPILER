@@ -4,6 +4,7 @@
 #include "Magazine_Automate.h"
 #include "Polish.h"
 #include "Syntax_Analiser.h"
+#include "Generator.h"
 
 using namespace INPUTVAL;
 using namespace LEXER;
@@ -72,12 +73,12 @@ int main(int argc, char* argv[])
 
 		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
 
-		MFST_TRACE_START(log);
+		/*MFST_TRACE_START(log);
 		MFST::Mfst mfst(hjk, h, GRB::getGreibach());
 		if (!mfst.start(log))
 			throw "Error";
 		mfst.savededucation();
-		mfst.printrules(log);
+		mfst.printrules(log);*/
 
 		ANALISER::Analiser analiser;
 		analiser.analise(hjk, h);
@@ -93,6 +94,9 @@ int main(int argc, char* argv[])
 				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params
 				<< " " << q.GetValue() << "  " << q.GetHashCode() << std::endl;
 		}
+
+		GEN::Generator gen(params[OUT_FILE], hjk, h);
+		gen.Generate();
 	}
 	catch (const std::out_of_range& ex)
 	{

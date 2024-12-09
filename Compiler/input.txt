@@ -1,45 +1,8 @@
-let ty = "ujuju";
-string uihiuh = "uuu";
-
-    @string jjjjjj = "noino" * "jj";@
-    int y = 3 + 5 - 10;
-
-  return (55 + t * 4) / w(8);
-}
-
-fn int nh1(int y,int k,int hlkkkk, bool k1, int i ) {
-    if((79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)))) > w(7)) {
-        int y = w(7);
-        if(y > 90) {
-            int l = 0;
-        }
-    }
-  return 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));
-}
-fn string w1(int z, bool v)
-{
-    @let jk = 79 - 88 * w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))) + 89 * w( (55 + 9 * 4) / w((55 + 9 * 4) / w(9)));@
-    return "hjk";
-}
-fn bool w11(int z, bool v)
-{
-    if(nh1(89,9,nh1(89,5,9,w11(8,false),98),w11(67,true),123) : nh1(nh1(9,8,6,false,976),89,0,w11(8,false),123)) {
-       z = 0;
-    }
-    if((7.00 * 8.67): 66.764) {
-       z = 0;
-    }
-     if((0h6 * 0hF) : 66) {
-       z = 0;
-    }
-    let rtyry = 324 + 7979354;
-    return true;
-}
 fn int main()
 {
-   string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
-   let hgk = true;
-   int hjk = nh1(0,-324,1,true, 345) + w(343) / nh1(0,w(34),1,true, 345);
-   let ghh = w1(w(6),hgk);
+   let a = 5.6;
+   a = a + 0.5;
+
+   let y = true;
    return 0;
 }

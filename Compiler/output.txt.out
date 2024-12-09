@@ -1,0 +1,28 @@
+.586P
+		 .MODEL FLAT, STDCALL 
+		 includelib kernel32.lib
+		 includelib masm32.lib
+	     ExitProcess PROTO:DWORD
+		 .STACK 4096
+.DATA
+Literal_New_0__none REAL8 5.600000
+Literal_1__none REAL8 0.500000
+Literal_2__none BYTE 1
+Literal_New_1__none SDWORD 0
+option prologue:PrologueDef
+option epilogue:EpilogueDef
+.CODE
+main__g0 proc
+local a__g0_m11:REAL8, y__g0_m11:BYTE
+fld Literal_New_0__none
+fstp a__g0_m11
+fld a__g0_m11
+fld Literal_1__none
+fadd
+fstp a__g0_m11
+push Literal_2__none
+pop y__g0_m11
+
+INVOKE ExitProcess, 0
+main__g0 endp
+end main__g0
