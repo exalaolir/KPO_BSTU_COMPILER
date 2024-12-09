@@ -4,7 +4,6 @@
 #include "Magazine_Automate.h"
 #include "Polish.h"
 #include "Syntax_Analiser.h"
-
 using namespace INPUTVAL;
 using namespace LEXER;
 
