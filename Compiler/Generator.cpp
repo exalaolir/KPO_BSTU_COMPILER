@@ -199,6 +199,7 @@ namespace GEN
 	{
 		std::string vars;
 
+
 		for (const auto& entry : idTable)
 		{
 			if (entry.second.scope.find(fun.ownScope) == 0)
