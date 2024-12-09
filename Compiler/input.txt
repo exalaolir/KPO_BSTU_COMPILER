@@ -4,6 +4,12 @@ fn int w(int t){
     int j = 7;
    }
    else {
+    if ( t < 56) {
+    int j = 7;
+   }
+   else {
+    int k = t + 56; 
+   }
     int k = t + 56; 
    }
 

@@ -14,46 +14,49 @@ Literal_5__none SDWORD 9
 Literal_6__none SDWORD 56
 Literal_New_0__none SDWORD 7
 Literal_8__none SDWORD 56
-Literal_9__none SDWORD 55
-Literal_10__none SDWORD 4
-Literal_11__none SDWORD 8
-Literal_New_1__none SDWORD 0
-Literal_13__none SDWORD 79
-Literal_14__none SDWORD 88
-Literal_15__none SDWORD 55
-Literal_16__none SDWORD 89
-Literal_17__none SDWORD 4
+Literal_New_1__none SDWORD 7
+Literal_10__none SDWORD 56
+Literal_11__none SDWORD 56
+Literal_12__none SDWORD 55
+Literal_13__none SDWORD 4
+Literal_14__none SDWORD 8
+Literal_New_2__none SDWORD 0
+Literal_16__none SDWORD 79
+Literal_17__none SDWORD 88
 Literal_18__none SDWORD 55
-Literal_19__none SDWORD 9
+Literal_19__none SDWORD 89
 Literal_20__none SDWORD 4
-Literal_21__none SDWORD 9
-Literal_22__none SDWORD 89
-Literal_23__none SDWORD 55
+Literal_21__none SDWORD 55
+Literal_22__none SDWORD 9
+Literal_23__none SDWORD 4
 Literal_24__none SDWORD 9
-Literal_25__none SDWORD 4
+Literal_25__none SDWORD 89
 Literal_26__none SDWORD 55
 Literal_27__none SDWORD 9
 Literal_28__none SDWORD 4
-Literal_29__none SDWORD 9
-Literal_30__none SDWORD 45
-Literal_31__none SDWORD 33
-Literal_32__none SDWORD 7
-Literal_New_2__none SDWORD 99
-Literal_34__none BYTE "hjk", 0
-Literal_35__none SDWORD 55
-Literal_36__none SDWORD 89
-Literal_37__none SDWORD 4
+Literal_29__none SDWORD 55
+Literal_30__none SDWORD 9
+Literal_31__none SDWORD 4
+Literal_32__none SDWORD 9
+Literal_33__none SDWORD 45
+Literal_34__none SDWORD 33
+Literal_35__none SDWORD 7
+Literal_New_3__none SDWORD 99
+Literal_37__none BYTE "hjk", 0
 Literal_38__none SDWORD 55
-Literal_39__none SDWORD 9
+Literal_39__none SDWORD 89
 Literal_40__none SDWORD 4
-Literal_41__none SDWORD 9
-Literal_42__none BYTE 1
-Literal_New_3__none SDWORD 0
+Literal_41__none SDWORD 55
+Literal_42__none SDWORD 9
+Literal_43__none SDWORD 4
+Literal_44__none SDWORD 9
+Literal_45__none BYTE 1
+Literal_New_4__none SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
 w__g0 proc t__g0_w11:SDWORD
-local t__g0_w11:SDWORD, gh__g0_w11:SDWORD, j__g0_w11_i22:SDWORD, k__g0_w11_e32:SDWORD
+local t__g0_w11:SDWORD, gh__g0_w11:SDWORD, j__g0_w11_i22:SDWORD, j__g0_w11_e32_i43:SDWORD, k__g0_w11_e32_e53:SDWORD, k__g0_w11_e32:SDWORD
 push Literal_0__none
 push t__g0_w11
 push Literal_1__none
@@ -92,8 +95,17 @@ push EAX
 pop gh__g0_w11
 push Literal_New_0__none
 pop j__g0_w11_i22
+push Literal_New_1__none
+pop j__g0_w11_e32_i43
 push t__g0_w11
-push Literal_8__none
+push Literal_10__none
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+pop k__g0_w11_e32_e53
+push t__g0_w11
+push Literal_11__none
 pop EBX
 pop EAX
 add EAX, EBX
@@ -101,25 +113,14 @@ push EAX
 pop k__g0_w11_e32
 ret
 w__g0 endp
-nh1__g0 proc y__g0_n41:SDWORD, k__g0_n41:SDWORD, w__g0_n41:BYTE, k1__g0_n41:BYTE, i__g0_n41:SDWORD
-local k__g0_n41:SDWORD, k1__g0_n41:BYTE, w__g0_n41:BYTE, y__g0_n41:SDWORD, i__g0_n41:SDWORD
+nh1__g0 proc y__g0_n61:SDWORD, k__g0_n61:SDWORD, w__g0_n61:BYTE, k1__g0_n61:BYTE, i__g0_n61:SDWORD
+local k__g0_n61:SDWORD, y__g0_n61:SDWORD, w__g0_n61:BYTE, k1__g0_n61:BYTE, i__g0_n61:SDWORD
 ret
 nh1__g0 endp
-w1__g0 proc z__g0_w51:SDWORD, v__g0_w51:BYTE
-local ppdcppd__g0_w51_i62:SDWORD, z__g0_w51:SDWORD, v__g0_w51:BYTE, jk__g0_w51:SDWORD
-push Literal_13__none
-push Literal_14__none
-push Literal_15__none
+w1__g0 proc z__g0_w71:SDWORD, v__g0_w71:BYTE
+local jk__g0_w71:SDWORD, z__g0_w71:SDWORD, v__g0_w71:BYTE, ppdcppd__g0_w71_i82:SDWORD
 push Literal_16__none
 push Literal_17__none
-pop EBX
-pop EAX
-imul EAX, EBX
-push EAX
-pop EBX
-pop EAX
-add EAX, EBX
-push EAX
 push Literal_18__none
 push Literal_19__none
 push Literal_20__none
@@ -132,6 +133,17 @@ pop EAX
 add EAX, EBX
 push EAX
 push Literal_21__none
+push Literal_22__none
+push Literal_23__none
+pop EBX
+pop EAX
+imul EAX, EBX
+push EAX
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push Literal_24__none
 push w__g0
 xor EDX,EDX
 pop EBX
@@ -153,18 +165,7 @@ pop EBX
 pop EAX
 sub EAX, EBX
 push EAX
-push Literal_22__none
-push Literal_23__none
-push Literal_24__none
 push Literal_25__none
-pop EBX
-pop EAX
-imul EAX, EBX
-push EAX
-pop EBX
-pop EAX
-add EAX, EBX
-push EAX
 push Literal_26__none
 push Literal_27__none
 push Literal_28__none
@@ -177,6 +178,17 @@ pop EAX
 add EAX, EBX
 push EAX
 push Literal_29__none
+push Literal_30__none
+push Literal_31__none
+pop EBX
+pop EAX
+imul EAX, EBX
+push EAX
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push Literal_32__none
 push w__g0
 xor EDX,EDX
 pop EBX
@@ -198,24 +210,13 @@ pop EBX
 pop EAX
 add EAX, EBX
 push EAX
-pop jk__g0_w51
-push Literal_New_2__none
-pop ppdcppd__g0_w51_i62
+pop jk__g0_w71
+push Literal_New_3__none
+pop ppdcppd__g0_w71_i82
 ret
 w1__g0 endp
 main__g0 proc
-local kl__g0_m71:BYTE
-push Literal_35__none
-push Literal_36__none
-push Literal_37__none
-pop EBX
-pop EAX
-imul EAX, EBX
-push EAX
-pop EBX
-pop EAX
-add EAX, EBX
-push EAX
+local kl__g0_m91:BYTE
 push Literal_38__none
 push Literal_39__none
 push Literal_40__none
@@ -228,22 +229,33 @@ pop EAX
 add EAX, EBX
 push EAX
 push Literal_41__none
-push w__g0
-xor EDX,EDX
-pop EBX
-pop EAX
-div EBX
-push EAX
-push w__g0
-xor EDX,EDX
-pop EBX
-pop EAX
-div EBX
-push EAX
-push w__g0
 push Literal_42__none
+push Literal_43__none
+pop EBX
+pop EAX
+imul EAX, EBX
+push EAX
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push Literal_44__none
+push w__g0
+xor EDX,EDX
+pop EBX
+pop EAX
+div EBX
+push EAX
+push w__g0
+xor EDX,EDX
+pop EBX
+pop EAX
+div EBX
+push EAX
+push w__g0
+push Literal_45__none
 push w1__g0
-pop kl__g0_m71
+pop kl__g0_m91
 
 INVOKE ExitProcess, 0
 main__g0 endp

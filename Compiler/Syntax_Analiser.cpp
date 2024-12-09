@@ -160,7 +160,14 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
 				char endSymbol;
-				lexTable[index + 1].lexema == "," ? endSymbol =  ',' : endSymbol = END_BRACKET;
+				if (countOfParams > 0 && currentParamType != countOfParams - 1)
+				{
+					endSymbol = ',';
+				}
+				else
+				{
+					endSymbol = ')';
+				}
 				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
 				if (endSymbol == ',') currentParamType++;
 			}
@@ -172,7 +179,14 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
 				char endSymbol;
-				lexTable[index + 1].lexema == "," ? endSymbol = ',' : endSymbol = END_BRACKET;
+				if (countOfParams > 0 && currentParamType != countOfParams - 1)
+				{
+					endSymbol = ',';
+				}
+				else
+				{
+					endSymbol = ')';
+				}
 				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
 				if(endSymbol == ',') currentParamType++;
 			}
