@@ -149,12 +149,20 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			{
 				currentParamType++;
 			}
+			else if (lexTable[index].lexema == "(" && lexTable[index - 1].lexema == "(")
+			{
+				while(lexTable[index].lexema == "(") index++;
+				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
+			}
 			break;
 		case Literal:
 			if (params[currentParamType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
+				char endSymbol;
+				lexTable[index + 1].lexema == "," ? endSymbol =  ',' : endSymbol = END_BRACKET;
+				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
+				if (endSymbol == ',') currentParamType++;
 			}
 			break;
 		case Param:
@@ -163,7 +171,10 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			if (params[currentParamType] != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
+				char endSymbol;
+				lexTable[index + 1].lexema == "," ? endSymbol = ',' : endSymbol = END_BRACKET;
+				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
+				if(endSymbol == ',') currentParamType++;
 			}
 			break;
 		default:
@@ -181,7 +192,7 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 					  std::format("ќжидалс€ тип {}", types[currentType.valueType]));
 			throw "Exception";
 	}; 
-	index++;
+	//index++;
 
 	while (lexTable[index].lexema[0] != endSymbol)
 	{
