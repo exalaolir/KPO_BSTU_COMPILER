@@ -6,23 +6,42 @@
 
 namespace GRB
 {
-	Greibach greibach(NS('S'), TS('$'), 17,
+	Greibach greibach(NS('S'), TS('$'), 20,
 
-		Rule(NS('S'), GRB_ERROR_SERIES, 3,//СТРУКТУРА КОДА
+		Rule(NS('S'), GRB_ERROR_SERIES, 5,//СТРУКТУРА КОДА
 
 			Rule::Chain(6, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), NS('Y')),
-			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('G')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('G')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('F')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('M')),
 			Rule::Chain(7, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), NS('W'))
 
 		),
 		Rule(NS('G'), GRB_ERROR_SERIES, 6,//ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
-			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('G')),
-			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('F')),
-			Rule::Chain(5, TS('t'), TS('i'), NS('L'), TS(';'), NS('M')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('G')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('F')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('M')),
 
-			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('G')),
-			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('F')),
-			Rule::Chain(4, TS('i'), NS('L'), TS(';'), NS('M'))
+			Rule::Chain(4, TS('i'), NS('Q'), TS(';'), NS('G')),
+			Rule::Chain(4, TS('i'), NS('Q'), TS(';'), NS('F')),
+			Rule::Chain(4, TS('i'), NS('Q'), TS(';'), NS('M'))
+		),
+		Rule(NS('Q'), GRB_ERROR_SERIES, 2,
+			Rule::Chain(2, TS('='), TS('l')),
+			Rule::Chain(2, TS('='), NS('X'))
+		),
+		Rule(NS('X'), GRB_ERROR_SERIES + 6, 3,//начало ВЫРАЖЕНИЕ
+
+			Rule::Chain(2, TS('l'), NS('D')),
+			Rule::Chain(3, TS('('), NS('X'), TS(')')),
+			Rule::Chain(4, TS('('), NS('X'), TS(')'), NS('D'))
+
+		),
+		Rule(NS('D'), GRB_ERROR_SERIES + 6, 2,//ПРОДОЛЖЕНИЕ ВЫРАЖЕНИЕ
+
+			Rule::Chain(3, TS('o'), NS('l'), NS('D')),
+			Rule::Chain(2, TS('o'), NS('l'))
+
 		),
 		Rule(NS('M'), GRB_ERROR_SERIES, 1,//СТРУКТУРА КОДА MAIN
 			Rule::Chain(6, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), NS('Y'))
@@ -135,9 +154,7 @@ namespace GRB
 		Rule(NS('T'), GRB_ERROR_SERIES + 6, 2,//ПРОДОЛЖЕНИЕ ВЫРАЖЕНИЕ
 
 		Rule::Chain(3, TS('o'), NS('R'), NS('T')),
-
-
-		Rule::Chain(2, TS('o'), NS('R'))
+		 Rule::Chain(2, TS('o'), NS('R'))
 
 		),
 
