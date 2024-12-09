@@ -233,7 +233,20 @@ namespace LEXER
 				{
 
 				case LEXER::IntLiteral:
-					intVal = std::stoi(literal, nullptr, code);
+					if (code == 2 && literal[0] == '-')
+					{
+						literal.erase(0, 1);
+						intVal = std::stoi(literal, nullptr, code);
+						if (intVal == 0)
+						{
+							throw "Esception";
+						}
+						intVal *= -1;
+					}
+					else
+					{
+						intVal = std::stoi(literal, nullptr, code);
+					}
 					break;
 				case LEXER::DoubleLiteral:
 					val = std::stod(literal);
@@ -305,9 +318,17 @@ namespace LEXER
 					idTable.Add(literal);
 				}
 			}
-			else if (regex.Match(token, "(0b(1|0)+)"))
+			else if (regex.Match(token, "(((0b(1|0)+|-0b(1|0)+)))"))
 			{
-				auto newTocken = token.erase(0, 2);
+				std::string newTocken;
+				if (token[0] == '-')
+				{
+					newTocken = token.erase(1, 2);
+				}
+				else
+				{
+					newTocken = token.erase(0, 2);
+				}
 				isValidLiteral(IntLiteral, newTocken, 2);
 				type = IntLiteral;
 
@@ -322,7 +343,7 @@ namespace LEXER
 					literal.scope = "none";
 					literal.line = line;
 					literal.pos = counter;
-					literal.value = std::stoi(token, nullptr, 8);
+					literal.value = std::stoi(token, nullptr, 2);
 
 					idTable.Add(literal);
 				}

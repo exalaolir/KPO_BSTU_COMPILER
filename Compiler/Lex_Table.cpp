@@ -96,7 +96,8 @@ namespace LEXER
 
 		if (timeToScopeGen > 1) timeToScopeGen++;
 
-		Keywords tokenType = GetKeyword(token, notLine, notcounter, true);
+		auto newToken = token;
+		Keywords tokenType = GetKeyword(newToken, notLine, notcounter, true);
 
 		switch (tokenType)
 		{
@@ -245,7 +246,7 @@ namespace LEXER
 			{
 				result = "l";
 			}
-			else if (regex.Match(token, "(0b(1|0)+)"))
+			else if (regex.Match(token, "((0b(1|0)+|-0b(1|0)+))"))
 			{
 				result = "l";
 			}

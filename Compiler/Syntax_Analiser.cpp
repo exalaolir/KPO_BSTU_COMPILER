@@ -108,7 +108,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 		if (lexTable[index].lexema == ")")
 		{
 			brackets.pop();
-			if (brackets.empty() && currentParamType != countOfParams - 1)
+			if (brackets.empty() && currentParamType != countOfParams - 1 && currentParamType != 0 && countOfParams != 0)
 			{
 				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
@@ -154,7 +154,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			if (params[currentParamType] != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index, currentType, END_BRACKET);
+				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
 			}
 			break;
 		case Param:
@@ -163,7 +163,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			if (params[currentParamType] != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
-				checkExp(lexTable, idTable, index, currentType, END_BRACKET);
+				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
 			}
 			break;
 		default:

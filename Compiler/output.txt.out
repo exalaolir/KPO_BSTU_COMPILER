@@ -5,23 +5,35 @@
 	     ExitProcess PROTO:DWORD
 		 .STACK 4096
 .DATA
-Literal_New_0__none REAL8 5.600000
-Literal_1__none REAL8 0.500000
-Literal_2__none BYTE 1
-Literal_New_1__none SDWORD 0
+Literal_New_0__none SDWORD 66
+Literal_New_1__none SDWORD -175
+Literal_2__none REAL8 2.000000
+Literal_3__none REAL8 2.000000
+Literal_New_2__none SDWORD 0
+.CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
-.CODE
+l__g0 proc y__g0_l11:REAL8
+local y__g0_l11:REAL8
+ret
+l__g0 endp
 main__g0 proc
-local a__g0_m11:REAL8, y__g0_m11:BYTE
-fld Literal_New_0__none
-fstp a__g0_m11
-fld a__g0_m11
-fld Literal_1__none
-fadd
-fstp a__g0_m11
+local g__g0_m21:SDWORD
+push Literal_New_1__none
+pop g__g0_m21
+push g__g0_m21
 push Literal_2__none
-pop y__g0_m11
+push Literal_3__none
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push l__g0
+pop EBX
+pop EAX
+imul EAX, EBX
+push EAX
+pop g__g0_m21
 
 INVOKE ExitProcess, 0
 main__g0 endp

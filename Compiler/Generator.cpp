@@ -48,8 +48,8 @@ namespace GEN
 		
 		GenerateDataSection(index);
 
-		code.push_back(PROC);
 		code.push_back(CODE);
+		code.push_back(PROC);
 
 		for (size_t i = index; i < lexTable.size(); i++)
 		{
