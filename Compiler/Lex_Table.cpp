@@ -142,14 +142,14 @@ namespace LEXER
 		case BoolLiteral:
 		{
 			std::string id = "none";
-			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string name = "Literal_" + std::to_string(literalNumber);
 			hash = hasher(name, id);
 			literalNumber++;
 			break;
 		}
 		case DoubleLiteral:
 		{
-			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string name = "Literal_" + std::to_string(literalNumber);
 			std::string id = "none";
 			hash = hasher(name, id);
 			literalNumber++;
@@ -157,7 +157,7 @@ namespace LEXER
 		}
 		case StringLiteral:
 		{
-			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string name = "Literal_" + std::to_string(literalNumber);
 			std::string id = "none";
 			hash = hasher(name, id);
 			literalNumber++;
@@ -165,7 +165,7 @@ namespace LEXER
 		}
 		case IntLiteral:
 		{
-			std::string name = "Literal-" + std::to_string(literalNumber);
+			std::string name = "Literal_" + std::to_string(literalNumber);
 			std::string id = "none";
 			hash = hasher(name, id);
 			literalNumber++;

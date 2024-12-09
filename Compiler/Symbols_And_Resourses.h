@@ -15,17 +15,16 @@ namespace LEXER
 		Char,
 		Byte,
 
-		Fun,
-		Return,
-		Main,
-
 		IntLiteral,
 		StringLiteral,
 		BoolLiteral,
 		DoubleLiteral,
-		UIntLiteral,
-		ByteLiteral,
 		CharLiteral,
+		ByteLiteral,
+
+		Fun,
+		Return,
+		Main,
 
 		If,
 		Else,

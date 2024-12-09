@@ -267,7 +267,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = StringLiteral;
 					literal.scope = "none";
@@ -294,7 +294,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = IntLiteral;
 					literal.scope = "none";
@@ -316,7 +316,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = IntLiteral;
 					literal.scope = "none";
@@ -346,7 +346,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = IntLiteral;
 					literal.scope = "none";
@@ -376,7 +376,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = IntLiteral;
 					literal.scope = "none";
@@ -397,7 +397,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = DoubleLiteral;
 					literal.scope = "none";
@@ -416,7 +416,7 @@ namespace LEXER
 					Entry literal;
 
 					literal.type = Literal;
-					literal.name = "Literal-" + std::to_string(literalNumber);
+					literal.name = "Literal_" + std::to_string(literalNumber);
 					literalNumber++;
 					literal.valueType = BoolLiteral;
 					literal.scope = "none";
