@@ -163,7 +163,6 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 					if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 'o' && counter > 1)
 					{
 						buffer.push_back('$');
-						code.erase(i + 2, 1);
 						buffer.push_back(code[i]);
 						continue;
 					}

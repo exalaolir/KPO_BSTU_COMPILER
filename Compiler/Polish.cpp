@@ -355,6 +355,7 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 					throw "Exception";
 				}
 			}
+			newPolishExpression.push_back(Lexem("$", "$"));
 			break;
 		}
 		default:
