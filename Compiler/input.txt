@@ -10,7 +10,16 @@ fn int w(int t){
   return (55 + t * 4) / w(8);
 }
 fn int nh1(int y,int k,string w, bool k1, int i ) {
+  if(k1 : true) {
+    let wert = 5;
+    return wert;
+  }
+  else {
+    let wert = 9;
+    return wert;
+  }
   return 0;
+  
 }
 fn string w1(int z, bool v)
 {
@@ -25,5 +34,7 @@ fn string w1(int z, bool v)
 fn int main()
 {
     string kl = w1(w((55 + 89 * 4) / w((55 + 9 * 4) / w(9))), true);
+    let lwer = 4 + 6;
+    let qwe = w1(8,true);
   return 0;
 }
