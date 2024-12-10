@@ -1,0 +1,36 @@
+.586P
+		 .MODEL FLAT, STDCALL 
+		 includelib kernel32.lib
+		 includelib masm32.lib
+	     ExitProcess PROTO:DWORD
+		 .STACK 4096
+.DATA
+real_buff REAL8 0.0
+Literal_New_0__none SDWORD 66
+Literal_1__none REAL8 0.500000
+Literal_2__none REAL8 -0.700000
+Literal_3__none SDWORD 4
+Literal_New_1__none SDWORD 0
+.CODE
+option prologue:PrologueDef
+option epilogue:EpilogueDef
+l__g0 proc h__g0_l11:SDWORD, y__g0_l11:REAL8
+ret
+l__g0 endp
+main__g0 proc
+local g__g0_m21:SDWORD
+fld Literal_1__none
+fld Literal_2__none
+fsub
+fstp real_buff
+lea eax, real_buff
+push sdword ptr [eax+4]
+push sdword ptr [eax]
+push Literal_3__none
+call l__g0
+push eax
+pop g__g0_m21
+
+INVOKE ExitProcess, 0
+main__g0 endp
+end main__g0

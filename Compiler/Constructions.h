@@ -33,6 +33,8 @@ namespace GEN
 	static const std::string F_MUL = "fmul\n";
 	static const std::string F_DIV = "fdiv\n";
 
+	static const std::string PUSH_REAL_PARAM = "fstp real_buff\nlea eax, real_buff\npush sdword ptr [eax+4]\npush sdword ptr [eax]\n";
+
 	const std::unordered_map<std::string, std::string> operatorsInt
 	{
 		{"+", ADD},
@@ -122,7 +124,19 @@ namespace GEN
 			}
 			else
 			{
-				return std::format(" lea eax, {}\n push sdword ptr [eax+4]\npush sdword ptr [eax]\n", val);
+				return "fld " + val + "\n";
+			}
+		};
+
+	const auto CALL = [](auto val, bool isDouble = false) -> std::string
+		{
+			if (!isDouble)
+			{
+				return "call " + val + "\n" + "push eax\n";
+			}
+			else
+			{
+				return "call " + val + "\n" + "fstp real_buff\nfld real_buff";
 			}
 		};
 }
