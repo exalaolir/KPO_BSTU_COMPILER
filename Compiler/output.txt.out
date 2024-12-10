@@ -6,30 +6,105 @@
 		 .STACK 4096
 .DATA
 real_buff REAL8 0.0
-Literal_New_0__none SDWORD 66
-Literal_1__none REAL8 0.500000
-Literal_2__none REAL8 -0.700000
-Literal_3__none SDWORD 4
+Literal_New_0__none SDWORD 3
 Literal_New_1__none SDWORD 0
+Literal_2__none SDWORD 1
+Literal_3__none SDWORD 234
+Literal_4__none SDWORD 2
+Literal_5__none SDWORD 3
+Literal_6__none SDWORD 6
+Literal_New_2__none SDWORD 9
+Literal_New_3__none SDWORD 87
+Literal_New_4__none SDWORD 37
+Literal_New_5__none SDWORD 87
+Literal_New_6__none SDWORD 9
+Literal_New_7__none SDWORD 0
+jksd__g0 SDWORD 3
+result__g0 SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
 l__g0 proc h__g0_l11:SDWORD, y__g0_l11:REAL8
+push jksd__g0
+push Literal_2__none
+pop EBX
+pop EAX
+sub EAX, EBX
+push EAX
+pop jksd__g0
+push Literal_3__none
+push h__g0_l11
+pop EBX
+pop EAX
+imul EAX, EBX
+push EAX
+push jksd__g0
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push Literal_4__none
+xor EDX,EDX
+pop EBX
+pop EAX
+div EBX
+push EAX
+pop result__g0
+push result__g0
+
+pop eax
 ret
 l__g0 endp
 main__g0 proc
-local g__g0_m21:SDWORD
-fld Literal_1__none
-fld Literal_2__none
-fsub
-fstp real_buff
-lea eax, real_buff
-push sdword ptr [eax+4]
-push sdword ptr [eax]
-push Literal_3__none
-call l__g0
-push eax
-pop g__g0_m21
+local r__g0_m21_i32:SDWORD, r__g0_m21_e72:SDWORD
+push jksd__g0
+push Literal_5__none
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push Literal_6__none
+pop eax
+pop ebx
+cmp eax, ebx
+je If_l0
+jmp Else0
+If_l0:
+push Literal_New_2__none
+pop r__g0_m21_i32
+push r__g0_m21_i32
+push jksd__g0
+pop eax
+pop ebx
+cmp eax, ebx
+jg If_l1
+jmp Else1
+If_l1:
+push Literal_New_3__none
+pop r__g0_m21_i32
+jmp Endif1
+Else1:
+push Literal_New_4__none
+pop r__g0_m21_i32
+push r__g0_m21_i32
+push jksd__g0
+pop eax
+pop ebx
+cmp eax, ebx
+jg If_l2
+jmp Else2
+If_l2:
+push Literal_New_5__none
+pop r__g0_m21_i32
+jmp Endif2
+Else2:
+Endif2:
+Endif1:
+jmp Endif0
+Else0:
+push Literal_New_6__none
+pop r__g0_m21_e72
+Endif0:
 
 INVOKE ExitProcess, 0
 main__g0 endp

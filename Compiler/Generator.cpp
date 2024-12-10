@@ -59,6 +59,7 @@ namespace GEN
 			case 'f':
 				functionFlag = true;
 				i += 2;
+				this->currentFunc = idTable[lexTable[i].positionInIdTable];
 				if (lexTable[i].lexema == "m")
 				{
 					GenerateMain(i);
@@ -70,8 +71,16 @@ namespace GEN
 				if (lexTable[i].originalText == "=" && functionFlag)
 				{
 					i++;
-					GenerateExpression(i);
+					GenerateExpression(code, i);
 				}
+				break;
+			case 'r':
+				i++;
+				GenerateExpression(code, i, true);
+				break;
+			case 'q':
+				i+=2;
+				GenerateIf(code, i, ifCounter);
 				break;
 			default:
 				break;
@@ -159,16 +168,23 @@ namespace GEN
 		GenerateLockalVars(fun);
 	}
 
-	void Generator::GenerateExpression(size_t& index)
+	void Generator::GenerateExpression(std::list<std::string>& code, size_t& index, bool isReturn, size_t ind, char end, int iterRebase)
 	{
-		auto var = idTable[lexTable[index - 2].positionInIdTable];
+		LEXER::Entry var;
+		if (isReturn)
+		{
+			var = Entry();
+			var.valueType = currentFunc.valueType;
+		}
+		else var = idTable[lexTable[index - ind].positionInIdTable];
+
 		std::list<std::string> expression;
 		bool doubleFlag = false;
 		LEXER::Entry currentFun = var;
 
-		auto count = [&](auto operators, bool isDouble = false)
+		auto count = [&](auto operators, bool isDouble = false, bool isReturn = false, string end = ";")
 			{
-				while (lexTable[index].originalText != ";")
+				while (lexTable[index].originalText != end)
 				{
 					if (lexTable[index].positionInIdTable != -1)
 						currentFun = idTable[lexTable[index].positionInIdTable];
@@ -182,17 +198,19 @@ namespace GEN
 
 					if (currentFun.type == LEXER::Fun)
 					{
-						expression.push_back(CALL(MAKE_NAME(currentFun)));
+						expression.push_back(CALL(MAKE_NAME(currentFun), isDouble));
 					}
 					else if (lexTable[index].lexema != "o" && lexTable[index].lexema != "u")
 					{
 						auto var = idTable[lexTable[index].positionInIdTable];
 
-						if (var.valueType == LEXER::Double || var.valueType == LEXER::DoubleLiteral || currentFun.valueType == LEXER::Double || currentFun.valueType == LEXER::DoubleLiteral || isDouble)
+						if (var.valueType == LEXER::Double || var.valueType == LEXER::DoubleLiteral || isDouble)
 						{
 							doubleFlag = true;
 						}
-						else doubleFlag = false;;
+						else doubleFlag = false;
+
+						if(currentFun.valueType != LEXER::Double && currentFun.valueType != LEXER::DoubleLiteral) doubleFlag = false;
 
 						expression.push_back(PUSH(MAKE_NAME(var), doubleFlag));
 
@@ -214,23 +232,24 @@ namespace GEN
 							expression.push_back(PUSH_REAL_PARAM);
 						}
 					}
+					else if (lexTable[index].lexema == "u") return;
 					index++;
 				}
 
-				expression.push_back(POP(MAKE_NAME(var), isDouble));
+				expression.push_back(POP(MAKE_NAME(var), isDouble, isReturn));
 			};
 
 		if (var.valueType != Double)
 		{
-			count(operatorsInt);
+			count(operatorsInt, false, isReturn, string() + end);
 		}
 		else
 		{
-			count(operatorsDouble, IS_DOUBLE);
+			count(operatorsDouble, IS_DOUBLE, isReturn, string() + end);
 		}
 
 		auto it = code.end();
-		std::advance(it, -1);
+		std::advance(it, iterRebase);
 		code.insert(it, expression.begin(), expression.end());
 	}
 
@@ -254,5 +273,60 @@ namespace GEN
 			auto newBlock = MAKE_LOCALS(vars);
 			code.insert(it, newBlock.begin(), newBlock.end());
 		}
+	}
+
+	void Generator::GenerateIf(std::list<std::string>& code, size_t& index, size_t localIfCounter, bool rebase)
+	{
+		ifCounter++;
+		std::list<std::string> block;
+		GenerateExpression(block, index, false, 0, ')', 0);
+
+		block.push_back(MAKE_IF(lexTable[index].originalText,
+					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter)));
+		index += 2;
+		bool isWork = true;
+		bool elseExist = false;
+		while (isWork)
+		{
+			switch (lexTable[index].lexema[0])
+			{
+			case 'i':
+				index++;
+				if (lexTable[index].originalText == "=" && functionFlag)
+				{
+					index++;
+					GenerateExpression(block, index, false, 2, ';', 0);
+				}
+				break;
+			case 'r':
+				index++;
+				GenerateExpression(block, index, true, 2, ';', 0);
+				break;
+			case 'q':
+				index += 2;
+				GenerateIf(block, index, ifCounter, false);
+				index--;
+				break;
+			case '}':
+				if (!elseExist)
+				{
+					block.push_back(MAKE_END_MARK(If, localIfCounter));
+					elseExist = true;
+				}
+				if (lexTable[index + 1].lexema != "s")
+				{
+					isWork = false;
+					block.push_back(MAKE_ENDIF(If, localIfCounter));
+				}
+				break;
+			default:
+				break;
+			}
+			index++;
+		}
+
+		auto it = code.end();
+		if(rebase) std::advance(it, -1);
+		code.insert(it, block.begin(), block.end());
 	}
 }

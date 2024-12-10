@@ -35,6 +35,23 @@ namespace GEN
 
 	static const std::string PUSH_REAL_PARAM = "fstp real_buff\nlea eax, real_buff\npush sdword ptr [eax+4]\npush sdword ptr [eax]\n";
 
+	static const std::string LESS = "pop eax\npop ebx\ncmp eax, ebx\njl ";
+	static const std::string MORE = "pop eax\npop ebx\ncmp ebx, eax\njg ";
+	static const std::string LESS_OR_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njle ";
+	static const std::string MORE_OR_EQAL = "pop eax\npop ebx\ncmp ebx, eax\njge ";
+	static const std::string EQAL = "pop eax\npop ebx\ncmp eax, ebx\nje ";
+	static const std::string NO_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njne ";
+
+	const std::unordered_map<std::string, std::string> operatorsBool
+	{
+		{"<", LESS},
+		{">", MORE},
+		{"<=", LESS_OR_EQAL},
+		{">=", MORE_OR_EQAL},
+		{":", EQAL},
+		{":!", NO_EQAL}
+	};
+
 	const std::unordered_map<std::string, std::string> operatorsInt
 	{
 		{"+", ADD},
@@ -104,15 +121,21 @@ namespace GEN
 			return { "local " + locals + "\n" };
 		};
 
-	const auto POP = [](auto val, bool isDouble = false) -> std::string
+	const auto POP = [](auto val, bool isDouble = false, bool isReturn = false) -> std::string
 		{
 			if (!isDouble)
 			{
-				return "pop " + val + "\n";
+				if(!isReturn)
+					return "pop " + val + "\n";
+				else
+					return "\npop eax\n";
 			}
 			else
 			{
-				return "fstp " + val + "\n";
+				if (!isReturn)
+					return "fstp " + val + "\n";
+				else
+					return "fstp real_buff\nfld qword ptr [real_buff]\n";
 			}
 		};
 
@@ -136,7 +159,43 @@ namespace GEN
 			}
 			else
 			{
-				return "call " + val + "\n" + "fstp real_buff\nfld real_buff";
+				return "call " + val + "\n" + "fstp real_buff\nfld real_buff\n";
 			}
 		};
+
+	const auto MAKE_BOOKMARK = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "If_l" + std::to_string(id);
+			}
+			else if (type == Else)
+			{
+				return "Else" + std::to_string(id);
+			}
+		};
+
+	const auto MAKE_ENDIF = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "Endif" + std::to_string(id) + ":\n";
+			}
+		};
+
+	const auto MAKE_END_MARK = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "jmp Endif" + std::to_string(id) + "\n"
+					+ "Else" + std::to_string(id) + ":" + "\n";
+			}
+		};
+
+	const auto MAKE_IF = [](std::string op, auto bookmark, auto elseBookmark) -> std::string
+		{
+			return operatorsBool.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
+		};
+
+
 }
