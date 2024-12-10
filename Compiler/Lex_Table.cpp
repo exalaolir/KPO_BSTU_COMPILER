@@ -250,7 +250,7 @@ namespace LEXER
 			{
 				result = "l";
 			}
-			else if (regex.Match(token, "((0[1-7]+[0-9]*|-0[1-7]+[0-9]*))"))
+			else if (regex.Match(token, "((0o[1-7]+[0-9]*|-0o[1-7]+[0-9]*))"))
 			{
 				result = "l";
 			}

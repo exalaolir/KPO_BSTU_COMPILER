@@ -122,7 +122,7 @@ namespace GEN
 			}
 			else
 			{
-				return "fld " + val + "\n";
+				return std::format(" lea eax, {}\n push sdword ptr [eax+4]\npush sdword ptr [eax]\n", val);
 			}
 		};
 }

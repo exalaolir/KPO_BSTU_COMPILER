@@ -6,9 +6,9 @@ namespace LEXER
 	struct Lexem
 	{
 		Lexem(std::string lexema,
-			  std::string originalText,
-			  unsigned int line,
-			  unsigned int index,
+			  std::string originalText = "",
+			  unsigned int line = -1,
+			  unsigned int index = -1 ,
 			  double positionInIdTable = -1.0, short prioryty = -1)
 		{
 			this->index = index;

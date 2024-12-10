@@ -348,8 +348,9 @@ namespace LEXER
 					idTable.Add(literal);
 				}
 			}
-			else if (regex.Match(token, "((0[1-7]+[0-9]*|-0[1-7]+[0-9]*))"))
+			else if (regex.Match(token, "((0o[1-7]+[0-9]*|-0o[1-7]+[0-9]*))"))
 			{
+				token.erase(1, 1);
 				std::string newTocken;
 				if (token[0] == '-')
 				{
