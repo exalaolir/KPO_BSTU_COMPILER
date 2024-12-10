@@ -295,6 +295,8 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 			newPolishExpression.push_back(lexTable[index]);
 			break;
 		case Fun:
+			operators.push(lexTable[index]);
+			break;
 		case OpenParmBracket:
 			operators.push(lexTable[index]);
 			break;
