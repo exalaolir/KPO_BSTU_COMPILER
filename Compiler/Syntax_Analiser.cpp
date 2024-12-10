@@ -152,7 +152,16 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			else if (lexTable[index].lexema == "(" && lexTable[index - 1].lexema == "(")
 			{
 				while(lexTable[index].lexema == "(") index++;
-				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
+				try
+				{
+					checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], END_BRACKET);
+				}
+				catch (...)
+				{
+					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+							  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
+					throw "Exception";
+				}
 			}
 			break;
 		case Literal:
@@ -168,7 +177,16 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 				{
 					endSymbol = ')';
 				}
-				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
+				try
+				{
+					checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
+				}
+				catch (...)
+				{
+					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+							  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
+					throw "Exception";
+				}
 				if (endSymbol == ',') currentParamType++;
 			}
 			break;
@@ -187,7 +205,16 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 				{
 					endSymbol = ')';
 				}
-				checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
+				try
+				{
+					checkExp(lexTable, idTable, index, idTable[lexTable[index].positionInIdTable], endSymbol);
+				}
+				catch (...)
+				{
+					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+							  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
+					throw "Exception";
+				}
 				if(endSymbol == ',') currentParamType++;
 			}
 			break;
@@ -229,6 +256,8 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 		default:
 			break;
 		}
+		if(lexTable[index].lexema[0] == ';' && endSymbol != ';')
+			throw "Ex";
 		if (lexTable[index].lexema[0] == endSymbol) break;
 		index++;
 	}
