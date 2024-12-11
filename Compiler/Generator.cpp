@@ -141,7 +141,7 @@ namespace GEN
 			if (lexTable[index].lexema == "i")
 			{
 				auto param = idTable[lexTable[index].positionInIdTable];
-				params.insert(0, MAKE_PARAM(MAKE_NAME(param), types[param.valueType]));
+				params.insert(0, MAKE_PARAM(MAKE_NAME(param), types[param.valueType], param.valueType));
 			}
 			index++;
 		}
@@ -180,6 +180,7 @@ namespace GEN
 
 		std::list<std::string> expression;
 		bool doubleFlag = false;
+		bool strFlag = false;
 		LEXER::Entry currentFun = var;
 
 		auto count = [&](auto operators, bool isDouble = false, bool isReturn = false, string end = ";")
@@ -204,6 +205,12 @@ namespace GEN
 					{
 						auto var = idTable[lexTable[index].positionInIdTable];
 
+						if (var.valueType == LEXER::String || var.valueType == LEXER::StringLiteral || isDouble)
+						{
+							strFlag = true;
+						}
+						else strFlag = false;
+
 						if (var.valueType == LEXER::Double || var.valueType == LEXER::DoubleLiteral || isDouble)
 						{
 							doubleFlag = true;
@@ -212,7 +219,7 @@ namespace GEN
 
 						if(currentFun.valueType != LEXER::Double && currentFun.valueType != LEXER::DoubleLiteral) doubleFlag = false;
 
-						expression.push_back(PUSH(MAKE_NAME(var), doubleFlag));
+						expression.push_back(PUSH(MAKE_NAME(var), doubleFlag, strFlag));
 
 						if ((lexTable[index + 1].originalText == "$" || (lexTable[index + 1].lexema == "i" && currentFun.type == LEXER::Fun)) && doubleFlag)
 						{
@@ -232,7 +239,11 @@ namespace GEN
 							expression.push_back(PUSH_REAL_PARAM);
 						}
 					}
-					else if (lexTable[index].lexema == "u") return;
+					else if (lexTable[index].lexema == "u")
+					{
+						if(var.valueType == Double || var.valueType == DoubleLiteral) realIf = true;
+						return;
+					}
 					index++;
 				}
 
@@ -256,13 +267,19 @@ namespace GEN
 	void Generator::GenerateLockalVars(LEXER::Entry& fun)
 	{
 		std::string vars;
-
+		std::list<std::string> copyes;
 
 		for (const auto& entry : idTable)
 		{
 			if (entry.second.scope.find(fun.ownScope) == 0 && entry.second.type == Variable)
 			{
 				vars += MAKE_PARAM(MAKE_NAME(entry.second), types[entry.second.valueType]);
+			}
+			if (entry.second.scope.find(fun.ownScope) == 0 && entry.second.type == Param && entry.second.valueType == String)
+			{
+				vars += MAKE_PARAM(MAKE_NAME(entry.second), types[entry.second.valueType], None, true);
+				copyes.push_back(MAKE_COPY(MAKE_NAME(entry.second) + "_S", MAKE_NAME(entry.second), this->copyEqalGenerator, true));
+				copyEqalGenerator++;
 			}
 		}
 		if (!vars.empty())
@@ -272,6 +289,7 @@ namespace GEN
 			std::advance(it, -1);
 			auto newBlock = MAKE_LOCALS(vars);
 			code.insert(it, newBlock.begin(), newBlock.end());
+			code.insert(it, copyes.begin(), copyes.end());
 		}
 	}
 
@@ -282,10 +300,11 @@ namespace GEN
 		GenerateExpression(block, index, false, 0, ')', 0);
 
 		block.push_back(MAKE_IF(lexTable[index].originalText,
-					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter)));
+					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter), realIf));
 		index += 2;
 		bool isWork = true;
 		bool elseExist = false;
+		realIf = false;
 		while (isWork)
 		{
 			switch (lexTable[index].lexema[0])

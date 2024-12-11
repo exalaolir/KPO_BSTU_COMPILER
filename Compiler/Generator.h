@@ -22,6 +22,8 @@ namespace GEN
 		IdTable idTable;
 		Entry currentFunc;
 		size_t ifCounter = 0;
+		bool realIf = false;
+		size_t copyEqalGenerator = 0;
 
 		void GenerateDataSection(size_t& index);
 		void GenerateFunction(size_t& index);
@@ -34,16 +36,16 @@ namespace GEN
 		{
 			"SDWORD",
 			"BYTE",
-			"BYTE",
+			"DWORD",
 			"REAL8",
-			"BYTE",
-			"BYTE",
+			"DWORD",
+			"DWORD",
 			"SDWORD",
 			"BYTE",
-			"BYTE",
+			"DWORD",
 			"REAL8",
-			"BYTE",
-			"BYTE",
+			"DWORD",
+			"DWORD",
 		};
 	};
 }

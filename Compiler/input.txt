@@ -1,6 +1,6 @@
 int jksd = 3;
 int result=0;
-fn int l(double y, int h){
+fn int l(double y, int h, string str, string hhh, string erty){
   jksd = jksd-1;
   result = ( 234 * h + jksd)/2;
   
@@ -8,7 +8,8 @@ fn int l(double y, int h){
 }
 fn int main()
 {
-	if((jksd + 3) : 6){
+	let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
+	if(0.34 > -3.4){
 		let r = 9;
 		if(r > jksd){
 			r = 87;
