@@ -1,7 +1,7 @@
 #pragma once
 
 #define IS_DEPRICATED_SYMBOL(i) code[i] == '\t' || code[i] == '\v'
-#define MATH_SIMBOL(i, n) code[i - n] == '+' || code[i - n] == '-' || code[i - n] == '*' || code[i - n] == '/' || code[i - n] == '%' || code[i - n] == '(' || code[i - n] == '=' || code[i - n] == ',' 
+#define MATH_SIMBOL(i, n) code[i - n] == '+' || code[i - n] == '-' || code[i - n] == '*' || code[i - n] == '/' || code[i - n] == '%' || code[i - n] == '(' || code[i - n] == '=' || code[i - n] == ',' || code[i - n] == ':' || code[i - n] == '!'  || code[i - n] == '>' || code[i - n] == '<' 
 #define DEPRICATED_SYMBOL "none"
 
 namespace LEXER

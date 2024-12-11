@@ -5,7 +5,8 @@
 namespace GEN
 {
 	static const std::string BEGIN_OF_FILE =
-		".586P\n\
+		".686p\n\
+		 .xmm\n\
 		 .MODEL FLAT, STDCALL \n\
 		 includelib kernel32.lib\n\
 		 includelib masm32.lib\n\
@@ -34,6 +35,42 @@ namespace GEN
 	static const std::string F_DIV = "fdiv\n";
 
 	static const std::string PUSH_REAL_PARAM = "fstp real_buff\nlea eax, real_buff\npush sdword ptr [eax+4]\npush sdword ptr [eax]\n";
+
+	static const std::string LESS = "pop eax\npop ebx\ncmp eax, ebx\njl ";
+	static const std::string MORE = "pop eax\npop ebx\ncmp ebx, eax\njg ";
+	static const std::string LESS_OR_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njle ";
+	static const std::string MORE_OR_EQAL = "pop eax\npop ebx\ncmp ebx, eax\njge ";
+	static const std::string EQAL = "pop eax\npop ebx\ncmp eax, ebx\nje ";
+	static const std::string NO_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njne ";
+
+	static const std::string SSE_MOVEMENT = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\n";
+
+	static const std::string LESS_SSE = "cmpsd xmm0, xmm1, 1\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string MORE_SSE = "cmpsd xmm0, xmm1, 6\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string LESS_OR_EQAL_SSE = "cmpsd xmm0, xmm1, 2\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string MORE_OR_EQAL_SSE = "cmpsd xmm0, xmm1, 5\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string EQAL_SSE = "cmpsd xmm0, xmm1, 0\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string NO_EQAL_SSE = "cmpsd xmm0, xmm1, 4\nmovd eax, xmm0\nand eax, eax\njnz ";
+
+	const std::unordered_map<std::string, std::string> operatorsBool
+	{
+		{"<", LESS},
+		{">", MORE},
+		{"<=", LESS_OR_EQAL},
+		{">=", MORE_OR_EQAL},
+		{":", EQAL},
+		{":!", NO_EQAL}
+	};
+
+	const std::unordered_map<std::string, std::string> operatorsSse
+	{
+		{"<", LESS_SSE},
+		{">", MORE_SSE},
+		{"<=", LESS_OR_EQAL_SSE},
+		{">=", MORE_OR_EQAL_SSE},
+		{":", EQAL_SSE},
+		{":!", NO_EQAL_SSE}
+	};
 
 	const std::unordered_map<std::string, std::string> operatorsInt
 	{
@@ -77,8 +114,14 @@ namespace GEN
 			return name + " " + type + " " + val;
 		};
 
-	const auto MAKE_PARAM = [](std::string name, std::string type) -> std::string
+	const auto MAKE_PARAM = [](std::string name, std::string type, Keywords eType = None, bool isLockalStr = false) -> std::string
 		{
+			if (eType == String)
+			{
+				name += "_S";
+				type = "ptr byte";
+			}
+			if(isLockalStr) name +="[256]";
 			std::string result = std::format("{}:{}, ", name, type);
 			return result;
 		};
@@ -104,20 +147,27 @@ namespace GEN
 			return { "local " + locals + "\n" };
 		};
 
-	const auto POP = [](auto val, bool isDouble = false) -> std::string
+	const auto POP = [](auto val, bool isDouble = false, bool isReturn = false) -> std::string
 		{
 			if (!isDouble)
 			{
-				return "pop " + val + "\n";
+				if(!isReturn)
+					return "pop " + val + "\n";
+				else
+					return "\npop eax\n";
 			}
 			else
 			{
-				return "fstp " + val + "\n";
+				if (!isReturn)
+					return "fstp " + val + "\n";
+				else
+					return "fstp real_buff\nfld qword ptr [real_buff]\n";
 			}
 		};
 
-	const auto PUSH = [](auto val, bool isDouble = false) -> std::string
+	const auto PUSH = [](auto val, bool isDouble = false, bool isString = false) -> std::string
 		{
+			if(isString) return std::format("lea edx, {}\npush edx\n", val);
 			if (!isDouble)
 			{
 				return "push " + val + "\n";
@@ -136,7 +186,56 @@ namespace GEN
 			}
 			else
 			{
-				return "call " + val + "\n" + "fstp real_buff\nfld real_buff";
+				return "call " + val + "\n" + "fstp real_buff\nfld real_buff\n";
+			}
+		};
+
+	const auto MAKE_BOOKMARK = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "If_l" + std::to_string(id);
+			}
+			else if (type == Else)
+			{
+				return "Else" + std::to_string(id);
+			}
+		};
+
+	const auto MAKE_ENDIF = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "Endif" + std::to_string(id) + ":\n";
+			}
+		};
+
+	const auto MAKE_END_MARK = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "jmp Endif" + std::to_string(id) + "\n"
+					+ "Else" + std::to_string(id) + ":" + "\n";
+			}
+		};
+
+	const auto MAKE_IF = [](std::string op, auto bookmark, auto elseBookmark, bool isDouble = false) -> std::string
+		{
+			if (!isDouble)
+			{
+				return operatorsBool.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
+			}
+			else
+			{
+				return SSE_MOVEMENT + operatorsSse.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
+			}
+		};
+
+	const auto MAKE_COPY = [](std::string sourse, std::string destination, size_t index, bool isParam = false) -> std::string
+		{
+			if (isParam)
+			{
+				return std::format("mov esi, {}\nlea edi, {}\n copy_loop_{}:\nlodsb\nstosb\ntest al, al\njnz copy_loop_{}\n", sourse, destination, index, index);
 			}
 		};
 }

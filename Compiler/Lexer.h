@@ -29,10 +29,10 @@ namespace LEXER
 	struct Entry
 	{
 		Keywords type = None;
-		std::string name;
+		std::string name = "";
 		Keywords valueType = None;
-		std::string scope;
-		std::string ownScope;
+		std::string scope = "none";
+		std::string ownScope = "none";
 		int line = -1;
 		int pos = -1;
 		int params = 0;
