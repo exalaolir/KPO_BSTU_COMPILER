@@ -1,112 +1,46 @@
-int jksd = 3;
-int result = 0;
 
-fn int l(double y, int h, string str, string hhh, string erty){
-  jksd = jksd-1;
-  result = ( 234 * h + jksd)/2;
-  
-  return result;
-}
-fn double Double2(int r) {
-	if(r > 0) {
-        return 1.5;
-    }
-    else {
-        if(r : 0) {
-            return 0.5;
-        }
-        else {
-            if(r < 0) {
-                double buf = -1.5;
-                return buf;
-            }
-        }
-    }
-    return 0.0;
-}
-fn double Double(double r) {
-	double result = 2.0*3.14*r*r-Double2(1)*Double2(0) - 75.67;
-    if(Double2(1) > 1.0) {
-        return 1.0;
-    }
-    else {
-        return 2.0;
-    }
-	return result;
-}
-fn double Double2(int r) {
-  if(r > 0) {
-        return 1.5;
-    }
-    else {
-        if(r : 0) {
-            return 0.5;
-       
-        }
-        else {
-            if(r < 0) {
-                double buf = -1.5;
-                return buf;
-            }
-        }
-    }
-    return 0.0;
-}
-fn bool Bool(string r) {
-  bool result = true;
-  if(r : "true") {
-    return true;
-  }
-  return false;
-}
-
-fn string strTest(string a, double b, string c){
-    
-    if(a :! c){
-        if(b > 8.5){
-            return "";
-        }
-        return a;
-    }
-    else{
-      return c;
-    }
-    return "uuu";
-}
 fn int main()
 {
-double resultFunction = Double(2.5);
-double ver1 = Double2(5);
-double ver2 = Double2(-5);
-double ver3 = Double2(0);
-
-let resultOfBool = Bool("true");
-if("d" :! "k"){
-    let ii = "ervv";
-}
-    let rewr = strTest("a", -0.7, "kl");
-  
- let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
-  
-  if(0.34 > -3.4){
-    let r = 9;
-    if(r > jksd){
-      r = 87;
+let result = "ереекр";
+double ret = -0.2;
+  if(ret < 0.0) {
+   if(ret : -0.5) {
+        result = "ret равен -0.5";
+   }
+   else {
+        if (ret : -1.0) {
+            result="ret равен -1.0";
+        }
+        else {
+            result = "ret не равен ни -0.5, ни -1.0,но оно отрицательное";
+        }
+   }
+  }
+  else {
+    if(ret : 0.0) {
+        result = "ret равен 0";
     }
-    else{
-    r = 37;
-    if(r > jksd){
-      r = 87;
-    }
+    else {
+        if(ret > 0.0) {
+            if(ret : 0.5) {
+                result = "ret равен 0.5";
+            }
+            else {
+                if(ret : 1.0) {
+                     result = "ret равен 1";
+                }
+                else {
+                     result = "ret не равен ни 0.5 ни 1";
+                }
+            }
+        }
     }
   }
-  else{
-  let r = 9;
-  }
-  @let g = -0hAF;
-   g = g * l(2.0+2.0, 7 + 4 * l(0.7, 7 % 1));@
    return 0;
 }
+
+
+
 @Выражения с целыми и дробными числами и вызовами функций@
 @If, else с целыми числами, дробными числами и bool@
 @Передачу параметров в функцию в виде выражения(содержащего вызов функции). Пока целые и дробные. Можно и bool@

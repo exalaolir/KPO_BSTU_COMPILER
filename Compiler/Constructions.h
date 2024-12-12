@@ -45,12 +45,12 @@ namespace GEN
 
 	static const std::string SSE_MOVEMENT = "";
 
-	static const std::string LESS_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 1\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string LESS_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 1\nmovd eax, xmm0\nand eax, eax\njnz ";
 	static const std::string MORE_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 6\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string LESS_OR_EQAL_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 2\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string LESS_OR_EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 2\nmovd eax, xmm0\nand eax, eax\njnz ";
 	static const std::string MORE_OR_EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 5\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string EQAL_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 0\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string NO_EQAL_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 4\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 0\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string NO_EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 4\nmovd eax, xmm0\nand eax, eax\njnz ";
 
 	static const std::string EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njz ";
 	static const std::string NO_EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njnz ";
