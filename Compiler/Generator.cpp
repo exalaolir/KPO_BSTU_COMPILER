@@ -183,7 +183,7 @@ namespace GEN
 		bool strFlag = false;
 		LEXER::Entry currentFun = var;
 
-		auto count = [&](auto operators, bool isDouble = false, bool isReturn = false, string end = ";")
+		auto count = [&](auto operators, bool isDouble = false, bool isReturn = false, string end = ";", bool isString = false)
 			{
 				while (lexTable[index].originalText != end)
 				{
@@ -247,10 +247,15 @@ namespace GEN
 					index++;
 				}
 
-				expression.push_back(POP(MAKE_NAME(var), isDouble, isReturn));
+				expression.push_back(POP(MAKE_NAME(var), isDouble, isReturn, isString, copyEqalGenerator));
+				if(isString) copyEqalGenerator++;
 			};
 
-		if (var.valueType != Double)
+		if (var.valueType == String || var.valueType == StringLiteral)
+		{
+			count(operatorsInt, false, isReturn, string() + end, true);
+		}
+		else if (var.valueType != Double)
 		{
 			count(operatorsInt, false, isReturn, string() + end);
 		}
@@ -271,9 +276,10 @@ namespace GEN
 
 		for (const auto& entry : idTable)
 		{
+			bool isLocalStr = (entry.second.valueType == String || entry.second.valueType == StringLiteral);
 			if (entry.second.scope.find(fun.ownScope) == 0 && entry.second.type == Variable)
 			{
-				vars += MAKE_PARAM(MAKE_NAME(entry.second), types[entry.second.valueType]);
+				vars += MAKE_PARAM(MAKE_NAME(entry.second), types[entry.second.valueType], None, isLocalStr);
 			}
 			if (entry.second.scope.find(fun.ownScope) == 0 && entry.second.type == Param && entry.second.valueType == String)
 			{

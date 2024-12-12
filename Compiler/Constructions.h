@@ -147,8 +147,15 @@ namespace GEN
 			return { "local " + locals + "\n" };
 		};
 
-	const auto POP = [](auto val, bool isDouble = false, bool isReturn = false) -> std::string
+	const auto POP = [](auto val, bool isDouble = false, bool isReturn = false, bool isString = false, size_t index = 0) -> std::string
 		{
+			if (isString)
+			{
+				if (!isReturn)
+					return std::format("pop esi\nlea edi, {}\n copy_loop_{}:\nlodsb\nstosb\ntest al, al\njnz copy_loop_{}\n", val, index, index);
+				else
+					return "\npop eax\n";
+			}
 			if (!isDouble)
 			{
 				if(!isReturn)
@@ -167,7 +174,7 @@ namespace GEN
 
 	const auto PUSH = [](auto val, bool isDouble = false, bool isString = false) -> std::string
 		{
-			if(isString) return std::format("lea edx, {}\npush edx\n", val);
+			if(isString) return std::format("lea eax, {}\npush eax\n", val);
 			if (!isDouble)
 			{
 				return "push " + val + "\n";
