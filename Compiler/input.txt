@@ -34,6 +34,24 @@ fn double Double(double r) {
     }
 	return result;
 }
+fn double Double2(int r) {
+  if(r > 0) {
+        return 1.5;
+    }
+    else {
+        if(r : 0) {
+            return 0.5;
+       
+        }
+        else {
+            if(r < 0) {
+                double buf = -1.5;
+                return buf;
+            }
+        }
+    }
+    return 0.0;
+}
 fn bool Bool(string r) {
   bool result = true;
   if(r : "true") {

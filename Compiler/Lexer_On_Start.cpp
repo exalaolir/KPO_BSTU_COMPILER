@@ -178,6 +178,12 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 						buffer.push_back(code[i]);
 						continue;
 					}
+					else if (i - 5 - counter >= 0 && code.substr(i - 5 - counter, 6) == "return" && isdigit(code[i + 1]))
+					{
+						buffer.push_back('$');
+						buffer.push_back(code[i]);
+						continue;
+					}
 					else if (isSymbol && isdigit(code[i + 1]) && counter > 1)
 					{
 						buffer.push_back('$');
