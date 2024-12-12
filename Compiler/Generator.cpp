@@ -205,7 +205,7 @@ namespace GEN
 					{
 						auto var = idTable[lexTable[index].positionInIdTable];
 
-						if (var.valueType == LEXER::String || var.valueType == LEXER::StringLiteral || isDouble)
+						if (var.valueType == LEXER::String || var.valueType == LEXER::StringLiteral)
 						{
 							strFlag = true;
 						}
@@ -220,8 +220,9 @@ namespace GEN
 						if(currentFun.valueType != LEXER::Double && currentFun.valueType != LEXER::DoubleLiteral) doubleFlag = false;
 
 						expression.push_back(PUSH(MAKE_NAME(var), doubleFlag, strFlag));
-
-						if ((lexTable[index + 1].originalText == "$" || (lexTable[index + 1].lexema == "i" && currentFun.type == LEXER::Fun)) && doubleFlag)
+						bool isDoubleFun = (lexTable[index + 1].lexema == "i" && idTable[lexTable[index + 1].positionInIdTable].type == Fun);
+						bool isParam = lexTable[index + 1].originalText == "$" || isDoubleFun;
+						if (isParam && doubleFlag)
 						{
 							expression.push_back(PUSH_REAL_PARAM);
 						}
@@ -242,6 +243,7 @@ namespace GEN
 					else if (lexTable[index].lexema == "u")
 					{
 						if(var.valueType == Double || var.valueType == DoubleLiteral) realIf = true;
+						if (var.valueType == String || var.valueType == StringLiteral) strIf = true;
 						return;
 					}
 					index++;
@@ -306,11 +308,12 @@ namespace GEN
 		GenerateExpression(block, index, false, 0, ')', 0);
 
 		block.push_back(MAKE_IF(lexTable[index].originalText,
-					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter), realIf));
+					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter), realIf, strIf));
 		index += 2;
 		bool isWork = true;
 		bool elseExist = false;
 		realIf = false;
+		strIf = false;
 		while (isWork)
 		{
 			switch (lexTable[index].lexema[0])

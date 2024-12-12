@@ -43,15 +43,17 @@ namespace GEN
 	static const std::string EQAL = "pop eax\npop ebx\ncmp eax, ebx\nje ";
 	static const std::string NO_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njne ";
 
-	static const std::string SSE_MOVEMENT = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\n";
+	static const std::string SSE_MOVEMENT = "";
 
-	static const std::string LESS_SSE = "cmpsd xmm0, xmm1, 1\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string MORE_SSE = "cmpsd xmm0, xmm1, 6\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string LESS_OR_EQAL_SSE = "cmpsd xmm0, xmm1, 2\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string MORE_OR_EQAL_SSE = "cmpsd xmm0, xmm1, 5\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string EQAL_SSE = "cmpsd xmm0, xmm1, 0\nmovd eax, xmm0\nand eax, eax\njnz ";
-	static const std::string NO_EQAL_SSE = "cmpsd xmm0, xmm1, 4\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string LESS_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 1\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string MORE_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 6\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string LESS_OR_EQAL_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 2\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string MORE_OR_EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 5\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string EQAL_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 0\nmovd eax, xmm0\nand eax, eax\njnz ";
+	static const std::string NO_EQAL_SSE = "fstp real_buff\nmovsd xmm0, real_buff\nfstp real_buff\nmovsd xmm1, real_buff\ncmpsd xmm0, xmm1, 4\nmovd eax, xmm0\nand eax, eax\njnz ";
 
+	static const std::string EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njz ";
+	static const std::string NO_EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njnz ";
 	const std::unordered_map<std::string, std::string> operatorsBool
 	{
 		{"<", LESS},
@@ -81,6 +83,12 @@ namespace GEN
 		{"%", DIV_WITH_PERCENTS},
 		{"<<", SHIFT_LEFT},
 		{">>", SHIFT_RIGHT},
+	};
+
+	const std::unordered_map<std::string, std::string> operatorsStr
+	{
+		{":", EQAL_STR},
+		{":!", NO_EQAL_STR}
 	};
 
 	const std::unordered_map<std::string, std::string> operatorsDouble
@@ -226,15 +234,19 @@ namespace GEN
 			}
 		};
 
-	const auto MAKE_IF = [](std::string op, auto bookmark, auto elseBookmark, bool isDouble = false) -> std::string
+	const auto MAKE_IF = [](std::string op, auto bookmark, auto elseBookmark, bool isDouble = false, bool isString = false) -> std::string
 		{
+			if (isString)
+			{
+				return operatorsStr.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
+			}
 			if (!isDouble)
 			{
 				return operatorsBool.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
 			}
 			else
 			{
-				return SSE_MOVEMENT + operatorsSse.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
+				return operatorsSse.at(op) + bookmark + "\n" + "jmp " + elseBookmark + "\n" + bookmark + ":" + "\n";
 			}
 		};
 

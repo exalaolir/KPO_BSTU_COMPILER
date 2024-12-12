@@ -179,9 +179,9 @@ pop aaa__g0_m51
 fld Literal_New_3__none
 fld Literal_New_4__none
 fstp real_buff
-movsd xmm0, real_buff
-fstp real_buff
 movsd xmm1, real_buff
+fstp real_buff
+movsd xmm0, real_buff
 cmpsd xmm0, xmm1, 6
 movd eax, xmm0
 and eax, eax
