@@ -57,7 +57,36 @@ namespace LEXER
 				}
 				else if constexpr (std::is_same_v<T, std::string>)
 				{
-					return arg;
+					std::string newArg;
+					for (size_t i = 0; i < arg.length(); i++)
+					{
+						auto symbol = arg[i];
+						std::string newSym;
+						bool isSpec = false;
+						if (symbol == '\n') { newSym += "10"; isSpec = true; }
+						else if (symbol == '\v') { newSym += "11"; isSpec = true; }
+						else if (symbol == '\t') { newSym += "9"; isSpec = true; }
+						else newArg += symbol;
+
+						if (isSpec)
+						{
+							if (i == 1)
+							{
+								newArg.clear();
+								newArg = newSym + ", \"";
+							}
+							else if (i == arg.length() - 2)
+							{
+								newArg += "\"," + newSym + ", 0";
+								break;
+							}
+							else
+							{
+								newArg += "\"," + newSym + ", \"";
+							}
+						}
+					}
+					return newArg;
 				}
 				else if constexpr (std::is_same_v<T, Keywords>)
 				{
@@ -107,6 +136,15 @@ namespace LEXER
 
 	IdTable LEXER::Lexer::generateIdTable(std::vector<Lexem>& lexTable)
 	{
+		Entry testPr;
+		testPr.type = Fun;
+		testPr.name = "printString";
+		testPr.params = 1;
+		testPr.paramTypes.push_back(String);
+		testPr.scope = "g0";
+		testPr.valueType = Int;
+		idTable.Add(testPr);
+
 		std::stack<Keywords> brackets;
 		int line = 1;
 		int counter = 0;

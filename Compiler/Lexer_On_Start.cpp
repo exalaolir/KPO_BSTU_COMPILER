@@ -74,6 +74,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 					code[i] == '\\' &&
 					(code[i + 1] == 'v' || code[i + 1] == 'n' || code[i + 1] == 't'))
 				{
+
 					buffer.pop_back();
 					std::string simbol = string() + code[i] + code[i + 1];
 

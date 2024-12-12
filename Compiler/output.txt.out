@@ -1,10 +1,15 @@
 .686p
-		 .xmm
-		 .MODEL FLAT, STDCALL 
-		 includelib kernel32.lib
-		 includelib masm32.lib
-	     ExitProcess PROTO:DWORD
-		 .STACK 4096
+.xmm
+.MODEL FLAT, STDCALL
+includelib kernel32.lib
+includelib msvcrt.lib
+includelib ucrt.lib
+includelib vcruntime.lib
+includelib msvcprt.lib
+includelib standartLib.lib
+printString__g0 PROTO:ptr byte
+ExitProcess PROTO:DWORD
+.STACK 4096
 .DATA
 real_buff REAL8 0.0
 Literal_New_0__none SDWORD 0
@@ -12,14 +17,17 @@ Literal_New_1__none REAL8 9.900000
 Literal_2__none SDWORD 10
 Literal_3__none SDWORD 3
 Literal_4__none REAL8 1.200000
-Literal_5__none REAL8 2.300000
-Literal_6__none SDWORD 1
+Literal_5__none BYTE "ss", 0
+Literal_6__none REAL8 2.300000
+Literal_7__none BYTE "ddd", 0
+Literal_8__none SDWORD 1
+Literal_9__none BYTE "aaa", 0
 Literal_New_2__none SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
 main__g0 proc
-local z__g0_m11:SDWORD, q__g0_m11:REAL8
+local z__g0_m11:SDWORD, yy__g0_m11_w22_i33:SDWORD, q__g0_m11:REAL8, yy__g0_m11_w22_e43:SDWORD, yy__g0_m11_w22:SDWORD
 push Literal_New_0__none
 pop z__g0_m11
 fld Literal_New_1__none
@@ -38,29 +46,44 @@ push Literal_3__none
 pop ebx
 pop eax
 cmp eax, ebx
-jge If_l1
-jmp Else1
-If_l1:
+jge If_l0
+jmp Else0
+If_l0:
 fld q__g0_m11
 fld Literal_4__none
 fsub
 fstp q__g0_m11
-jmp Endif1
-Else1:
+lea eax, Literal_5__none
+push eax
+call printString__g0
+push eax
+pop yy__g0_m11_w22_i33
+jmp Endif0
+Else0:
 fld q__g0_m11
-fld Literal_5__none
+fld Literal_6__none
 fadd
 fstp q__g0_m11
-Endif1:
+lea eax, Literal_7__none
+push eax
+call printString__g0
+push eax
+pop yy__g0_m11_w22_e43
+Endif0:
 jmp While_start0
 Else_While0:
 push z__g0_m11
-push Literal_6__none
+push Literal_8__none
 pop EBX
 pop EAX
 add EAX, EBX
 push EAX
 pop z__g0_m11
+lea eax, Literal_9__none
+push eax
+call printString__g0
+push eax
+pop yy__g0_m11_w22
 push Literal_New_2__none
 
 pop eax

@@ -4,14 +4,7 @@
 
 namespace GEN
 {
-	static const std::string BEGIN_OF_FILE =
-		".686p\n\
-		 .xmm\n\
-		 .MODEL FLAT, STDCALL \n\
-		 includelib kernel32.lib\n\
-		 includelib masm32.lib\n\
-	     ExitProcess PROTO:DWORD\n\
-		 .STACK 4096\n";
+	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nprintString__g0 PROTO:ptr byte\nExitProcess PROTO:DWORD\n.STACK 4096\n";
 
 	static const bool IS_DOUBLE = true;
 
