@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 			throw "Error";
 		mfst.savededucation();
 		mfst.printrules(log);
-
+		std::cout << "---------------------------конец синтаксического анализатора-------------------------" << std::endl;
 		ANALISER::Analiser analiser;
 		analiser.analise(hjk, h);
 

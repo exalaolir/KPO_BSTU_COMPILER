@@ -1,4 +1,5 @@
-.586P
+.686p
+		 .xmm
 		 .MODEL FLAT, STDCALL 
 		 includelib kernel32.lib
 		 includelib masm32.lib
@@ -6,30 +7,146 @@
 		 .STACK 4096
 .DATA
 real_buff REAL8 0.0
-Literal_New_0__none SDWORD 66
-Literal_1__none REAL8 0.500000
-Literal_2__none REAL8 -0.700000
-Literal_3__none SDWORD 4
+Literal_New_0__none SDWORD 3
 Literal_New_1__none SDWORD 0
+Literal_2__none SDWORD 1
+Literal_3__none SDWORD 234
+Literal_4__none SDWORD 2
+Literal_5__none REAL8 -0.800000
+Literal_6__none SDWORD 77
+Literal_7__none BYTE "hyeufhuhd", 0
+Literal_8__none BYTE "kk", 0
+Literal_9__none BYTE "I love Kate!!", 0
+Literal_New_2__none REAL8 -3.400000
+Literal_New_3__none REAL8 0.340000
+Literal_New_4__none SDWORD 9
+Literal_New_5__none SDWORD 87
+Literal_New_6__none SDWORD 37
+Literal_New_7__none SDWORD 87
+Literal_New_8__none SDWORD 9
+Literal_New_9__none SDWORD 0
+jksd__g0 SDWORD 3
+result__g0 SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
-l__g0 proc h__g0_l11:SDWORD, y__g0_l11:REAL8
+l__g0 proc erty__g0_l11_S:ptr byte, hhh__g0_l11_S:ptr byte, str__g0_l11_S:ptr byte, h__g0_l11:SDWORD, y__g0_l11:REAL8
+local str__g0_l11[256]:BYTE, hhh__g0_l11[256]:BYTE, erty__g0_l11[256]:BYTE
+mov esi, str__g0_l11_S
+lea edi, str__g0_l11
+ copy_loop_0:
+lodsb
+stosb
+test al, al
+jnz copy_loop_0
+mov esi, hhh__g0_l11_S
+lea edi, hhh__g0_l11
+ copy_loop_1:
+lodsb
+stosb
+test al, al
+jnz copy_loop_1
+mov esi, erty__g0_l11_S
+lea edi, erty__g0_l11
+ copy_loop_2:
+lodsb
+stosb
+test al, al
+jnz copy_loop_2
+push jksd__g0
+push Literal_2__none
+pop EBX
+pop EAX
+sub EAX, EBX
+push EAX
+pop jksd__g0
+push Literal_3__none
+push h__g0_l11
+pop EBX
+pop EAX
+imul EAX, EBX
+push EAX
+push jksd__g0
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push Literal_4__none
+xor EDX,EDX
+pop EBX
+pop EAX
+div EBX
+push EAX
+pop result__g0
+push result__g0
+
+pop eax
 ret
 l__g0 endp
 main__g0 proc
-local g__g0_m21:SDWORD
-fld Literal_1__none
-fld Literal_2__none
-fsub
+local aaa__g0_m21:SDWORD, r__g0_m21_i32:SDWORD, r__g0_m21_e72:SDWORD
+fld Literal_5__none
 fstp real_buff
 lea eax, real_buff
 push sdword ptr [eax+4]
 push sdword ptr [eax]
-push Literal_3__none
+push Literal_6__none
+lea edx, Literal_7__none
+push edx
+lea edx, Literal_8__none
+push edx
+lea edx, Literal_9__none
+push edx
 call l__g0
 push eax
-pop g__g0_m21
+pop aaa__g0_m21
+fld Literal_New_2__none
+fld Literal_New_3__none
+fstp real_buff
+movsd xmm0, real_buff
+fstp real_buff
+movsd xmm1, real_buff
+cmpsd xmm0, xmm1, 6
+movd eax, xmm0
+and eax, eax
+jnz If_l0
+jmp Else0
+If_l0:
+push Literal_New_4__none
+pop r__g0_m21_i32
+push r__g0_m21_i32
+push jksd__g0
+pop eax
+pop ebx
+cmp ebx, eax
+jg If_l1
+jmp Else1
+If_l1:
+push Literal_New_5__none
+pop r__g0_m21_i32
+jmp Endif1
+Else1:
+push Literal_New_6__none
+pop r__g0_m21_i32
+push r__g0_m21_i32
+push jksd__g0
+pop eax
+pop ebx
+cmp ebx, eax
+jg If_l2
+jmp Else2
+If_l2:
+push Literal_New_7__none
+pop r__g0_m21_i32
+jmp Endif2
+Else2:
+Endif2:
+Endif1:
+jmp Endif0
+Else0:
+push Literal_New_8__none
+pop r__g0_m21_e72
+Endif0:
 
 INVOKE ExitProcess, 0
 main__g0 endp
