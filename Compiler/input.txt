@@ -6,14 +6,14 @@ fn int main()
 	while(z :! 10){
 		if(z >= 3){
 			q = q - 1.2;
-			let yy = printString("ss");
+			let yy = printString("ss/\n/");
 		}
 		else{
 			q = q + 2.3;
-			let yy = printString("ddd");
+			let yy = printString("ddd/\n/");
 		}
 		z = z + 1;
-		 let yy = printString("aaa");
+		 let yy = printString("aaa/\n/");
 	}
    return 0;
 }

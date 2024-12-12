@@ -17,11 +17,11 @@ Literal_New_1__none REAL8 9.900000
 Literal_2__none SDWORD 10
 Literal_3__none SDWORD 3
 Literal_4__none REAL8 1.200000
-Literal_5__none BYTE "ss", 0
+Literal_5__none BYTE "ss",10, 0
 Literal_6__none REAL8 2.300000
-Literal_7__none BYTE "ddd", 0
+Literal_7__none BYTE "ddd",10, 0
 Literal_8__none SDWORD 1
-Literal_9__none BYTE "aaa", 0
+Literal_9__none BYTE "aaa",10, 0
 Literal_New_2__none SDWORD 0
 .CODE
 option prologue:PrologueDef
@@ -70,8 +70,6 @@ call printString__g0
 push eax
 pop yy__g0_m11_w22_e43
 Endif0:
-jmp While_start0
-Else_While0:
 push z__g0_m11
 push Literal_8__none
 pop EBX
@@ -84,6 +82,8 @@ push eax
 call printString__g0
 push eax
 pop yy__g0_m11_w22
+jmp While_start0
+Else_While0:
 push Literal_New_2__none
 
 pop eax

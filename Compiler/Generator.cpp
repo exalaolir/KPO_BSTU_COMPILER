@@ -401,7 +401,6 @@ namespace GEN
 			case 'q':
 				index += 2;
 				GenerateIf(block, index, ifCounter, false);
-				index--;
 				break;
 			case '}':
 				block.push_back(MAKE_END_WHILE(localIfCounter));
