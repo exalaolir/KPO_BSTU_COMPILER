@@ -82,6 +82,10 @@ namespace GEN
 				i+=2;
 				GenerateIf(code, i, ifCounter);
 				break;
+			case 'w':
+				i += 2;
+				GenerateWhile(code, i, whileCounter);
+				break;
 			default:
 				break;
 			}
@@ -347,6 +351,10 @@ namespace GEN
 					block.push_back(MAKE_ENDIF(If, localIfCounter));
 				}
 				break;
+			case 'w':
+				index += 2;
+				GenerateWhile(code, index, whileCounter);
+				break;
 			default:
 				break;
 			}
@@ -356,6 +364,62 @@ namespace GEN
 		index--;
 		auto it = code.end();
 		if(rebase) std::advance(it, -1);
+		code.insert(it, block.begin(), block.end());
+	}
+
+	void Generator::GenerateWhile(std::list<std::string>& code, size_t& index, size_t localIfCounter, bool rebase)
+	{
+		whileCounter++;
+		std::list<std::string> block;
+
+		block.push_back(MAKE_WHILE(localIfCounter));
+		GenerateExpression(block, index, false, 0, ')', 0);
+
+		block.push_back(MAKE_IF(lexTable[index].originalText,
+						MAKE_BOOKMARK_WHILE(If, localIfCounter), MAKE_BOOKMARK_WHILE(Else, localIfCounter), realIf, strIf));
+		index += 2;
+		bool isWork = true;
+		bool elseExist = false;
+		realIf = false;
+		strIf = false;
+		while (isWork)
+		{
+			switch (lexTable[index].lexema[0])
+			{
+			case 'i':
+				index++;
+				if (lexTable[index].originalText == "=" && functionFlag)
+				{
+					index++;
+					GenerateExpression(block, index, false, 2, ';', 0);
+				}
+				break;
+			case 'r':
+				index++;
+				GenerateExpression(block, index, true, 2, ';', 0);
+				break;
+			case 'q':
+				index += 2;
+				GenerateIf(block, index, ifCounter, false);
+				index--;
+				break;
+			case '}':
+				block.push_back(MAKE_END_WHILE(localIfCounter));
+				isWork = false;
+				break;
+			case 'w':
+				index += 2;
+				GenerateWhile(code, index, whileCounter);
+				break;
+			default:
+				break;
+			}
+			index++;
+		}
+
+		index--;
+		auto it = code.end();
+		if (rebase) std::advance(it, -1);
 		code.insert(it, block.begin(), block.end());
 	}
 }

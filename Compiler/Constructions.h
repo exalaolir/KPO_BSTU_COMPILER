@@ -217,12 +217,36 @@ namespace GEN
 			}
 		};
 
+	const auto MAKE_BOOKMARK_WHILE = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "While_l" + std::to_string(id);
+			}
+			else if (type == Else)
+			{
+				return "Else_While" + std::to_string(id);
+			}
+		};
+
 	const auto MAKE_ENDIF = [](Keywords type, size_t id) -> std::string
 		{
 			if (type == If)
 			{
 				return "Endif" + std::to_string(id) + ":\n";
 			}
+		};
+
+	const auto MAKE_WHILE = [](size_t id) -> std::string
+		{
+				return "While_start" + std::to_string(id) + ":\n";	
+		};
+
+	const auto MAKE_END_WHILE = [](size_t id) -> std::string
+		{
+				return "jmp While_start" + std::to_string(id) + "\n"
+					+ "Else_While" + std::to_string(id) + ":" + "\n";
+			
 		};
 
 	const auto MAKE_END_MARK = [](Keywords type, size_t id) -> std::string
