@@ -36,10 +36,10 @@ namespace GEN
 
 	static const std::string PUSH_REAL_PARAM = "fstp real_buff\nlea eax, real_buff\npush sdword ptr [eax+4]\npush sdword ptr [eax]\n";
 
-	static const std::string LESS = "pop eax\npop ebx\ncmp eax, ebx\njl ";
-	static const std::string MORE = "pop eax\npop ebx\ncmp ebx, eax\njg ";
-	static const std::string LESS_OR_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njle ";
-	static const std::string MORE_OR_EQAL = "pop eax\npop ebx\ncmp ebx, eax\njge ";
+	static const std::string LESS = "pop ebx\npop eax\ncmp eax, ebx\njl ";
+	static const std::string MORE = "pop ebx\npop eax\ncmp eax, ebx\njg ";
+	static const std::string LESS_OR_EQAL = "pop ebx\npop eax\ncmp eax, ebx\njle ";
+	static const std::string MORE_OR_EQAL = "pop ebx\npop eax\ncmp eax, ebx\njge ";
 	static const std::string EQAL = "pop eax\npop ebx\ncmp eax, ebx\nje ";
 	static const std::string NO_EQAL = "pop eax\npop ebx\ncmp eax, ebx\njne ";
 

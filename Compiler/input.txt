@@ -8,9 +8,27 @@ fn int l(double y, int h, string str, string hhh, string erty){
   return result;
 }
 fn double Double(double r) {
-  double result = 2.0*3.14*r*r;
+  double result = (2.0*3.14*r*r)-77.8*56.9;
 
   return result;
+}
+fn double Double2(int r) {
+  if(r > 0) {
+        return 1.5;
+    }
+    else {
+        if(r : 0) {
+            return 0.5;
+       
+        }
+        else {
+            if(r < 0) {
+                double buf = -1.5;
+                return buf;
+            }
+        }
+    }
+    return 0.0;
 }
 fn bool Bool(string r) {
   bool result = true;
@@ -35,11 +53,16 @@ fn string strTest(string a, double b, string c){
 }
 fn int main()
 {
+double resultFunction = Double(2.5);
+double ver1 = Double2(5);
+double ver2 = Double2(-5);
+double ver3 = Double2(0);
+
 if("d" :! "k"){
     let ii = "ervv";
 }
     let rewr = strTest("a", -0.7, "kl");
-  double resultFunction = Double(2.5);
+  
  let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
   
   if(0.34 > -3.4){
