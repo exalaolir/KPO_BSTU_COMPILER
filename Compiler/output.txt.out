@@ -17,71 +17,49 @@ Literal_6__none REAL8 3.140000
 Literal_7__none DWORD 1
 Literal_8__none BYTE "", 0
 Literal_9__none REAL8 2.500000
-Literal_10__none REAL8 -0.800000
-Literal_11__none SDWORD 77
-Literal_12__none BYTE "hyeufhuhd", 0
-Literal_13__none BYTE "kk", 0
-Literal_14__none BYTE "I love Kate!!", 0
-Literal_New_2__none REAL8 -3.400000
-Literal_New_3__none REAL8 0.340000
-Literal_New_4__none SDWORD 9
-Literal_New_5__none SDWORD 87
-Literal_New_6__none SDWORD 37
-Literal_New_7__none SDWORD 87
-Literal_New_8__none SDWORD 9
-Literal_New_9__none SDWORD 0
+Literal_New_2__none SDWORD 10
+Literal_11__none SDWORD 0
+Literal_12__none REAL8 -0.800000
+Literal_13__none SDWORD 77
+Literal_14__none BYTE "hyeufhuhd", 0
+Literal_15__none BYTE "kk", 0
+Literal_16__none BYTE "I love Kate!!", 0
+Literal_New_3__none REAL8 -3.400000
+Literal_New_4__none REAL8 0.340000
+Literal_New_5__none SDWORD 9
+Literal_New_6__none SDWORD 87
+Literal_New_7__none SDWORD 37
+Literal_New_8__none SDWORD 87
+Literal_New_9__none SDWORD 9
+Literal_New_10__none SDWORD 0
 jksd__g0 SDWORD 3
 result__g0 SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
-R__g0 proc h__g0_R11_S:ptr byte
-local j__g0_R11[256]:BYTE, h__g0_R11[256]:BYTE
-mov esi, h__g0_R11_S
-lea edi, h__g0_R11
+l__g0 proc erty__g0_l11_S:ptr byte, hhh__g0_l11_S:ptr byte, str__g0_l11_S:ptr byte, h__g0_l11:SDWORD, y__g0_l11:REAL8
+local str__g0_l11[256]:BYTE, hhh__g0_l11[256]:BYTE, erty__g0_l11[256]:BYTE
+mov esi, str__g0_l11_S
+lea edi, str__g0_l11
  copy_loop_0:
 lodsb
 stosb
 test al, al
 jnz copy_loop_0
-lea eax, h__g0_R11
-push eax
-pop esi
-lea edi, j__g0_R11
+mov esi, hhh__g0_l11_S
+lea edi, hhh__g0_l11
  copy_loop_1:
 lodsb
 stosb
 test al, al
 jnz copy_loop_1
-lea eax, j__g0_R11
-push eax
-
-pop eax
-ret
-R__g0 endp
-l__g0 proc erty__g0_l21_S:ptr byte, hhh__g0_l21_S:ptr byte, str__g0_l21_S:ptr byte, h__g0_l21:SDWORD, y__g0_l21:REAL8
-local str__g0_l21[256]:BYTE, hhh__g0_l21[256]:BYTE, erty__g0_l21[256]:BYTE
-mov esi, str__g0_l21_S
-lea edi, str__g0_l21
- copy_loop_3:
+mov esi, erty__g0_l11_S
+lea edi, erty__g0_l11
+ copy_loop_2:
 lodsb
 stosb
 test al, al
-jnz copy_loop_3
-mov esi, hhh__g0_l21_S
-lea edi, hhh__g0_l21
- copy_loop_4:
-lodsb
-stosb
-test al, al
-jnz copy_loop_4
-mov esi, erty__g0_l21_S
-lea edi, erty__g0_l21
- copy_loop_5:
-lodsb
-stosb
-test al, al
-jnz copy_loop_5
+jnz copy_loop_2
 push jksd__g0
 push Literal_2__none
 pop EBX
@@ -90,7 +68,7 @@ sub EAX, EBX
 push EAX
 pop jksd__g0
 push Literal_3__none
-push h__g0_l21
+push h__g0_l11
 pop EBX
 pop EAX
 imul EAX, EBX
@@ -114,20 +92,20 @@ ret
 l__g0 endp
 Double__g0 proc r__g0_D21:REAL8
 local result__g0_D21:REAL8
-lea edx, Literal_5__none
-push edx
-lea edx, Literal_6__none
-push edx
+lea eax, Literal_5__none
+push eax
+lea eax, Literal_6__none
+push eax
 fmul
-lea edx, r__g0_D21
-push edx
+lea eax, r__g0_D21
+push eax
 fmul
-lea edx, r__g0_D21
-push edx
+lea eax, r__g0_D21
+push eax
 fmul
 fstp result__g0_D21
-lea edx, result__g0_D21
-push edx
+lea eax, result__g0_D21
+push eax
 fstp real_buff
 fld qword ptr [real_buff]
 ret
@@ -149,41 +127,57 @@ pop eax
 ret
 Bool__g0 endp
 String__g0 proc ret__g0_S41:REAL8
-local result__g0_S41:BYTE
-lea edx, Literal_8__none
-push edx
-pop result__g0_S41
-lea edx, result__g0_S41
-push edx
+local result__g0_S41[256]:BYTE
+lea eax, Literal_8__none
+push eax
+pop esi
+lea edi, result__g0_S41
+ copy_loop_4:
+lodsb
+stosb
+test al, al
+jnz copy_loop_4
+lea eax, result__g0_S41
+push eax
 
 pop eax
 ret
 String__g0 endp
 main__g0 proc
-local resultFunction__g0_m51:REAL8, aaa__g0_m51:SDWORD, r__g0_m51_i62:SDWORD, r__g0_m51_e102:SDWORD
-lea edx, Literal_9__none
-push edx
+local resultFunction__g0_m51:REAL8, aaa__g0_m51:SDWORD, r__g0_m51_i62:SDWORD, kl__g0_m51:SDWORD, div__g0_m51:SDWORD, r__g0_m51_e102:SDWORD
+lea eax, Literal_9__none
+push eax
 call Double__g0
 fstp real_buff
 fld real_buff
 fstp resultFunction__g0_m51
-fld Literal_10__none
+push Literal_New_2__none
+pop kl__g0_m51
+push kl__g0_m51
+push Literal_11__none
+xor EDX,EDX
+pop EBX
+pop EAX
+div EBX
+push EAX
+pop div__g0_m51
+fld Literal_12__none
 fstp real_buff
 lea eax, real_buff
 push sdword ptr [eax+4]
 push sdword ptr [eax]
-push Literal_11__none
-lea edx, Literal_12__none
-push edx
-lea edx, Literal_13__none
-push edx
-lea edx, Literal_14__none
-push edx
+push Literal_13__none
+lea eax, Literal_14__none
+push eax
+lea eax, Literal_15__none
+push eax
+lea eax, Literal_16__none
+push eax
 call l__g0
 push eax
 pop aaa__g0_m51
-fld Literal_New_2__none
 fld Literal_New_3__none
+fld Literal_New_4__none
 fstp real_buff
 movsd xmm0, real_buff
 fstp real_buff
@@ -194,7 +188,7 @@ and eax, eax
 jnz If_l0
 jmp Else0
 If_l0:
-push Literal_New_4__none
+push Literal_New_5__none
 pop r__g0_m51_i62
 push r__g0_m51_i62
 push jksd__g0
@@ -204,11 +198,11 @@ cmp ebx, eax
 jg If_l1
 jmp Else1
 If_l1:
-push Literal_New_5__none
+push Literal_New_6__none
 pop r__g0_m51_i62
 jmp Endif1
 Else1:
-push Literal_New_6__none
+push Literal_New_7__none
 pop r__g0_m51_i62
 push r__g0_m51_i62
 push jksd__g0
@@ -218,7 +212,7 @@ cmp ebx, eax
 jg If_l2
 jmp Else2
 If_l2:
-push Literal_New_7__none
+push Literal_New_8__none
 pop r__g0_m51_i62
 jmp Endif2
 Else2:
@@ -226,7 +220,7 @@ Endif2:
 Endif1:
 jmp Endif0
 Else0:
-push Literal_New_8__none
+push Literal_New_9__none
 pop r__g0_m51_e102
 Endif0:
 
