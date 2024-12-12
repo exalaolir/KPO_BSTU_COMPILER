@@ -12,12 +12,16 @@ Literal_New_1__none SDWORD 0
 Literal_2__none SDWORD 1
 Literal_3__none SDWORD 234
 Literal_4__none SDWORD 2
-Literal_5__none BYTE "jj", 0
-Literal_6__none REAL8 -0.800000
-Literal_7__none SDWORD 77
-Literal_8__none BYTE "hyeufhuhd", 0
-Literal_9__none BYTE "kk", 0
-Literal_10__none BYTE "I love Kate!!", 0
+Literal_5__none REAL8 2.000000
+Literal_6__none REAL8 3.140000
+Literal_7__none DWORD 1
+Literal_8__none BYTE "", 0
+Literal_9__none REAL8 2.500000
+Literal_10__none REAL8 -0.800000
+Literal_11__none SDWORD 77
+Literal_12__none BYTE "hyeufhuhd", 0
+Literal_13__none BYTE "kk", 0
+Literal_14__none BYTE "I love Kate!!", 0
 Literal_New_2__none REAL8 -3.400000
 Literal_New_3__none REAL8 0.340000
 Literal_New_4__none SDWORD 9
@@ -31,53 +35,29 @@ result__g0 SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
-R__g0 proc h__g0_R11_S:ptr byte
-local j__g0_R11[256]:BYTE, h__g0_R11[256]:BYTE
-mov esi, h__g0_R11_S
-lea edi, h__g0_R11
+l__g0 proc erty__g0_l11_S:ptr byte, hhh__g0_l11_S:ptr byte, str__g0_l11_S:ptr byte, h__g0_l11:SDWORD, y__g0_l11:REAL8
+local str__g0_l11[256]:BYTE, hhh__g0_l11[256]:BYTE, erty__g0_l11[256]:BYTE
+mov esi, str__g0_l11_S
+lea edi, str__g0_l11
  copy_loop_0:
 lodsb
 stosb
 test al, al
 jnz copy_loop_0
-lea eax, h__g0_R11
-push eax
-pop esi
-lea edi, j__g0_R11
+mov esi, hhh__g0_l11_S
+lea edi, hhh__g0_l11
  copy_loop_1:
 lodsb
 stosb
 test al, al
 jnz copy_loop_1
-lea eax, j__g0_R11
-push eax
-
-pop eax
-ret
-R__g0 endp
-l__g0 proc erty__g0_l21_S:ptr byte, hhh__g0_l21_S:ptr byte, str__g0_l21_S:ptr byte, h__g0_l21:SDWORD, y__g0_l21:REAL8
-local str__g0_l21[256]:BYTE, hhh__g0_l21[256]:BYTE, erty__g0_l21[256]:BYTE
-mov esi, str__g0_l21_S
-lea edi, str__g0_l21
- copy_loop_3:
+mov esi, erty__g0_l11_S
+lea edi, erty__g0_l11
+ copy_loop_2:
 lodsb
 stosb
 test al, al
-jnz copy_loop_3
-mov esi, hhh__g0_l21_S
-lea edi, hhh__g0_l21
- copy_loop_4:
-lodsb
-stosb
-test al, al
-jnz copy_loop_4
-mov esi, erty__g0_l21_S
-lea edi, erty__g0_l21
- copy_loop_5:
-lodsb
-stosb
-test al, al
-jnz copy_loop_5
+jnz copy_loop_2
 push jksd__g0
 push Literal_2__none
 pop EBX
@@ -86,7 +66,7 @@ sub EAX, EBX
 push EAX
 pop jksd__g0
 push Literal_3__none
-push h__g0_l21
+push h__g0_l11
 pop EBX
 pop EAX
 imul EAX, EBX
@@ -108,34 +88,82 @@ push result__g0
 pop eax
 ret
 l__g0 endp
-main__g0 proc
-local qq__g0_m31[256]:BYTE, aaa__g0_m31:SDWORD, r__g0_m31_i42:SDWORD, r__g0_m31_e82:SDWORD
+Double__g0 proc r__g0_D21:REAL8
+local result__g0_D21:REAL8
 lea eax, Literal_5__none
 push eax
-call R__g0
+lea eax, Literal_6__none
 push eax
-pop esi
-lea edi, qq__g0_m31
- copy_loop_6:
+fmul
+lea eax, r__g0_D21
+push eax
+fmul
+lea eax, r__g0_D21
+push eax
+fmul
+fstp result__g0_D21
+lea eax, result__g0_D21
+push eax
+fstp real_buff
+fld qword ptr [real_buff]
+ret
+Double__g0 endp
+Bool__g0 proc r__g0_B31_S:ptr byte
+local result__g0_B31:DWORD, r__g0_B31[256]:BYTE
+mov esi, r__g0_B31_S
+lea edi, r__g0_B31
+ copy_loop_3:
 lodsb
 stosb
 test al, al
-jnz copy_loop_6
-fld Literal_6__none
+jnz copy_loop_3
+push Literal_7__none
+pop result__g0_B31
+push result__g0_B31
+
+pop eax
+ret
+Bool__g0 endp
+String__g0 proc ret__g0_S41:REAL8
+local result__g0_S41[256]:BYTE
+lea eax, Literal_8__none
+push eax
+pop esi
+lea edi, result__g0_S41
+ copy_loop_4:
+lodsb
+stosb
+test al, al
+jnz copy_loop_4
+lea eax, result__g0_S41
+push eax
+
+pop eax
+ret
+String__g0 endp
+main__g0 proc
+local resultFunction__g0_m51:REAL8, aaa__g0_m51:SDWORD, r__g0_m51_i62:SDWORD, r__g0_m51_e102:SDWORD
+lea eax, Literal_9__none
+push eax
+call Double__g0
+fstp real_buff
+fld real_buff
+fstp resultFunction__g0_m51
+fld Literal_10__none
 fstp real_buff
 lea eax, real_buff
 push sdword ptr [eax+4]
 push sdword ptr [eax]
-push Literal_7__none
-lea eax, Literal_8__none
+push Literal_11__none
+lea eax, Literal_12__none
 push eax
-lea eax, Literal_9__none
+lea eax, Literal_13__none
 push eax
-lea eax, Literal_10__none
+lea eax, Literal_14__none
 push eax
 call l__g0
 push eax
-pop aaa__g0_m31
+pop aaa__g0_m51
 fld Literal_New_2__none
 fld Literal_New_3__none
 fstp real_buff
@@ -149,8 +177,8 @@ jnz If_l0
 jmp Else0
 If_l0:
 push Literal_New_4__none
-pop r__g0_m31_i42
-push r__g0_m31_i42
+pop r__g0_m51_i62
+push r__g0_m51_i62
 push jksd__g0
 pop eax
 pop ebx
@@ -159,12 +187,12 @@ jg If_l1
 jmp Else1
 If_l1:
 push Literal_New_5__none
-pop r__g0_m31_i42
+pop r__g0_m51_i62
 jmp Endif1
 Else1:
 push Literal_New_6__none
-pop r__g0_m31_i42
-push r__g0_m31_i42
+pop r__g0_m51_i62
+push r__g0_m51_i62
 push jksd__g0
 pop eax
 pop ebx
@@ -173,7 +201,7 @@ jg If_l2
 jmp Else2
 If_l2:
 push Literal_New_7__none
-pop r__g0_m31_i42
+pop r__g0_m51_i62
 jmp Endif2
 Else2:
 Endif2:
@@ -181,7 +209,7 @@ Endif1:
 jmp Endif0
 Else0:
 push Literal_New_8__none
-pop r__g0_m31_e82
+pop r__g0_m51_e102
 Endif0:
 
 INVOKE ExitProcess, 0

@@ -1,35 +1,45 @@
 int jksd = 3;
-int result=0;
-fn string R(string h){
+int result = 0;
 
-	let j = h;
-	return j;
-}
 fn int l(double y, int h, string str, string hhh, string erty){
   jksd = jksd-1;
   result = ( 234 * h + jksd)/2;
   
   return result;
 }
+fn double Double(double r) {
+  double result = 2.0*3.14*r*r;
+
+  return result;
+}
+fn bool Bool(string r) {
+  bool result = true;
+  return result;
+}
+fn string String(double ret) {
+  let result = "";
+  return result;
+}
 fn int main()
 {
-	let qq = R("jj");
-	let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
-	if(0.34 > -3.4){
-		let r = 9;
-		if(r > jksd){
-			r = 87;
-		}
-		else{
-		r = 37;
-		if(r > jksd){
-			r = 87;
-		}
-		}
-	}
-	else{
-	let r = 9;
-	}
+  double resultFunction = Double(2.5);
+  let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
+  
+  if(0.34 > -3.4){
+    let r = 9;
+    if(r > jksd){
+      r = 87;
+    }
+    else{
+    r = 37;
+    if(r > jksd){
+      r = 87;
+    }
+    }
+  }
+  else{
+  let r = 9;
+  }
   @ let g = -0hAF;
    g = g * l(2.0+2.0, 7 + 4 * l(0.7, 7 % 1));@
    return 0;

@@ -287,6 +287,13 @@ namespace LEXER
 					literal.line = line;
 					literal.pos = counter;
 					literal.value = token;
+					if (token == "\"\"")
+					{
+
+						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+								  std::format("ѕуста€ строка не допускаетс€ {}", token));
+						throw "Esception";
+					}
 
 					idTable.Add(literal);
 				}
