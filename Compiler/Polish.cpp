@@ -245,19 +245,24 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 					return ServisSymbol;
 					break;
 				case 'u':
-					if (lexem.originalText == "%" && (currentType.valueType == Double || currentType.valueType == DoubleLiteral))
+					if (lexem.originalText == ">" && (currentType.valueType == String || currentType.valueType == StringLiteral))
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор % недопустим для типа double");
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор > недопустим для типа string");
 						throw "Exception";
 					}
-					if (lexem.originalText == "<<" && (currentType.valueType == Double || currentType.valueType == DoubleLiteral))
+					if (lexem.originalText == "<" && (currentType.valueType == String || currentType.valueType == StringLiteral))
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор << недопустим для типа double");
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор < недопустим для типа string");
 						throw "Exception";
 					}
-					if (lexem.originalText == ">>" && (currentType.valueType == Double || currentType.valueType == DoubleLiteral))
+					if (lexem.originalText == ">=" && (currentType.valueType == String || currentType.valueType == StringLiteral))
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор >> недопустим для типа double");
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор >= недопустим для типа string");
+						throw "Exception";
+					}
+					if (lexem.originalText == "<=" && (currentType.valueType == String || currentType.valueType == StringLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор <= недопустим для типа string");
 						throw "Exception";
 					}
 					return ServisSymbol;

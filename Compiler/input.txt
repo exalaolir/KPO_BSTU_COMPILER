@@ -20,8 +20,25 @@ fn string String(double ret) {
   let result = "ереекр";
   return result;
 }
+fn string strTest(string a, double b, string c){
+    
+    if(a :! c){
+        if(b > 8.5){
+            return "j";
+        }
+        return a;
+    }
+    else{
+      return c;
+    }
+    return "uuu";
+}
 fn int main()
 {
+if("d" :! "k"){
+    let ii = "ervv";
+}
+    let rewr = strTest("a", -0.7, "kl");
   double resultFunction = Double(2.5);
  let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
   

@@ -136,7 +136,7 @@ namespace LEXER
 		{":", IfEqal},//==
 		{":!", IfNoEqal},//!=
 		{">=", MoreorEqal},//>=
-		{"=<", LessorEqal},//<=
+		{"<=", LessorEqal},//<=
 
 		{">", More},
 		{"<", Less},
@@ -161,6 +161,7 @@ namespace LEXER
 		{'|', true},
 		{'!', true},
 		{'>', true},
+		{':', true},
 		{'<', true}
 	};
 

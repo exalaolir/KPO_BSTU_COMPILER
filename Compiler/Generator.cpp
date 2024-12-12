@@ -243,6 +243,7 @@ namespace GEN
 					else if (lexTable[index].lexema == "u")
 					{
 						if(var.valueType == Double || var.valueType == DoubleLiteral) realIf = true;
+						if (var.valueType == String || var.valueType == StringLiteral) strIf = true;
 						return;
 					}
 					index++;
@@ -307,11 +308,12 @@ namespace GEN
 		GenerateExpression(block, index, false, 0, ')', 0);
 
 		block.push_back(MAKE_IF(lexTable[index].originalText,
-					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter), realIf));
+					   MAKE_BOOKMARK(If, localIfCounter), MAKE_BOOKMARK(Else, localIfCounter), realIf, strIf));
 		index += 2;
 		bool isWork = true;
 		bool elseExist = false;
 		realIf = false;
+		strIf = false;
 		while (isWork)
 		{
 			switch (lexTable[index].lexema[0])

@@ -23,6 +23,7 @@ namespace GEN
 		Entry currentFunc;
 		size_t ifCounter = 0;
 		bool realIf = false;
+		bool strIf = false;
 		size_t copyEqalGenerator = 0;
 
 		void GenerateDataSection(size_t& index);
