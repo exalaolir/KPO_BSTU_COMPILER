@@ -353,6 +353,7 @@ namespace GEN
 			index++;
 		}
 
+		index--;
 		auto it = code.end();
 		if(rebase) std::advance(it, -1);
 		code.insert(it, block.begin(), block.end());

@@ -108,6 +108,7 @@ push result__g0
 
 pop eax
 ret
+ret
 l__g0 endp
 Double__g0 proc r__g0_D21:REAL8
 local result__g0_D21:REAL8
@@ -127,6 +128,7 @@ fld result__g0_D21
 fstp real_buff
 fld qword ptr [real_buff]
 ret
+ret
 Double__g0 endp
 Double2__g0 proc r__g0_D31:SDWORD
 local buf__g0_D31_e52_e73_i84:REAL8
@@ -134,13 +136,14 @@ push r__g0_D31
 push Literal_9__none
 pop ebx
 pop eax
-cmp ebx, eax
+cmp eax, ebx
 jg If_l0
 jmp Else0
 If_l0:
 fld Literal_New_2__none
 fstp real_buff
 fld qword ptr [real_buff]
+ret
 jmp Endif0
 Else0:
 push r__g0_D31
@@ -154,6 +157,7 @@ If_l1:
 fld Literal_New_3__none
 fstp real_buff
 fld qword ptr [real_buff]
+ret
 jmp Endif1
 Else1:
 push r__g0_D31
@@ -169,11 +173,16 @@ fstp buf__g0_D31_e52_e73_i84
 fld buf__g0_D31_e52_e73_i84
 fstp real_buff
 fld qword ptr [real_buff]
+ret
 jmp Endif2
 Else2:
 Endif2:
 Endif1:
 Endif0:
+fld Literal_New_5__none
+fstp real_buff
+fld qword ptr [real_buff]
+ret
 ret
 Double2__g0 endp
 Bool__g0 proc r__g0_B91_S:ptr byte
@@ -191,6 +200,7 @@ push result__g0_B91
 
 pop eax
 ret
+ret
 Bool__g0 endp
 String__g0 proc ret__g0_S101:REAL8
 local result__g0_S101[256]:BYTE
@@ -207,6 +217,7 @@ lea eax, result__g0_S101
 push eax
 
 pop eax
+ret
 ret
 String__g0 endp
 strTest__g0 proc c__g0_s111_S:ptr byte, b__g0_s111:REAL8, a__g0_s111_S:ptr byte
@@ -252,20 +263,28 @@ lea eax, Literal_19__none
 push eax
 
 pop eax
+ret
 jmp Endif4
 Else4:
 Endif4:
+jmp Endif3
+Else3:
+Endif3:
 lea eax, a__g0_s111
 push eax
 
 pop eax
-jmp Endif3
-Else3:
+ret
 lea eax, c__g0_s111
 push eax
 
 pop eax
-Endif3:
+ret
+lea eax, Literal_20__none
+push eax
+
+pop eax
+ret
 ret
 strTest__g0 endp
 main__g0 proc
@@ -309,11 +328,11 @@ lea eax, Literal_27__none
 push eax
 pop esi
 lea edi, ii__g0_m151_i162
- copy_loop_11:
+ copy_loop_12:
 lodsb
 stosb
 test al, al
-jnz copy_loop_11
+jnz copy_loop_12
 jmp Endif5
 Else5:
 Endif5:
@@ -330,11 +349,11 @@ call strTest__g0
 push eax
 pop esi
 lea edi, rewr__g0_m151
- copy_loop_12:
+ copy_loop_13:
 lodsb
 stosb
 test al, al
-jnz copy_loop_12
+jnz copy_loop_13
 fld Literal_31__none
 fstp real_buff
 lea eax, real_buff
@@ -368,7 +387,7 @@ push r__g0_m151_i172
 push jksd__g0
 pop ebx
 pop eax
-cmp ebx, eax
+cmp eax, ebx
 jg If_l7
 jmp Else7
 If_l7:
@@ -382,7 +401,7 @@ push r__g0_m151_i172
 push jksd__g0
 pop ebx
 pop eax
-cmp ebx, eax
+cmp eax, ebx
 jg If_l8
 jmp Else8
 If_l8:
@@ -394,9 +413,13 @@ Endif8:
 Endif7:
 jmp Endif6
 Else6:
+Endif6:
 push Literal_New_12__none
 pop r__g0_m151_e212
-Endif6:
+push Literal_New_13__none
+
+pop eax
+ret
 
 INVOKE ExitProcess, 0
 main__g0 endp

@@ -162,21 +162,21 @@ namespace GEN
 				if (!isReturn)
 					return std::format("pop esi\nlea edi, {}\n copy_loop_{}:\nlodsb\nstosb\ntest al, al\njnz copy_loop_{}\n", val, index, index);
 				else
-					return "\npop eax\n";
+					return "\npop eax\nret\n";
 			}
 			if (!isDouble)
 			{
 				if(!isReturn)
 					return "pop " + val + "\n";
 				else
-					return "\npop eax\n";
+					return "\npop eax\nret\n";
 			}
 			else
 			{
 				if (!isReturn)
 					return "fstp " + val + "\n";
 				else
-					return "fstp real_buff\nfld qword ptr [real_buff]\n";
+					return "fstp real_buff\nfld qword ptr [real_buff]\nret\n";
 			}
 		};
 
