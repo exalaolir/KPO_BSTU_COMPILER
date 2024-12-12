@@ -205,7 +205,7 @@ namespace GEN
 					{
 						auto var = idTable[lexTable[index].positionInIdTable];
 
-						if (var.valueType == LEXER::String || var.valueType == LEXER::StringLiteral || isDouble)
+						if (var.valueType == LEXER::String || var.valueType == LEXER::StringLiteral)
 						{
 							strFlag = true;
 						}
@@ -220,8 +220,9 @@ namespace GEN
 						if(currentFun.valueType != LEXER::Double && currentFun.valueType != LEXER::DoubleLiteral) doubleFlag = false;
 
 						expression.push_back(PUSH(MAKE_NAME(var), doubleFlag, strFlag));
-
-						if ((lexTable[index + 1].originalText == "$" || (lexTable[index + 1].lexema == "i" && currentFun.type == LEXER::Fun)) && doubleFlag)
+						bool isDoubleFun = (lexTable[index + 1].lexema == "i" && idTable[lexTable[index + 1].positionInIdTable].type == Fun);
+						bool isParam = lexTable[index + 1].originalText == "$" || isDoubleFun;
+						if (isParam && doubleFlag)
 						{
 							expression.push_back(PUSH_REAL_PARAM);
 						}

@@ -15,7 +15,7 @@ Literal_4__none SDWORD 2
 Literal_5__none REAL8 2.000000
 Literal_6__none REAL8 3.140000
 Literal_7__none DWORD 1
-Literal_8__none BYTE "", 0
+Literal_8__none BYTE "ереекр", 0
 Literal_9__none REAL8 2.500000
 Literal_10__none REAL8 -0.800000
 Literal_11__none SDWORD 77
@@ -90,20 +90,15 @@ ret
 l__g0 endp
 Double__g0 proc r__g0_D21:REAL8
 local result__g0_D21:REAL8
-lea eax, Literal_5__none
-push eax
-lea eax, Literal_6__none
-push eax
+fld Literal_5__none
+fld Literal_6__none
 fmul
-lea eax, r__g0_D21
-push eax
+fld r__g0_D21
 fmul
-lea eax, r__g0_D21
-push eax
+fld r__g0_D21
 fmul
 fstp result__g0_D21
-lea eax, result__g0_D21
-push eax
+fld result__g0_D21
 fstp real_buff
 fld qword ptr [real_buff]
 ret
@@ -143,8 +138,11 @@ ret
 String__g0 endp
 main__g0 proc
 local resultFunction__g0_m51:REAL8, aaa__g0_m51:SDWORD, r__g0_m51_i62:SDWORD, r__g0_m51_e102:SDWORD
-lea eax, Literal_9__none
-push eax
+fld Literal_9__none
+fstp real_buff
+lea eax, real_buff
+push sdword ptr [eax+4]
+push sdword ptr [eax]
 call Double__g0
 fstp real_buff
 fld real_buff
