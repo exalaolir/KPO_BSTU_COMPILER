@@ -162,21 +162,21 @@ namespace GEN
 				if (!isReturn)
 					return std::format("pop esi\nlea edi, {}\n copy_loop_{}:\nlodsb\nstosb\ntest al, al\njnz copy_loop_{}\n", val, index, index);
 				else
-					return "\npop eax\n";
+					return "\npop eax\nret\n";
 			}
 			if (!isDouble)
 			{
 				if(!isReturn)
 					return "pop " + val + "\n";
 				else
-					return "\npop eax\n";
+					return "\npop eax\nret\n";
 			}
 			else
 			{
 				if (!isReturn)
 					return "fstp " + val + "\n";
 				else
-					return "fstp real_buff\nfld qword ptr [real_buff]\n";
+					return "fstp real_buff\nfld qword ptr [real_buff]\nret\n";
 			}
 		};
 
@@ -217,12 +217,36 @@ namespace GEN
 			}
 		};
 
+	const auto MAKE_BOOKMARK_WHILE = [](Keywords type, size_t id) -> std::string
+		{
+			if (type == If)
+			{
+				return "While_l" + std::to_string(id);
+			}
+			else if (type == Else)
+			{
+				return "Else_While" + std::to_string(id);
+			}
+		};
+
 	const auto MAKE_ENDIF = [](Keywords type, size_t id) -> std::string
 		{
 			if (type == If)
 			{
 				return "Endif" + std::to_string(id) + ":\n";
 			}
+		};
+
+	const auto MAKE_WHILE = [](size_t id) -> std::string
+		{
+				return "While_start" + std::to_string(id) + ":\n";	
+		};
+
+	const auto MAKE_END_WHILE = [](size_t id) -> std::string
+		{
+				return "jmp While_start" + std::to_string(id) + "\n"
+					+ "Else_While" + std::to_string(id) + ":" + "\n";
+			
 		};
 
 	const auto MAKE_END_MARK = [](Keywords type, size_t id) -> std::string

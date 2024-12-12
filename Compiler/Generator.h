@@ -25,6 +25,7 @@ namespace GEN
 		bool realIf = false;
 		bool strIf = false;
 		size_t copyEqalGenerator = 0;
+		size_t whileCounter = 0;
 
 		void GenerateDataSection(size_t& index);
 		void GenerateFunction(size_t& index);
@@ -32,6 +33,7 @@ namespace GEN
 		void GenerateExpression(std::list<std::string>& code, size_t& index, bool isReturn = false, size_t ind = 2, char end = ';', int iterRebase = -1);
 		void GenerateLockalVars(LEXER::Entry& fun);
 		void GenerateIf(std::list<std::string>& code, size_t& index, size_t localIfCounter, bool rebase = true);
+		void GenerateWhile(std::list<std::string>& code, size_t& index, size_t localIfCounter, bool rebase = true);
 
 		static inline std::array<std::string, COUNT_OF_TYPES * 2> types
 		{
