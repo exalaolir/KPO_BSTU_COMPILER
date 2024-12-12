@@ -72,14 +72,14 @@ int main(int argc, char* argv[])
 		}
 
 		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
-
+		std::cout << "---------------------------начало синтаксического анализатора-------------------------" << std::endl;
 		MFST_TRACE_START(log);
 		MFST::Mfst mfst(hjk, h, GRB::getGreibach());
 		if (!mfst.start(log))
 			throw "Error";
 		mfst.savededucation();
 		mfst.printrules(log);
-
+		std::cout << "---------------------------конец синтаксического анализатора-------------------------" << std::endl;
 		ANALISER::Analiser analiser;
 		analiser.analise(hjk, h);
 

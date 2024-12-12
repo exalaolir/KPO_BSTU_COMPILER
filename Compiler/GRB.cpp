@@ -10,13 +10,13 @@ namespace GRB
 
 		Rule(NS('S'), GRB_ERROR_SERIES, 5,//СТРУКТУРА КОДА
 
-			Rule::Chain(6, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), NS('Y')),
+			Rule::Chain(6, TS('f'), TS('t'), TS('m'), TS('('), TS(')'), NS('Y')),//++
 
-			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('G')),
-			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('F')),
-			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('M')),
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('G')),//++
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('F')),//++
+			Rule::Chain(5, TS('t'), TS('i'), NS('Q'), TS(';'), NS('M')),//++
 
-			Rule::Chain(7, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), NS('W'))
+			Rule::Chain(7, TS('f'), TS('t'), TS('i'), TS('('), NS('P'), TS(')'), NS('W'))//++
 
 		),
 		Rule(NS('G'), GRB_ERROR_SERIES, 6,//ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
@@ -29,8 +29,8 @@ namespace GRB
 			Rule::Chain(4, TS('i'), NS('Q'), TS(';'), NS('M'))
 		),
 		Rule(NS('Q'), GRB_ERROR_SERIES, 2,//литералы для глобальных переменных
-			Rule::Chain(2, TS('='), TS('l')),
-			Rule::Chain(2, TS('='), NS('X'))
+			Rule::Chain(2, TS('='), TS('l')),//++
+			Rule::Chain(2, TS('='), NS('X'))//++
 		),
 		Rule(NS('X'), GRB_ERROR_SERIES + 6, 3,//начало ВЫРАЖЕНИЕ для глобальных переменных
 
@@ -69,7 +69,7 @@ namespace GRB
 			Rule::Chain(6, TS('{'), TS('r'), NS('V'), TS(';'), TS('}'), NS('F'))
 		),
 		Rule(NS('J'), GRB_ERROR_SERIES + 1, 2, //ДЛЯ КОНЦА ИНСТРУКЦИИ В ТЕЛО
-			Rule::Chain(2, TS(';'), NS('B')),
+			Rule::Chain(2, TS(';'), NS('B')),//++
 			Rule::Chain(1, TS(';'))
 		),
 		Rule(NS('K'), GRB_ERROR_SERIES + 1, 10, //ДЛЯ КОНЦА ИНСТУКЦИИ ЦИКЛА
@@ -90,9 +90,9 @@ namespace GRB
 		),
 		Rule(NS('B'), GRB_ERROR_SERIES + 1, 7,//ТЕЛО
 
-			Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('J')),
+			Rule::Chain(4, TS('t'), TS('i'), NS('L'), NS('J')),//++
 
-			Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), NS('J')),
+			Rule::Chain(8, TS('t'), TS('i'), TS('='), TS('i'), TS('('), NS('A'), TS(')'), NS('J')),//++
 
 			Rule::Chain(3, TS('i'), NS('L'), NS('J')),
 			/// <summary>
