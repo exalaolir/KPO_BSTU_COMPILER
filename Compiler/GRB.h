@@ -56,7 +56,7 @@ namespace GRB
 				GRBALPHABET s, ...			//символы (терминал или нетерминал)
 			);
 			char* getCChain(char* b);		//получить правую сторону правила
-			static GRBALPHABET T(char t) { return GRBALPHABET(t); };//терминал
+			static GRBALPHABET T(char t) { return GRBALPHABET(t); };//терминал стоп
 			static GRBALPHABET N(char n) { return -GRBALPHABET(n); };//нетерминал
 			static bool isT(GRBALPHABET s) { return s > 0; }			//терминал?
 			static bool isN(GRBALPHABET s) { return !isT(s); }		//нетерминал?

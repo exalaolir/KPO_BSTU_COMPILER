@@ -12,26 +12,53 @@ Literal_New_1__none SDWORD 0
 Literal_2__none SDWORD 1
 Literal_3__none SDWORD 234
 Literal_4__none SDWORD 2
-Literal_5__none REAL8 2.000000
-Literal_6__none REAL8 3.140000
-Literal_7__none DWORD 1
-Literal_8__none BYTE "", 0
-Literal_9__none REAL8 2.500000
-Literal_New_2__none SDWORD 10
-Literal_11__none SDWORD 0
-Literal_12__none REAL8 -0.800000
-Literal_13__none SDWORD 77
-Literal_14__none BYTE "hyeufhuhd", 0
-Literal_15__none BYTE "kk", 0
-Literal_16__none BYTE "I love Kate!!", 0
-Literal_New_3__none REAL8 -3.400000
-Literal_New_4__none REAL8 0.340000
-Literal_New_5__none SDWORD 9
-Literal_New_6__none SDWORD 87
-Literal_New_7__none SDWORD 37
-Literal_New_8__none SDWORD 87
-Literal_New_9__none SDWORD 9
-Literal_New_10__none SDWORD 0
+Literal_5__none SDWORD 0
+Literal_New_2__none REAL8 1.500000
+Literal_7__none SDWORD 0
+Literal_New_3__none REAL8 0.500000
+Literal_9__none SDWORD 0
+Literal_New_4__none REAL8 -1.500000
+Literal_New_5__none REAL8 0.000000
+Literal_12__none REAL8 2.000000
+Literal_13__none REAL8 3.140000
+Literal_14__none SDWORD 1
+Literal_15__none SDWORD 0
+Literal_16__none REAL8 75.670000
+Literal_17__none SDWORD 1
+Literal_18__none REAL8 1.000000
+Literal_New_6__none REAL8 1.000000
+Literal_New_7__none REAL8 2.000000
+Literal_21__none DWORD 1
+Literal_22__none BYTE "true", 0
+Literal_23__none DWORD 1
+Literal_24__none DWORD 0
+Literal_25__none REAL8 8.500000
+Literal_26__none BYTE "j", 0
+Literal_27__none BYTE "uuu", 0
+Literal_28__none REAL8 2.500000
+Literal_29__none SDWORD 5
+Literal_30__none SDWORD -5
+Literal_31__none SDWORD 0
+Literal_32__none BYTE "true", 0
+Literal_33__none BYTE "d", 0
+Literal_34__none BYTE "k", 0
+Literal_35__none BYTE "ervv", 0
+Literal_36__none BYTE "a", 0
+Literal_37__none REAL8 -0.700000
+Literal_38__none BYTE "kl", 0
+Literal_39__none REAL8 -0.800000
+Literal_40__none SDWORD 77
+Literal_41__none BYTE "hyeufhuhd", 0
+Literal_42__none BYTE "kk", 0
+Literal_43__none BYTE "I love Kate!!", 0
+Literal_New_8__none REAL8 -3.400000
+Literal_New_9__none REAL8 0.340000
+Literal_New_10__none SDWORD 9
+Literal_New_11__none SDWORD 87
+Literal_New_12__none SDWORD 37
+Literal_New_13__none SDWORD 87
+Literal_New_14__none SDWORD 9
+Literal_New_15__none SDWORD 0
 jksd__g0 SDWORD 3
 result__g0 SDWORD 0
 .CODE
@@ -90,94 +117,156 @@ push result__g0
 pop eax
 ret
 l__g0 endp
-Double__g0 proc r__g0_D21:REAL8
-local result__g0_D21:REAL8
-lea eax, Literal_5__none
-push eax
-lea eax, Literal_6__none
-push eax
-fmul
-lea eax, r__g0_D21
-push eax
-fmul
-lea eax, r__g0_D21
-push eax
-fmul
-fstp result__g0_D21
-lea eax, result__g0_D21
-push eax
+Double2__g0 proc r__g0_D21:SDWORD
+local buf__g0_D21_e42_e63_i74:REAL8
+push r__g0_D21
+push Literal_5__none
+pop eax
+pop ebx
+cmp ebx, eax
+jg If_l0
+jmp Else0
+If_l0:
+fld Literal_New_2__none
 fstp real_buff
 fld qword ptr [real_buff]
+jmp Endif0
+Else0:
+push r__g0_D21
+push Literal_7__none
+pop eax
+pop ebx
+cmp eax, ebx
+je If_l1
+jmp Else1
+If_l1:
+fld Literal_New_3__none
+fstp real_buff
+fld qword ptr [real_buff]
+jmp Endif1
+Else1:
+push r__g0_D21
+push Literal_9__none
+pop eax
+pop ebx
+cmp eax, ebx
+jl If_l2
+jmp Else2
+If_l2:
+fld Literal_New_4__none
+fstp buf__g0_D21_e42_e63_i74
+fld buf__g0_D21_e42_e63_i74
+fstp real_buff
+fld qword ptr [real_buff]
+jmp Endif2
+Else2:
+Endif2:
+Endif1:
+Endif0:
+ret
+Double2__g0 endp
+Double__g0 proc r__g0_D81:REAL8
+local result__g0_D81:REAL8
+fld Literal_12__none
+fld Literal_13__none
+fmul
+fld r__g0_D81
+fmul
+fld r__g0_D81
+fmul
+push Literal_14__none
+call Double2__g0
+fstp real_buff
+fld real_buff
+push Literal_15__none
+call Double2__g0
+fstp real_buff
+fld real_buff
+fmul
+fsub
+fld Literal_16__none
+fsub
+fstp result__g0_D81
+push Literal_17__none
+call Double2__g0
+push eax
+fld Literal_18__none
+pop eax
+pop ebx
+cmp ebx, eax
+jg If_l3
+jmp Else3
+If_l3:
+fld Literal_New_6__none
+fstp real_buff
+fld qword ptr [real_buff]
+jmp Endif3
+Else3:
+fld Literal_New_7__none
+fstp real_buff
+fld qword ptr [real_buff]
+Endif3:
 ret
 Double__g0 endp
-Bool__g0 proc r__g0_B31_S:ptr byte
-local result__g0_B31:DWORD, r__g0_B31[256]:BYTE
-mov esi, r__g0_B31_S
-lea edi, r__g0_B31
+Bool__g0 proc r__g0_B111_S:ptr byte
+local r__g0_B111[256]:BYTE, result__g0_B111:DWORD
+mov esi, r__g0_B111_S
+lea edi, r__g0_B111
  copy_loop_3:
 lodsb
 stosb
 test al, al
 jnz copy_loop_3
-push Literal_7__none
-pop result__g0_B31
-push result__g0_B31
-
-pop eax
-ret
-Bool__g0 endp
-String__g0 proc ret__g0_S41:REAL8
-local result__g0_S41[256]:BYTE
-lea eax, Literal_8__none
+push Literal_21__none
+pop result__g0_B111
+lea eax, r__g0_B111
+push eax
+lea eax, Literal_22__none
 push eax
 pop esi
-lea edi, result__g0_S41
+pop edi
+mov ecx, 256
+repe cmpsb
+jz If_l4
+jmp Else4
+If_l4:
+push Literal_23__none
+
+pop eax
+jmp Endif4
+Else4:
+Endif4:
+ret
+Bool__g0 endp
+strTest__g0 proc c__g0_s131_S:ptr byte, b__g0_s131:REAL8, a__g0_s131_S:ptr byte
+local a__g0_s131[256]:BYTE, c__g0_s131[256]:BYTE
+mov esi, a__g0_s131_S
+lea edi, a__g0_s131
  copy_loop_4:
 lodsb
 stosb
 test al, al
 jnz copy_loop_4
-lea eax, result__g0_S41
+mov esi, c__g0_s131_S
+lea edi, c__g0_s131
+ copy_loop_5:
+lodsb
+stosb
+test al, al
+jnz copy_loop_5
+lea eax, a__g0_s131
 push eax
-
-pop eax
-ret
-String__g0 endp
-main__g0 proc
-local resultFunction__g0_m51:REAL8, aaa__g0_m51:SDWORD, r__g0_m51_i62:SDWORD, kl__g0_m51:SDWORD, div__g0_m51:SDWORD, r__g0_m51_e102:SDWORD
-lea eax, Literal_9__none
+lea eax, c__g0_s131
 push eax
-call Double__g0
-fstp real_buff
-fld real_buff
-fstp resultFunction__g0_m51
-push Literal_New_2__none
-pop kl__g0_m51
-push kl__g0_m51
-push Literal_11__none
-xor EDX,EDX
-pop EBX
-pop EAX
-div EBX
-push EAX
-pop div__g0_m51
-fld Literal_12__none
-fstp real_buff
-lea eax, real_buff
-push sdword ptr [eax+4]
-push sdword ptr [eax]
-push Literal_13__none
-lea eax, Literal_14__none
-push eax
-lea eax, Literal_15__none
-push eax
-lea eax, Literal_16__none
-push eax
-call l__g0
-push eax
-pop aaa__g0_m51
-fld Literal_New_3__none
-fld Literal_New_4__none
+pop esi
+pop edi
+mov ecx, 256
+repe cmpsb
+jnz If_l5
+jmp Else5
+If_l5:
+fld b__g0_s131
+fld Literal_25__none
 fstp real_buff
 movsd xmm1, real_buff
 fstp real_buff
@@ -185,44 +274,163 @@ movsd xmm0, real_buff
 cmpsd xmm0, xmm1, 6
 movd eax, xmm0
 and eax, eax
-jnz If_l0
-jmp Else0
-If_l0:
-push Literal_New_5__none
-pop r__g0_m51_i62
-push r__g0_m51_i62
+jnz If_l6
+jmp Else6
+If_l6:
+lea eax, Literal_26__none
+push eax
+
+pop eax
+jmp Endif6
+Else6:
+Endif6:
+lea eax, a__g0_s131
+push eax
+
+pop eax
+jmp Endif5
+Else5:
+lea eax, c__g0_s131
+push eax
+
+pop eax
+Endif5:
+ret
+strTest__g0 endp
+main__g0 proc
+local r__g0_m171_e232:SDWORD, ii__g0_m171_i182[256]:BYTE, rewr__g0_m171[256]:BYTE, ver3__g0_m171:REAL8, ver2__g0_m171:REAL8, resultOfBool__g0_m171:DWORD, resultFunction__g0_m171:REAL8, ver1__g0_m171:REAL8, aaa__g0_m171:SDWORD, r__g0_m171_i192:SDWORD
+fld Literal_28__none
+fstp real_buff
+lea eax, real_buff
+push sdword ptr [eax+4]
+push sdword ptr [eax]
+call Double__g0
+fstp real_buff
+fld real_buff
+fstp resultFunction__g0_m171
+push Literal_29__none
+call Double2__g0
+fstp real_buff
+fld real_buff
+fstp ver1__g0_m171
+push Literal_30__none
+call Double2__g0
+fstp real_buff
+fld real_buff
+fstp ver2__g0_m171
+push Literal_31__none
+call Double2__g0
+fstp real_buff
+fld real_buff
+fstp ver3__g0_m171
+lea eax, Literal_32__none
+push eax
+call Bool__g0
+push eax
+pop resultOfBool__g0_m171
+lea eax, Literal_33__none
+push eax
+lea eax, Literal_34__none
+push eax
+pop esi
+pop edi
+mov ecx, 256
+repe cmpsb
+jnz If_l7
+jmp Else7
+If_l7:
+lea eax, Literal_35__none
+push eax
+pop esi
+lea edi, ii__g0_m171_i182
+ copy_loop_9:
+lodsb
+stosb
+test al, al
+jnz copy_loop_9
+jmp Endif7
+Else7:
+Endif7:
+lea eax, Literal_36__none
+push eax
+fld Literal_37__none
+fstp real_buff
+lea eax, real_buff
+push sdword ptr [eax+4]
+push sdword ptr [eax]
+lea eax, Literal_38__none
+push eax
+call strTest__g0
+push eax
+pop esi
+lea edi, rewr__g0_m171
+ copy_loop_10:
+lodsb
+stosb
+test al, al
+jnz copy_loop_10
+fld Literal_39__none
+fstp real_buff
+lea eax, real_buff
+push sdword ptr [eax+4]
+push sdword ptr [eax]
+push Literal_40__none
+lea eax, Literal_41__none
+push eax
+lea eax, Literal_42__none
+push eax
+lea eax, Literal_43__none
+push eax
+call l__g0
+push eax
+pop aaa__g0_m171
+fld Literal_New_8__none
+fld Literal_New_9__none
+fstp real_buff
+movsd xmm1, real_buff
+fstp real_buff
+movsd xmm0, real_buff
+cmpsd xmm0, xmm1, 6
+movd eax, xmm0
+and eax, eax
+jnz If_l8
+jmp Else8
+If_l8:
+push Literal_New_10__none
+pop r__g0_m171_i192
+push r__g0_m171_i192
 push jksd__g0
 pop eax
 pop ebx
 cmp ebx, eax
-jg If_l1
-jmp Else1
-If_l1:
-push Literal_New_6__none
-pop r__g0_m51_i62
-jmp Endif1
-Else1:
-push Literal_New_7__none
-pop r__g0_m51_i62
-push r__g0_m51_i62
+jg If_l9
+jmp Else9
+If_l9:
+push Literal_New_11__none
+pop r__g0_m171_i192
+jmp Endif9
+Else9:
+push Literal_New_12__none
+pop r__g0_m171_i192
+push r__g0_m171_i192
 push jksd__g0
 pop eax
 pop ebx
 cmp ebx, eax
-jg If_l2
-jmp Else2
-If_l2:
-push Literal_New_8__none
-pop r__g0_m51_i62
-jmp Endif2
-Else2:
-Endif2:
-Endif1:
-jmp Endif0
-Else0:
-push Literal_New_9__none
-pop r__g0_m51_e102
-Endif0:
+jg If_l10
+jmp Else10
+If_l10:
+push Literal_New_13__none
+pop r__g0_m171_i192
+jmp Endif10
+Else10:
+Endif10:
+Endif9:
+jmp Endif8
+Else8:
+push Literal_New_14__none
+pop r__g0_m171_e232
+Endif8:
 
 INVOKE ExitProcess, 0
 main__g0 endp

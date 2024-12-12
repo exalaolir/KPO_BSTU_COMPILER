@@ -7,29 +7,46 @@ fn int l(double y, int h, string str, string hhh, string erty){
   
   return result;
 }
-fn double Double(double r) {
-	double result = 2.0*3.14*r*r;
-
-	return result;
+fn double Double2(int r) {
+	if(r > 0) {
+        return 1.5;
+    }
+    else {
+        if(r : 0) {
+            return 0.5;
+        }
+        else {
+            if(r < 0) {
+                double buf = -1.5;
+                return buf;
+            }
+        }
+    }
+    return 0.0;
 }
 fn double Double(double r) {
-  double result = 2.0*3.14*r*r;
-
-  return result;
+	double result = 2.0*3.14*r*r-Double2(1)*Double2(0) - 75.67;
+    if(Double2(1) > 1.0) {
+        return 1.0;
+    }
+    else {
+        return 2.0;
+    }
+	return result;
 }
 fn bool Bool(string r) {
   bool result = true;
-  return result;
+  if(r : "true") {
+    return true;
+  }
+  return false;
 }
-fn string String(double ret) {
-  let result = "ереекр";
-  return result;
-}
+
 fn string strTest(string a, double b, string c){
     
     if(a :! c){
         if(b > 8.5){
-            return "j";
+            return "";
         }
         return a;
     }
@@ -40,11 +57,17 @@ fn string strTest(string a, double b, string c){
 }
 fn int main()
 {
+double resultFunction = Double(2.5);
+double ver1 = Double2(5);
+double ver2 = Double2(-5);
+double ver3 = Double2(0);
+
+let resultOfBool = Bool("true");
 if("d" :! "k"){
     let ii = "ervv";
 }
     let rewr = strTest("a", -0.7, "kl");
-  double resultFunction = Double(2.5);
+  
  let aaa = l(-0.8, 77, "hyeufhuhd", "kk", "I love Kate!!");
   
   if(0.34 > -3.4){
@@ -78,3 +101,5 @@ if("d" :! "k"){
 @double result = 2*3.14*r*r; Ожидался тип double - так надо.В польской записи промежуточный результат с литералами@
 @не высчитывается так как есть индентификатор@
 @нельзя объявлять пустую строку(ругается в ассемблере)@
+@нельзя вызывать функцию которая внизу@
+@нельзя вставлять пустую строку@
