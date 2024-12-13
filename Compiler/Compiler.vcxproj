@@ -230,6 +230,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="table_printer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Automat.h" />
@@ -245,6 +249,7 @@
     <ClInclude Include="Polish.h" />
     <ClInclude Include="Symbols_And_Resourses.h" />
     <ClInclude Include="Syntax_Analiser.h" />
+    <ClInclude Include="table_printer.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

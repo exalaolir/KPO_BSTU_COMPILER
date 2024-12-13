@@ -58,6 +58,9 @@
     <Filter Include="Файлы заголовков\Generator">
       <UniqueIdentifier>{a831815f-2748-43c0-a514-124f5967423a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\print">
+      <UniqueIdentifier>{8a9103da-79d5-4356-aa6a-bf7ae608f4b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Compiler.cpp">
@@ -100,6 +103,9 @@
       <Filter>Исходные файлы\semantic</Filter>
     </ClCompile>
     <ClCompile Include="Generator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="table_printer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -145,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="Constructions.h">
       <Filter>Файлы заголовков\Generator</Filter>
+    </ClInclude>
+    <ClInclude Include="table_printer.h">
+      <Filter>Файлы заголовков\print</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

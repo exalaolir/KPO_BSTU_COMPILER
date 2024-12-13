@@ -6,15 +6,22 @@ fn int main()
 	while(z :! 10){
 		if(z >= 3){
 			q = q - 1.2;
-			let yy = printString("ss/\n/");
+			let yy = Print("if z >= 3 итерация ");
+			yy = Println(IToString(z));
 		}
 		else{
 			q = q + 2.3;
-			let yy = printString("ddd/\n/");
+			let yy = Println(FToString(q));
 		}
 		z = z + 1;
-		 let yy = printString("aaa/\n/");
 	}
+	let aaa = "Я люблю ";
+	let b = "Катю";
+	let asdf = " очень, очень";
+	let wer = Concat(b, asdf);
+	int uuu = Println(Concat(aaa, wer));
+	let tyuio = 0;
+	tyuio = 67 / tyuio;
    return 0;
 }
 @Выражения с целыми и дробными числами и вызовами функций@

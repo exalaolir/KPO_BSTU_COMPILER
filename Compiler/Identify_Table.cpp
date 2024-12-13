@@ -136,14 +136,60 @@ namespace LEXER
 
 	IdTable LEXER::Lexer::generateIdTable(std::vector<Lexem>& lexTable)
 	{
-		Entry testPr;
-		testPr.type = Fun;
-		testPr.name = "printString";
-		testPr.params = 1;
-		testPr.paramTypes.push_back(String);
-		testPr.scope = "g0";
-		testPr.valueType = Int;
-		idTable.Add(testPr);
+		Entry printFn;
+		printFn.type = Fun;
+		printFn.name = "Print";
+		printFn.params = 1;
+		printFn.paramTypes.push_back(String);
+		printFn.scope = "g0";
+		printFn.valueType = Int;
+		idTable.Add(printFn);
+
+		Entry printlnFn;
+		printlnFn.type = Fun;
+		printlnFn.name = "Println";
+		printlnFn.params = 1;
+		printlnFn.paramTypes.push_back(String);
+		printlnFn.scope = "g0";
+		printlnFn.valueType = Int;
+		idTable.Add(printlnFn);
+
+		Entry toStrIntFn;
+		toStrIntFn.type = Fun;
+		toStrIntFn.name = "IToString";
+		toStrIntFn.params = 1;
+		toStrIntFn.paramTypes.push_back(Int);
+		toStrIntFn.scope = "g0";
+		toStrIntFn.valueType = String;
+		idTable.Add(toStrIntFn);
+
+		Entry toStrDoubleFn;
+		toStrDoubleFn.type = Fun;
+		toStrDoubleFn.name = "FToString";
+		toStrDoubleFn.params = 1;
+		toStrDoubleFn.paramTypes.push_back(Double);
+		toStrDoubleFn.scope = "g0";
+		toStrDoubleFn.valueType = String;
+		idTable.Add(toStrDoubleFn);
+
+		Entry toStrBoolFn;
+		toStrBoolFn.type = Fun;
+		toStrBoolFn.name = "BoolToString";
+		toStrBoolFn.params = 1;
+		toStrBoolFn.paramTypes.push_back(Bool);
+		toStrBoolFn.scope = "g0";
+		toStrBoolFn.valueType = String;
+		idTable.Add(toStrBoolFn);
+
+		Entry Conc;
+		Conc.type = Fun;
+		Conc.name = "Concat";
+		Conc.params = 2;
+		Conc.paramTypes.push_back(String);
+		Conc.paramTypes.push_back(String);
+		Conc.scope = "g0";
+		Conc.valueType = String;
+		idTable.Add(Conc);
 
 		std::stack<Keywords> brackets;
 		int line = 1;

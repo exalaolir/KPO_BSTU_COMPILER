@@ -171,4 +171,15 @@ namespace LEXER
 		{"\\t", '\t'},
 		{"\\v", '\v'},
 	};
+
+	inline static const std::unordered_map<std::string, std::string> Functions
+	{
+		{"Print", "Print"},
+		{"Println", "Println"},
+		{"IToString", "IToString"},
+		{"BoolToString", "BoolToString"},
+		{"FToString", "FToString"},
+		{"Concat", "Concat"},
+		{"Absb", "Absb"},
+	};
 }

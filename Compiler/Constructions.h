@@ -4,7 +4,7 @@
 
 namespace GEN
 {
-	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nprintString__g0 PROTO:ptr byte\nExitProcess PROTO:DWORD\n.STACK 4096\n";
+	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nPrint PROTO arg:ptr byte\nPrintln PROTO arg:ptr byte\nIToString PROTO arg:sdword\nFToString PROTO arg:real8\nBoolToString PROTO arg:sdword\nConcat PROTO arg1:ptr byte, arg2:ptr byte\nAbsb PROTO arg:sword\nExitProcess PROTO:DWORD\n.STACK 4096\n";
 
 	static const bool IS_DOUBLE = true;
 
@@ -129,6 +129,10 @@ namespace GEN
 
 	const auto MAKE_NAME = [](LEXER::Entry entry) -> std::string
 		{
+			if (Functions.contains(entry.name) && entry.type == Fun)
+			{
+				return entry.name;
+			}
 			return entry.name + "__" + entry.scope;
 		};
 

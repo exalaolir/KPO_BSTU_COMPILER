@@ -4,7 +4,11 @@
 #include "Magazine_Automate.h"
 #include "Polish.h"
 #include "Syntax_Analiser.h"
+#include "table_printer.h"
 #include "Generator.h"
+
+
+using namespace bprinter;
 
 using namespace INPUTVAL;
 using namespace LEXER;
@@ -15,6 +19,19 @@ int main(int argc, char* argv[])
  	setlocale(LC_NUMERIC, "C");
 	try
 	{
+		TablePrinter tp(&std::cout);
+		tp.set_flush_left();
+		tp.AddColumn("Name", 25);
+		tp.AddColumn("Age", 25);
+		tp.AddColumn("Position", 25);
+
+		tp.PrintHeader();
+		tp << "Dat Chu" << 25 << "Research Assistant";
+		tp << "John Doe" << 26 << "Professional Anonymity";
+		tp << "Jane Doe" << 26 << "Professional Anonymity";
+		tp << "Tom Doe" << 7 << "Student";
+		tp.PrintFooter();
+
 		std::unordered_map<Keywords, string> kl
 		{
 			{Int, "int"},
