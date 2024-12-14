@@ -261,6 +261,10 @@ namespace GEN
 		{
 			count(operatorsInt, false, isReturn, string() + end, true);
 		}
+		else if (var.valueType == UInt || var.valueType == UIntLiteral)
+		{
+			count(operatorsUInt, false, isReturn, string() + end);
+		}
 		else if (var.valueType != Double)
 		{
 			count(operatorsInt, false, isReturn, string() + end);

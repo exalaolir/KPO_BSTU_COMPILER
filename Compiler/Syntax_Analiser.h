@@ -16,10 +16,16 @@ namespace ANALISER
 			{String, "string"},
 			{Bool, "bool"},
 			{Double, "double"},
+			{Byte, "byte"},
+			{Char, "char"},
+			{UInt, "uint"},
 			{IntLiteral, "int"},
 			{StringLiteral, "string"},
 			{BoolLiteral, "bool"},
 			{DoubleLiteral, "double"},
+			{ByteLiteral, "byte"},
+			{CharLiteral, "char"},
+			{UIntLiteral, "uint"},
 		};
 	private:
 		Entry currentFunction;
@@ -37,10 +43,16 @@ namespace ANALISER
 			{StringLiteral, String},
 			{BoolLiteral, Bool},
 			{DoubleLiteral, Double},
+			{CharLiteral, Char},
+			{UIntLiteral, UInt},
+			{ByteLiteral, Byte},
 			{Int, Int},
 			{String, String},
 			{Bool, Bool},
 			{Double, Double},
+			{Char, Char},
+			{UInt, UInt},
+			{Byte, Byte},
 		};
 	};
 }

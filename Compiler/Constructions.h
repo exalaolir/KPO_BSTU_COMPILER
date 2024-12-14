@@ -4,7 +4,7 @@
 
 namespace GEN
 {
-	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nPrint PROTO arg:ptr byte\nPrintln PROTO arg:ptr byte\nIToString PROTO arg:sdword\nFToString PROTO arg:real8\nBoolToString PROTO arg:sdword\nConcat PROTO arg1:ptr byte, arg2:ptr byte\nAbsb PROTO arg:sword\nExitProcess PROTO:DWORD\n.STACK 4096\n";
+	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nPrint PROTO arg:ptr byte\nPrintln PROTO arg:ptr byte\nIToString PROTO arg:sdword\nUIToString PROTO arg:dword\nFToString PROTO arg:real8\nBoolToString PROTO arg:sdword\nConcat PROTO arg1:ptr byte, arg2:ptr byte\nAbsb PROTO arg:sword\nExitProcess PROTO:DWORD\n.STACK 4096\n";
 
 	static const bool IS_DOUBLE = true;
 
@@ -21,6 +21,7 @@ namespace GEN
 	static const std::string IMUL = "pop EBX\npop EAX\nimul EAX, EBX\npush EAX\n";
 	static const std::string SHIFT_LEFT = "pop eax\npop ecx\nshl eax, cl\npush eax";
 	static const std::string SHIFT_RIGHT = "pop eax\npop ecx\nshr eax, cl\npush eax";
+	static const std::string MUL = "pop EBX\npop EAX\nmul EAX, EBX\npush EAX\n";
 
 	static const std::string F_ADD = "fadd\n";
 	static const std::string F_SUB = "fsub\n";
@@ -72,6 +73,17 @@ namespace GEN
 		{"+", ADD},
 		{"-", SUB},
 		{"*", IMUL},
+		{"/", DIV},
+		{"%", DIV_WITH_PERCENTS},
+		{"<<", SHIFT_LEFT},
+		{">>", SHIFT_RIGHT},
+	};
+
+	const std::unordered_map<std::string, std::string> operatorsUInt
+	{
+		{"+", ADD},
+		{"-", SUB},
+		{"*", MUL},
 		{"/", DIV},
 		{"%", DIV_WITH_PERCENTS},
 		{"<<", SHIFT_LEFT},

@@ -10,7 +10,7 @@ namespace LEXER
 	std::variant <Keywords,
 		std::string,
 		int,
-		std::variant<int, double, bool, std::string, Keywords>
+		std::variant<int, double, bool, std::string, Keywords, unsigned int>
 	> LEXER::Entry::operator[](unsigned index) const
 	{
 		switch (index)
@@ -56,39 +56,54 @@ namespace LEXER
 					return std::to_string(arg);
 				}
 				else if constexpr (std::is_same_v<T, std::string>)
-				{
-					std::string newArg;
-					for (size_t i = 0; i < arg.length(); i++)
+				{					
+					if (arg[0] != '\'')
 					{
-						auto symbol = arg[i];
-						std::string newSym;
-						bool isSpec = false;
-						if (symbol == '\n') { newSym += "10"; isSpec = true; }
-						else if (symbol == '\v') { newSym += "11"; isSpec = true; }
-						else if (symbol == '\t') { newSym += "9"; isSpec = true; }
-						else newArg += symbol;
-
-						if (isSpec)
+						std::string newArg;
+						for (size_t i = 0; i < arg.length(); i++)
 						{
-							if (i == 1)
+							auto symbol = arg[i];
+							std::string newSym;
+							bool isSpec = false;
+							if (symbol == '\n') { newSym += "10"; isSpec = true; }
+							else if (symbol == '\v') { newSym += "11"; isSpec = true; }
+							else if (symbol == '\t') { newSym += "9"; isSpec = true; }
+							else newArg += symbol;
+
+							if (isSpec)
 							{
-								newArg.clear();
-								newArg = newSym + ", \"";
-							}
-							else if (i == arg.length() - 2)
-							{
-								newArg += "\"," + newSym + ", 0";
-								break;
-							}
-							else
-							{
-								newArg += "\"," + newSym + ", \"";
+								if (i == 1)
+								{
+									newArg.clear();
+									newArg = newSym + ", \"";
+								}
+								else if (i == arg.length() - 2)
+								{
+									newArg += "\"," + newSym + ", 0";
+									break;
+								}
+								else
+								{
+									newArg += "\"," + newSym + ", \"";
+								}
 							}
 						}
+						return newArg;
 					}
-					return newArg;
+					else
+					{
+						auto res = arg;
+						if (res == "\'\n\'") res = "0Ah";
+						else if (res == "\'\t\'") res = "09h";
+						else if (res == "\'\v\'") res = "0Bh";
+						return res;
+					}
 				}
 				else if constexpr (std::is_same_v<T, Keywords>)
+				{
+					return std::to_string(arg);
+				}
+				else if constexpr (std::is_same_v<T, unsigned int>)
 				{
 					return std::to_string(arg);
 				}
@@ -115,6 +130,15 @@ namespace LEXER
 	void IdTable::Add(Entry& entry)
 	{
 		double key = entry.GetHashCode();
+		if (entry.valueType == String || entry.valueType == StringLiteral)
+		{
+			if (entry.GetValue().length() > 255)
+			{
+				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", entry.line, entry.pos),
+						  "Длина строки не должна превышать 255 символов");
+				throw "Esception";
+			}
+		}
 		table.insert(std::make_pair(key, entry));
 		keys.push_back(key);
 	}
@@ -181,6 +205,15 @@ namespace LEXER
 		toStrBoolFn.valueType = String;
 		idTable.Add(toStrBoolFn);
 
+		Entry toStrUIntFn;
+		toStrUIntFn.type = Fun;
+		toStrUIntFn.name = "UIToString";
+		toStrUIntFn.params = 1;
+		toStrUIntFn.paramTypes.push_back(UInt);
+		toStrUIntFn.scope = "g0";
+		toStrUIntFn.valueType = String;
+		idTable.Add(toStrUIntFn);
+
 		Entry Conc;
 		Conc.type = Fun;
 		Conc.name = "Concat";
@@ -212,6 +245,15 @@ namespace LEXER
 				break;
 			case Double:
 				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Double);
+				break;
+			case Byte:
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Byte);
+				break;
+			case Char:
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Char);
+				break;
+			case UInt:
+				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, UInt);
 				break;
 			case Bool:
 				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Bool);
@@ -335,6 +377,9 @@ namespace LEXER
 				case LEXER::DoubleLiteral:
 					val = std::stod(literal);
 					break;
+				case LEXER::UIntLiteral:
+					val = std::stoul(literal);
+					break;
 				default:
 					break;
 				}
@@ -371,6 +416,106 @@ namespace LEXER
 					literal.line = line;
 					literal.pos = counter;
 					literal.value = token;
+					if (token == "\"\"")
+					{
+
+						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+								  std::format("Пустая строка не допускается {}", token));
+						throw "Esception";
+					}
+
+					idTable.Add(literal);
+				}
+			}
+			else if (regex.Match(token, "(\'[\t-я]\')"))
+			{
+				type = CharLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal_" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = CharLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = token;
+					if (token == "\"\"")
+					{
+
+						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+								  std::format("Пустая строка не допускается {}", token));
+						throw "Esception";
+					}
+
+					idTable.Add(literal);
+				}
+			}
+			else if (regex.Match(token, "((0s[1-9]+[0-9]*|-0s[1-9]+[0-9]*|0s0))"))
+			{
+				std::string newTocken;
+				if (token[0] == '-')
+				{
+					newTocken = token.erase(1, 2);
+				}
+				else
+				{
+					newTocken = token.erase(0, 2);
+				}
+				isValidLiteral(IntLiteral, newTocken, 10);
+				type = ByteLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal_" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = ByteLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = std::stoi(newTocken);
+					if (std::stoi(token) < -128 || std::stoi(token) > 127)
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+								  std::format("Переполнение типа byte {}", token));
+						throw "Esception";
+					}
+
+					idTable.Add(literal);
+				}
+			}
+			else if (regex.Match(token, "((0u[1-9]+[0-9]*|0u0))"))
+			{
+				std::string newTocken;
+				if (token[0] == '-')
+				{
+					newTocken = token.erase(1, 2);
+				}
+				else
+				{
+					newTocken = token.erase(0, 2);
+				}
+				isValidLiteral(UIntLiteral, newTocken, 10);
+				type = UIntLiteral;
+
+				if (!isLexTable)
+				{
+					Entry literal;
+
+					literal.type = Literal;
+					literal.name = "Literal_" + std::to_string(literalNumber);
+					literalNumber++;
+					literal.valueType = UIntLiteral;
+					literal.scope = "none";
+					literal.line = line;
+					literal.pos = counter;
+					literal.value = (unsigned int)std::stoul(newTocken);
 					if (token == "\"\"")
 					{
 
@@ -439,7 +584,7 @@ namespace LEXER
 					idTable.Add(literal);
 				}
 			}
-			else if (regex.Match(token, "((0o[1-7]+[0-9]*|-0o[1-7]+[0-9]*))"))
+			else if (regex.Match(token, "((0o[1-7]+[0-9]*|-0o[1-7]+[0-9]*|0o0))"))
 			{
 				token.erase(1, 1);
 				std::string newTocken;
@@ -470,7 +615,7 @@ namespace LEXER
 					idTable.Add(literal);
 				}
 			}
-			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*))"))
+			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*|0h0))"))
 			{
 				std::string newTocken;
 				if (token[0] == '-')
@@ -587,7 +732,7 @@ namespace LEXER
 
 		const std::array<string, 2> expressions
 		{
-			"(int|string|bool|double)",
+			"(int|string|bool|double|float|byte|char|uint)",
 			"(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"
 		};
 
@@ -665,6 +810,7 @@ namespace LEXER
 								entry.value = "";
 								break;
 							default:
+								entry.value = 0;
 								break;
 							}
 						}
@@ -774,7 +920,7 @@ namespace LEXER
 
 		const std::array<string, 2> expressions
 		{
-			"(int|string|bool|double)",
+			"(int|string|bool|double|float|byte|char|uint)",
 			"(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"
 		};
 
@@ -939,6 +1085,7 @@ namespace LEXER
 				autoType.value = "";
 				break;
 			default:
+				autoType.value = 0.0;
 				break;
 			}
 			};
@@ -1092,6 +1239,27 @@ namespace LEXER
 				if (autoType.valueType == None)
 				{
 					autoType.valueType = String;
+					setType();
+				}
+				break;
+			case CharLiteral:
+				if (autoType.valueType == None)
+				{
+					autoType.valueType = Char;
+					setType();
+				}
+				break;
+			case UIntLiteral:
+				if (autoType.valueType == None)
+				{
+					autoType.valueType = UInt;
+					setType();
+				}
+				break;
+			case ByteLiteral:
+				if (autoType.valueType == None)
+				{
+					autoType.valueType = Byte;
 					setType();
 				}
 				break;

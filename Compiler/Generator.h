@@ -1,5 +1,5 @@
 #pragma once
-#define COUNT_OF_TYPES 6
+#define COUNT_OF_TYPES 7
 #include "Lexer.h"
 
 using namespace LEXER;
@@ -35,21 +35,40 @@ namespace GEN
 		void GenerateIf(std::list<std::string>& code, size_t& index, size_t localIfCounter, bool rebase = true);
 		void GenerateWhile(std::list<std::string>& code, size_t& index, size_t localIfCounter, bool rebase = true);
 
+		//static inline std::array<std::string, COUNT_OF_TYPES * 2> types
+		//{
+		//	"SDWORD",//int
+		//	"BYTE",//string
+		//	"WORD",//bool
+		//	"REAL8",//double
+		//	"WORD",//char
+		//	"WORD",//byte
+		//	"DWORD",//uint
+		//	"SDWORD",//int
+		//	"BYTE",//string
+		//	"WORD",
+		//	"REAL8",
+		//	"WORD",
+		//	"WORD",
+		//	"DWORD",
+		//};
+
 		static inline std::array<std::string, COUNT_OF_TYPES * 2> types
 		{
-			"SDWORD",
-			"BYTE",
+			"SDWORD",//int
+			"BYTE",//string
+			"DWORD",//bool
+			"REAL8",//double
+			"DWORD",//char
+			"WORD",//byte
+			"DWORD",//uint
+			"SDWORD",//int
+			"BYTE",//string
 			"DWORD",
 			"REAL8",
 			"DWORD",
-			"DWORD",
-			"SDWORD",
-			"BYTE",
-			"DWORD",
-			"REAL8",
 			"DWORD",
 			"DWORD",
 		};
 	};
 }
-

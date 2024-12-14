@@ -12,6 +12,11 @@ extern "C" {
         return _itoa(num, str, 10);
     }
 
+    char* _stdcall UIToString(unsigned int num) {
+        char* str = new char[256];
+        return _ultoa(num, str, 10);
+    }
+
     char* _stdcall FToString(double num) {
         char* str = new char[256];
         sprintf(str, "%f", num);

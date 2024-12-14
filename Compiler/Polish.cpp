@@ -75,7 +75,7 @@ void POLISH::changeLexTable(vector<LEXER::Lexem>& lexTable, LEXER::IdTable& idTa
 	}
 }
 
-template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expression, LEXER::IdTable& idTable)
+template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expression, LEXER::IdTable& idTable, Keywords type)
 {
 	std::stack<T> results;
 	std::list<LEXER::Lexem> result;
@@ -139,8 +139,8 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			}
 		};
 
-	auto getType = []() -> Keywords {
-		return std::is_same_v<T, int> ? IntLiteral : DoubleLiteral;
+	auto getType = [=]() -> Keywords {
+		return type;
 		};
 
 	auto createEntry = [&](auto& newEntry, auto& val) {
@@ -171,7 +171,17 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 		}
 		else if (element.lexema == "o")
 		{
-			results.push(count(Pop(results), Pop(results), element));
+			try
+			{
+				
+				results.push(count(Pop(results), Pop(results), element));
+			}
+			catch (...)
+			{
+				ERROR_LOG("Sourse code",
+						  "Недопустимая математическая операция");
+				throw "Esception";
+			}
 		}
 		else
 		{
@@ -226,7 +236,7 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 						
 						auto left = ANALISER::Analiser::types[idTable[lexTable[index - 1].positionInIdTable].valueType];
 
-						if ((left != "int" && left != "double") )
+						if ((left != "int" && left != "double" && left != "uint") )
 						{
 							ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), std::format("Арифметические выражения неподдерживаются для типа {}", ANALISER::Analiser::types[idTable[lexTable[index + 1].positionInIdTable].valueType]));
 							throw "Exception";
@@ -236,7 +246,7 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 					{
 						auto right = ANALISER::Analiser::types[idTable[lexTable[index + 1].positionInIdTable].valueType];
 
-						if ((right != "int" && right != "double"))
+						if ((right != "int" && right != "double" && right != "uint"))
 						{
 							ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), std::format("Арифметические выражения неподдерживаются для типа {}", ANALISER::Analiser::types[idTable[lexTable[index+1].positionInIdTable].valueType]));
 							throw "Exception";
@@ -260,9 +270,29 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор >= недопустим для типа string");
 						throw "Exception";
 					}
-					if (lexem.originalText == "<=" && (currentType.valueType == String || currentType.valueType == StringLiteral))
+					if (lexem.originalText == "<=" && (currentType.valueType == Char || currentType.valueType == CharLiteral))
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор <= недопустим для типа string");
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор <= недопустим для типа char");
+						throw "Exception";
+					}
+					if (lexem.originalText == ">" && (currentType.valueType == Char || currentType.valueType == CharLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор > недопустим для типа char");
+						throw "Exception";
+					}
+					if (lexem.originalText == "<" && (currentType.valueType == Char || currentType.valueType == CharLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор < недопустим для типа char");
+						throw "Exception";
+					}
+					if (lexem.originalText == ">=" && (currentType.valueType == Char || currentType.valueType == CharLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор >= недопустим для типа char");
+						throw "Exception";
+					}
+					if (lexem.originalText == "<=" && (currentType.valueType == Char || currentType.valueType == CharLiteral))
+					{
+						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexem.line, lexem.index), "Оператор <= недопустим для типа char");
 						throw "Exception";
 					}
 					return ServisSymbol;
@@ -389,9 +419,13 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 	if (optymiseFlag)
 	{
 		if (currentType.valueType == Int || currentType.valueType == IntLiteral)
-			POLISH::countPolish<int>(newPolishExpression, idTable);
+			POLISH::countPolish<int>(newPolishExpression, idTable, IntLiteral);
 		else if (currentType.valueType == Double || currentType.valueType == DoubleLiteral)
-			POLISH::countPolish<double>(newPolishExpression, idTable);
+			POLISH::countPolish<double>(newPolishExpression, idTable, DoubleLiteral);
+		else if (currentType.valueType == UInt || currentType.valueType == UIntLiteral)
+			POLISH::countPolish<unsigned int>(newPolishExpression, idTable, UIntLiteral);
+		else if (currentType.valueType == Byte || currentType.valueType == ByteLiteral)
+			POLISH::countPolish<int>(newPolishExpression, idTable, ByteLiteral);
 	}
 
 	return newPolishExpression;

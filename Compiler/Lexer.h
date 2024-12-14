@@ -36,14 +36,14 @@ namespace LEXER
 		int line = -1;
 		int pos = -1;
 		int params = 0;
-		std::variant <int, double, bool, std::string, Keywords> value;
+		std::variant <int, double, bool, std::string, Keywords, unsigned int> value;
 		std::vector<Keywords> paramTypes;
 		bool isUse = false;
 		
 		std::variant <Keywords, 
 			std::string, 
 			int, 
-			std::variant<int, double, bool, std::string, Keywords>
+			std::variant<int, double, bool, std::string, Keywords, unsigned int>
 		> operator[](unsigned index) const;
 
 		double GetHashCode() const;

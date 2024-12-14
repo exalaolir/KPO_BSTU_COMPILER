@@ -14,6 +14,7 @@ namespace LEXER
 		Double,
 		Char,
 		Byte,
+		UInt,
 
 		IntLiteral,
 		StringLiteral,
@@ -21,6 +22,7 @@ namespace LEXER
 		DoubleLiteral,
 		CharLiteral,
 		ByteLiteral,
+		UIntLiteral,
 
 		Fun,
 		Return,
@@ -72,6 +74,9 @@ namespace LEXER
 		{"string", "t"},
 		{"double", "t"},
 		{"bool", "t"},
+		{"byte", "t"},
+		{"uint", "t"},
+		{"char", "t"},
 		{"let", "t"},
 		{"fn", "f"},
 		{"return", "r"},
@@ -111,6 +116,9 @@ namespace LEXER
 		{"string", String},
 		{"double", Double},
 		{"bool", Bool},
+		{"byte", Byte},
+		{"uint", UInt},
+		{"char", Char},
 		{"fn", Fun},
 		{"return", Return},
 		{"main", Main},
@@ -181,5 +189,6 @@ namespace LEXER
 		{"FToString", "FToString"},
 		{"Concat", "Concat"},
 		{"Absb", "Absb"},
+		{"UIToString", "UIToString"},
 	};
 }
