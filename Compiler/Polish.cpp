@@ -159,13 +159,13 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			Entry newEntry;
 			createEntry(newEntry, val);
 			idTable.Add(newEntry);
-			result.push_back(Lexem("l", std::to_string(val), -1, -1, newEntry.GetHashCode()));
 
 			val = Pop(results);
 			Entry newEntry1;
 			createEntry(newEntry1, val);
 			idTable.Add(newEntry1);
 			result.push_back(Lexem("l", std::to_string(val), -1, -1, newEntry1.GetHashCode()));
+			result.push_back(Lexem("l", std::to_string(val), -1, -1, newEntry.GetHashCode()));
 
 			result.push_back(element);
 		}
