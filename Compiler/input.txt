@@ -1,37 +1,74 @@
 double PI = 3.14;
-fn double sqrt(double rad) {
+fn double circumference(double rad) {
   return 2.0*PI*rad*rad;
 }
 fn int shiftR(int a,int b) {
-  return a>>b
+  return a>>b;
 }
 fn int shiftL(int a, int b) {
   return a<<b;
 }
+fn bool characterChar(char a, char b) {
+    if(a : b) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+fn bool characterString(string a, string b) {
+    if(a : b) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+fn uint sum (uint a, uint b) {
+    return a+b;
+}
+fn uint arithmetic(uint a, uint b) {
+    uint del = 0u2;
+    uint result = (a+b* sum(0u50,0u30) - a) % del;
+    return result;
+}
 fn int main()
 {
-  @Контррольный пример@
-  double result = sqrt(2.45);
-  int i = Println("Результат вычислений");
-  i = Println(FToString(result));
-  i = Println("Битовый сдвиг");
-  i = Println(IToString(shiftR(5,2)));
-  i = Println(IToString(shiftL(5,2)));
 
-  let z = 0;
-  let q = 9.9;
-  while(z :! 10){
-    if(z >= 3){
-      q = q - 1.2;
-      let yy = Print("if z >= 3 итерация ");
-      yy = Println(IToString(z));
-    }
-    else{
-      q = q + 2.3;
-      let yy = Println(FToString(q));
-    }
-    z = z + 1;
+  double result = circumference(2.45);
+
+  int i = Println("Результат длины окружности");
+  i = Println(FToString(result));
+
+  i = Println("Арифметический расчёт");
+  i = Println(UIToString(arithmetic(0u4,0u5)));
+
+  i = Println("/\n/Битовый сдвиг");
+  i = Println("20>>2");
+  i = Println(IToString(shiftR(20,2)));
+  i = Println("20<<2");
+  i = Println(IToString(shiftL(20,2)));
+
+  let counter = 0;
+  i = Println("/\n/Счётчик");
+  while(counter <= 10) {
+    i = Println(IToString(counter));
+    counter = counter + 1;
   }
-  
-    return 0;
+  i = Println("/\n/Сравнение символов");
+  i = Println("a и b");
+  i = Println(BoolToString(characterChar('a', 'b')));
+  i = Println("a и a");
+  i = Println(BoolToString(characterChar('a', 'a')));
+
+  i = Println("/\n/Соединение строк");
+  let str = Concat("Hello,"," World");
+  i = Println(str);
+
+  i = Println("Соединение символов путём конвертарции в строку/\n/");
+  let op = Concat(CharToString('a'),CharToString('b'));
+  i = Println(op);
+  return 0;
 }
