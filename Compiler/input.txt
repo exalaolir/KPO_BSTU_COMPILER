@@ -1,37 +1,60 @@
 double PI = 3.14;
-fn double sqrt(double rad) {
+fn double circumference(double rad) {
   return 2.0*PI*rad*rad;
 }
 fn int shiftR(int a,int b) {
-  return a>>b
+  return a>>b;
 }
 fn int shiftL(int a, int b) {
   return a<<b;
 }
+fn bool characterChar(char a, char b) {
+    if(a : b) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    return true;
+}
+fn bool characterString(string a, string b) {
+    if(a : b) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    return true;
+}
 fn int main()
 {
   @Контррольный пример@
-  double result = sqrt(2.45);
-  int i = Println("Результат вычислений");
+  double result = circumference(2.45);
+  int i = Println("Результат длины окружности");
   i = Println(FToString(result));
+
   i = Println("Битовый сдвиг");
+  i = Println("5>>2");
   i = Println(IToString(shiftR(5,2)));
+  i = Println("5<<2");
   i = Println(IToString(shiftL(5,2)));
 
-  let z = 0;
-  let q = 9.9;
-  while(z :! 10){
-    if(z >= 3){
-      q = q - 1.2;
-      let yy = Print("if z >= 3 итерация ");
-      yy = Println(IToString(z));
-    }
-    else{
-      q = q + 2.3;
-      let yy = Println(FToString(q));
-    }
-    z = z + 1;
+  let counter = 0;
+  i = Println("Счётчик");
+  while(counter <= 10) {
+    i = Println(IToString(counter));
+    counter = counter + 1;
   }
-  
+  i = Println("Сравнение символов/\n/");
+  i = Println("a и b");
+  i = Println(BoolToString(characterChar('a', 'b')));
+  i = Println("a и a");
+  i = Println(BoolToString(characterChar('a', 'a')));
+
+  i = Println("Сравнение строк/\n/");
+  i = Println("Hello и hello");
+  i = Println(BoolToString(characterString("Hello", "hello")));
+  i = Println("Hello и Hello");
+  i = Println(BoolToString(characterString("Hello", "Hello")));
     return 0;
 }

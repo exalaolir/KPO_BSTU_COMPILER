@@ -158,9 +158,9 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			auto val = Pop(results);
 			if (std::is_same_v<T, double>)
 			{
-				if (std::isinf(val) && val > 0) return;
-				else if (std::isinf(val) && val < 0) return;
-				else if (std::isnan(val)) return;
+				if (std::isinf((double)val) && val > 0) return;
+				else if (std::isinf((double)val) && val < 0) return;
+				else if (std::isnan((double)val)) return;
 			}
 			Entry newEntry;
 			createEntry(newEntry, val);
@@ -169,9 +169,9 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 			val = Pop(results);
 			if (std::is_same_v<T, double>)
 			{
-				if (std::isinf(val) && val > 0) return;
-				else if (std::isinf(val) && val < 0) return;
-				else if (std::isnan(val)) return;
+				if (std::isinf((double)val) && val > 0) return;
+				else if (std::isinf((double)val) && val < 0) return;
+				else if (std::isnan((double)val)) return;
 			}
 			Entry newEntry1;
 			createEntry(newEntry1, val);
@@ -206,9 +206,9 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 		auto val = Pop(results);
 		if (std::is_same_v<T, double>)
 		{
-			if (std::isinf(val) && val > 0) return;
-			else if (std::isinf(val) && val < 0) return;
-			else if (std::isnan(val)) return;
+			if (std::isinf((double)val) && val > 0) return;
+			else if (std::isinf((double)val) && val < 0) return;
+			else if (std::isnan((double)val)) return;
 		}
 		Entry newEntry;
 		createEntry(newEntry, val);
