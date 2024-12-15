@@ -46,7 +46,7 @@ std::array<string, 3> INPUTVAL::validateParams(int& countOfArgs, char* args[])
 		throw "Exception";
 	}
 
-	if (regex.Match(params[OUT_FILE], "(-out:[ -z]+.txt.out)"))
+	if (regex.Match(params[OUT_FILE], "(-out:[ -z]+.asm)"))
 	{
 		paths[OUT_FILE] = params[OUT_FILE].substr(5);
 	}
@@ -56,5 +56,11 @@ std::array<string, 3> INPUTVAL::validateParams(int& countOfArgs, char* args[])
 		INFO_LOG("-out:param", "Используйте шаблон -out:<name>.txt.out");
 	}
 
+	auto substr = paths[OUT_FILE];
+	substr.erase(substr.length() - 4, 4);
+	std::fstream bat;
+	bat.open("C:\\labs\\Course\\Compiler\\Release\\CompilationOfGenCode.bat", std::ios::out);
+	bat << std::format("@ECHO OFF\ntimeout 1\ncd C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\ncall vcvarsall.bat x86\ncd C:\\labs\\Course\\Compiler\\Compiler\nml /c /coff {}.asm\nlink /OPT:NOREF /LTCG /SUBSYSTEM:CONSOLE kernel32.lib msvcrt.lib ucrt.lib vcruntime.lib msvcprt.lib standartLib.lib {}.obj\n call {}.exe\ntimeout 5\npause\nexit",substr, substr, substr);
+	bat.close();
 	return paths;
 }

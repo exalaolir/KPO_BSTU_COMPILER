@@ -251,6 +251,15 @@ namespace LEXER
 		Conc.valueType = String;
 		idTable.Add(Conc);
 
+		Entry CharToString;
+		CharToString.type = Fun;
+		CharToString.name = "CharToString";
+		CharToString.params = 1;
+		CharToString.paramTypes.push_back(Char);
+		CharToString.scope = "g0";
+		CharToString.valueType = String;
+		idTable.Add(CharToString);
+
 		std::stack<Keywords> brackets;
 		int line = 1;
 		int counter = 0;

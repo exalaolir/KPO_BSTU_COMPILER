@@ -26,13 +26,15 @@ fn int main()
 	let asdf = "scsc";
 	let wer = Concat(b, asdf);
 	int uuu = Println(Concat(aaa, wer));
-	let tyuio = 0;
+	let tyuio = 9;
 	tyuio = 67 / tyuio;@
 	let a = 1.0 / 0.0;
 	let y = 0.0 / 0.0;
 	let r = 0.0 / 77.9;
 	@int u = 0;@
-	let yyy = Println(IToString(10/0));
+
+	let yyy = Println("/@/");
+	let yywy = Println(CharToString('/@/'));
 	@let z = 0u3147483647 - 0u6 ;
 	let uio = Println(UIToString(z));
 	if(true : true){let i = Println("bool test done");}

@@ -157,7 +157,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="output.txt.out">
+    <Text Include="output.asm">
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="log.txt.log">

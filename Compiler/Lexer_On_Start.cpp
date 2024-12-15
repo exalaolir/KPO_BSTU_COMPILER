@@ -91,7 +91,9 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 			{
 				if ((int)i + 1 < code.length() && (int)i - 1 >= 0 && code[i - 1] == '/' && code[i + 1] == '/')
 				{
-					i += 1;
+					buffer.pop_back();
+					buffer.push_back('@');
+					i += 2;
 				}
 				else
 				{

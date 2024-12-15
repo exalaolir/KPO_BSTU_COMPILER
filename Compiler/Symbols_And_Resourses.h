@@ -190,6 +190,7 @@ namespace LEXER
 		{"Concat", "Concat"},
 		{"Absb", "Absb"},
 		{"UIToString", "UIToString"},
+		{"CharToString", "CharToString"},
 	};
 
 	inline static const std::unordered_map<Keywords, string> stringInfo

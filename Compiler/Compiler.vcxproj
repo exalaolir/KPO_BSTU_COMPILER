@@ -255,7 +255,7 @@
   <ItemGroup>
     <Text Include="input.txt" />
     <Text Include="log.txt.log" />
-    <Text Include="output.txt.out" />
+    <Text Include="output.asm" />
     <Text Include="translationInfo.txt.log" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

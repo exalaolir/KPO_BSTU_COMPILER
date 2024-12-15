@@ -97,6 +97,8 @@ namespace GEN
 		{
 			assembly << block;
 		}
+
+		this->~Generator();
 	}
 
 	void Generator::GenerateDataSection(size_t& index)

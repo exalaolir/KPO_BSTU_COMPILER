@@ -15,6 +15,7 @@ FToString PROTO arg:real8
 BoolToString PROTO arg:sdword
 Concat PROTO arg1:ptr byte, arg2:ptr byte
 Absb PROTO arg:sword
+CharToString PROTO arg:sdword
 ExitProcess PROTO:DWORD
 .STACK 4096
 .DATA
@@ -26,8 +27,8 @@ Literal_2__none REAL8 0.000000
 Literal_3__none REAL8 0.000000
 Literal_4__none REAL8 0.000000
 Literal_New_1__none REAL8 0.000000
-Literal_7__none SDWORD 10
-Literal_8__none SDWORD 0
+Literal_7__none BYTE "@|", 0
+Literal_8__none DWORD '@'
 Literal_New_2__none SDWORD 0
 .CODE
 option prologue:PrologueDef
@@ -48,7 +49,7 @@ ret
 ret
 test__g0 endp
 main__g0 proc
-local yyy__g0_m21:SDWORD, y__g0_m21:REAL8, a__g0_m21:REAL8, r__g0_m21:REAL8
+local yyy__g0_m21:SDWORD, y__g0_m21:REAL8, a__g0_m21:REAL8, r__g0_m21:REAL8, yywy__g0_m21:SDWORD
 fld Literal_1__none
 fld Literal_2__none
 fdiv
@@ -59,20 +60,17 @@ fdiv
 fstp y__g0_m21
 fld Literal_New_1__none
 fstp r__g0_m21
-push Literal_7__none
-push Literal_8__none
-xor EDX,EDX
-pop EBX
-cmp EBX, 0
-je null_exception
-pop EAX
-div EBX
-push EAX
-call IToString
+lea eax, Literal_7__none
 push eax
 call Println
 push eax
 pop yyy__g0_m21
+push Literal_8__none
+call CharToString
+push eax
+call Println
+push eax
+pop yywy__g0_m21
 push Literal_New_2__none
 
 pop eax

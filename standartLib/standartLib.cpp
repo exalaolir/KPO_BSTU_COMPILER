@@ -32,8 +32,19 @@ extern "C" {
         return str;
     }
 
+    char* _stdcall CharToString(char num) {
+        char* str = new char[256];
+        str[0] = num;
+        str[1] = '\0';
+        return str;
+    }
+
     char* _stdcall Concat(char* sec, char* first) {
-        
+        if (strlen(sec) + strlen(first) > 255)
+        {
+            std::cout << "Превышена длина строки" << std::endl;
+            exit(-1);
+        }
         return strcat(first, sec);
     }
 
@@ -57,7 +68,6 @@ extern "C" {
 
     int _stdcall Println(const char* str) {
         setlocale(LC_ALL, "ru");
-        throw "ee";
         std::cout << str << std::endl;
         return 0;
     }

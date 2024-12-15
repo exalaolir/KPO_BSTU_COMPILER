@@ -18,20 +18,6 @@ int main(int argc, char* argv[])
  	setlocale(LC_NUMERIC, "C");
 	try
 	{
-		/*TablePrinter tp(&std::cout);
-		tp.set_flush_left();
-		tp.AddColumn("Name", 25);
-		tp.AddColumn("Age", 25);
-		tp.AddColumn("Position", 25);
-
-		tp.PrintHeader();
-		tp << "Dat Chu" << 25 << "Research Assistant";
-		tp << "John Doe" << 26 << "Professional Anonymity";
-		tp << "Jane Doe" << 26 << "Professional Anonymity";
-		tp << "Tom Doe" << 7 << "Student";
-		tp.PrintFooter();*/
-
-		
 		auto params = validateParams(argc, argv);
 		Lexer lexer(params[IN_FILE]);
 
@@ -41,30 +27,6 @@ int main(int argc, char* argv[])
 		lexer.printLexTable(lexTable, *log);
 		auto idTable = lexer.generateIdTable(lexTable);
 		lexer.printIdTable(idTable, *log);
-
-		/*for (auto i : idTable.keys)
-		{
-			auto q = idTable.table[i];
-			std::cout << kl[q.type] << " " << q.name << " " << kl[q.valueType] << " " 
-				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params 
-				<< " " << q.GetValue()  << "  " << q.GetHashCode() << std::endl;
-		}*/
-
-		int kk = 1;
-		for (auto jj : lexTable)
-		{
-			if (jj.line != kk) std::cout << std::endl;
-			std::cout << jj.lexema;
-			kk = jj.line;
-		}
-		std::cout << std::endl;
-		std::cout << std::endl;
-		for (auto jj : lexTable)
-		{
-			std::cout << jj.line << "  " << jj.index << "  " << jj.lexema <<
-				"  " << jj.positionInIdTable << std::endl;
-		}
-
 		
 		std::cout << "---------------------------начало синтаксического анализатора-------------------------" << std::endl;
 		MFST_TRACE_START(log);
@@ -81,13 +43,6 @@ int main(int argc, char* argv[])
 
 		std::cout << std::endl;
 		std::cout << std::endl;
-		/*for (auto i : idTable)
-		{
-			auto q = i.second;
-			std::cout << kl[q.type] << " " << q.name << " " << kl[q.valueType] << " "
-				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params
-				<< " " << q.GetValue() << "  " << q.GetHashCode() << std::endl;
-		}*/
 
 		GEN::Generator gen(params[OUT_FILE], lexTable, idTable);
 		gen.Generate();
