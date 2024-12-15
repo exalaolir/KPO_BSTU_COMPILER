@@ -35,6 +35,8 @@ namespace GEN
 
 		code.push_back(DATA + "\n");
 		code.push_back(MAKE_VAR("real_buff", types[LEXER::Double], "0.0") + "\n");
+		code.push_back(MAKE_VAR("null_err", types[LEXER::String], "\"Ошибка, деление на ноль\", 0") + "\n");
+
 
 		for (size_t i = 0; i < lexTable.size(); i++)
 		{
@@ -253,7 +255,7 @@ namespace GEN
 					index++;
 				}
 
-				expression.push_back(POP(MAKE_NAME(var), isDouble, isReturn, isString, copyEqalGenerator));
+				expression.push_back(POP(MAKE_NAME(var), isDouble, isReturn, isString, copyEqalGenerator, currentFunc.type));
 				if(isString) copyEqalGenerator++;
 			};
 

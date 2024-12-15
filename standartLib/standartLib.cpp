@@ -57,6 +57,7 @@ extern "C" {
 
     int _stdcall Println(const char* str) {
         setlocale(LC_ALL, "ru");
+        throw "ee";
         std::cout << str << std::endl;
         return 0;
     }

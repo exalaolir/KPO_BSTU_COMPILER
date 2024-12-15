@@ -3,6 +3,8 @@
 #include "Automat.h"
 #include "Symbols_And_Resourses.h"
 
+using namespace bprinter;
+
 namespace LEXER
 {
 
@@ -36,6 +38,31 @@ namespace LEXER
 		default:
 			throw std::out_of_range("Index out of range in entry of IdTable");
 		}
+	}
+
+	void Lexer::printIdTable(IdTable table, std::ostream& stream)
+	{
+		TablePrinter tp(&stream);
+		tp.set_flush_left();
+		tp.AddColumn("Тип", 10);
+		tp.AddColumn("Имя", 15);
+		tp.AddColumn("Тип значения", 15);
+		tp.AddColumn("Область видимости", 20);
+		tp.AddColumn("Своя область видимости", 23);
+		tp.AddColumn("Строка", 10);
+		tp.AddColumn("Позиция", 10);
+		tp.AddColumn("Кол-во параметров", 10);
+		tp.PrintHeader();
+
+		for (const auto& entry : table)
+		{
+			tp << stringInfo.at(entry.second.type) <<
+				entry.second.name << stringInfo.at(entry.second.valueType) << entry.second.scope <<
+				entry.second.ownScope << entry.second.line <<
+				entry.second.pos << entry.second.params;
+			//tp.PrintFooter();
+		}
+		tp.PrintFooter();
 	}
 
 	Entry& LEXER::IdTable::operator[](double key) const

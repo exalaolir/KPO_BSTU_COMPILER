@@ -14,8 +14,10 @@ namespace GEN
 	static const std::string END_MAIN = "end main";
 	static const std::string PROC = "option prologue:PrologueDef\noption epilogue:EpilogueDef\n";
 
-	static const std::string DIV_WITH_PERCENTS = "xor EDX,EDX\npop EBX\npop EAX\ndiv EBX\npush EDX\n";
-	static const std::string DIV = "xor EDX,EDX\npop EBX\npop EAX\ndiv EBX\npush EAX\n";
+	static const std::string DIV_WITH_PERCENTS = "xor EDX,EDX\npop EBX\ncmp EBX, 0\nje null_exception\npop EAX\nidiv EBX\npush EDX\n";
+	static const std::string DIV = "xor EDX,EDX\npop EBX\ncmp EBX, 0\nje null_exception\npop EAX\ndiv EBX\npush EAX\n";
+	static const std::string DIV_WITH_PERCENTS_U = "xor EDX,EDX\npop EBX\ncmp EBX, 0\nje null_exception\npop EAX\ndiv EBX\npush EDX\n";
+	static const std::string DIV_U = "xor EDX,EDX\npop EBX\ncmp EBX, 0\nje null_exception\npop EAX\ndiv EBX\npush EAX\n";
 	static const std::string ADD = "pop EBX\npop EAX\nadd EAX, EBX\npush EAX\n";
 	static const std::string SUB = "pop EBX\npop EAX\nsub EAX, EBX\npush EAX\n";
 	static const std::string IMUL = "pop EBX\npop EAX\nimul EAX, EBX\npush EAX\n";
@@ -46,8 +48,11 @@ namespace GEN
 	static const std::string EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 0\nmovd eax, xmm0\nand eax, eax\njnz ";
 	static const std::string NO_EQAL_SSE = "fstp real_buff\nmovsd xmm1, real_buff\nfstp real_buff\nmovsd xmm0, real_buff\ncmpsd xmm0, xmm1, 4\nmovd eax, xmm0\nand eax, eax\njnz ";
 
+	static const std::string NULL_EXCEPTION = "null_exception:\nlea eax, null_err\npush eax\ncall Println\npop eax\nINVOKE ExitProcess, -1\n";
+
 	static const std::string EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njz ";
 	static const std::string NO_EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njnz ";
+	
 	const std::unordered_map<std::string, std::string> operatorsBool
 	{
 		{"<", LESS},
@@ -84,8 +89,8 @@ namespace GEN
 		{"+", ADD},
 		{"-", SUB},
 		{"*", MUL},
-		{"/", DIV},
-		{"%", DIV_WITH_PERCENTS},
+		{"/", DIV_U},
+		{"%", DIV_WITH_PERCENTS_U},
 		{"<<", SHIFT_LEFT},
 		{">>", SHIFT_RIGHT},
 	};
@@ -117,7 +122,7 @@ namespace GEN
 		{
 			std::string prolog = std::format(
 				"{} proc\n", name);
-			auto end = std::format("\nINVOKE ExitProcess, 0\n{} endp\nend {}", name, name);
+			auto end = std::format("\nINVOKE ExitProcess, eax\n{}\n{} endp\nend {}", NULL_EXCEPTION, name, name, name);
 			std::list<std::string> result{ prolog, end };
 			return result;
 		};
@@ -164,7 +169,7 @@ namespace GEN
 			return { "local " + locals + "\n" };
 		};
 
-	const auto POP = [](auto val, bool isDouble = false, bool isReturn = false, bool isString = false, size_t index = 0) -> std::string
+	const auto POP = [](auto val, bool isDouble = false, bool isReturn = false, bool isString = false, size_t index = 0, Keywords typeFun = None) -> std::string
 		{
 			if (isString)
 			{
@@ -178,7 +183,9 @@ namespace GEN
 				if(!isReturn)
 					return "pop " + val + "\n";
 				else
-					return "\npop eax\nret\n";
+					if(typeFun == Main)
+						return "\npop eax\n";
+					else return "\npop eax\nret\n";
 			}
 			else
 			{

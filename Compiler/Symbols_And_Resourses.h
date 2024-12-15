@@ -191,4 +191,37 @@ namespace LEXER
 		{"Absb", "Absb"},
 		{"UIToString", "UIToString"},
 	};
+
+	inline static const std::unordered_map<Keywords, string> stringInfo
+	{
+		{Int, "int"},
+		{String, "string"},
+		{Double, "double"},
+		{Bool, "bool"},
+		{Char, "char"},
+		{UInt, "uint"},
+		{Byte, "byte"},
+		{IntLiteral, "int"},
+		{StringLiteral, "string"},
+		{DoubleLiteral, "double"},
+		{BoolLiteral, "bool"},
+		{CharLiteral, "char"},
+		{UIntLiteral, "uint"},
+		{ByteLiteral, "byte"},
+		{Literal, "literal"},
+		{Fun, "fn"},
+		{Return, "return"},
+		{Main, "main"},
+		{If, "if"},
+		{Else, "else"},
+		{For, "for"},
+		{While, "while"},
+		{ServisSymbol, ";"},
+		{ServisSymbol, ","},
+		{OpenBracket, "{"},
+		{CloseBracket, "}"},
+		{Param, "param"},
+		{Variable, "var"},
+		{None, "none"}
+	};
 }

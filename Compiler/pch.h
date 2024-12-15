@@ -21,6 +21,7 @@
 #include <variant>
 #include "Utils.h"
 #include <limits>
+#include "table_printer.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "Logger.h"

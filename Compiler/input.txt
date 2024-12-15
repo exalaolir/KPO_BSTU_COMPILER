@@ -28,12 +28,12 @@ fn int main()
 	int uuu = Println(Concat(aaa, wer));
 	let tyuio = 0;
 	tyuio = 67 / tyuio;@
-	@let r = 0.0;
-	let a = 1.0 / r;
-	let y = Println(FToString(a));@
-	@let r = 0hF14A;
-	int u = 0;
-	let z = 0u3147483647 - 0u6 ;
+	let a = 1.0 / 0.0;
+	let y = 0.0 / 0.0;
+	let r = 0.0 / 77.9;
+	@int u = 0;@
+	let yyy = Println(IToString(10/0));
+	@let z = 0u3147483647 - 0u6 ;
 	let uio = Println(UIToString(z));
 	if(true : true){let i = Println("bool test done");}
 	if(true :! false){let i = Println("bool test done");}
@@ -44,8 +44,8 @@ fn int main()
 	if("a" : "aa"){let i = Println("str test not done");}
 	if('h' : 'h'){let i = Println("char test done");}
 	if('h' :! '/\n/'){let i = Println("char test done");}
-	if(0s9 < 0s10){let i = Println("byte test done");}@
-	let i = "ggg/@/";
+	if(0s9 < 0s10){let i = Println("byte test done");}
+	let i = "ggg//";@
     return 0;
 }
 @Выражения с целыми и дробными числами и вызовами функций@

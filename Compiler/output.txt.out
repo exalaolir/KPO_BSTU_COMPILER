@@ -19,9 +19,16 @@ ExitProcess PROTO:DWORD
 .STACK 4096
 .DATA
 real_buff REAL8 0.0
+null_err BYTE "Ошибка, деление на ноль", 0
 Literal_New_0__none SDWORD 66
-Literal_1__none BYTE "ggg//", 0
-Literal_New_1__none SDWORD 0
+Literal_1__none REAL8 1.000000
+Literal_2__none REAL8 0.000000
+Literal_3__none REAL8 0.000000
+Literal_4__none REAL8 0.000000
+Literal_New_1__none REAL8 0.000000
+Literal_7__none SDWORD 10
+Literal_8__none SDWORD 0
+Literal_New_2__none SDWORD 0
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
@@ -41,21 +48,43 @@ ret
 ret
 test__g0 endp
 main__g0 proc
-local i__g0_m21[256]:BYTE
-lea eax, Literal_1__none
+local yyy__g0_m21:SDWORD, y__g0_m21:REAL8, a__g0_m21:REAL8, r__g0_m21:REAL8
+fld Literal_1__none
+fld Literal_2__none
+fdiv
+fstp a__g0_m21
+fld Literal_3__none
+fld Literal_4__none
+fdiv
+fstp y__g0_m21
+fld Literal_New_1__none
+fstp r__g0_m21
+push Literal_7__none
+push Literal_8__none
+xor EDX,EDX
+pop EBX
+cmp EBX, 0
+je null_exception
+pop EAX
+div EBX
+push EAX
+call IToString
 push eax
-pop esi
-lea edi, i__g0_m21
- copy_loop_1:
-lodsb
-stosb
-test al, al
-jnz copy_loop_1
-push Literal_New_1__none
+call Println
+push eax
+pop yyy__g0_m21
+push Literal_New_2__none
 
 pop eax
 ret
 
-INVOKE ExitProcess, 0
+INVOKE ExitProcess, eax
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 main__g0 endp
 end main__g0

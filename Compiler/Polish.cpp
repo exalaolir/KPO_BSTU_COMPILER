@@ -156,11 +156,17 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 		if (element.lexema == "u")
 		{
 			auto val = Pop(results);
+			if (std::isinf(val) && val > 0) return;
+			else if (std::isinf(val) && val < 0) return;
+			else if (std::isnan(val)) return;
 			Entry newEntry;
 			createEntry(newEntry, val);
 			idTable.Add(newEntry);
 
 			val = Pop(results);
+			if (std::isinf(val) && val > 0) return;
+			else if (std::isinf(val) && val < 0) return;
+			else if (std::isnan(val)) return;
 			Entry newEntry1;
 			createEntry(newEntry1, val);
 			idTable.Add(newEntry1);
@@ -192,6 +198,9 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 	if (result.empty())
 	{
 		auto val = Pop(results);
+		if (std::isinf(val) && val > 0) return;
+		else if (std::isinf(val) && val < 0) return;
+		else if (std::isnan(val)) return;
 		Entry newEntry;
 		createEntry(newEntry, val);
 		idTable.Add(newEntry);

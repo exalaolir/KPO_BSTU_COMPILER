@@ -4,7 +4,6 @@
 #include "Magazine_Automate.h"
 #include "Polish.h"
 #include "Syntax_Analiser.h"
-#include "table_printer.h"
 #include "Generator.h"
 
 
@@ -19,7 +18,7 @@ int main(int argc, char* argv[])
  	setlocale(LC_NUMERIC, "C");
 	try
 	{
-		TablePrinter tp(&std::cout);
+		/*TablePrinter tp(&std::cout);
 		tp.set_flush_left();
 		tp.AddColumn("Name", 25);
 		tp.AddColumn("Age", 25);
@@ -30,51 +29,29 @@ int main(int argc, char* argv[])
 		tp << "John Doe" << 26 << "Professional Anonymity";
 		tp << "Jane Doe" << 26 << "Professional Anonymity";
 		tp << "Tom Doe" << 7 << "Student";
-		tp.PrintFooter();
+		tp.PrintFooter();*/
 
-		std::unordered_map<Keywords, string> kl
-		{
-			{Int, "int"},
-			{String, "string"},
-			{Double, "double"},
-			{Bool, "bool"},
-			{Fun, "fn"},
-			{Return, "return"},
-			{Main, "main"},
-			{If, "if"},
-			{Else, "else"},
-			{For, "for"},
-			{While, "while"},
-			{ServisSymbol, ";"},
-			{ServisSymbol, ","},
-			{OpenBracket, "{"},
-			{CloseBracket, "}"},
-			{ServisSymbol, "("},
-			{ServisSymbol, ")"},
-			{ServisSymbol, "+"},
-			{ServisSymbol, "-"},
-			{ServisSymbol, "*"},
-			{ServisSymbol, "/"},
-			{ServisSymbol, "="},
-			{Param, "param"},
-			{Variable, "var"}
-		};
+		
 		auto params = validateParams(argc, argv);
 		Lexer lexer(params[IN_FILE]);
 
-		auto hjk = lexer.generateLexTable();
-		auto h = lexer.generateIdTable(hjk);
+		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
 
-		for (auto i : h.keys)
+		auto lexTable = lexer.generateLexTable();
+		lexer.printLexTable(lexTable, *log);
+		auto idTable = lexer.generateIdTable(lexTable);
+		lexer.printIdTable(idTable, *log);
+
+		/*for (auto i : idTable.keys)
 		{
-			auto q = h.table[i];
+			auto q = idTable.table[i];
 			std::cout << kl[q.type] << " " << q.name << " " << kl[q.valueType] << " " 
 				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params 
 				<< " " << q.GetValue()  << "  " << q.GetHashCode() << std::endl;
-		}
+		}*/
 
 		int kk = 1;
-		for (auto jj : hjk)
+		for (auto jj : lexTable)
 		{
 			if (jj.line != kk) std::cout << std::endl;
 			std::cout << jj.lexema;
@@ -82,38 +59,40 @@ int main(int argc, char* argv[])
 		}
 		std::cout << std::endl;
 		std::cout << std::endl;
-		for (auto jj : hjk)
+		for (auto jj : lexTable)
 		{
 			std::cout << jj.line << "  " << jj.index << "  " << jj.lexema <<
 				"  " << jj.positionInIdTable << std::endl;
 		}
 
-		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
+		
 		std::cout << "---------------------------начало синтаксического анализатора-------------------------" << std::endl;
 		MFST_TRACE_START(log);
-		MFST::Mfst mfst(hjk, h, GRB::getGreibach());
+		MFST::Mfst mfst(lexTable, idTable, GRB::getGreibach());
 		if (!mfst.start(log))
 			throw "Error";
 		mfst.savededucation();
 		mfst.printrules(log);
 		std::cout << "---------------------------конец синтаксического анализатора-------------------------" << std::endl;
 		ANALISER::Analiser analiser;
-		analiser.analise(hjk, h);
+		analiser.analise(lexTable, idTable);
 
-		POLISH::changeLexTable(hjk, h);
+		POLISH::changeLexTable(lexTable, idTable);
 
 		std::cout << std::endl;
 		std::cout << std::endl;
-		for (auto i : h)
+		/*for (auto i : idTable)
 		{
 			auto q = i.second;
 			std::cout << kl[q.type] << " " << q.name << " " << kl[q.valueType] << " "
 				<< q.scope << " " << q.ownScope << " " << q.line << " " << q.pos << " " << q.params
 				<< " " << q.GetValue() << "  " << q.GetHashCode() << std::endl;
-		}
+		}*/
 
-		GEN::Generator gen(params[OUT_FILE], hjk, h);
+		GEN::Generator gen(params[OUT_FILE], lexTable, idTable);
 		gen.Generate();
+
+		system("C:\\labs\\Course\\Compiler\\Release\\CompilationOfGenCode.bat");
 	}
 	catch (const std::out_of_range& ex)
 	{

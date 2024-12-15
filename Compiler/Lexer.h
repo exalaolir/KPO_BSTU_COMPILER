@@ -91,6 +91,9 @@ namespace LEXER
 		std::vector<Lexem> generateLexTable();
 
 		IdTable generateIdTable(std::vector<Lexem>& lexTable);
+
+		void printLexTable(std::vector<Lexem> table, std::ostream& stream);
+		void printIdTable(IdTable table, std::ostream& stream);
 	private:
 		std::list<string> preprocessCode(std::string& code);
 		std::string readFile(std::string& fileName);

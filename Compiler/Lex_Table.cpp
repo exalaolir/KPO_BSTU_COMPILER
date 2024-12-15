@@ -3,6 +3,8 @@
 #include "Automat.h"
 #include "Symbols_And_Resourses.h"
 
+using namespace bprinter;
+
 namespace LEXER
 {
 	bool ifFlag = false;
@@ -307,5 +309,22 @@ namespace LEXER
 			}
 		}
 		return result;
+	}
+	void Lexer::printLexTable(std::vector<Lexem> table, std::ostream& stream)
+	{
+		std::cout << "Таблица лексем" << std::endl;
+
+		TablePrinter tp(&stream);
+		tp.set_flush_left();
+		tp.AddColumn("Строка", 10);
+		tp.AddColumn("Позиция", 10);
+		tp.AddColumn("Лексема", 10);
+
+		tp.PrintHeader();
+		for (const auto& lexem : table)
+		{
+			tp << lexem.line << lexem.index <<lexem.lexema;
+		}
+		tp.PrintFooter();
 	}
 }
