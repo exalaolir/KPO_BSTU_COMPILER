@@ -182,14 +182,6 @@ namespace LEXER
 			literalNumber++;
 			break;
 		}
-		case ByteLiteral:
-		{
-			std::string name = "Literal_" + std::to_string(literalNumber);
-			std::string id = "none";
-			hash = hasher(name, id);
-			literalNumber++;
-			break;
-		}
 		case UIntLiteral:
 		{
 			std::string name = "Literal_" + std::to_string(literalNumber);
@@ -272,27 +264,11 @@ namespace LEXER
 			{
 				result = "l";
 			}
-			else if (regex.Match(token, "((0s[1-9]+[0-9]*|-0s[1-9]+[0-9]*|0s0))"))
-			{
-				result = "l";
-			}
 			else if (regex.Match(token, "((0u[1-9]+[0-9]*|0u0))"))
 			{
 				result = "l";
 			}
 			else if (regex.Match(token, "((-[1-9]+[0-9]*|-[0-9]+.[0-9]+))"))
-			{
-				result = "l";
-			}
-			else if (regex.Match(token, "((0b(1|0)+|-0b(1|0)+))"))
-			{
-				result = "l";
-			}
-			else if (regex.Match(token, "((0o[1-7]+[0-9]*|-0o[1-7]+[0-9]*|0o0))"))
-			{
-				result = "l";
-			}
-			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*|0h0))"))
 			{
 				result = "l";
 			}

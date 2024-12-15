@@ -1,66 +1,37 @@
-fn int test(string ll){
-	return 66;
+double PI = 3.14;
+fn double sqrt(double rad) {
+  return 2.0*PI*rad*rad;
 }
-
-
+fn int shiftR(int a,int b) {
+  return a>>b
+}
+fn int shiftL(int a, int b) {
+  return a<<b;
+}
 fn int main()
 {
-	@let aaaaaaa = 1.0;
-	aaaaaaa = 1.0 / 0.0;
-	let z = 0;
-	let q = 9.9;
-	while(z :! 10){
-		if(z >= 3){
-			q = q - 1.2;
-			let yy = Print("if z >= 3 итерация ");
-			yy = Println(IToString(z));
-		}
-		else{
-			q = q + 2.3;
-			let yy = Println(FToString(q));
-		}
-		z = z + 1;
-	}
-	let aaa = "cedc ";
-	let b = "dcdc";
-	let asdf = "scsc";
-	let wer = Concat(b, asdf);
-	int uuu = Println(Concat(aaa, wer));
-	let tyuio = 9;
-	tyuio = 67 / tyuio;@
-	let a = 1.0 / 0.0;
-	let y = 0.0 / 0.0;
-	let r = 0.0 / 77.9;
-	@int u = 0;@
+  @Контррольный пример@
+  double result = sqrt(2.45);
+  int i = Println("Результат вычислений");
+  i = Println(FToString(result));
+  i = Println("Битовый сдвиг");
+  i = Println(IToString(shiftR(5,2)));
+  i = Println(IToString(shiftL(5,2)));
 
-	let yyy = Println("/@/");
-	let yywy = Println(CharToString('/@/'));
-	@let z = 0u3147483647 - 0u6 ;
-	let uio = Println(UIToString(z));
-	if(true : true){let i = Println("bool test done");}
-	if(true :! false){let i = Println("bool test done");}
-	if(true : false){let i = Println("bool test not done");}
-	if("abcd" : "abcd"){let i = Println("str test not done");}
-	if("abcd" :! "gggggggggggg"){let i = Println("str test done");}
-	if("a" : "g"){let i = Println("str test not done");}
-	if("a" : "aa"){let i = Println("str test not done");}
-	if('h' : 'h'){let i = Println("char test done");}
-	if('h' :! '/\n/'){let i = Println("char test done");}
-	if(0s9 < 0s10){let i = Println("byte test done");}
-	let i = "ggg//";@
+  let z = 0;
+  let q = 9.9;
+  while(z :! 10){
+    if(z >= 3){
+      q = q - 1.2;
+      let yy = Print("if z >= 3 итерация ");
+      yy = Println(IToString(z));
+    }
+    else{
+      q = q + 2.3;
+      let yy = Println(FToString(q));
+    }
+    z = z + 1;
+  }
+  
     return 0;
 }
-@Выражения с целыми и дробными числами и вызовами функций@
-@If, else с целыми числами, дробными числами и bool@
-@Передачу параметров в функцию в виде выражения(содержащего вызов функции). Пока целые и дробные. Можно и bool@
-@let@
-@восьмиричные...@
-@арифметика@
-@деление нало не обработано@
-@нельзя не передавать парметры - так надо@
-
-@double result = 2*3.14*r*r; Ожидался тип double - так надо.В польской записи промежуточный результат с литералами@
-@не высчитывается так как есть индентификатор@
-@нельзя объявлять пустую строку(ругается в ассемблере)@
-@нельзя вызывать функцию которая внизу@
-@нельзя вставлять пустую строку@

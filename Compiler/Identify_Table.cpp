@@ -60,7 +60,6 @@ namespace LEXER
 				entry.second.name << stringInfo.at(entry.second.valueType) << entry.second.scope <<
 				entry.second.ownScope << entry.second.line <<
 				entry.second.pos << entry.second.params;
-			//tp.PrintFooter();
 		}
 		tp.PrintFooter();
 	}
@@ -282,9 +281,6 @@ namespace LEXER
 			case Double:
 				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Double);
 				break;
-			case Byte:
-				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Byte);
-				break;
 			case Char:
 				createVar(token, lexTable, idTable, preprocesseredStr, line, counter, Char);
 				break;
@@ -490,42 +486,6 @@ namespace LEXER
 					idTable.Add(literal);
 				}
 			}
-			else if (regex.Match(token, "((0s[1-9]+[0-9]*|-0s[1-9]+[0-9]*|0s0))"))
-			{
-				std::string newTocken;
-				if (token[0] == '-')
-				{
-					newTocken = token.erase(1, 2);
-				}
-				else
-				{
-					newTocken = token.erase(0, 2);
-				}
-				isValidLiteral(IntLiteral, newTocken, 10);
-				type = ByteLiteral;
-
-				if (!isLexTable)
-				{
-					Entry literal;
-
-					literal.type = Literal;
-					literal.name = "Literal_" + std::to_string(literalNumber);
-					literalNumber++;
-					literal.valueType = ByteLiteral;
-					literal.scope = "none";
-					literal.line = line;
-					literal.pos = counter;
-					literal.value = std::stoi(newTocken);
-					if (std::stoi(token) < -128 || std::stoi(token) > 127)
-					{
-						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
-								  std::format("Переполнение типа byte {}", token));
-						throw "Esception";
-					}
-
-					idTable.Add(literal);
-				}
-			}
 			else if (regex.Match(token, "((0u[1-9]+[0-9]*|0u0))"))
 			{
 				std::string newTocken;
@@ -586,97 +546,6 @@ namespace LEXER
 					literal.line = line;
 					literal.pos = counter;
 					literal.value = std::stoi(token, nullptr, 10);
-
-					idTable.Add(literal);
-				}
-			}
-			else if (regex.Match(token, "(((0b(1|0)+|-0b(1|0)+)))"))
-			{
-				std::string newTocken;
-				if (token[0] == '-')
-				{
-					newTocken = token.erase(1, 2);
-				}
-				else
-				{
-					newTocken = token.erase(0, 2);
-				}
-				isValidLiteral(IntLiteral, newTocken, 2);
-				type = IntLiteral;
-
-				if (!isLexTable)
-				{
-					Entry literal;
-
-					literal.type = Literal;
-					literal.name = "Literal_" + std::to_string(literalNumber);
-					literalNumber++;
-					literal.valueType = IntLiteral;
-					literal.scope = "none";
-					literal.line = line;
-					literal.pos = counter;
-					literal.value = std::stoi(token, nullptr, 2);
-
-					idTable.Add(literal);
-				}
-			}
-			else if (regex.Match(token, "((0o[1-7]+[0-9]*|-0o[1-7]+[0-9]*|0o0))"))
-			{
-				token.erase(1, 1);
-				std::string newTocken;
-				if (token[0] == '-')
-				{
-					newTocken = token.erase(1, 1);
-				}
-				else
-				{
-					newTocken = token.erase(0, 1);
-				}
-				isValidLiteral(IntLiteral, newTocken, 8);
-				type = IntLiteral;
-
-				if (!isLexTable)
-				{
-					Entry literal;
-
-					literal.type = Literal;
-					literal.name = "Literal_" + std::to_string(literalNumber);
-					literalNumber++;
-					literal.valueType = IntLiteral;
-					literal.scope = "none";
-					literal.line = line;
-					literal.pos = counter;
-					literal.value = std::stoi(token, nullptr, 8);
-
-					idTable.Add(literal);
-				}
-			}
-			else if (regex.Match(token, "((0h([A-F]+|[1-9])+[0-9]*[A-F]*|-0h([A-F]+|[1-9])+[0-9]*[A-F]*|0h0))"))
-			{
-				std::string newTocken;
-				if (token[0] == '-')
-				{
-					newTocken = token.erase(1, 2);
-				}
-				else
-				{
-					newTocken = token.erase(0, 2);
-				}
-				isValidLiteral(IntLiteral, newTocken, 16);
-				type = IntLiteral;
-
-				if (!isLexTable)
-				{
-					Entry literal;
-
-					literal.type = Literal;
-					literal.name = "Literal_" + std::to_string(literalNumber);
-					literalNumber++;
-					literal.valueType = IntLiteral;
-					literal.scope = "none";
-					literal.line = line;
-					literal.pos = counter;
-					literal.value = std::stoi(token, nullptr, 16);
 
 					idTable.Add(literal);
 				}

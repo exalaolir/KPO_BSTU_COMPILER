@@ -163,31 +163,8 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 
 					bool isSymbol = (MATH_SIMBOL(i, counter));
 
-					if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 'o' && counter > 1)
-					{
-						buffer.push_back('$');
-						buffer.push_back(code[i]);
-						continue;
-					}
-					else if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 'b' && counter > 1)
-					{
-						buffer.push_back('$');
-						buffer.push_back(code[i]);
-						continue;
-					}
-					else if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 'u' && counter > 1)
-					{
-						buffer.push_back('$');
-						buffer.push_back(code[i]);
-						continue;
-					}
-					else if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 's' && counter > 1)
-					{
-						buffer.push_back('$');
-						buffer.push_back(code[i]);
-						continue;
-					}
-					else if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 'h' && counter > 1)
+					
+					if (i + 2 < code.length() && isSymbol && code[i + 1] == '0' && code[i + 2] == 'u' && counter > 1)
 					{
 						buffer.push_back('$');
 						buffer.push_back(code[i]);
