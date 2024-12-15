@@ -23,7 +23,7 @@ namespace GEN
 	static const std::string IMUL = "pop EBX\npop EAX\nimul EAX, EBX\npush EAX\n";
 	static const std::string SHIFT_LEFT = "pop eax\npop ecx\nshl eax, cl\npush eax";
 	static const std::string SHIFT_RIGHT = "pop eax\npop ecx\nshr eax, cl\npush eax";
-	static const std::string MUL = "pop EBX\npop EAX\nmul, EBX\npush EAX\n";
+	static const std::string MUL = "pop EBX\npop EAX\nmul EBX\npush EAX\n";
 
 	static const std::string F_ADD = "fadd\n";
 	static const std::string F_SUB = "fsub\n";
@@ -113,7 +113,7 @@ namespace GEN
 		{
 			std::string prolog = std::format(
 				"{} proc {}\n", name, params);
-			auto end = std::format("ret\n{} endp\n", name);
+			auto end = std::format("ret\n{}\n{} endp\n",NULL_EXCEPTION, name);
 			std::list<std::string> result{ prolog, end };
 			return result;
 		};

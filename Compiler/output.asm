@@ -78,6 +78,13 @@ fstp real_buff
 fld qword ptr [real_buff]
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 circumference__g0 endp
 shiftR__g0 proc b__g0_s21:SDWORD, a__g0_s21:SDWORD
 push a__g0_s21
@@ -89,6 +96,13 @@ push eax
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 shiftR__g0 endp
 shiftL__g0 proc b__g0_s31:SDWORD, a__g0_s31:SDWORD
 push a__g0_s31
@@ -100,6 +114,13 @@ push eax
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 shiftL__g0 endp
 characterChar__g0 proc b__g0_c41:DWORD, a__g0_c41:DWORD
 push a__g0_c41
@@ -126,6 +147,13 @@ push Literal_4__none
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 characterChar__g0 endp
 characterString__g0 proc b__g0_c71_S:ptr byte, a__g0_c71_S:ptr byte
 local b__g0_c71[256]:BYTE, a__g0_c71[256]:BYTE
@@ -170,6 +198,13 @@ push Literal_7__none
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 characterString__g0 endp
 sum__g0 proc b__g0_s101:DWORD, a__g0_s101:DWORD
 push a__g0_s101
@@ -182,6 +217,13 @@ push EAX
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 sum__g0 endp
 arithmetic__g0 proc b__g0_a111:DWORD, a__g0_a111:DWORD
 local del__g0_a111:DWORD, result__g0_a111:DWORD
@@ -195,7 +237,7 @@ call sum__g0
 push eax
 pop EBX
 pop EAX
-mul EAX, EBX
+mul EBX
 push EAX
 pop EBX
 pop EAX
@@ -220,6 +262,13 @@ push result__g0_a111
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 arithmetic__g0 endp
 main__g0 proc
 local i__g0_m121:SDWORD, counter__g0_m121:SDWORD, op__g0_m121[256]:BYTE, result__g0_m121:REAL8, str__g0_m121[256]:BYTE
