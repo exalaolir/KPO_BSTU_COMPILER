@@ -14,6 +14,7 @@ UIToString PROTO arg:dword
 FToString PROTO arg:real8
 BoolToString PROTO arg:sdword
 Concat PROTO arg1:ptr byte, arg2:ptr byte
+comp PROTO arg1:ptr byte, arg2:ptr byte
 Absb PROTO arg:sword
 CharToString PROTO arg:sdword
 ExitProcess PROTO:DWORD
@@ -55,12 +56,18 @@ Literal_30__none DWORD 'b'
 Literal_31__none BYTE "a и a", 0
 Literal_32__none DWORD 'a'
 Literal_33__none DWORD 'a'
-Literal_34__none BYTE 10, "Соединение строк", 0
-Literal_35__none BYTE "Hello,", 0
-Literal_36__none BYTE " World", 0
-Literal_37__none BYTE "Соединение символов путём конвертарции в строку",10, 0
-Literal_38__none DWORD 'a'
-Literal_39__none DWORD 'b'
+Literal_34__none BYTE "hjhh", 0
+Literal_35__none BYTE "hjhh", 0
+Literal_36__none BYTE "hjhh", 0
+Literal_37__none BYTE "hjhh", 0
+Literal_38__none BYTE "сравнение прошло", 0
+Literal_39__none BYTE "сравнение переменных прошло", 0
+Literal_40__none BYTE 10, "Соединение строк", 0
+Literal_41__none BYTE "Hello,", 0
+Literal_42__none BYTE " World", 0
+Literal_43__none BYTE "Соединение символов путём конвертарции в строку",10, 0
+Literal_44__none DWORD 'a'
+Literal_45__none DWORD 'b'
 Literal_New_3__none SDWORD 0
 PI__g0 REAL8 3.140000
 .CODE
@@ -175,11 +182,10 @@ lea eax, a__g0_c71
 push eax
 lea eax, b__g0_c71
 push eax
-pop esi
-pop edi
-mov ecx, 256
-repe cmpsb
-jz If_l1
+call comp
+pop eax
+cmp eax, 0
+je If_l1
 jmp Else1
 If_l1:
 push Literal_5__none
@@ -271,7 +277,7 @@ INVOKE ExitProcess, -1
 
 arithmetic__g0 endp
 main__g0 proc
-local i__g0_m121:SDWORD, counter__g0_m121:SDWORD, op__g0_m121[256]:BYTE, result__g0_m121:REAL8, str__g0_m121[256]:BYTE
+local i__g0_m121:SDWORD, q__g0_m121_i152:SDWORD, counter__g0_m121:SDWORD, q__g0_m121_i142:SDWORD, op__g0_m121[256]:BYTE, result__g0_m121:REAL8, str1__g0_m121[256]:BYTE, str2__g0_m121[256]:BYTE, str__g0_m121[256]:BYTE
 fld Literal_11__none
 fstp real_buff
 lea eax, real_buff
@@ -409,47 +415,101 @@ push eax
 pop i__g0_m121
 lea eax, Literal_34__none
 push eax
-call Println
-push eax
-pop i__g0_m121
-lea eax, Literal_35__none
-push eax
-lea eax, Literal_36__none
-push eax
-call Concat
-push eax
 pop esi
-lea edi, str__g0_m121
+lea edi, str1__g0_m121
  copy_loop_2:
 lodsb
 stosb
 test al, al
 jnz copy_loop_2
+lea eax, Literal_35__none
+push eax
+pop esi
+lea edi, str2__g0_m121
+ copy_loop_3:
+lodsb
+stosb
+test al, al
+jnz copy_loop_3
+lea eax, Literal_36__none
+push eax
+lea eax, Literal_37__none
+push eax
+call comp
+pop eax
+cmp eax, 0
+je If_l2
+jmp Else2
+If_l2:
+lea eax, Literal_38__none
+push eax
+call Println
+push eax
+pop q__g0_m121_i142
+jmp Endif2
+Else2:
+Endif2:
+lea eax, str1__g0_m121
+push eax
+lea eax, str2__g0_m121
+push eax
+call comp
+pop eax
+cmp eax, 0
+je If_l3
+jmp Else3
+If_l3:
+lea eax, Literal_39__none
+push eax
+call Println
+push eax
+pop q__g0_m121_i152
+jmp Endif3
+Else3:
+Endif3:
+lea eax, Literal_40__none
+push eax
+call Println
+push eax
+pop i__g0_m121
+lea eax, Literal_41__none
+push eax
+lea eax, Literal_42__none
+push eax
+call Concat
+push eax
+pop esi
+lea edi, str__g0_m121
+ copy_loop_4:
+lodsb
+stosb
+test al, al
+jnz copy_loop_4
 lea eax, str__g0_m121
 push eax
 call Println
 push eax
 pop i__g0_m121
-lea eax, Literal_37__none
+lea eax, Literal_43__none
 push eax
 call Println
 push eax
 pop i__g0_m121
-push Literal_38__none
+push Literal_44__none
 call CharToString
 push eax
-push Literal_39__none
+push Literal_45__none
 call CharToString
 push eax
 call Concat
 push eax
 pop esi
 lea edi, op__g0_m121
- copy_loop_3:
+ copy_loop_5:
 lodsb
 stosb
 test al, al
-jnz copy_loop_3
+jnz copy_loop_5
 lea eax, op__g0_m121
 push eax
 call Println

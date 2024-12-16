@@ -63,6 +63,10 @@ fn int main()
   i = Println("a и a");
   i = Println(BoolToString(characterChar('a', 'a')));
 
+  let str1 = "hjhh";
+   let str2 = "hjhh";
+  if("hjhh" : "hjhh") {let q = Println("сравнение прошло");}
+   if(str1 : str2) {let q = Println("сравнение переменных прошло");}
   i = Println("/\n/Соединение строк");
   let str = Concat("Hello,"," World");
   i = Println(str);
