@@ -22,7 +22,6 @@ int main(int argc, char* argv[])
 		Lexer lexer(params[IN_FILE]);
 
 		auto log = std::make_shared<std::ofstream>("translationInfo.txt.log");
-
 		auto lexTable = lexer.generateLexTable();
 		lexer.printLexTable(lexTable, *log);
 		auto idTable = lexer.generateIdTable(lexTable);

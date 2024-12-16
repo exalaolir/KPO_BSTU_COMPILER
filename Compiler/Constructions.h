@@ -4,7 +4,7 @@
 
 namespace GEN
 {
-	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nPrint PROTO arg:ptr byte\nPrintln PROTO arg:ptr byte\nIToString PROTO arg:sdword\nUIToString PROTO arg:dword\nFToString PROTO arg:real8\nBoolToString PROTO arg:sdword\nConcat PROTO arg1:ptr byte, arg2:ptr byte\nAbsb PROTO arg:sword\nCharToString PROTO arg:sdword\nExitProcess PROTO:DWORD\n.STACK 4096\n";
+	static const std::string BEGIN_OF_FILE = ".686p\n.xmm\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib msvcrt.lib\nincludelib ucrt.lib\nincludelib vcruntime.lib\nincludelib msvcprt.lib\nincludelib standartLib.lib\nPrint PROTO arg:ptr byte\nPrintln PROTO arg:ptr byte\nIToString PROTO arg:sdword\nUIToString PROTO arg:dword\nFToString PROTO arg:real8\nBoolToString PROTO arg:sdword\nConcat PROTO arg1:ptr byte, arg2:ptr byte\ncomp PROTO arg1:ptr byte, arg2:ptr byte\nAbsb PROTO arg:sword\nCharToString PROTO arg:sdword\nExitProcess PROTO:DWORD\n.STACK 4096\n";
 
 	static const bool IS_DOUBLE = true;
 
@@ -23,7 +23,7 @@ namespace GEN
 	static const std::string IMUL = "pop EBX\npop EAX\nimul EAX, EBX\npush EAX\n";
 	static const std::string SHIFT_LEFT = "pop eax\npop ecx\nshl eax, cl\npush eax";
 	static const std::string SHIFT_RIGHT = "pop eax\npop ecx\nshr eax, cl\npush eax";
-	static const std::string MUL = "pop EBX\npop EAX\nmul EAX, EBX\npush EAX\n";
+	static const std::string MUL = "pop EBX\npop EAX\nmul EBX\npush EAX\n";
 
 	static const std::string F_ADD = "fadd\n";
 	static const std::string F_SUB = "fsub\n";
@@ -50,8 +50,8 @@ namespace GEN
 
 	static const std::string NULL_EXCEPTION = "null_exception:\nlea eax, null_err\npush eax\ncall Println\npop eax\nINVOKE ExitProcess, -1\n";
 
-	static const std::string EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njz ";
-	static const std::string NO_EQAL_STR = "pop esi\npop edi\nmov ecx, 256\nrepe cmpsb\njnz ";
+	static const std::string EQAL_STR = "call comp\npop eax\ncmp eax, 0\nje ";
+	static const std::string NO_EQAL_STR = "call comp\npop eax\ncmp eax, 1\nje ";
 	
 	const std::unordered_map<std::string, std::string> operatorsBool
 	{
@@ -113,7 +113,7 @@ namespace GEN
 		{
 			std::string prolog = std::format(
 				"{} proc {}\n", name, params);
-			auto end = std::format("ret\n{} endp\n", name);
+			auto end = std::format("ret\n{}\n{} endp\n",NULL_EXCEPTION, name);
 			std::list<std::string> result{ prolog, end };
 			return result;
 		};

@@ -92,7 +92,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 				if ((int)i + 1 < code.length() && (int)i - 1 >= 0 && code[i - 1] == '/' && code[i + 1] == '/')
 				{
 					buffer.pop_back();
-					buffer.push_back('@');
+					buffer.push_back('#');
 					i += 2;
 				}
 				else
@@ -140,7 +140,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 			lineCounter += 1;
 		}
 
-		findComment(code[i] == '@');
+		findComment(code[i] == '#');
 		if (commentBrackets.empty())
 		{
 			findSpecial(code[i] == '\"' || code[i] == '\'', i);

@@ -42,7 +42,7 @@ fn int arithmeticsInt(int i, int b) {
 }
 fn int main()
 {
-  @Контррольный пример@
+
   double result = circumference(2.45);
   int jk = 7/7;
   int i = Println("Результат длины окружности");

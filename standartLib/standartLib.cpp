@@ -60,6 +60,10 @@ extern "C" {
         return abs(num);
     }
 
+    bool _stdcall comp(char* str2, char* str1) {
+        return strcmp(str1, str2);
+    }
+
     int _stdcall Print(const char* str) {
         setlocale(LC_ALL, "ru");
         std::cout << str;

@@ -116,7 +116,6 @@ namespace LEXER
 		{"string", String},
 		{"double", Double},
 		{"bool", Bool},
-		{"byte", Byte},
 		{"uint", UInt},
 		{"char", Char},
 		{"fn", Fun},

@@ -14,6 +14,7 @@ UIToString PROTO arg:dword
 FToString PROTO arg:real8
 BoolToString PROTO arg:sdword
 Concat PROTO arg1:ptr byte, arg2:ptr byte
+comp PROTO arg1:ptr byte, arg2:ptr byte
 Absb PROTO arg:sword
 CharToString PROTO arg:sdword
 ExitProcess PROTO:DWORD
@@ -29,34 +30,45 @@ Literal_4__none DWORD 1
 Literal_5__none DWORD 1
 Literal_6__none DWORD 0
 Literal_7__none DWORD 1
-Literal_8__none REAL8 2.450000
-Literal_9__none BYTE "Результат длины окружности", 0
-Literal_10__none BYTE "Битовый сдвиг", 0
-Literal_11__none BYTE "5>>2", 0
-Literal_12__none SDWORD 5
-Literal_13__none SDWORD 2
-Literal_14__none BYTE "5<<2", 0
-Literal_15__none SDWORD 5
-Literal_16__none SDWORD 2
-Literal_New_1__none SDWORD 0
-Literal_18__none BYTE "Счётчик", 0
-Literal_19__none SDWORD 10
-Literal_20__none SDWORD 1
-Literal_21__none BYTE "Сравнение символов",10, 0
-Literal_22__none BYTE "a и b", 0
-Literal_23__none DWORD 'a'
-Literal_24__none DWORD 'b'
-Literal_25__none BYTE "a и a", 0
-Literal_26__none DWORD 'a'
-Literal_27__none DWORD 'a'
-Literal_28__none BYTE "Сравнение строк",10, 0
-Literal_29__none BYTE "Hello и hello", 0
-Literal_30__none BYTE "Hello", 0
-Literal_31__none BYTE "hello", 0
-Literal_32__none BYTE "Hello и Hello", 0
-Literal_33__none BYTE "Hello", 0
-Literal_34__none BYTE "Hello", 0
+Literal_New_1__none DWORD 2
+Literal_9__none DWORD 50
+Literal_10__none DWORD 30
+Literal_11__none REAL8 2.450000
+Literal_12__none BYTE "Результат длины окружности", 0
+Literal_13__none BYTE "Арифметический расчёт", 0
+Literal_14__none DWORD 4
+Literal_15__none DWORD 5
+Literal_16__none BYTE 10, "Битовый сдвиг", 0
+Literal_17__none BYTE "20>>2", 0
+Literal_18__none SDWORD 20
+Literal_19__none SDWORD 2
+Literal_20__none BYTE "20<<2", 0
+Literal_21__none SDWORD 20
+Literal_22__none SDWORD 2
 Literal_New_2__none SDWORD 0
+Literal_24__none BYTE 10, "Счётчик", 0
+Literal_25__none SDWORD 10
+Literal_26__none SDWORD 1
+Literal_27__none BYTE 10, "Сравнение символов", 0
+Literal_28__none BYTE "a и b", 0
+Literal_29__none DWORD 'a'
+Literal_30__none DWORD 'b'
+Literal_31__none BYTE "a и a", 0
+Literal_32__none DWORD 'a'
+Literal_33__none DWORD 'a'
+Literal_34__none BYTE "hjhh", 0
+Literal_35__none BYTE "hjhh", 0
+Literal_36__none BYTE "hjhh", 0
+Literal_37__none BYTE "hjhh", 0
+Literal_38__none BYTE "сравнение прошло", 0
+Literal_39__none BYTE "сравнение переменных прошло", 0
+Literal_40__none BYTE 10, "Соединение строк", 0
+Literal_41__none BYTE "Hello,", 0
+Literal_42__none BYTE " World", 0
+Literal_43__none BYTE "Соединение символов путём конвертарции в строку",10, 0
+Literal_44__none DWORD 'a'
+Literal_45__none DWORD 'b'
+Literal_New_3__none SDWORD 0
 PI__g0 REAL8 3.140000
 .CODE
 option prologue:PrologueDef
@@ -73,6 +85,13 @@ fstp real_buff
 fld qword ptr [real_buff]
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 circumference__g0 endp
 shiftR__g0 proc b__g0_s21:SDWORD, a__g0_s21:SDWORD
 push a__g0_s21
@@ -84,6 +103,13 @@ push eax
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 shiftR__g0 endp
 shiftL__g0 proc b__g0_s31:SDWORD, a__g0_s31:SDWORD
 push a__g0_s31
@@ -95,6 +121,13 @@ push eax
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 shiftL__g0 endp
 characterChar__g0 proc b__g0_c41:DWORD, a__g0_c41:DWORD
 push a__g0_c41
@@ -121,6 +154,13 @@ push Literal_4__none
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 characterChar__g0 endp
 characterString__g0 proc b__g0_c71_S:ptr byte, a__g0_c71_S:ptr byte
 local b__g0_c71[256]:BYTE, a__g0_c71[256]:BYTE
@@ -142,11 +182,10 @@ lea eax, a__g0_c71
 push eax
 lea eax, b__g0_c71
 push eax
-pop esi
-pop edi
-mov ecx, 256
-repe cmpsb
-jz If_l1
+call comp
+pop eax
+cmp eax, 0
+je If_l1
 jmp Else1
 If_l1:
 push Literal_5__none
@@ -165,10 +204,81 @@ push Literal_7__none
 pop eax
 ret
 ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
 characterString__g0 endp
+sum__g0 proc b__g0_s101:DWORD, a__g0_s101:DWORD
+push a__g0_s101
+push b__g0_s101
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+
+pop eax
+ret
+ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
+sum__g0 endp
+arithmetic__g0 proc b__g0_a111:DWORD, a__g0_a111:DWORD
+local del__g0_a111:DWORD, result__g0_a111:DWORD
+push Literal_New_1__none
+pop del__g0_a111
+push a__g0_a111
+push b__g0_a111
+push Literal_9__none
+push Literal_10__none
+call sum__g0
+push eax
+pop EBX
+pop EAX
+mul EBX
+push EAX
+pop EBX
+pop EAX
+add EAX, EBX
+push EAX
+push a__g0_a111
+pop EBX
+pop EAX
+sub EAX, EBX
+push EAX
+push del__g0_a111
+xor EDX,EDX
+pop EBX
+cmp EBX, 0
+je null_exception
+pop EAX
+div EBX
+push EDX
+pop result__g0_a111
+push result__g0_a111
+
+pop eax
+ret
+ret
+null_exception:
+lea eax, null_err
+push eax
+call Println
+pop eax
+INVOKE ExitProcess, -1
+
+arithmetic__g0 endp
 main__g0 proc
-local result__g0_m101:REAL8, i__g0_m101:SDWORD, counter__g0_m101:SDWORD
-fld Literal_8__none
+local i__g0_m121:SDWORD, q__g0_m121_i152:SDWORD, counter__g0_m121:SDWORD, q__g0_m121_i142:SDWORD, op__g0_m121[256]:BYTE, result__g0_m121:REAL8, str1__g0_m121[256]:BYTE, str2__g0_m121[256]:BYTE, str__g0_m121[256]:BYTE
+fld Literal_11__none
 fstp real_buff
 lea eax, real_buff
 push sdword ptr [eax+4]
@@ -176,13 +286,13 @@ push sdword ptr [eax]
 call circumference__g0
 fstp real_buff
 fld real_buff
-fstp result__g0_m101
-lea eax, Literal_9__none
+fstp result__g0_m121
+lea eax, Literal_12__none
 push eax
 call Println
 push eax
-pop i__g0_m101
-fld result__g0_m101
+pop i__g0_m121
+fld result__g0_m121
 fstp real_buff
 lea eax, real_buff
 push sdword ptr [eax+4]
@@ -191,142 +301,221 @@ call FToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_10__none
+pop i__g0_m121
+lea eax, Literal_13__none
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_11__none
+pop i__g0_m121
+push Literal_14__none
+push Literal_15__none
+call arithmetic__g0
+push eax
+call UIToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-push Literal_12__none
-push Literal_13__none
+pop i__g0_m121
+lea eax, Literal_16__none
+push eax
+call Println
+push eax
+pop i__g0_m121
+lea eax, Literal_17__none
+push eax
+call Println
+push eax
+pop i__g0_m121
+push Literal_18__none
+push Literal_19__none
 call shiftR__g0
 push eax
 call IToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_14__none
+pop i__g0_m121
+lea eax, Literal_20__none
 push eax
 call Println
 push eax
-pop i__g0_m101
-push Literal_15__none
-push Literal_16__none
+pop i__g0_m121
+push Literal_21__none
+push Literal_22__none
 call shiftL__g0
 push eax
 call IToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-push Literal_New_1__none
-pop counter__g0_m101
-lea eax, Literal_18__none
+pop i__g0_m121
+push Literal_New_2__none
+pop counter__g0_m121
+lea eax, Literal_24__none
 push eax
 call Println
 push eax
-pop i__g0_m101
+pop i__g0_m121
 While_start0:
-push counter__g0_m101
-push Literal_19__none
+push counter__g0_m121
+push Literal_25__none
 pop ebx
 pop eax
 cmp eax, ebx
 jle While_l0
 jmp Else_While0
 While_l0:
-push counter__g0_m101
+push counter__g0_m121
 call IToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-push counter__g0_m101
-push Literal_20__none
+pop i__g0_m121
+push counter__g0_m121
+push Literal_26__none
 pop EBX
 pop EAX
 add EAX, EBX
 push EAX
-pop counter__g0_m101
+pop counter__g0_m121
 jmp While_start0
 Else_While0:
-lea eax, Literal_21__none
+lea eax, Literal_27__none
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_22__none
-push eax
-call Println
-push eax
-pop i__g0_m101
-push Literal_23__none
-push Literal_24__none
-call characterChar__g0
-push eax
-call BoolToString
-push eax
-call Println
-push eax
-pop i__g0_m101
-lea eax, Literal_25__none
-push eax
-call Println
-push eax
-pop i__g0_m101
-push Literal_26__none
-push Literal_27__none
-call characterChar__g0
-push eax
-call BoolToString
-push eax
-call Println
-push eax
-pop i__g0_m101
+pop i__g0_m121
 lea eax, Literal_28__none
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_29__none
+pop i__g0_m121
+push Literal_29__none
+push Literal_30__none
+call characterChar__g0
+push eax
+call BoolToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_30__none
-push eax
+pop i__g0_m121
 lea eax, Literal_31__none
 push eax
-call characterString__g0
+call Println
+push eax
+pop i__g0_m121
+push Literal_32__none
+push Literal_33__none
+call characterChar__g0
 push eax
 call BoolToString
 push eax
 call Println
 push eax
-pop i__g0_m101
-lea eax, Literal_32__none
-push eax
-call Println
-push eax
-pop i__g0_m101
-lea eax, Literal_33__none
-push eax
+pop i__g0_m121
 lea eax, Literal_34__none
 push eax
-call characterString__g0
+pop esi
+lea edi, str1__g0_m121
+ copy_loop_2:
+lodsb
+stosb
+test al, al
+jnz copy_loop_2
+lea eax, Literal_35__none
 push eax
-call BoolToString
+pop esi
+lea edi, str2__g0_m121
+ copy_loop_3:
+lodsb
+stosb
+test al, al
+jnz copy_loop_3
+lea eax, Literal_36__none
+push eax
+lea eax, Literal_37__none
+push eax
+call comp
+pop eax
+cmp eax, 0
+je If_l2
+jmp Else2
+If_l2:
+lea eax, Literal_38__none
 push eax
 call Println
 push eax
-pop i__g0_m101
-push Literal_New_2__none
+pop q__g0_m121_i142
+jmp Endif2
+Else2:
+Endif2:
+lea eax, str1__g0_m121
+push eax
+lea eax, str2__g0_m121
+push eax
+call comp
+pop eax
+cmp eax, 0
+je If_l3
+jmp Else3
+If_l3:
+lea eax, Literal_39__none
+push eax
+call Println
+push eax
+pop q__g0_m121_i152
+jmp Endif3
+Else3:
+Endif3:
+lea eax, Literal_40__none
+push eax
+call Println
+push eax
+pop i__g0_m121
+lea eax, Literal_41__none
+push eax
+lea eax, Literal_42__none
+push eax
+call Concat
+push eax
+pop esi
+lea edi, str__g0_m121
+ copy_loop_4:
+lodsb
+stosb
+test al, al
+jnz copy_loop_4
+lea eax, str__g0_m121
+push eax
+call Println
+push eax
+pop i__g0_m121
+lea eax, Literal_43__none
+push eax
+call Println
+push eax
+pop i__g0_m121
+push Literal_44__none
+call CharToString
+push eax
+push Literal_45__none
+call CharToString
+push eax
+call Concat
+push eax
+pop esi
+lea edi, op__g0_m121
+ copy_loop_5:
+lodsb
+stosb
+test al, al
+jnz copy_loop_5
+lea eax, op__g0_m121
+push eax
+call Println
+push eax
+pop i__g0_m121
+push Literal_New_3__none
 
 pop eax
 ret

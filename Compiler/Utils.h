@@ -109,7 +109,7 @@ namespace Utils
 		Regex::Regex regex;
 		while (getline(ss, item, delim))
 		{
-			if (item != "" && item[0] != '@') result.push_back(item);
+			if (item != "" && item[0] != '#') result.push_back(item);
 		}
 
 		return result;
