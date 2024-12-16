@@ -195,7 +195,7 @@ namespace MFST
 		if (n < MFST_DIAGN_DIGBER && (lpos = diagnosis[n].lenta_position) >= 0)
 		{
 			auto currentLexem = this->lexems[lpos];
-			ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", currentLexem.line, currentLexem.index),
+			ERROR_LOG(std::format("Parser: строка {}, индекс лексемы {}", currentLexem.line, currentLexem.index),
 					  std::format("Ќеверна€ структура программы"));
 			throw "Esception";
 		};

@@ -26,6 +26,7 @@ namespace GEN
 		bool strIf = false;
 		size_t copyEqalGenerator = 0;
 		size_t whileCounter = 0;
+		bool isDestructed = false;
 
 		void GenerateDataSection(size_t& index);
 		void GenerateFunction(size_t& index);

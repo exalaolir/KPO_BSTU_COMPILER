@@ -52,7 +52,7 @@ void ANALISER::Analiser::setCurrentFunction(std::vector<Lexem>& lexTable, IdTabl
 	this->currentFunction = idTable[lexTable[index].positionInIdTable];
 	if (currentFunction.name == "main" && currentFunction.valueType != Int)
 	{
-		ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", currentFunction.line, currentFunction.pos),
+		ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", currentFunction.line, currentFunction.pos),
 				  "Недопустимая тип функции main");
 		throw "Exception";
 	}
@@ -97,7 +97,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 
 	auto generateThrow = [&]()
 	{
-			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+			ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 					  std::format("Ожидался тип {}", types[params[currentParamType]]));
 			throw "Exception";
 	};
@@ -110,7 +110,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			brackets.pop();
 			if (brackets.empty() && currentParamType != countOfParams - 1 && currentParamType != 0 && countOfParams != 0)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+				ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
 				throw "Exception";
 			}
@@ -120,7 +120,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 		{
 			if (currentParamType != countOfParams - 1)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+				ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
 				throw "Exception";
 			}
@@ -132,7 +132,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			currentParamType++;
 			if (currentParamType >= countOfParams)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+				ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 						  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
 				throw "Exception";
 			}
@@ -158,7 +158,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 				}
 				catch (...)
 				{
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+					ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 							  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
 					throw "Exception";
 				}
@@ -183,7 +183,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 				}
 				catch (...)
 				{
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+					ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 							  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
 					throw "Exception";
 				}
@@ -192,7 +192,6 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 			break;
 		case Param:
 		case Variable:
-			//std::cout << types[currentFunction.valueType] << " " << types[idTable[lexTable[oldIndex].positionInIdTable].valueType] << std::endl;
 			if (params[currentParamType] != idTable[lexTable[oldIndex].positionInIdTable].valueType) generateThrow();
 			if (lexTable[index + 1].lexema != "," && lexTable[index + 1].lexema != ")")
 			{
@@ -211,7 +210,7 @@ void ANALISER::Analiser::checkFun(std::vector<Lexem>& lexTable, IdTable& idTable
 				}
 				catch (...)
 				{
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+					ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 							  std::format("Неверное кол-во параметров функции {}, ожидается {}", currentType.name, currentType.params));
 					throw "Exception";
 				}
@@ -229,11 +228,10 @@ void ANALISER::Analiser::checkExp(std::vector<Lexem>& lexTable, IdTable& idTable
 {
 	auto generateThrow = [&]()
 	{
-			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+			ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 					  std::format("Ожидался тип {}", types[currentType.valueType]));
 			throw "Exception";
 	}; 
-	//index++;
 
 	while (lexTable[index].lexema[0] != endSymbol)
 	{
@@ -267,7 +265,7 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 {
 	auto generateThrow = [&]()
 	{
-			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+			ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 					  std::format("Ожидался тип {}", types[currentFunction.valueType]));
 			throw "Exception";
 	};
@@ -277,7 +275,7 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 		(idTable[lexTable[index].positionInIdTable].valueType != IntLiteral ||
 		std::get<int>(idTable[lexTable[index].positionInIdTable].value) != 0))
 	{
-		ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
+		ERROR_LOG(std::format("Semantic_analiser: строка {}, лексема {}.", lexTable[index].line, lexTable[index].index),
 				  std::format("Функция main должна возвращать 0"));
 		throw "Exception";
 	}
@@ -291,7 +289,6 @@ void ANALISER::Analiser::checkReturnType(std::vector<Lexem>& lexTable, IdTable& 
 			{
 			case Fun:
 				if (currentFunction.valueType != literalTypes[idTable[lexTable[oldIndex].positionInIdTable].valueType]) generateThrow();
-				//checkFun(lexTable, idTable, index);
 				break;
 			case ServisSymbol:
 				if (lexTable[index].lexema != ";")

@@ -160,7 +160,7 @@ namespace LEXER
 		{
 			if (entry.GetValue().length() > 255)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", entry.line, entry.pos),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", entry.line, entry.pos),
 						  "Длина строки не должна превышать 255 символов");
 				throw "Esception";
 			}
@@ -316,7 +316,7 @@ namespace LEXER
 					if (idTable.Contains(key))
 					{
 						int hhh = std::distance(preprocesseredStr.begin(), token) - line + 1;
-						std::cout << hhh << std::endl;
+						
 						lexTable[hhh].positionInIdTable = key;
 						check = true;
 						break;
@@ -324,7 +324,7 @@ namespace LEXER
 				}
 				if (!check)
 				{
-					ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+					ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 							  std::format("Необъявлееный идентификатор {}", *token));
 					throw "Esception";
 					break;
@@ -353,7 +353,7 @@ namespace LEXER
 			{
 				if (brackets.empty())
 				{
-					ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+					ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 							  "Нарушен уровень вложенности");
 					throw "Esception";
 				}
@@ -368,7 +368,7 @@ namespace LEXER
 
 		if (!hasMain)
 		{
-			ERROR_LOG("Sourse code",
+			ERROR_LOG("Lexer",
 					  "Отсутствует функция main");
 			throw "Esception";
 		}
@@ -418,7 +418,7 @@ namespace LEXER
 			}
 			catch (...)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 						  std::format("Выход за пределы допустимого диапазона типа {}", token));
 				throw "Esception";
 			}
@@ -451,9 +451,10 @@ namespace LEXER
 					if (token == "\"\"")
 					{
 
-						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						/*ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 								  std::format("Пустая строка не допускается {}", token));
-						throw "Esception";
+						throw "Esception";*/
+						literal.value = "0";
 					}
 
 					idTable.Add(literal);
@@ -475,12 +476,13 @@ namespace LEXER
 					literal.line = line;
 					literal.pos = counter;
 					literal.value = token;
-					if (token == "\"\"")
+					if (token == "\'\'")
 					{
 
-						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						/*ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 								  std::format("Пустая строка не допускается {}", token));
-						throw "Esception";
+						throw "Esception";*/
+						literal.value = "0";
 					}
 
 					idTable.Add(literal);
@@ -515,7 +517,7 @@ namespace LEXER
 					if (token == "\"\"")
 					{
 
-						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 								  std::format("Пустая строка не допускается {}", token));
 						throw "Esception";
 					}
@@ -605,7 +607,7 @@ namespace LEXER
 			}
 			else
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 						  std::format("Нераспознаная лексема {}", token));
 				throw "Esception";
 			}
@@ -655,10 +657,10 @@ namespace LEXER
 					{
 
 						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
-						std::cout << hhh << std::endl;
+						
 						lexTable[hhh].positionInIdTable = entry.GetHashCode();
 					}
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter), "Множественная инициализация");
+					ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter), "Множественная инициализация");
 					throw "Exception";
 				}
 			};
@@ -690,7 +692,7 @@ namespace LEXER
 								}
 								else
 								{
-									ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+									ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 											  std::format("{} {}", errorMessages[j], *currentToken));
 									throw "Exception";
 								}
@@ -724,7 +726,7 @@ namespace LEXER
 					}
 					else
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+						ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 								  std::format("{} {}", errorMessages[j], *currentToken));
 						throw "Exception";
 					}
@@ -741,7 +743,7 @@ namespace LEXER
 
 		if (scopes.top() != "g0")
 		{
-			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+			ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 					  "Недопустимая вложенная функция");
 			throw "Exception";
 		}
@@ -784,7 +786,7 @@ namespace LEXER
 
 				if (*currentToken != "," && *currentToken != ")")
 				{
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+					ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 							  std::format("Неверная форма записи параметров {}", *currentToken));
 					throw "Exception";
 				}
@@ -809,7 +811,7 @@ namespace LEXER
 		}
 		else
 		{
-			ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+			ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 					  std::format("Неверная форма записи параметров {}", *currentToken));
 			throw "Exception";
 		}
@@ -842,10 +844,10 @@ namespace LEXER
 					if (entry.type == Variable)
 					{
 						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
-						std::cout << hhh << std::endl;
+						
 						lexTable[hhh].positionInIdTable = entry.GetHashCode();
 					}
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter), "Множественная инициализация");
+					ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter), "Множественная инициализация");
 					throw "Exception";
 				}
 			};
@@ -871,7 +873,7 @@ namespace LEXER
 						{
 							if (GetKeyword(*currentToken, line, counter) != Id)
 							{
-								ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+								ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 										  std::format("{} {}", errorMessages[j], *currentToken));
 								throw "Exception";
 							}
@@ -903,7 +905,7 @@ namespace LEXER
 					}
 					else
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+						ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 								  std::format("{} {}", errorMessages[j], *currentToken));
 						throw "Exception";
 					}
@@ -934,10 +936,10 @@ namespace LEXER
 					if (entry.type == Variable)
 					{
 						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
-						std::cout << hhh << std::endl;
+						
 						lexTable[hhh].positionInIdTable = entry.GetHashCode();
 					}
-					ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter), "Множественная инициализация");
+					ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter), "Множественная инициализация");
 					throw "Exception";
 				}
 			};
@@ -958,7 +960,7 @@ namespace LEXER
 					if (idTable[resultKey].type == Variable)
 					{
 						int hhh = std::distance(preprocesseredStr.begin(), currentToken) - line + 1;
-						std::cout << hhh << std::endl;
+						
 						lexTable[hhh].positionInIdTable = resultKey;
 					}
 					check = true;
@@ -967,7 +969,7 @@ namespace LEXER
 			}
 			if (!check)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 						  std::format("Необъявлееный идентификатор {}", *currentToken));
 				throw "Esception";
 			}
@@ -1013,7 +1015,7 @@ namespace LEXER
 		{
 			if (GetKeyword(*currentToken, line, counter) != Id)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, лексема {}.", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, лексема {}.", line, counter),
 						  std::format("Неверно задан идентификатор {}", *currentToken));
 				throw "Exception";
 			}
@@ -1038,7 +1040,7 @@ namespace LEXER
 
 			if (GetKeyword(*currentToken, line, counter) != Eqal)
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 						  "Для авто-типа необходимо использовать оператор присваивания");
 				throw "Esception";
 			}
@@ -1047,7 +1049,7 @@ namespace LEXER
 		}
 		else
 		{
-			ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+			ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 					  std::format("Недопустимое именование идентификатора {}", *currentToken));
 			throw "Esception";
 		}
@@ -1088,7 +1090,7 @@ namespace LEXER
 					}
 					else
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 								  std::format("Необъявлееный идентификатор {}", *currentToken));
 						throw "Esception";
 					}
@@ -1097,7 +1099,7 @@ namespace LEXER
 				{
 					if (!idExists(key))
 					{
-						ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+						ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 								  std::format("Необъявлееный идентификатор {}", *currentToken));
 						throw "Esception";
 					}

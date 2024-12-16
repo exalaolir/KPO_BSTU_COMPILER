@@ -21,9 +21,9 @@ namespace GEN
 
 	Generator::~Generator()
 	{
-		if (assembly.is_open())
+		if (assembly.is_open() && !isDestructed)
 		{
-			assembly.close();
+			isDestructed = true;
 		}
 	}
 
@@ -98,7 +98,7 @@ namespace GEN
 			assembly << block;
 		}
 
-		this->~Generator();
+		assembly.close();
 	}
 
 	void Generator::GenerateDataSection(size_t& index)

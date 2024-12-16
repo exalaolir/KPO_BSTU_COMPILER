@@ -1,78 +1,100 @@
-double PI = 3.14;
-fn double circumference(double rad) {
+let PI = 3.14;
+
+fn double countEllipseLength(double rad)
+{
   return 2.0*PI*rad*rad;
 }
-fn int shiftR(int a,int b) {
-  return a>>b;
+fn int shiftR(int firstOp, int secondOp)
+{
+  return firstOp >> secondOp;
 }
-fn int shiftL(int a, int b) {
-  return a<<b;
+fn int shiftL(int firstOp, int secondOp)
+{
+  return firstOp << secondOp;
 }
-fn bool characterChar(char a, char b) {
-    if(a : b) {
+fn bool characterChar(char firstOp, char secondOp)
+{
+    if(firstOp : secondOp) 
+    {
         return true;
     }
-    else {
+    else 
+    {
         return false;
     }
     return true;
 }
-fn bool characterString(string a, string b) {
-    if(a : b) {
+fn bool characterString(string firstOp, string secondOp)
+{
+    if(firstOp : secondOp) 
+    {
         return true;
     }
-    else {
+    else 
+    {
         return false;
     }
     return true;
 }
-fn uint sum (uint a, uint b) {
-    return a+b;
+fn uint sum (uint firstOp, uint secondOp)
+{
+    return firstOp + secondOp;
 }
-fn uint arithmetic(uint a, uint b) {
-    uint del = 0u2;
-    uint result = (a+b* sum(0u50,0u30) - a) % del;
+fn uint arithmetic(uint firstOp, uint secondOp)
+{
+    uint del = 0u3;
+    uint result = (firstOp + secondOp * sum(0u50,0u30) - firstOp) % del;
     return result;
+}
+fn int sumInt(int firstOp, int secondOp)
+{
+    return firstOp+ secondOp;
+}
+fn int arithmeticsInt(int firstOp, int secondOp) 
+{
+    return ((firstOp+secondOp)*sumInt(34,56)-secondOp)%2;
 }
 fn int main()
 {
+let a = "";
+a = "kkk";
+let x = Println(a);
+  #Контрольный пример#
+   double result = countEllipseLength(2.45);
 
-  double result = circumference(2.45);
+   let  functionStatus = Println("Результат длины окружности");
+   functionStatus = Println(FToString(result));
+   functionStatus = Println("/\n/Арифметический расчёт c uint");
+   functionStatus = Println(UIToString(arithmetic(0u4,0u5)));
+   functionStatus = Println("/\n/Арифметический расчёт c int");
+   functionStatus = Println(IToString(arithmeticsInt(23,45)));
 
-  int i = Println("Результат длины окружности");
-  i = Println(FToString(result));
-
-  i = Println("Арифметический расчёт");
-  i = Println(UIToString(arithmetic(0u4,0u5)));
-
-  i = Println("/\n/Битовый сдвиг");
-  i = Println("20>>2");
-  i = Println(IToString(shiftR(20,2)));
-  i = Println("20<<2");
-  i = Println(IToString(shiftL(20,2)));
+   functionStatus = Println("/\n/Битовый сдвиг");
+   functionStatus = Println("20>>2");
+   functionStatus = Println(IToString(shiftR(20,2)));
+   functionStatus = Println("20<<2");
+   functionStatus = Println(IToString(shiftL(20,2)));
 
   let counter = 0;
-  i = Println("/\n/Счётчик");
-  while(counter <= 10) {
-    i = Println(IToString(counter));
+   functionStatus = Println("/\n/Счётчик");
+
+  while(counter <= 10) 
+  {
+    functionStatus = Println(IToString(counter));
     counter = counter + 1;
   }
-  i = Println("/\n/Сравнение символов");
-  i = Println("a и b");
-  i = Println(BoolToString(characterChar('a', 'b')));
-  i = Println("a и a");
-  i = Println(BoolToString(characterChar('a', 'a')));
+   functionStatus = Println("/\n/Сравнение символов");
+   functionStatus = Println("a и b");
+   functionStatus = Println(BoolToString(characterChar('a', 'b')));
+   functionStatus = Println("a и a");
+   functionStatus = Println(BoolToString(characterChar('a', 'a')));
 
-  let str1 = "hjhh";
-   let str2 = "hjhh";
-  if("hjhh" : "hjhh") {let q = Println("сравнение прошло");}
-   if(str1 : str2) {let q = Println("сравнение переменных прошло");}
-  i = Println("/\n/Соединение строк");
-  let str = Concat("Hello,"," World");
-  i = Println(str);
+   functionStatus= Println("/\n/Соединение строк");
+   let str = Concat("Hello,"," World");
+    functionStatus = Println(str);
 
-  i = Println("Соединение символов путём конвертарции в строку/\n/");
-  let op = Concat(CharToString('a'),CharToString('b'));
-  i = Println(op);
-  return 0;
+   functionStatus= Println("Соединение символов путём конвертарции в строку/\n/");
+   let op = Concat(CharToString('a'),CharToString('b'));
+   functionStatus= Println(op);
+   return 0;
 }

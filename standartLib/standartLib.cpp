@@ -1,10 +1,5 @@
-﻿// standartLib.cpp : Определяет функции для статической библиотеки.
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "framework.h"
-
-
 
 extern "C" {
     char* _stdcall IToString(int num) {
@@ -40,28 +35,19 @@ extern "C" {
     }
 
     char* _stdcall Concat(char* sec, char* first) {
-        if (strlen(sec) + strlen(first) > 255)
+        if (strlen(sec) + strlen(first) > 256)
         {
+            setlocale(LC_ALL, "ru");
             std::cout << "Превышена длина строки" << std::endl;
             exit(-1);
         }
         return strcat(first, sec);
     }
 
-    short _stdcall Absb(short num) {
-        return abs(num);
-    }
-
-    int _stdcall Abs(int num) {
-        return abs(num);
-    }
-
-    double _stdcall Absd(double num) {
-        return abs(num);
-    }
-
-    bool _stdcall comp(char* str2, char* str1) {
-        return strcmp(str1, str2);
+    int _stdcall comp(char* str2, char* str1) {
+        int res = false;
+        strcmp(str1, str2) == 0 ? res = 0 : res = 1;
+        return res;
     }
 
     int _stdcall Print(const char* str) {

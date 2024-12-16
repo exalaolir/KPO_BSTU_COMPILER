@@ -2,14 +2,15 @@
 #include "InputValidator.h"
 #include "Automat.h"
 
-std::array<string, 3> INPUTVAL::validateParams(int& countOfArgs, char* args[])
+//using namespace INPUTVAL;
+std::array<string, 4> INPUTVAL::validateParams(int& countOfArgs, char* args[])
 {
 	std::vector<string> params;
-	std::array<string, 3> paths{ INPUT_PATH, OUTPUT_PATH, LOG_PATH };
+	std::array<string, 4> paths{ INPUT_PATH, OUTPUT_PATH, LOG_PATH, PROTOCOL_PATH };
 
 	params.reserve(countOfArgs - 1);
 
-	if (countOfArgs <= 1 || countOfArgs > 4)
+	if (countOfArgs <= 1 || countOfArgs > 5)
 	{
 		ERROR_LOG("params:", "Неверное число параметров компилятора");
 		throw "Exception";
@@ -52,8 +53,18 @@ std::array<string, 3> INPUTVAL::validateParams(int& countOfArgs, char* args[])
 	}
 	else
 	{
-		WARN_LOG("-out:param", "Невозможно использовать указанный .out файл. Будет создан файл out.txt.out");
-		INFO_LOG("-out:param", "Используйте шаблон -out:<name>.txt.out");
+		WARN_LOG("-out:param", "Невозможно использовать указанный .out файл. Будет создан файл out.asm");
+		INFO_LOG("-out:param", "Используйте шаблон -out:<name>.asm");
+	}
+
+	if (regex.Match(params[PROTOCOL_FILE], "(-prot:[ -z]+.txt)"))
+	{
+		paths[PROTOCOL_FILE] = params[PROTOCOL_FILE].substr(6);
+	}
+	else
+	{
+		WARN_LOG("-prot:param", "Невозможно использовать указанный .out файл. Будет создан файл prot.txt");
+		INFO_LOG("-prot:param", "Используйте шаблон -prot:<name>.txt");
 	}
 
 	auto substr = paths[OUT_FILE];

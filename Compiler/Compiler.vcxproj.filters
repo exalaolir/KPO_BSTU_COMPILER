@@ -43,12 +43,6 @@
     <Filter Include="Файлы заголовков\Polish_Natation">
       <UniqueIdentifier>{9c40b676-649c-4a0d-ab36-6817ade41200}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Syntaxer">
-      <UniqueIdentifier>{5bbc87c4-3ae6-422c-9aba-47d48b1e9059}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\Lolger\Input_Vallidator">
-      <UniqueIdentifier>{6ada750b-bbc0-44e2-85b8-a04c24700307}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\polish">
       <UniqueIdentifier>{905f2aef-0124-47ce-8785-8b34a1893f8e}</UniqueIdentifier>
     </Filter>
@@ -60,6 +54,12 @@
     </Filter>
     <Filter Include="Файлы заголовков\print">
       <UniqueIdentifier>{8a9103da-79d5-4356-aa6a-bf7ae608f4b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Semantic">
+      <UniqueIdentifier>{5bbc87c4-3ae6-422c-9aba-47d48b1e9059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Lolger\Input_Vallidator">
+      <UniqueIdentifier>{6ada750b-bbc0-44e2-85b8-a04c24700307}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +99,7 @@
     <ClCompile Include="Polish.cpp">
       <Filter>Исходные файлы\polish</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax_Analiser.cpp">
+    <ClCompile Include="Semantic_Analiser.cpp">
       <Filter>Исходные файлы\semantic</Filter>
     </ClCompile>
     <ClCompile Include="Generator.cpp">
@@ -141,7 +141,7 @@
       <Filter>Файлы заголовков\Sintax_Analiser</Filter>
     </ClInclude>
     <ClInclude Include="Syntax_Analiser.h">
-      <Filter>Файлы заголовков\Syntaxer</Filter>
+      <Filter>Файлы заголовков\Semantic</Filter>
     </ClInclude>
     <ClInclude Include="Polish.h">
       <Filter>Файлы заголовков\Polish_Natation</Filter>
@@ -163,10 +163,10 @@
     <Text Include="log.txt.log">
       <Filter>Файлы ресурсов</Filter>
     </Text>
-    <Text Include="input.txt">
+    <Text Include="translationInfo.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
-    <Text Include="translationInfo.txt.log">
+    <Text Include="input.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

@@ -21,8 +21,8 @@ namespace GEN
 	static const std::string ADD = "pop EBX\npop EAX\nadd EAX, EBX\npush EAX\n";
 	static const std::string SUB = "pop EBX\npop EAX\nsub EAX, EBX\npush EAX\n";
 	static const std::string IMUL = "pop EBX\npop EAX\nimul EAX, EBX\npush EAX\n";
-	static const std::string SHIFT_LEFT = "pop eax\npop ecx\nshl eax, cl\npush eax";
-	static const std::string SHIFT_RIGHT = "pop eax\npop ecx\nshr eax, cl\npush eax";
+	static const std::string SHIFT_LEFT = "pop ecx\npop eax\nshl eax, cl\npush eax";
+	static const std::string SHIFT_RIGHT = "pop ecx\npop eax\nshr eax, cl\npush eax";
 	static const std::string MUL = "pop EBX\npop EAX\nmul EBX\npush EAX\n";
 
 	static const std::string F_ADD = "fadd\n";
@@ -50,8 +50,8 @@ namespace GEN
 
 	static const std::string NULL_EXCEPTION = "null_exception:\nlea eax, null_err\npush eax\ncall Println\npop eax\nINVOKE ExitProcess, -1\n";
 
-	static const std::string EQAL_STR = "call comp\npop eax\ncmp eax, 0\nje ";
-	static const std::string NO_EQAL_STR = "call comp\npop eax\ncmp eax, 1\nje ";
+	static const std::string EQAL_STR = "call comp\ncmp eax, 1\njne ";
+	static const std::string NO_EQAL_STR = "call comp\ncmp eax, 1\njne ";
 	
 	const std::unordered_map<std::string, std::string> operatorsBool
 	{

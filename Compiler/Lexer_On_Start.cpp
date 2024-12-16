@@ -119,7 +119,7 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 				while (!stack.empty())
 				{
 					errorSymbol = Utils::Pop(stack);
-					std::string mes = std::format("Source code, line {}, simbol {}",
+					std::string mes = std::format("Lexer, line {}, simbol {}",
 												  std::get<0>(errorSymbol),
 												  std::get<1>(errorSymbol));
 					ERROR_LOG(mes, std::format("Лишний символ {}", std::get<2>(errorSymbol)));
@@ -242,10 +242,6 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 
 	result = Utils::Split(newStr, '$');
 
-	for (auto h : result)
-	{
-		std::cout << h << std::endl;
-	}
 	return result;
 }
 

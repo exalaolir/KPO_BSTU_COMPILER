@@ -226,7 +226,7 @@ namespace LEXER
 		{
 			if (brackets.empty())
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 						  "Нарушен уровень вложенности");
 				throw "Esception";
 			}
@@ -275,11 +275,16 @@ namespace LEXER
 			else if (regex.Match(token, "(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)")
 					 && !TokenTypes.contains(token))
 			{
+				if (token.length() > 20)
+				{
+					ERROR_LOG(std::format("Источник: Lexer. Строка:{}, Столбец: {}", line, counter), "Превышена допустимая длина идентификатора(допустимо 12 символов)");
+					throw "Expressin";
+				}
 				result = "i";
 			}
 			else
 			{
-				ERROR_LOG(std::format("Sourse code: строка {}, индекс лексемы {}", line, counter),
+				ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 						  std::format("Нераспознаная лексема {}", token));
 				throw "Esception";
 			}
@@ -288,7 +293,7 @@ namespace LEXER
 	}
 	void Lexer::printLexTable(std::vector<Lexem> table, std::ostream& stream)
 	{
-		std::cout << "Таблица лексем" << std::endl;
+		stream << "Таблица лексем" << std::endl;
 
 		TablePrinter tp(&stream);
 		tp.set_flush_left();
@@ -299,7 +304,7 @@ namespace LEXER
 		tp.PrintHeader();
 		for (const auto& lexem : table)
 		{
-			tp << lexem.line << lexem.index <<lexem.lexema;
+			tp << lexem.line << lexem.index << lexem.lexema;
 		}
 		tp.PrintFooter();
 	}
