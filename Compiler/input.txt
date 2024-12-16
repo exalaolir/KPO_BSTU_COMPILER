@@ -26,35 +26,62 @@ fn bool characterString(string a, string b) {
     }
     return true;
 }
+fn uint sum (uint a, uint b) {
+    return a+b;
+}
+fn uint arithmetic(uint a, uint b) {
+    uint del = 0u3;
+    uint result = (a+b* sum(0u50,0u30) - a) % del;
+    return result;
+}
+fn int sumInt(int a,int b) {
+    return a+b;
+}
+fn int arithmeticsInt(int i, int b) {
+    return ((i+b)*sumInt(34,56)-b)%2;
+}
 fn int main()
 {
   @Контррольный пример@
   double result = circumference(2.45);
+  int jk = 7/7;
   int i = Println("Результат длины окружности");
   i = Println(FToString(result));
+  i = Println("/\n/Арифметический расчёт c uint");
+  i = Println(UIToString(arithmetic(0u4,0u5)));
+  i = Println("/\n/Арифметический расчёт c int");
+  i = Println(IToString(arithmeticsInt(23,45)));
 
-  i = Println("Битовый сдвиг");
-  i = Println("5>>2");
-  i = Println(IToString(shiftR(5,2)));
-  i = Println("5<<2");
-  i = Println(IToString(shiftL(5,2)));
+  i = Println("/\n/Битовый сдвиг");
+  i = Println("20>>2");
+  i = Println(IToString(shiftR(20,2)));
+  i = Println("20<<2");
+  i = Println(IToString(shiftL(20,2)));
 
   let counter = 0;
-  i = Println("Счётчик");
+  i = Println("/\n/Счётчик");
   while(counter <= 10) {
     i = Println(IToString(counter));
     counter = counter + 1;
   }
-  i = Println("Сравнение символов/\n/");
+  i = Println("/\n/Сравнение символов");
   i = Println("a и b");
   i = Println(BoolToString(characterChar('a', 'b')));
   i = Println("a и a");
   i = Println(BoolToString(characterChar('a', 'a')));
 
-  i = Println("Сравнение строк/\n/");
+  i = Println("/\n/Сравнение строк");
   i = Println("Hello и hello");
   i = Println(BoolToString(characterString("Hello", "hello")));
   i = Println("Hello и Hello");
   i = Println(BoolToString(characterString("Hello", "Hello")));
-    return 0;
+
+  i = Println("/\n/Соединение строк");
+  let str = Concat("Hello,"," World");
+  i = Println(str);
+
+  i = Println("Соединение символов путём конвертарции в строку/\n/");
+  let op = Concat(CharToString('a'),CharToString('b'));
+  i = Println(op);
+  return 0;
 }
