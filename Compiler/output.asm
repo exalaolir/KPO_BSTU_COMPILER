@@ -40,9 +40,9 @@ Literal_14__none BYTE ?
 Literal_15__none BYTE "kkk ", 0
 Literal_16__none BYTE ?
 Literal_17__none BYTE "asdf", 0
-Literal_18__none SDWORD 456
-Literal_19__none SDWORD 6
-Literal_20__none SDWORD 4
+Literal_18__none DWORD 456
+Literal_19__none DWORD 6
+Literal_20__none DWORD 4
 Literal_21__none REAL8 2.450000
 Literal_22__none BYTE "Результат длины окружности", 0
 Literal_23__none BYTE 10, "Арифметический расчёт c uint", 0
@@ -397,7 +397,7 @@ pop ecx
 pop eax
 shl eax, cl
 push eax
-call IToString
+call UIToString
 push eax
 call Println
 push eax

@@ -638,7 +638,7 @@ namespace LEXER
 
 		const std::array<string, 2> expressions
 		{
-			"(int|string|bool|double|float|byte|char|uint)",
+			"(int|string|bool|double|char|uint)",
 			"(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"
 		};
 
@@ -826,7 +826,7 @@ namespace LEXER
 
 		const std::array<string, 2> expressions
 		{
-			"(int|string|bool|double|float|byte|char|uint)",
+			"(int|string|bool|double|char|uint)",
 			"(([A-Z]|[a-z])(([A-Z]|[a-z])|[0-9])*)"
 		};
 
