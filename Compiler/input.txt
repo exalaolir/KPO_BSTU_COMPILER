@@ -56,9 +56,14 @@ fn int arithmeticsInt(int firstOp, int secondOp)
 }
 fn int main()
 {
+
 let a = "";
-a = "kkk";
-let x = Println(a);
+a = "kkk ";
+int x = Println(a);
+let h = "";
+x = Println(Concat(h, "asdf"));
+x = Println(IToString(456 >> 6 << 4));
+
   #Контрольный пример#
    double result = countEllipseLength(2.45);
 

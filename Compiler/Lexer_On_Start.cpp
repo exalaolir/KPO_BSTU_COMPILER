@@ -195,10 +195,6 @@ std::list<string> LEXER::Lexer::preprocessCode(std::string& code)
 						continue;
 					}
 				}
-				else if (code[i] == 'x')
-				{
-					code.erase(i, 1);
-				}
 
 				if (Spaces.contains(code[i]))
 				{

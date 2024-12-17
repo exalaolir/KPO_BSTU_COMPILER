@@ -42,39 +42,38 @@ Literal_16__none BYTE ?
 Literal_17__none BYTE "asdf", 0
 Literal_18__none SDWORD 456
 Literal_19__none SDWORD 6
-Literal_20__none SDWORD 4
-Literal_21__none REAL8 2.450000
-Literal_22__none BYTE "Результат длины окружности", 0
-Literal_23__none BYTE 10, "Арифметический расчёт c uint", 0
-Literal_24__none DWORD 4
-Literal_25__none DWORD 5
-Literal_26__none BYTE 10, "Арифметический расчёт c int", 0
-Literal_27__none SDWORD 23
-Literal_28__none SDWORD 45
-Literal_29__none BYTE 10, "Битовый сдвиг", 0
-Literal_30__none BYTE "20>>2", 0
-Literal_31__none SDWORD 20
-Literal_32__none SDWORD 2
-Literal_33__none BYTE "20<<2", 0
-Literal_34__none SDWORD 20
-Literal_35__none SDWORD 2
+Literal_20__none REAL8 2.450000
+Literal_21__none BYTE "Результат длины окружности", 0
+Literal_22__none BYTE 10, "Арифметический расчёт c uint", 0
+Literal_23__none DWORD 4
+Literal_24__none DWORD 5
+Literal_25__none BYTE 10, "Арифметический расчёт c int", 0
+Literal_26__none SDWORD 23
+Literal_27__none SDWORD 45
+Literal_28__none BYTE 10, "Битовый сдвиг", 0
+Literal_29__none BYTE "20>>2", 0
+Literal_30__none SDWORD 20
+Literal_31__none SDWORD 2
+Literal_32__none BYTE "20<<2", 0
+Literal_33__none SDWORD 20
+Literal_34__none SDWORD 2
 Literal_New_2__none SDWORD 0
-Literal_37__none BYTE 10, "Счётчик", 0
-Literal_38__none SDWORD 10
-Literal_39__none SDWORD 1
-Literal_40__none BYTE 10, "Сравнение символов", 0
-Literal_41__none BYTE "a и b", 0
-Literal_42__none DWORD 'a'
-Literal_43__none DWORD 'b'
-Literal_44__none BYTE "a и a", 0
+Literal_36__none BYTE 10, "Счётчик", 0
+Literal_37__none SDWORD 10
+Literal_38__none SDWORD 1
+Literal_39__none BYTE 10, "Сравнение символов", 0
+Literal_40__none BYTE "a и b", 0
+Literal_41__none DWORD 'a'
+Literal_42__none DWORD 'b'
+Literal_43__none BYTE "a и a", 0
+Literal_44__none DWORD 'a'
 Literal_45__none DWORD 'a'
-Literal_46__none DWORD 'a'
-Literal_47__none BYTE 10, "Соединение строк", 0
-Literal_48__none BYTE "Hello,", 0
-Literal_49__none BYTE " World", 0
-Literal_50__none BYTE "Соединение символов путём конвертарции в строку",10, 0
-Literal_51__none DWORD 'a'
-Literal_52__none DWORD 'b'
+Literal_46__none BYTE 10, "Соединение строк", 0
+Literal_47__none BYTE "Hello,", 0
+Literal_48__none BYTE " World", 0
+Literal_49__none BYTE "Соединение символов путём конвертарции в строку",10, 0
+Literal_50__none DWORD 'a'
+Literal_51__none DWORD 'b'
 Literal_New_3__none SDWORD 0
 PI__g0 REAL8 3.140000
 .CODE
@@ -107,7 +106,6 @@ pop ecx
 pop eax
 shr eax, cl
 push eax
-
 pop eax
 ret
 ret
@@ -126,7 +124,6 @@ pop ecx
 pop eax
 shl eax, cl
 push eax
-
 pop eax
 ret
 ret
@@ -391,18 +388,12 @@ push Literal_19__none
 pop ecx
 pop eax
 shr eax, cl
-push eax
-push Literal_20__none
-pop ecx
-pop eax
-shl eax, cl
-push eax
-call IToString
+push eaxcall IToString
 push eax
 call Println
 push eax
 pop x__g0_m141
-fld Literal_21__none
+fld Literal_20__none
 fstp real_buff
 lea eax, real_buff
 push sdword ptr [eax+4]
@@ -411,7 +402,7 @@ call countEllipseLength__g0
 fstp real_buff
 fld real_buff
 fstp result__g0_m141
-lea eax, Literal_22__none
+lea eax, Literal_21__none
 push eax
 call Println
 push eax
@@ -426,13 +417,13 @@ push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_23__none
+lea eax, Literal_22__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
+push Literal_23__none
 push Literal_24__none
-push Literal_25__none
 call arithmetic__g0
 push eax
 call UIToString
@@ -440,16 +431,21 @@ push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_26__none
+lea eax, Literal_25__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
+push Literal_26__none
 push Literal_27__none
-push Literal_28__none
 call arithmeticsInt__g0
 push eax
 call IToString
+push eax
+call Println
+push eax
+pop functionStatus__g0_m141
+lea eax, Literal_28__none
 push eax
 call Println
 push eax
@@ -459,13 +455,8 @@ push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_30__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
+push Literal_30__none
 push Literal_31__none
-push Literal_32__none
 call shiftR__g0
 push eax
 call IToString
@@ -473,13 +464,13 @@ push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_33__none
+lea eax, Literal_32__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
+push Literal_33__none
 push Literal_34__none
-push Literal_35__none
 call shiftL__g0
 push eax
 call IToString
@@ -489,14 +480,14 @@ push eax
 pop functionStatus__g0_m141
 push Literal_New_2__none
 pop counter__g0_m141
-lea eax, Literal_37__none
+lea eax, Literal_36__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
 While_start0:
 push counter__g0_m141
-push Literal_38__none
+push Literal_37__none
 pop ebx
 pop eax
 cmp eax, ebx
@@ -510,7 +501,7 @@ call Println
 push eax
 pop functionStatus__g0_m141
 push counter__g0_m141
-push Literal_39__none
+push Literal_38__none
 pop EBX
 pop EAX
 add EAX, EBX
@@ -518,18 +509,18 @@ push EAX
 pop counter__g0_m141
 jmp While_start0
 Else_While0:
+lea eax, Literal_39__none
+push eax
+call Println
+push eax
+pop functionStatus__g0_m141
 lea eax, Literal_40__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_41__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
+push Literal_41__none
 push Literal_42__none
-push Literal_43__none
 call characterChar__g0
 push eax
 call BoolToString
@@ -537,28 +528,28 @@ push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_44__none
+lea eax, Literal_43__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
+push Literal_44__none
 push Literal_45__none
-push Literal_46__none
 call characterChar__g0
 push eax
 call BoolToString
+push eax
+call Println
+push eax
+pop functionStatus__g0_m141
+lea eax, Literal_46__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
 lea eax, Literal_47__none
 push eax
-call Println
-push eax
-pop functionStatus__g0_m141
 lea eax, Literal_48__none
-push eax
-lea eax, Literal_49__none
 push eax
 call Concat
 push eax
@@ -574,15 +565,15 @@ push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-lea eax, Literal_50__none
+lea eax, Literal_49__none
 push eax
 call Println
 push eax
 pop functionStatus__g0_m141
-push Literal_51__none
+push Literal_50__none
 call CharToString
 push eax
-push Literal_52__none
+push Literal_51__none
 call CharToString
 push eax
 call Concat

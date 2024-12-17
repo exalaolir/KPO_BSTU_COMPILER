@@ -454,7 +454,7 @@ namespace LEXER
 						/*ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
 								  std::format("Пустая строка не допускается {}", token));
 						throw "Esception";*/
-						literal.value = "0";
+						literal.value = "?";
 					}
 
 					idTable.Add(literal);
@@ -479,10 +479,9 @@ namespace LEXER
 					if (token == "\'\'")
 					{
 
-						/*ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
-								  std::format("Пустая строка не допускается {}", token));
-						throw "Esception";*/
-						literal.value = "0";
+						ERROR_LOG(std::format("Lexer: строка {}, индекс лексемы {}", line, counter),
+								  std::format("Пустой символ не допускается {}", token));
+						throw "Esception";
 					}
 
 					idTable.Add(literal);

@@ -21,8 +21,8 @@ namespace GEN
 	static const std::string ADD = "pop EBX\npop EAX\nadd EAX, EBX\npush EAX\n";
 	static const std::string SUB = "pop EBX\npop EAX\nsub EAX, EBX\npush EAX\n";
 	static const std::string IMUL = "pop EBX\npop EAX\nimul EAX, EBX\npush EAX\n";
-	static const std::string SHIFT_LEFT = "pop ecx\npop eax\nshl eax, cl\npush eax";
-	static const std::string SHIFT_RIGHT = "pop ecx\npop eax\nshr eax, cl\npush eax";
+	static const std::string SHIFT_LEFT = "pop ecx\npop eax\nshl eax, cl\npush eax\n";
+	static const std::string SHIFT_RIGHT = "pop ecx\npop eax\nshr eax, cl\npush eax\n";
 	static const std::string MUL = "pop EBX\npop EAX\nmul EBX\npush EAX\n";
 
 	static const std::string F_ADD = "fadd\n";

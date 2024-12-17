@@ -72,9 +72,6 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Исходные файлы\Lolger</Filter>
     </ClCompile>
-    <ClCompile Include="Parser.cpp">
-      <Filter>Исходные файлы\Regex</Filter>
-    </ClCompile>
     <ClCompile Include="Automat.cpp">
       <Filter>Исходные файлы\Regex</Filter>
     </ClCompile>
@@ -107,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="table_printer.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Исходные файлы\semantic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
