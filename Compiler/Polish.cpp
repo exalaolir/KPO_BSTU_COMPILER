@@ -86,6 +86,7 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 				return a * b;
 				break;
 			case Delim:
+				if(b == 0) throw std::runtime_error("");
 				return a / b;
 				break;
 			case ShiftLeft:
@@ -188,6 +189,12 @@ template<typename T> void POLISH::countPolish(std::list<LEXER::Lexem>& expressio
 					}
 				}
 				results.push(count(Pop(results), Pop(results), element));
+			}
+			catch (std::runtime_error e)
+			{
+				ERROR_LOG("Expressions_Analiser",
+						  "Деление на 0");
+				throw "Esception";
 			}
 			catch (...)
 			{
@@ -430,7 +437,9 @@ std::list<LEXER::Lexem> POLISH::makePolish(vector<LEXER::Lexem>& lexTable, LEXER
 		}
 		else newPolishExpression.push_back(Utils::Pop(operators));
 	}
+	for (auto j : newPolishExpression) std::cout << j.originalText;
 
+	std::cout << std::endl;
 	if (optymiseFlag)
 	{
 		if (currentType.valueType == Int || currentType.valueType == IntLiteral)

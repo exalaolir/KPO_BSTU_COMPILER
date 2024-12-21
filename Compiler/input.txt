@@ -1,7 +1,5 @@
 double PI = 3.14;
-fn float circumference(float rad) {
-  return 2.0*PI*rad*rad;
-}
+
 fn int shiftR(int a,int b) {
   return a>>b;
 }
@@ -43,44 +41,19 @@ fn int arithmeticsInt(int i, int b) {
 fn int main()
 {
   #Контррольный пример#
-  double result = circumference(2.45);
-  int jk = 7/7;
-  int i = Println("Результат длины окружности");
-  i = Println(FToString(result));
-  i = Println("/\n/Арифметический расчёт c uint");
-  i = Println(UIToString(arithmetic(0u4,0u5)));
-  i = Println("/\n/Арифметический расчёт c int");
+  int i = Println(UIToString(arithmetic(0u4,0u5)));
   i = Println(IToString(arithmeticsInt(23,45)));
 
-  i = Println("/\n/Битовый сдвиг");
-  i = Println("20>>2");
   i = Println(IToString(shiftR(20,2)));
-  i = Println("20<<2");
   i = Println(IToString(shiftL(20,2)));
 
-  let counter = 0;
-  while(counter <= 10) {
-    i = Println(IToString(counter));
-    counter = counter + 1;
-  }
-  i = Println("/\n/Сравнение символов");
-  i = Println("a и b");
-  i = Println(BoolToString(characterChar('a', 'b')));
-  i = Println("a и a");
-  i = Println(BoolToString(characterChar('a', 'a')));
+  #let zz = 25 * 5 /(2+3/(2+3));#
+  
+ 
+ 
+  
+  uint qwe = arithmetic("0u4",0u5,0u2);
+  # int hj = 5/0;#
 
-  i = Println("/\n/Сравнение строк");
-  i = Println("Hello и hello");
-  i = Println(BoolToString(characterString("Hello", "hello")));
-  i = Println("Hello и Hello");
-  i = Println(BoolToString(characterString("Hello", "Hello")));
-
-  i = Println("/\n/Соединение строк");
-  let str = Concat("Hello,"," World");
-  i = Println(str);
-
-  i = Println("Соединение символов путём конвертарции в строку/\n/");
-  let op = Concat(CharToString('a'),CharToString('b'));
-  i = Println(op);
   return 0;
 }

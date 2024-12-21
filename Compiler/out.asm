@@ -22,90 +22,42 @@ ExitProcess PROTO:DWORD
 .DATA
 real_buff REAL8 0.0
 null_err BYTE "Ошибка, деление на ноль", 0
+byte_err BYTE "Ошибка, повреждение типа byte", 0
 Literal_New_0__none REAL8 3.140000
-Literal_1__none REAL8 2.000000
-Literal_2__none DWORD 1
-Literal_3__none DWORD 0
+Literal_1__none DWORD 1
+Literal_2__none DWORD 0
+Literal_3__none DWORD 1
 Literal_4__none DWORD 1
-Literal_5__none DWORD 1
-Literal_6__none DWORD 0
-Literal_7__none DWORD 1
+Literal_5__none DWORD 0
+Literal_6__none DWORD 1
 Literal_New_1__none DWORD 3
-Literal_9__none DWORD 50
-Literal_10__none DWORD 30
-Literal_11__none SDWORD 34
-Literal_12__none SDWORD 56
-Literal_13__none SDWORD 2
-Literal_14__none BYTE ?
-Literal_15__none BYTE "kkk ", 0
-Literal_16__none BYTE ?
-Literal_17__none BYTE "asdf", 0
-Literal_18__none SDWORD 456
-Literal_19__none SDWORD 6
-Literal_20__none REAL8 2.450000
-Literal_21__none BYTE "Результат длины окружности", 0
-Literal_22__none BYTE 10, "Арифметический расчёт c uint", 0
-Literal_23__none DWORD 4
-Literal_24__none DWORD 5
-Literal_25__none BYTE 10, "Арифметический расчёт c int", 0
-Literal_26__none SDWORD 23
-Literal_27__none SDWORD 45
-Literal_28__none BYTE 10, "Битовый сдвиг", 0
-Literal_29__none BYTE "20>>2", 0
-Literal_30__none SDWORD 20
-Literal_31__none SDWORD 2
-Literal_32__none BYTE "20<<2", 0
-Literal_33__none SDWORD 20
-Literal_34__none SDWORD 2
-Literal_New_2__none SDWORD 0
-Literal_36__none BYTE 10, "Счётчик", 0
-Literal_37__none SDWORD 10
-Literal_38__none SDWORD 1
-Literal_39__none BYTE 10, "Сравнение символов", 0
-Literal_40__none BYTE "a и b", 0
-Literal_41__none DWORD 'a'
-Literal_42__none DWORD 'b'
-Literal_43__none BYTE "a и a", 0
-Literal_44__none DWORD 'a'
-Literal_45__none DWORD 'a'
-Literal_46__none BYTE 10, "Соединение строк", 0
-Literal_47__none BYTE "Hello,", 0
-Literal_48__none BYTE " World", 0
-Literal_49__none BYTE "Соединение символов путём конвертарции в строку",10, 0
-Literal_50__none DWORD 'a'
-Literal_51__none DWORD 'b'
+Literal_8__none DWORD 50
+Literal_9__none DWORD 30
+Literal_10__none SDWORD 34
+Literal_11__none SDWORD 56
+Literal_12__none SDWORD 2
+Literal_13__none DWORD 4
+Literal_14__none DWORD 5
+Literal_15__none SDWORD 23
+Literal_16__none SDWORD 45
+Literal_17__none SDWORD 20
+Literal_18__none SDWORD 2
+Literal_19__none SDWORD 20
+Literal_20__none SDWORD 2
+Literal_New_2__none SDWORD 62
 Literal_New_3__none SDWORD 0
 PI__g0 REAL8 3.140000
 .CODE
 option prologue:PrologueDef
 option epilogue:EpilogueDef
-countEllipseLength__g0 proc rad__g0_c11:REAL8
-fld Literal_1__none
-fld PI__g0
-fmul
-fld rad__g0_c11
-fmul
-fld rad__g0_c11
-fmul
-fstp real_buff
-fld qword ptr [real_buff]
-ret
-ret
-null_exception:
-lea eax, null_err
-push eax
-call Println
-pop eax
-INVOKE ExitProcess, -1
-
-countEllipseLength__g0 endp
-shiftR__g0 proc secondOp__g0_s21:SDWORD, firstOp__g0_s21:SDWORD
-push firstOp__g0_s21
-push secondOp__g0_s21
+shiftR__g0 proc b__g0_s11:SDWORD, a__g0_s11:SDWORD
+push a__g0_s11
+push b__g0_s11
 pop ecx
 pop eax
 shr eax, cl
 push eax
+
 pop eax
 ret
 ret
@@ -117,13 +69,14 @@ pop eax
 INVOKE ExitProcess, -1
 
 shiftR__g0 endp
-shiftL__g0 proc secondOp__g0_s31:SDWORD, firstOp__g0_s31:SDWORD
-push firstOp__g0_s31
-push secondOp__g0_s31
+shiftL__g0 proc b__g0_s21:SDWORD, a__g0_s21:SDWORD
+push a__g0_s21
+push b__g0_s21
 pop ecx
 pop eax
 shl eax, cl
 push eax
+
 pop eax
 ret
 ret
@@ -135,27 +88,27 @@ pop eax
 INVOKE ExitProcess, -1
 
 shiftL__g0 endp
-characterChar__g0 proc secondOp__g0_c41:DWORD, firstOp__g0_c41:DWORD
-push firstOp__g0_c41
-push secondOp__g0_c41
+characterChar__g0 proc b__g0_c31:DWORD, a__g0_c31:DWORD
+push a__g0_c31
+push b__g0_c31
 pop eax
 pop ebx
 cmp eax, ebx
 je If_l0
 jmp Else0
 If_l0:
-push Literal_2__none
+push Literal_1__none
 
 pop eax
 ret
 jmp Endif0
 Else0:
-push Literal_3__none
+push Literal_2__none
 
 pop eax
 ret
 Endif0:
-push Literal_4__none
+push Literal_3__none
 
 pop eax
 ret
@@ -168,43 +121,43 @@ pop eax
 INVOKE ExitProcess, -1
 
 characterChar__g0 endp
-characterString__g0 proc secondOp__g0_c71_S:ptr byte, firstOp__g0_c71_S:ptr byte
-local firstOp__g0_c71[256]:BYTE, secondOp__g0_c71[256]:BYTE
-mov esi, firstOp__g0_c71_S
-lea edi, firstOp__g0_c71
+characterString__g0 proc b__g0_c61_S:ptr byte, a__g0_c61_S:ptr byte
+local b__g0_c61[256]:BYTE, a__g0_c61[256]:BYTE
+mov esi, b__g0_c61_S
+lea edi, b__g0_c61
  copy_loop_0:
 lodsb
 stosb
 test al, al
 jnz copy_loop_0
-mov esi, secondOp__g0_c71_S
-lea edi, secondOp__g0_c71
+mov esi, a__g0_c61_S
+lea edi, a__g0_c61
  copy_loop_1:
 lodsb
 stosb
 test al, al
 jnz copy_loop_1
-lea eax, firstOp__g0_c71
+lea eax, a__g0_c61
 push eax
-lea eax, secondOp__g0_c71
+lea eax, b__g0_c61
 push eax
 call comp
 cmp eax, 1
 jne If_l1
 jmp Else1
 If_l1:
-push Literal_5__none
+push Literal_4__none
 
 pop eax
 ret
 jmp Endif1
 Else1:
-push Literal_6__none
+push Literal_5__none
 
 pop eax
 ret
 Endif1:
-push Literal_7__none
+push Literal_6__none
 
 pop eax
 ret
@@ -217,9 +170,9 @@ pop eax
 INVOKE ExitProcess, -1
 
 characterString__g0 endp
-sum__g0 proc secondOp__g0_s101:DWORD, firstOp__g0_s101:DWORD
-push firstOp__g0_s101
-push secondOp__g0_s101
+sum__g0 proc b__g0_s91:DWORD, a__g0_s91:DWORD
+push a__g0_s91
+push b__g0_s91
 pop EBX
 pop EAX
 add EAX, EBX
@@ -236,39 +189,39 @@ pop eax
 INVOKE ExitProcess, -1
 
 sum__g0 endp
-arithmetic__g0 proc secondOp__g0_a111:DWORD, firstOp__g0_a111:DWORD
-local del__g0_a111:DWORD, result__g0_a111:DWORD
+arithmetic__g0 proc b__g0_a101:DWORD, a__g0_a101:DWORD
+local result__g0_a101:DWORD, del__g0_a101:DWORD
 push Literal_New_1__none
-pop del__g0_a111
-push firstOp__g0_a111
-push secondOp__g0_a111
+pop del__g0_a101
+push a__g0_a101
+push b__g0_a101
+push Literal_8__none
 push Literal_9__none
-push Literal_10__none
 call sum__g0
 push eax
 pop EBX
 pop EAX
-mul EBX
+imul EAX, EBX
 push EAX
 pop EBX
 pop EAX
 add EAX, EBX
 push EAX
-push firstOp__g0_a111
+push a__g0_a101
 pop EBX
 pop EAX
 sub EAX, EBX
 push EAX
-push del__g0_a111
+push del__g0_a101
 xor EDX,EDX
 pop EBX
 cmp EBX, 0
 je null_exception
 pop EAX
-div EBX
+idiv EBX
 push EDX
-pop result__g0_a111
-push result__g0_a111
+pop result__g0_a101
+push result__g0_a101
 
 pop eax
 ret
@@ -281,9 +234,9 @@ pop eax
 INVOKE ExitProcess, -1
 
 arithmetic__g0 endp
-sumInt__g0 proc secondOp__g0_s121:SDWORD, firstOp__g0_s121:SDWORD
-push firstOp__g0_s121
-push secondOp__g0_s121
+sumInt__g0 proc b__g0_s111:SDWORD, a__g0_s111:SDWORD
+push a__g0_s111
+push b__g0_s111
 pop EBX
 pop EAX
 add EAX, EBX
@@ -300,27 +253,27 @@ pop eax
 INVOKE ExitProcess, -1
 
 sumInt__g0 endp
-arithmeticsInt__g0 proc secondOp__g0_a131:SDWORD, firstOp__g0_a131:SDWORD
-push firstOp__g0_a131
-push secondOp__g0_a131
+arithmeticsInt__g0 proc b__g0_a121:SDWORD, i__g0_a121:SDWORD
+push i__g0_a121
+push b__g0_a121
 pop EBX
 pop EAX
 add EAX, EBX
 push EAX
+push Literal_10__none
 push Literal_11__none
-push Literal_12__none
 call sumInt__g0
 push eax
 pop EBX
 pop EAX
 imul EAX, EBX
 push EAX
-push secondOp__g0_a131
+push b__g0_a121
 pop EBX
 pop EAX
 sub EAX, EBX
 push EAX
-push Literal_13__none
+push Literal_12__none
 xor EDX,EDX
 pop EBX
 cmp EBX, 0
@@ -341,255 +294,45 @@ INVOKE ExitProcess, -1
 
 arithmeticsInt__g0 endp
 main__g0 proc
-local functionStatus__g0_m141:SDWORD, x__g0_m141:SDWORD, result__g0_m141:REAL8, counter__g0_m141:SDWORD, h__g0_m141[256]:BYTE, a__g0_m141[256]:BYTE, str__g0_m141[256]:BYTE, op__g0_m141[256]:BYTE
-lea eax, Literal_14__none
-push eax
-pop esi
-lea edi, a__g0_m141
- copy_loop_2:
-lodsb
-stosb
-test al, al
-jnz copy_loop_2
-lea eax, Literal_15__none
-push eax
-pop esi
-lea edi, a__g0_m141
- copy_loop_3:
-lodsb
-stosb
-test al, al
-jnz copy_loop_3
-lea eax, a__g0_m141
-push eax
-call Println
-push eax
-pop x__g0_m141
-lea eax, Literal_16__none
-push eax
-pop esi
-lea edi, h__g0_m141
- copy_loop_4:
-lodsb
-stosb
-test al, al
-jnz copy_loop_4
-lea eax, h__g0_m141
-push eax
-lea eax, Literal_17__none
-push eax
-call Concat
-push eax
-call Println
-push eax
-pop x__g0_m141
-push Literal_18__none
-push Literal_19__none
-pop ecx
-pop eax
-shr eax, cl
-push eaxcall IToString
-push eax
-call Println
-push eax
-pop x__g0_m141
-fld Literal_20__none
-fstp real_buff
-lea eax, real_buff
-push sdword ptr [eax+4]
-push sdword ptr [eax]
-call countEllipseLength__g0
-fstp real_buff
-fld real_buff
-fstp result__g0_m141
-lea eax, Literal_21__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-fld result__g0_m141
-fstp real_buff
-lea eax, real_buff
-push sdword ptr [eax+4]
-push sdword ptr [eax]
-call FToString
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_22__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_23__none
-push Literal_24__none
+local zz__g0_m131:SDWORD, i__g0_m131:SDWORD
+push Literal_13__none
+push Literal_14__none
 call arithmetic__g0
 push eax
 call UIToString
 push eax
 call Println
 push eax
-pop functionStatus__g0_m141
-lea eax, Literal_25__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_26__none
-push Literal_27__none
+pop i__g0_m131
+push Literal_15__none
+push Literal_16__none
 call arithmeticsInt__g0
 push eax
 call IToString
 push eax
 call Println
 push eax
-pop functionStatus__g0_m141
-lea eax, Literal_28__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_29__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_30__none
-push Literal_31__none
+pop i__g0_m131
+push Literal_17__none
+push Literal_18__none
 call shiftR__g0
 push eax
 call IToString
 push eax
 call Println
 push eax
-pop functionStatus__g0_m141
-lea eax, Literal_32__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_33__none
-push Literal_34__none
+pop i__g0_m131
+push Literal_19__none
+push Literal_20__none
 call shiftL__g0
 push eax
 call IToString
 push eax
 call Println
 push eax
-pop functionStatus__g0_m141
+pop i__g0_m131
 push Literal_New_2__none
-pop counter__g0_m141
-lea eax, Literal_36__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-While_start0:
-push counter__g0_m141
-push Literal_37__none
-pop ebx
-pop eax
-cmp eax, ebx
-jle While_l0
-jmp Else_While0
-While_l0:
-push counter__g0_m141
-call IToString
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push counter__g0_m141
-push Literal_38__none
-pop EBX
-pop EAX
-add EAX, EBX
-push EAX
-pop counter__g0_m141
-jmp While_start0
-Else_While0:
-lea eax, Literal_39__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_40__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_41__none
-push Literal_42__none
-call characterChar__g0
-push eax
-call BoolToString
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_43__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_44__none
-push Literal_45__none
-call characterChar__g0
-push eax
-call BoolToString
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_46__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_47__none
-push eax
-lea eax, Literal_48__none
-push eax
-call Concat
-push eax
-pop esi
-lea edi, str__g0_m141
- copy_loop_5:
-lodsb
-stosb
-test al, al
-jnz copy_loop_5
-lea eax, str__g0_m141
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-lea eax, Literal_49__none
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
-push Literal_50__none
-call CharToString
-push eax
-push Literal_51__none
-call CharToString
-push eax
-call Concat
-push eax
-pop esi
-lea edi, op__g0_m141
- copy_loop_6:
-lodsb
-stosb
-test al, al
-jnz copy_loop_6
-lea eax, op__g0_m141
-push eax
-call Println
-push eax
-pop functionStatus__g0_m141
+pop zz__g0_m131
 push Literal_New_3__none
 
 pop eax
